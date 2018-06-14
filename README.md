@@ -17,10 +17,10 @@ FNFTpy currently allows to call the following functions from libFNFT:
        tvec = np.linspace(-1,1,D)
        q = np.zeros(D, dtype=np.complex128)
        q[:] = 2.0 + 0.0j
-       x1 = -2
-       x2 = 2
+       xi1 = -2
+       xi2 = 2
        M = 8
-       res = kdvv(q, tvec, M, xi1=x1, xi2=x2, DIS=15)
+       res = kdvv(q, tvec, M, xi1=xi1, xi2=xi2, DIS=15)
        print("libFNFT return value: %d"%res['return_value'])
        for i in range(len(res['contspec'])):
            print("%d   %.6f  %.6fj"%(i, np.real(res['contspec'][i]),np.imag(res['contspec'][i])))
@@ -67,8 +67,10 @@ FNFTpy currently allows to call the following functions from libFNFT:
       tvec = np.linspace(-1,1,D)
       q = np.zeros(len(tvec), dtype=np.complex128)
       q[:] = 2.0+0.0j
-      M = 8 
-      res = nsev(q, tvec, M=M,xi1=-2,xi2=2,K=D ,)
+      M = 8
+      xi1 = -2
+      xi2 = 2
+      res = nsev(q, tvec, M=M, xi1=xi1, xi2=xi2, K=D)
       print("libFNFT return value: %d"%res['return_value'])
       print("continuous spectrum")
       for i in range(len(res['c_ref'])):
