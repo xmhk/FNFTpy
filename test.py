@@ -75,9 +75,9 @@ def nsevexample():
                                   np.imag(res['bound_states'][i]),
                                   np.real(res['d_norm'][i]),
                                   np.imag(res['d_norm'][i])))
-#nsevexample()
+nsevexample()
 #nsepexample()
-kdvvexample()
+#kdvvexample()
 
 
 #nsevtest()

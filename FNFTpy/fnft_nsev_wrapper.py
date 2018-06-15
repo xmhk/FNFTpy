@@ -42,8 +42,7 @@ def nsev_wrapper(clib_nsev_func, D, q, t1, t2, xi1, xi2,
     NSEV_XI = np.zeros(2, dtype=numpy_double)
     NSEV_XI[0] = xi1
     NSEV_XI[1] = xi2    
-    NSEV_boundstates = np.zeros(K,dtype=numpy_complex)
-    print("M, NSEV_M", M, NSEV_M)
+    NSEV_boundstates = np.zeros(K,dtype=numpy_complex)    
     # discrete spectrum -> reflection coefficient and / or residues
     if options.discspec_type==2:
         NSEV_discspec = np.zeros(2 * K,dtype=numpy_complex)
