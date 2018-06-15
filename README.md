@@ -113,12 +113,17 @@ FNFTpy currently allows to call the following functions from libFNFT:
  
 ## installation
  * place the FNFTpy folder inside your python path
- * the module needs to know where the compiled copy of libFNFT is located. This is done via editing the 
-   file libFNFT_path.ini inside the FNFTpy folder. Example:
+ * the module needs to know where the compiled copy of libFNFT is located. 
+   The configuration is done via editing the function get_lib_path()
+   in the file auxilary.py. Example:
        
    ```
-   [libFNFT]
-   # this is a comment
-   #path=C:/Users/Username/Documents/FNFT/build/libfnft.dll  # for windows
-   path=/usr/local/lib/libfnft.so # linux
+    def get_lib_path():
+      """return the path of the libFNFT file
+      This is something you have to edit.
+      See example strings.
+      """
+      libstr = "C:\Libraries\local\libfnft.dll"  # example for windows
+      #libstr = "/usr/local/lib/libfnft.so"    #example for linux
+    return libstr
    ```

@@ -1,16 +1,11 @@
 import numpy as np
 import ctypes
-import configparser
-import pkg_resources
+from .auxilary import get_lib_path
 
 
-
-# reading lib path from ini file
-config = configparser.ConfigParser()
-config.read(pkg_resources.resource_filename(__name__, 'libFNFT_path.ini'))
-if config.sections() == []:
-    print("Warning: libFNFT_path.ini can not be read")
-fnft_clib = ctypes.CDLL(config['libFNFT']['path'])
+# get python ctypes object of libFNFT
+libpath = get_lib_path()  # edit in auxilary.py
+fnft_clib = ctypes.CDLL(libpath)
 
 # import wrapper functions
 from .fnft_kdvv_wrapper import kdvv_wrapper
