@@ -123,7 +123,7 @@ FNFTpy currently allows to call the following functions from libFNFT:
       This is something you have to edit.
       See example strings.
       """
-      libstr = "C:\Libraries\local\libfnft.dll"  # example for windows
+      libstr = "C:/Libraries/local/libfnft.dll"  # example for windows
       #libstr = "/usr/local/lib/libfnft.so"    #example for linux
     return libstr
    ```
