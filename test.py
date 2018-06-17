@@ -9,14 +9,16 @@ import numpy as np
 from FNFTpy import *
 
 def kdvvtest():
+    print("KDVV test")
     xvec = np.linspace(-10,10,256)
     q = np.sin(2*np.pi/256 * xvec )
     res = kdvv(q, xvec)
     print(res['return_value'])
     res = kdvv(q, xvec, xi1=-10, xi2 = 10, DIS=15, M=2048)
-    print(res.keys())
+    #print(res.keys())
 
 def nseptest():
+    print("NSEP test")
     xvec = np.linspace(0, 2*np.pi, 256)
     q = np.sin(2*np.pi/256 * xvec )
     res  = nsep(q, 0, 2*np.pi)
@@ -25,6 +27,7 @@ def nseptest():
     print(res['return_value'])
     
 def nsevtest():
+    print("NSEV test")
     xvec = np.linspace(0, 2*np.pi, 256)
     q = np.sin(2*np.pi/256 * xvec )
     res  = nsev(q, xvec)
@@ -75,11 +78,11 @@ def nsevexample():
                                   np.imag(res['bound_states'][i]),
                                   np.real(res['d_norm'][i]),
                                   np.imag(res['d_norm'][i])))
-nsevexample()
+#nsevexample()
 #nsepexample()
 #kdvvexample()
 
 
-#nsevtest()
+nsevtest()
 #kdvvtest()
 #nseptest()
