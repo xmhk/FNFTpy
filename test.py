@@ -30,7 +30,7 @@ def nsevtest():
     print("NSEV test")
     xvec = np.linspace(0, 2*np.pi, 256)
     q = np.sin(2*np.pi/256 * xvec )
-    res  = nsev(q, xvec)
+    res  = nsev(q, xvec,DSUB=3, BSL=2)
     print(res['return_value'])
     res  = nsev(q,xvec, DS=2)
     print(res['return_value'])
@@ -67,7 +67,7 @@ def nsevexample():
     q = np.zeros(len(tvec), dtype=np.complex128)
     q[:] = 2.0+0.0j
     M = 8 
-    res = nsev(q, tvec, M=M,xi1=-2,xi2=2,K=D ,)
+    res = nsev(q, tvec, M=M, xi1=-2, xi2=2, K=D )
     print("libFNFT return value: %d"%res['return_value'])
     print("continuous spectrum")
     for i in range(len(res['c_ref'])):
