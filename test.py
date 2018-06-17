@@ -83,6 +83,6 @@ def nsevexample():
 #kdvvexample()
 
 
-nsevtest()
+#nsevtest()
 #kdvvtest()
 #nseptest()
