@@ -86,3 +86,6 @@ def nsevexample():
 #nsevtest()
 #kdvvtest()
 #nseptest()
+
+options = get_nsev_inverse_options(0,0,0,0,2)
+print(options.discretization)
