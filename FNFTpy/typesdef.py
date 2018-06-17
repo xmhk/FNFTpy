@@ -39,6 +39,42 @@ class nsev_options_struct(ctypes.Structure):
         ("normalization_flag",ctypes_int32),
         ("discretization",ctypes_int)]
 
+class nsev_inverse_options_struct(ctypes.Structure):
+    _fields_ = [
+        ("discretization", ctypes_int),
+        ("contspec_type", ctypes_int),
+        ("contspec_inversion_method", ctypes_int),
+        ("max_iter", ctypes_uint),
+        ("oversampling_factor",ctypes_uint)
+    ]
+
+
+def get_nsev_inverse_options(DIS, CST, CIM, MAXITER, OSF):
+    """returns an options struct for NSEV Inverse
+    Parameters:
+        DIS : Discretization to use
+            0=2SPLIT2_MODAL,
+            1=2SPLIT2A,
+            2=2SPLIT4A,
+            3=2SPLIT4B,
+            4=BO
+        CST : type of continuous spectrum
+            0=REFLECTION_COEFFICIENT,
+            1=B_OF_TAU
+        CSI : type of inverse method for continuous spectrum
+            0=DEFAULT,
+            1=FMATRIX_CONTAINS_REFL_COEFF,
+            2=TFMATRIX_CONTAINS_AB_FROM_ITER
+        MAXITER : maximum number of iterations (continuous spectrum)
+        OSF : oversampling factor
+            """
+    check_value(DIS, 0, 4)
+    check_value(CST, 0, 1)
+    check_value(CIM, 0, 2)
+    check_value(MAXITER, 0, 32000)
+    check_value(OSF,1,32000)
+    return nsev_inverse_options_struct(DIS, CST, CIM, MAXITER, OSF)
+
 
 def get_kdvv_options(DIS):
     """returns an options struct for KDVV
@@ -67,6 +103,7 @@ def get_kdvv_options(DIS):
     """
     check_value(DIS, 0, 15) # Discretization
     return kdvv_options_struct(DIS)
+
 
 def get_nsep_options(LOC, FILT, BB, MAXEV, DIS, NF):    
     """creates a options struct for NSEP
