@@ -40,6 +40,7 @@ def nsev_inverse_wrapper(clib_nsev_inverse_func, clib_nsev_inverse_xi_func,
     clib_nsev_inverse_func.restype = ctypes_int
     NSEV_M = ctypes_uint(M)
     NSEV_contspec = np.zeros(M, dtype=numpy_complex)
+    NSEV_contspec[:] = contspec[:]
     NSEV_XI = np.zeros(2, dtype=numpy_double)
     NSEV_K = ctypes_uint(K)
     NSEV_boundstates = np.zeros(K,dtype=numpy_complex)
@@ -50,6 +51,7 @@ def nsev_inverse_wrapper(clib_nsev_inverse_func, clib_nsev_inverse_xi_func,
     NSEV_T[1]=T2
     NSEV_kappa = ctypes_int(kappa)
     NSEV_q = np.zeros(NSEV_D.value, dtype=numpy_complex)
+    NSEV_nullptr = ctypes.POINTER(ctypes.c_int)()
     rv, tmpXI = nsev_inverse_xi_wrapper(clib_nsev_inverse_xi_func, D, T1, T2, M, DIS)
     if rv==0:
         NSEV_XI[0] = tmpXI[0]
@@ -63,10 +65,12 @@ def nsev_inverse_wrapper(clib_nsev_inverse_func, clib_nsev_inverse_xi_func,
         np.ctypeslib.ndpointer(dtype=ctypes_double,
                                ndim=1, flags='C'),  # xi
         type(NSEV_K),
-        np.ctypeslib.ndpointer(dtype=numpy_complex,
-                               ndim=1, flags='C'),  # boundstates
-        np.ctypeslib.ndpointer(dtype=numpy_complex,
-                               ndim=1, flags='C'),  # normconst res
+        type(NSEV_nullptr),                          # boundstates (tmp)
+        #np.ctypeslib.ndpointer(dtype=numpy_complex,
+        #                       ndim=1, flags='C'),  # boundstates
+        type(NSEV_nullptr),  # normconst_res (tmp)
+        #np.ctypeslib.ndpointer(dtype=numpy_complex,
+        #                       ndim=1, flags='C'),  # normconst res
         type(NSEV_D),
         np.ctypeslib.ndpointer(dtype=numpy_complex,
                                ndim=1, flags='C'),  # q
@@ -82,30 +86,36 @@ def nsev_inverse_wrapper(clib_nsev_inverse_func, clib_nsev_inverse_xi_func,
         NSEV_contspec,
         NSEV_XI,
         NSEV_K,
-        NSEV_boundstates,
-        NSEV_discspec,
+        NSEV_nullptr,   # boundstates
+        NSEV_nullptr,  # normconst
         NSEV_D,
         NSEV_q,
         NSEV_T,
         NSEV_kappa,
         ctypes.byref(options)
     )
-M = 256
-D = 256
+    return NSEV_q
+M = 2048
+D = 1024
 DIS=1
-tvec = np.linspace(-14,14,D)
+tvec = np.linspace(-2,2,D)
 T1 = np.min(tvec)
 T2 = np.max(tvec)
 XI1 = 0
 XI2 = 0
-#rv, XI = nsev_inverse_xi_wrapper(fnft_clib.fnft_nsev_inverse_XI, D, T1,T2 , M, DIS)
-#print(rv, XI)
-
+alpha = 2.0
+beta = -0.55
+rv, XI = nsev_inverse_xi_wrapper(fnft_clib.fnft_nsev_inverse_XI, D, T1,T2 , M, DIS)
+xiv = XI[0] + np.arange(M) * (XI[1]-XI[0])/(M-1)
 contspec = np.zeros(M, dtype=np.complex128)
+contspec = alpha / (xiv-beta*1.0j)
 K = 0
 kappa=1
 
 
-nsev_inverse_wrapper(fnft_clib.fnft_nsev_inverse, fnft_clib.fnft_nsev_inverse_XI,
+q = nsev_inverse_wrapper(fnft_clib.fnft_nsev_inverse, fnft_clib.fnft_nsev_inverse_XI,
                      M, contspec, XI1, XI2, K, None, None, D, T1, T2, kappa, DIS=DIS)
 
+
+for i in range(0, D, 64):
+    print("t = %.3f     q=%.4e  + %.4e i"%(tvec[i], np.real(q[i]), np.imag(q[i])))
