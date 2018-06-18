@@ -4,9 +4,6 @@
 import numpy as np
 from FNFTpy import *
 
-options = get_nsev_inverse_options(0,0,0,0,2)
-print(options.discretization)
-
 def nsev_inverse_xi_wrapper(clib_nsev_inverse_xi_func, D, T1, T2, M, DIS):
     clib_nsev_inverse_xi_func.restype = ctypes_int
     NSEV_D = ctypes_uint(D)
@@ -24,27 +21,24 @@ def nsev_inverse_xi_wrapper(clib_nsev_inverse_xi_func, D, T1, T2, M, DIS):
         np.ctypeslib.ndpointer(dtype=ctypes_double,
                                ndim=1, flags='C'),  # xi
         type(NSEV_DIS)]
-    rv =clib_nsev_inverse_xi_func(
-            NSEV_D,
-            NSEV_T,
-            NSEV_M,
-            NSEV_XI,
-            DIS)
+    rv =clib_nsev_inverse_xi_func(NSEV_D, NSEV_T, NSEV_M, NSEV_XI, DIS)
     return rv, NSEV_XI
 
 
-def nsev_inverse_wrapper(clib_nsev_inverse_func, clib_nsev_inverse_xi_func,
+def nsev_inverse_wrapper(clib_nsev_inverse_func,
                          M, contspec, Xi1, Xi2, K, bound_states,
                          normconst_or_residues, D, T1, T2, kappa,
-                         DIS=1, CST=0, CIM=0, MAXITER=100, OSF=8):
+                         options):
     clib_nsev_inverse_func.restype = ctypes_int
     NSEV_M = ctypes_uint(M)
     NSEV_contspec = np.zeros(M, dtype=numpy_complex)
     NSEV_contspec[:] = contspec[:]
     NSEV_XI = np.zeros(2, dtype=numpy_double)
+    NSEV_XI[0] = Xi1
+    NSEV_XI[1] = Xi2
     NSEV_K = ctypes_uint(K)
-    NSEV_boundstates = np.zeros(K,dtype=numpy_complex)
-    NSEV_discspec = np.zeros(K, dtype=numpy_complex)
+    #NSEV_boundstates = np.zeros(K,dtype=numpy_complex)
+    #NSEV_discspec = np.zeros(K, dtype=numpy_complex)
     NSEV_D = ctypes_uint(D)
     NSEV_T = np.zeros(2, dtype=numpy_double)
     NSEV_T[0]=T1
@@ -52,12 +46,6 @@ def nsev_inverse_wrapper(clib_nsev_inverse_func, clib_nsev_inverse_xi_func,
     NSEV_kappa = ctypes_int(kappa)
     NSEV_q = np.zeros(NSEV_D.value, dtype=numpy_complex)
     NSEV_nullptr = ctypes.POINTER(ctypes.c_int)()
-    rv, tmpXI = nsev_inverse_xi_wrapper(clib_nsev_inverse_xi_func, D, T1, T2, M, DIS)
-    if rv==0:
-        NSEV_XI[0] = tmpXI[0]
-        NSEV_XI[1] = tmpXI[1]
-    else:
-        raise ValueError("nsev_inverse_XI return code !=0")
     clib_nsev_inverse_func.argtypes = [
         type(NSEV_M),
         np.ctypeslib.ndpointer(dtype=numpy_complex,
@@ -79,8 +67,6 @@ def nsev_inverse_wrapper(clib_nsev_inverse_func, clib_nsev_inverse_xi_func,
         type(NSEV_kappa),
         ctypes.POINTER( nsev_inverse_options_struct)  # options ptr
         ]
-    options = get_nsev_inverse_options(DIS, CST, CIM, MAXITER, OSF)
-
     rv = clib_nsev_inverse_func(
         NSEV_M,
         NSEV_contspec,
@@ -94,7 +80,33 @@ def nsev_inverse_wrapper(clib_nsev_inverse_func, clib_nsev_inverse_xi_func,
         NSEV_kappa,
         ctypes.byref(options)
     )
-    return NSEV_q
+    rdict = {
+        'return_value': rv,
+        'q' : NSEV_q
+    }
+    return rdict
+
+
+
+def nsev_inverse(clib_nsev_inverse_func,
+                 clib_nsev_inverse_xi_func,
+                 contspec, tvec, kappa, DIS=1,
+                 CST=0, CIM=0, MAXITER=100, OSF=8):
+    M = len(contspec)
+    D = len(tvec)
+    T1 = np.min(tvec)
+    T2 = np.max(tvec)
+    K=0
+    rv, tmpXI = nsev_inverse_xi_wrapper(clib_nsev_inverse_xi_func, D, T1, T2 , M, DIS)
+    if rv!=0:
+        raise ValueError("nsev_inverse_xi calculation failes")
+    options = get_nsev_inverse_options(DIS, CST, CIM, MAXITER, OSF)
+    rdict = nsev_inverse_wrapper(clib_nsev_inverse_func,
+                              M, contspec, tmpXI[0], tmpXI[1], K, None, None, D, T1, T2, kappa, options)
+    return rdict
+
+
+
 M = 2048
 D = 1024
 DIS=1
@@ -111,11 +123,19 @@ contspec = np.zeros(M, dtype=np.complex128)
 contspec = alpha / (xiv-beta*1.0j)
 K = 0
 kappa=1
+DIS=1
+CST=0
+CIM=0
+MAXITER=100
+OSF=8
 
 
-q = nsev_inverse_wrapper(fnft_clib.fnft_nsev_inverse, fnft_clib.fnft_nsev_inverse_XI,
-                     M, contspec, XI1, XI2, K, None, None, D, T1, T2, kappa, DIS=DIS)
+tvec = np.linspace(-2,2, D)
 
+rd = nsev_inverse(fnft_clib.fnft_nsev_inverse, fnft_clib.fnft_nsev_inverse_XI,contspec,
+                 tvec,
+                 kappa, OSF=8)
+q = rd['q']
 
 for i in range(0, D, 64):
-    print("t = %.3f     q=%.4e  + %.4e i"%(tvec[i], np.real(q[i]), np.imag(q[i])))
+    print("t = %.5f     q=%.5e  + %.5e i"%(tvec[i], np.real(q[i]), np.imag(q[i])))
