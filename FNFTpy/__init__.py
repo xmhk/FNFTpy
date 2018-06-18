@@ -11,6 +11,7 @@ fnft_clib = ctypes.CDLL(libpath)
 from .fnft_kdvv_wrapper import kdvv_wrapper
 from .fnft_nsep_wrapper import nsep_wrapper
 from .fnft_nsev_wrapper import nsev_wrapper
+from .fnft_nsev_inverse_wrapper import nsev_inverse_xi_wrapper, nsev_inverse_wrapper
 from .typesdef import *
 
 def kdvv(u, tvec, M=100, xi1=-2, xi2=2, DIS=15):
@@ -29,13 +30,14 @@ def kdvv(u, tvec, M=100, xi1=-2, xi2=2, DIS=15):
     rdict : dictionary holding the fields (depending on options)
         return_value : return value from libFNFT
         contspec : continuous spectrum        
-    """ 
+    """
+    clib_kdvv_func = fnft_clib.fnft_kdvv
     D = len(u)
     K = 0 # not yet implemented
     t1 = np.min(tvec)
     t2 = np.max(tvec)
     options = get_kdvv_options(DIS)
-    return kdvv_wrapper(fnft_clib.fnft_kdvv, D, u, t1, t2, M, xi1, xi2, 
+    return kdvv_wrapper(clib_kdvv_func, D, u, t1, t2, M, xi1, xi2,
                         K, options)    
 
 def nsep(q, t1, t2, kappa=1, LOC=2, FILT=2, BB=[-200, 200, -200,200],
@@ -77,9 +79,10 @@ def nsep(q, t1, t2, kappa=1, LOC=2, FILT=2, BB=[-200, 200, -200,200],
         M: number of points in the auxilary spectrum
 	aux: auxilary spectrum
     """
+    clib_nsep_func = fnft_clib.fnft_nsep
     D = len(q)
     options = get_nsep_options(LOC, FILT, BB, MAXEV, DIS, NF)
-    return nsep_wrapper(fnft_clib.fnft_nsep, D, q, t1, t2, 
+    return nsep_wrapper(clib_nsep_func, D, q, t1, t2,
                         kappa, options)    
 
     
@@ -132,10 +135,29 @@ def nsev(q, tvec, xi1=-2, xi2=2, M=100, K=100, kappa=1, BSF=2,
         c_ref : continuous spectrum - reflection coefficient
         c_a : continuous spectrum - scattering coefficient a
         c_b : continuous spectrum - scattering coefficient b
-    """    
+    """
+    clib_nsev_func = fnft_clib.fnft_nsev
     D = len(q)
     t1 = np.min(tvec)
     t2 = np.max(tvec)
     options = get_nsev_options(BSF, BSL, niter, DSUB, DS, CS, NF, DIS)
-    return nsev_wrapper(fnft_clib.fnft_nsev, D, q, t1, t2, xi1, xi2,
-                        M, K, kappa, options)    
+    return nsev_wrapper(clib_nsev_func, D, q, t1, t2, xi1, xi2,
+                        M, K, kappa, options)
+
+
+def nsev_inverse(contspec, tvec, kappa, DIS=1,
+                 CST=0, CIM=0, MAXITER=100, OSF=8):
+    clib_nsev_inverse_func = fnft_clib.fnft_nsev_inverse
+    clib_nsev_inverse_xi_func = fnft_clib.fnft_nsev_inverse_XI
+    M = len(contspec)
+    D = len(tvec)
+    T1 = np.min(tvec)
+    T2 = np.max(tvec)
+    K=0
+    rv, tmpXI = nsev_inverse_xi_wrapper(clib_nsev_inverse_xi_func, D, T1, T2 , M, DIS)
+    if rv!=0:
+        raise ValueError("nsev_inverse_xi calculation failes")
+    options = get_nsev_inverse_options(DIS, CST, CIM, MAXITER, OSF)
+    rdict = nsev_inverse_wrapper(clib_nsev_inverse_func,
+                              M, contspec, tmpXI[0], tmpXI[1], K, None, None, D, T1, T2, kappa, options)
+    return rdict
