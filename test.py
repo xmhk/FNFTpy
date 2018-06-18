@@ -78,7 +78,7 @@ def nsevexample():
                                   np.imag(res['bound_states'][i]),
                                   np.real(res['d_norm'][i]),
                                   np.imag(res['d_norm'][i])))
-#nsevexample()
+nsevexample()
 #nsepexample()
 #kdvvexample()
 
@@ -87,5 +87,4 @@ def nsevexample():
 #kdvvtest()
 #nseptest()
 
-options = get_nsev_inverse_options(0,0,0,0,2)
-print(options.discretization)
+

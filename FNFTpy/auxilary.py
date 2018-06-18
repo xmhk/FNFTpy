@@ -5,9 +5,11 @@ def get_lib_path():
     See example strings.
     """
     #libstr = "C:/Libraries/local/libfnft.dll"  # example for windows
+    #libstr = "C:/Libraries/local/vanilla/libfnft.dll"  # example for windows
+    libstr = "C:/Libraries/local/devel/libfnft.dll"  # example for windows
     #libstr = "/usr/local/lib/libfnft.so"    #example for linux
     #libstr="/home/ch/Downloads/MyFNFTpy/lib/vanilla/libfnft.so"
-    libstr = "/home/ch/Downloads/MyFNFTpy/lib/inverse/libfnft.so"
+    #libstr = "/home/ch/Downloads/MyFNFTpy/lib/inverse/libfnft.so"
     return libstr
 
 
