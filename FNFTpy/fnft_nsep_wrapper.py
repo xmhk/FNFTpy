@@ -3,7 +3,7 @@ from .typesdef import *
 def nsep_wrapper(clib_nsep_func, D, q, t1, t2, kappa,
                  options):
     """
-    FNFT(NSEP) wraps the python input and returns the result from libFNFT
+    wraps the python input and returns the result from libFNFT  fnft_nsep
     Parameters:
     ----------
         clib_nsep_func : handle of the c function imported via ctypes
