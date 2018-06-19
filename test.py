@@ -100,9 +100,9 @@ def nsev_inverse_example():
 #nsepexample()
 #kdvvexample()
 
-nsev_inverse_example()
-#nsevtest()
-#kdvvtest()
-#nseptest()
+#nsev_inverse_example()
+nsevtest()
+kdvvtest()
+nseptest()
 
 
