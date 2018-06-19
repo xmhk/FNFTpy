@@ -28,8 +28,6 @@ def nsev_wrapper(clib_nsev_func, D, q, t1, t2, xi1, xi2,
         c_b : continuous spectrum - scattering coefficient b
     """      
     clib_nsev_func.restype = ctypes_int    
-    if options==None:
-        options=get_nsev_options()
     NSEV_D = ctypes_uint(D)
     NSEV_M = ctypes_uint(M)
     NSEV_K = ctypes_uint(K)

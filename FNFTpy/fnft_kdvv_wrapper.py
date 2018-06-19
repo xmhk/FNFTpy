@@ -21,8 +21,6 @@ def kdvv_wrapper(clib_kdvv_func, D, u, t1, t2, M,  xi1, xi2,
         contspec : continuous spectrum        
     """      
     clib_kdvv_func.restype = ctypes_int
-    if options==None:
-        options=get_kdvv_options()
     KDVV_D = ctypes_uint(D)
     KDVV_u = np.zeros(KDVV_D.value,dtype=numpy_complex)
     KDVV_u[:] = u[:] + 0.0j

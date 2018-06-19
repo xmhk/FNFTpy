@@ -24,8 +24,6 @@ def nsep_wrapper(clib_nsep_func, D, q, t1, t2, kappa,
 
              
     clib_nsep_func.restype = ctypes_int  
-    if options==None:
-        options=get_nsep_options()
     NSEP_D = ctypes_uint(D)
     NSEP_q = np.zeros(NSEP_D.value,dtype=numpy_complex)
     NSEP_q[:] = q[:] + 0.0j
