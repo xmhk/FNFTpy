@@ -1,5 +1,6 @@
 from .typesdef import *
 
+
 def nsep_wrapper(clib_nsep_func, D, q, t1, t2, kappa,
                  options):
     """
@@ -19,37 +20,33 @@ def nsep_wrapper(clib_nsep_func, D, q, t1, t2, kappa,
         K : number of points in the main spectrum 
         main : main spectrum
         M: number of points in the auxilary spectrum
-	aux: auxilary spectrum
-    """      
+        aux: auxilary spectrum"""
 
-             
     clib_nsep_func.restype = ctypes_int  
-    if options==None:
-        options=get_nsep_options()
     NSEP_D = ctypes_uint(D)
-    NSEP_q = np.zeros(NSEP_D.value,dtype=numpy_complex)
+    NSEP_q = np.zeros(NSEP_D.value, dtype=numpy_complex)
     NSEP_q[:] = q[:] + 0.0j
     NSEP_T = np.zeros(2, dtype=numpy_double)
     NSEP_T[0] = t1
     NSEP_T[1] = t2
     NSEP_K = ctypes_uint(4 * NSEP_D.value)
-    NSEP_main_spec = np.zeros(NSEP_K.value,dtype=numpy_complex)
+    NSEP_main_spec = np.zeros(NSEP_K.value, dtype=numpy_complex)
     NSEP_M = ctypes_uint(2 * NSEP_D.value)
-    NSEP_aux_spec = np.zeros(NSEP_M.value,dtype=numpy_complex)
-    NSEP_sheet_indices = ctypes.POINTER(ctypes.c_int)() # null_pointer
+    NSEP_aux_spec = np.zeros(NSEP_M.value, dtype=numpy_complex)
+    NSEP_sheet_indices = ctypes.POINTER(ctypes.c_int)()  # null_pointer
     NSEP_kappa = ctypes_int(kappa)
 
-    clib_nsep_func.argtypes=  [
+    clib_nsep_func.argtypes = [
         type(NSEP_D),                                # D 
-        np.ctypeslib.ndpointer(dtype = numpy_complex, 
+        np.ctypeslib.ndpointer(dtype=numpy_complex,
                                ndim=1, flags='C'),   # q
-        np.ctypeslib.ndpointer(dtype = ctypes_double, 
+        np.ctypeslib.ndpointer(dtype=ctypes_double,
                                ndim=1, flags='C'),   # T
         ctypes.POINTER(ctypes_uint),                 # K_ptr
-        np.ctypeslib.ndpointer(dtype = numpy_complex, 
+        np.ctypeslib.ndpointer(dtype=numpy_complex,
                                ndim=1, flags='C'),   # main_spec
         ctypes.POINTER(ctypes_uint),                 # M_ptr
-        np.ctypeslib.ndpointer(dtype = numpy_complex, 
+        np.ctypeslib.ndpointer(dtype=numpy_complex,
                                ndim=1, flags='C'),   # aux_spec    
         type(NSEP_sheet_indices),                    # sheet indices
         type(NSEP_kappa),                            # kappa
@@ -67,9 +64,9 @@ def nsep_wrapper(clib_nsep_func, D, q, t1, t2, kappa,
         NSEP_kappa,
         ctypes.byref(options))
     rdict = { 
-        'return_value':rv,
-        'K':NSEP_K.value,
-        'main':NSEP_main_spec[0:NSEP_K.value],
-        'M':NSEP_M.value,
-        'aux':NSEP_aux_spec[0:NSEP_M.value]}
+        'return_value': rv,
+        'K': NSEP_K.value,
+        'main': NSEP_main_spec[0:NSEP_K.value],
+        'M': NSEP_M.value,
+        'aux': NSEP_aux_spec[0:NSEP_M.value]}
     return rdict
