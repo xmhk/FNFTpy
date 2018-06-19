@@ -13,17 +13,17 @@ FNFTpy currently allows to call the following functions from libFNFT:
        ```
        import numpy as np
        from FNFTpy import kdvv
-       D = 256
-       tvec = np.linspace(-1,1,D)
+       d = 256
+       tvec = np.linspace(-1,1,d)
        q = np.zeros(D, dtype=np.complex128)
        q[:] = 2.0 + 0.0j
        xi1 = -2
        xi2 = 2
-       M = 8
+       m = 8
        #
        # call the function
        #
-       res = kdvv(q, tvec, M, xi1=xi1, xi2=xi2, DIS=15)
+       res = kdvv(q, tvec, m, xi1=xi1, xi2=xi2, dis=15)
        #
        # print results
        #
@@ -43,20 +43,20 @@ FNFTpy currently allows to call the following functions from libFNFT:
       ```
       import numpy as np
       from FNFTpy import nsep
-      D= 256
-      dt = 2*np.pi/D
-      tvec = np.arange(D) * dt
+      d = 256
+      dt = 2*np.pi/d
+      tvec = np.arange(d) * dt
       q = np.exp(2.0j * tvec)
       #
       # call the function
       #
-      res = nsep(q, 0, 2*np.pi, BB=[-2,2,-2,2], FILT=1)
+      res = nsep(q, 0, 2*np.pi, bb=[-2,2,-2,2], filt=1)
       #
       # print results
       #
       print("libFNFT return value: %d"%res['return_value'])
       print('main spectrum')
-      for i in range(res['K']):
+      for i in range(res['k']):
           print("%d   %.6f  %.6fj"%(i, np.real(res['main'][i]),np.imag(res['main'][i])))        
       print('auxilary spectrum')
       for i in range(res['M']):
@@ -75,17 +75,17 @@ FNFTpy currently allows to call the following functions from libFNFT:
       ```
       import numpy as np
       from FNFTpy import nsev
-      D=256        
-      tvec = np.linspace(-1,1,D)
+      d = 256        
+      tvec = np.linspace(-1,1,d)
       q = np.zeros(len(tvec), dtype=np.complex128)
       q[:] = 2.0+0.0j
-      M = 8
+      m = 8
       xi1 = -2
       xi2 = 2
       #
       # call the function
       #
-      res = nsev(q, tvec, M=M, xi1=xi1, xi2=xi2, K=D)
+      res = nsev(q, tvec, m=m, xi1=xi1, xi2=xi2, k=d)
       #
       # print results
       #
