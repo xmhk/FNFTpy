@@ -96,13 +96,13 @@ def nsev_inverse_example():
     q = rd['q']
     for i in range(0, D, 64):
         print("t = %.5f     q=%.5e  + %.5e i" % (tvec[i], np.real(q[i]), np.imag(q[i])))
-#nsevexample()
-#nsepexample()
-#kdvvexample()
+# nsevexample()
+# nsepexample()
+kdvvexample()
 
 #nsev_inverse_example()
-nsevtest()
+#nsevtest()
 kdvvtest()
-nseptest()
+#nseptest()
 
 
