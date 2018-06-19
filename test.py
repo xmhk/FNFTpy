@@ -1,10 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Mon Jun 11 23:10:41 2018
 
-@author: ch
-"""
 import numpy as np
 from FNFTpy import *
 
@@ -96,13 +92,13 @@ def nsev_inverse_example():
     q = rd['q']
     for i in range(0, D, 64):
         print("t = %.5f     q=%.5e  + %.5e i" % (tvec[i], np.real(q[i]), np.imag(q[i])))
-# nsevexample()
-# nsepexample()
+nsevexample()
+nsepexample()
 kdvvexample()
 
 #nsev_inverse_example()
-#nsevtest()
+nsevtest()
 kdvvtest()
-#nseptest()
+nseptest()
 
 
