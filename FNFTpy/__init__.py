@@ -1,7 +1,5 @@
-import numpy as np
 import ctypes
 from .auxilary import get_lib_path
-
 
 # get python ctypes object of libFNFT
 libpath = get_lib_path()  # edit in auxilary.py
@@ -12,6 +10,7 @@ from .fnft_kdvv_wrapper import kdvv_wrapper
 from .fnft_nsep_wrapper import nsep_wrapper
 from .fnft_nsev_wrapper import nsev_wrapper
 from .typesdef import *
+
 
 def kdvv(u, tvec, M=100, xi1=-2, xi2=2, DIS=15):
     """calculates the Nonlinear Fourier Transform for the Korteweg-de Vries equation with vanishing boundaries
@@ -38,7 +37,7 @@ def kdvv(u, tvec, M=100, xi1=-2, xi2=2, DIS=15):
     return kdvv_wrapper(fnft_clib.fnft_kdvv, D, u, t1, t2, M, xi1, xi2, 
                         K, options)    
 
-def nsep(q, t1, t2, kappa=1, LOC=2, FILT=2, BB=[-200, 200, -200,200],
+def nsep(q, t1, t2, kappa=1, LOC=2, FILT=2, BB=None,
          MAXEV=20, DIS=1, NF=1):
     """
     calculates the Nonlinear Fourier Transform for the periodic Nonlinear Schroedinger Equation
@@ -59,7 +58,7 @@ def nsep(q, t1, t2, kappa=1, LOC=2, FILT=2, BB=[-200, 200, -200,200],
                1=Manual,
                2=Auto [optional, default=2]
         BB: bounding box used for manual filtering 
-            [optional, default=[-200,200,-200,200]]
+            [optional, default=None (BB is set to [-200,200,-200,200])]
         MAXEV : maximum number of evaluations for root refinement
                 [optional, default=20]
         NF : normalization Flag 0=off, 1=on [optional, default=1]
@@ -78,6 +77,8 @@ def nsep(q, t1, t2, kappa=1, LOC=2, FILT=2, BB=[-200, 200, -200,200],
         M: number of points in the auxilary spectrum
 	aux: auxilary spectrum
     """
+    if BB==None:  #set standard value for BB
+        BB = [-200, 200, -200, 200]
     D = len(q)
     options = get_nsep_options(LOC, FILT, BB, MAXEV, DIS, NF)
     return nsep_wrapper(fnft_clib.fnft_nsep, D, q, t1, t2, 
