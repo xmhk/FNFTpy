@@ -86,23 +86,14 @@ def nsev_inverse_example():
     tvec = np.linspace(-2, 2, D)
     alpha = 2.0
     beta = -0.55
-    T1 = np.min(tvec)
-    T2 = np.max(tvec)
-    XI1 = 0
-    XI2 = 0
-    rv, XI = nsev_inverse_xi_wrapper(fnft_clib.fnft_nsev_inverse_XI, D, T1, T2, M, DIS)
+    kappa = 1
+    rv, XI = nsev_inverse_xi_wrapper(fnft_clib.fnft_nsev_inverse_XI, D, np.min(tvec),
+                                     np.max(tvec), M, DIS)
     xiv = XI[0] + np.arange(M) * (XI[1] - XI[0]) / (M - 1)
     contspec = np.zeros(M, dtype=np.complex128)
     contspec = alpha / (xiv - beta * 1.0j)
-    kappa = 1
-
-    tvec = np.linspace(-2, 2, D)
-
-    rd = nsev_inverse(contspec,
-                      tvec,
-                      kappa, OSF=8)
+    rd = nsev_inverse(contspec, tvec, kappa, OSF=8)
     q = rd['q']
-
     for i in range(0, D, 64):
         print("t = %.5f     q=%.5e  + %.5e i" % (tvec[i], np.real(q[i]), np.imag(q[i])))
 #nsevexample()
