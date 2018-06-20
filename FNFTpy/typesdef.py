@@ -28,21 +28,21 @@ def get_kdvv_options(dis):
     Parameters:
     ----------
         DIS: discretization
-           0 = 2SPLIT1A,
-           1 = 2SPLIT1B,
-           2 = SPLIT2A,
-           3 = 2SPLIT2B,
-           4 = 2SPLIT3A,
-           5 = 2SPLIT3B,
-           6 = 2SPLIT4A,
-           7 = 2SPLIT4B,
-           8 = 2SPLIT5A,
-           9 = 2SPLIT5B,
-           10 = 2SPLIT6A,
-           11 = 2SPLIT6B,
-           12 = 2SPLIT7A,
-           13 = 2SPLIT7B,
-           14 = 2SPLIT8A,
+           0 = 2SPLIT1A
+           1 = 2SPLIT1B
+           2 = SPLIT2A
+           3 = 2SPLIT2B
+           4 = 2SPLIT3A
+           5 = 2SPLIT3B
+           6 = 2SPLIT4A
+           7 = 2SPLIT4B
+           8 = 2SPLIT5A
+           9 = 2SPLIT5B
+           10 = 2SPLIT6A
+           11 = 2SPLIT6B
+           12 = 2SPLIT7A
+           13 = 2SPLIT7B
+           14 = 2SPLIT8A
            15 = 2SPLIT8B
     Returns:
     ----------
@@ -71,22 +71,22 @@ def get_nsep_options(loc, filt, bb, maxev, dis, nf):
     Parameters:
     ----------
         loc : localization of spectrum
-              0=Subsample and Refine,
-              1=Gridsearch,
-              2=Mixed
+                0=Subsample and Refine
+                1=Gridsearch
+                2=Mixed
         filt : filtering of spectrum
-               0=None,
-               1=Manual,
-               2=Auto
+                 0=None
+                 1=Manual
+                 2=Auto
         bb : bounding box used for manual filtering
         maxev : maximum number of evaluations for root refinement
         nf : normalization flag
         dis : discretization
-              0=2split2modal,
-              1=2split2a,
-              2=2split4a,
-              3=2split4b,
-              4=BO
+                0=2split2modal
+                1=2split2a
+                2=2split4a
+                3=2split4b
+                4=BO
     Returns:
     ----------
         options struct  for NSEP C call
@@ -131,27 +131,31 @@ def get_nsev_options(bsf, bsl, niter, dsub, dst, cst, nf, dis):
     Parameters:
     ----------
         bsf : bound state filtering
-               (0=none, 1=basic, 2=full; default=2)
+                0=none
+                1=basic
+                2=full
         bsl : bound state localization
-               0=Fast Eigenvalue,
-               1=Newton, 
+               0=Fast Eigenvalue
+               1=Newton
                2=Subsample and Refine
         niter : number of iterations for Newton BSL
         dsub : manual number of subsamples
         dst : type of discrete spectrum
-               0=norming constants, 
-               1=residues, 
+               0=norming constants
+               1=residues
                2=both
         cst : type of continuous spectrum
-               0=reflection coefficient,
-               1=a and b,
+               0=reflection coefficient
+               1=a and b
                2=both
-        nf : normalization Flag 0=off, 1=on
+        nf : normalization Flag
+               0=off
+               1=on
         dis : discretization
-               0=2split2modal,
-               1=2split2a,
-               2=2split4a,
-               3=2split4b,
+               0=2split2modal
+               1=2split2a
+               2=2split4a
+               3=2split4b
                4=BO
     Returns:
     ----------
@@ -169,29 +173,29 @@ def get_nsev_options(bsf, bsl, niter, dsub, dst, cst, nf, dis):
 
 
 
-def get_nsev_inverse_options(DIS, CST, CIM, MAXITER, OSF):
+def get_nsev_inverse_options(dis, cst, cim, maxiter, osf):
     """returns an options struct for NSEV Inverse
     Parameters:
-        DIS : Discretization to use
-            0=2SPLIT2_MODAL,
-            1=2SPLIT2A,
-            2=2SPLIT4A,
-            3=2SPLIT4B,
-            4=BO
-        CST : type of continuous spectrum
-            0=REFLECTION_COEFFICIENT,
-            1=B_OF_TAU
-        CSI : type of inverse method for continuous spectrum
-            0=DEFAULT,
-            1=FMATRIX_CONTAINS_REFL_COEFF,
-            2=TFMATRIX_CONTAINS_AB_FROM_ITER
-        MAXITER : maximum number of iterations (continuous spectrum)
-        OSF : oversampling factor
+        dis : Discretization to use
+              0=2split2_MODAL
+              1=2split2A
+              2=2split4A
+              3=2split4B
+              4=BO
+        cst : type of continuous spectrum
+                0=reflection coefficient
+                1=b of tau
+        csi : type of inverse method for continuous spectrum
+                0=default
+                1=TF-matrix contains reflection coeff.
+                2=TF-matrix contains a,b from iteration
+        maxiter : maximum number of iterations (continuous spectrum)
+        osf : oversampling factor
             """
-    check_value(DIS, 0, 4)
-    check_value(CST, 0, 1)
-    check_value(CIM, 0, 2)
-    check_value(MAXITER, 0, 32000)
-    check_value(OSF, 1, 32000)
-    return NsevInverseOptionsStruct(DIS, CST, CIM, MAXITER, OSF)
+    check_value(dis, 0, 4)
+    check_value(cst, 0, 1)
+    check_value(cim, 0, 2)
+    check_value(maxiter, 0, 32000)
+    check_value(osf, 1, 32000)
+    return NsevInverseOptionsStruct(dis, cst, cim, maxiter, osf)
 

@@ -4,7 +4,7 @@ from .typesdef import *
 def kdvv_wrapper(clib_kdvv_func, d, u, t1, t2, m, xi1, xi2,
                  k, options):
     """
-    wraps the python input and returns the result from libFNFT  fnft_kdvv
+    Wraps the python input and returns the result from libFNFT's fnft_kdvv.
     Parameters:
     ----------
         clib_kdvv_func : handle of the c function imported via ctypes

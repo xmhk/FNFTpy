@@ -79,10 +79,10 @@ def nsepexample():
     print("libFNFT return value: %d" % res['return_value'])
     print("number of samples: %d"%d)
     print('main spectrum')
-    for i in range(res['K']):
+    for i in range(res['k']):
         print("%d   %.6f  %.6fj" % (i, np.real(res['main'][i]), np.imag(res['main'][i])))
     print('auxilary spectrum')
-    for i in range(res['M']):
+    for i in range(res['m']):
         print("%d   %.6f  %.6fj" % (i, np.real(res['aux'][i]), np.imag(res['aux'][i])))
 
 def nsevexample2():

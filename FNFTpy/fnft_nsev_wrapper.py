@@ -4,7 +4,7 @@ from .typesdef import *
 def nsev_wrapper(clib_nsev_func, d, q, t1, t2, xi1, xi2,
                  m, k, kappa, options):
     """
-    wraps the python input and returns the result from libFNFT fnft_nsev
+    Wraps the python input and returns the result from libFNFT's fnft_nsev.
     Parameters:
     ----------
         clib_nsev_func : handle of the c function imported via ctypes
