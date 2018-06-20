@@ -24,25 +24,23 @@ def kdvv(u, tvec, m=128, xi1=-2, xi2=2, dis=15):
         xi1, xi2 : min and max frequency for the continuous spectrum, 
                    [optional, standard=-/+ 2]        
         dis : determines the discretization
-                [optional, standard=17]
+                [optional, standard=15]
                 0 = 2SPLIT1A
                 1 = 2SPLIT1B
                 2 = 2SPLIT2A
                 3 = 2SPLIT2B
-                4 = 2SPLIT2S
-                5 = 2SPLIT3A
-                6 = 2SPLIT3B
-                7 = 2SPLIT3S
-                8 = 2SPLIT4A
-                9 = 2SPLIT4B
-                10 = 2SPLIT5A
-                11 = 2SPLIT5B
-                12 = 2SPLIT6A
-                13 = 2SPLIT6B
-                14 = 2SPLIT7A
-                15 = 2SPLIT7B
-                16 = 2SPLIT8A
-                17 = 2SPLIT8B
+                4 = 2SPLIT3A
+                5 = 2SPLIT3B
+                6 = 2SPLIT4A
+                7 = 2SPLIT4B
+                8 = 2SPLIT5A
+                9 = 2SPLIT5B
+                10 = 2SPLIT6A
+                11 = 2SPLIT6B
+                12 = 2SPLIT7A
+                13 = 2SPLIT7B
+                14 = 2SPLIT8A
+                15 = 2SPLIT8B
     Returns:
     ----------
     rdict : dictionary holding the fields (depending on options)
