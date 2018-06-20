@@ -4,40 +4,42 @@ from .auxilary import *
 
 # data types for interfacing C
 
-ctypes_int32 = ctypes.c_int32   # FNFT_INT, (C int32_t )
-ctypes_uint = ctypes.c_size_t   # FNFT_UINT (C size_t)
-ctypes_int = ctypes.c_int       # plain c integer, e.g. union elements
-ctypes_double = ctypes.c_double # FNFT_REAL
-numpy_complex = np.complex128   # FNFT_COMPLEX for Arrays (C-double)
-numpy_double = np.double        # FNFT_REAL for Arrays (C-double)
+ctypes_int32 = ctypes.c_int32  # FNFT_INT, (C int32_t )
+ctypes_uint = ctypes.c_size_t  # FNFT_UINT (C size_t)
+ctypes_int = ctypes.c_int  # plain c integer, e.g. union elements
+ctypes_double = ctypes.c_double  # FNFT_REAL
+numpy_complex = np.complex128  # FNFT_COMPLEX for Arrays (C-double)
+numpy_double = np.double  # FNFT_REAL for Arrays (C-double)
+
 
 # option structs for interfacing C
 
 class kdvv_options_struct(ctypes.Structure):
     _fields_ = [
-        ("discretization",ctypes_int)]
+        ("discretization", ctypes_int)]
 
 
 class nsep_options_struct(ctypes.Structure):
     _fields_ = [
-        ("localization",ctypes_int),
-        ("filtering",ctypes_int),
-        ("bounding_box",ctypes_double * 4),
-        ("max_evals",ctypes_uint),
-        ("discretization",ctypes_int),   
-        ("normalization_flag",ctypes_int32)]
+        ("localization", ctypes_int),
+        ("filtering", ctypes_int),
+        ("bounding_box", ctypes_double * 4),
+        ("max_evals", ctypes_uint),
+        ("discretization", ctypes_int),
+        ("normalization_flag", ctypes_int32)]
 
 
 class nsev_options_struct(ctypes.Structure):
     _fields_ = [
-        ("bound_state_filtering",ctypes_int),
-        ("bound_state_localization",ctypes_int),
+        ("bound_state_filtering", ctypes_int),
+        ("bound_state_localization", ctypes_int),
         ("niter", ctypes_uint),
         ("Dsub", ctypes_uint),
-        ("discspec_type",ctypes_int),
-        ("contspec_type",ctypes_int),
-        ("normalization_flag",ctypes_int32),
-        ("discretization",ctypes_int)]
+        ("discspec_type", ctypes_int),
+        ("contspec_type", ctypes_int),
+        ("normalization_flag", ctypes_int32),
+        ("discretization", ctypes_int)]
+
 
 class nsev_inverse_options_struct(ctypes.Structure):
     _fields_ = [
@@ -45,7 +47,7 @@ class nsev_inverse_options_struct(ctypes.Structure):
         ("contspec_type", ctypes_int),
         ("contspec_inversion_method", ctypes_int),
         ("max_iter", ctypes_uint),
-        ("oversampling_factor",ctypes_uint)
+        ("oversampling_factor", ctypes_uint)
     ]
 
 
@@ -72,7 +74,7 @@ def get_nsev_inverse_options(DIS, CST, CIM, MAXITER, OSF):
     check_value(CST, 0, 1)
     check_value(CIM, 0, 2)
     check_value(MAXITER, 0, 32000)
-    check_value(OSF,1,32000)
+    check_value(OSF, 1, 32000)
     return nsev_inverse_options_struct(DIS, CST, CIM, MAXITER, OSF)
 
 
@@ -101,11 +103,11 @@ def get_kdvv_options(DIS):
     ----------
         options struct for KDVV C call
     """
-    check_value(DIS, 0, 15) # Discretization
+    check_value(DIS, 0, 15)  # Discretization
     return kdvv_options_struct(DIS)
 
 
-def get_nsep_options(LOC, FILT, BB, MAXEV, DIS, NF):    
+def get_nsep_options(LOC, FILT, BB, MAXEV, DIS, NF):
     """creates a options struct for NSEP
     Parameters:
     ----------
@@ -134,9 +136,9 @@ def get_nsep_options(LOC, FILT, BB, MAXEV, DIS, NF):
     check_value(FILT, 0, 2)  # Bound state localization        
     check_value(NF, 0, 1)  # Normflag
     check_value(DIS, 0, 4)  # Discretization
-    BBtype = ctypes_double *4
-    return nsep_options_struct(LOC, FILT, BBtype(BB[0],BB[1],BB[2],BB[3]), 
-        		       MAXEV, DIS, NF)
+    BBtype = ctypes_double * 4
+    return nsep_options_struct(LOC, FILT, BBtype(BB[0], BB[1], BB[2], BB[3]),
+                               MAXEV, DIS, NF)
 
 
 def get_nsev_options(BSF, BSL, niter, DSUB, DS, CS, NF, DIS):
@@ -172,8 +174,8 @@ def get_nsev_options(BSF, BSL, niter, DSUB, DS, CS, NF, DIS):
     """
     check_value(BSF, 0, 2)  # Bound state filtering
     check_value(BSL, 0, 2)  # Bound state localization    
-    check_value(niter, 0,  32000) # niter
-    check_value(DSUB, 0, 32000) #Dsub
+    check_value(niter, 0, 32000)  # niter
+    check_value(DSUB, 0, 32000)  # Dsub
     check_value(DS, 0, 2)  # Discspec type
     check_value(CS, 0, 2)  # Contspec type
     check_value(NF, 0, 1)  # Normflag
