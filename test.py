@@ -84,10 +84,9 @@ def nsevexample():
                                                                    np.imag(res['d_norm'][i])))
 
 
-# nsevexample()
-nsepexample()
+nsevexample()
 # kdvvexample()
-
+# nsepexample()
 
 nsevtest()
 # kdvvtest()
