@@ -81,12 +81,12 @@ def nsevexample():
 
 
 # detect some general errors
-# nsevtest()
-# kdvvtest()
-# nseptest()
+nsevtest()
+kdvvtest()
+nseptest()
 
 # mimic the example files
-#  nsevexample()
-#  kdvvexample()
-# nsepexample()
+nsevexample()
+kdvvexample()
+nsepexample()
 

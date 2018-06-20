@@ -45,21 +45,21 @@ def get_kdvv_options(dis):
     Parameters:
     ----------
         dis: discretization
-           0 = 2SPLIT1A,
-           1 = 2SPLIT1B,
-           2 = SPLIT2A,
-           3 = 2SPLIT2B,
-           4 = 2SPLIT3A,
-           5 = 2SPLIT3B,
-           6 = 2SPLIT4A,
-           7 = 2SPLIT4B,
-           8 = 2SPLIT5A,
-           9 = 2SPLIT5B,
-           10 = 2SPLIT6A,
-           11 = 2SPLIT6B,
-           12 = 2SPLIT7A,
-           13 = 2SPLIT7B,
-           14 = 2SPLIT8A,
+           0 = 2SPLIT1A
+           1 = 2SPLIT1B
+           2 = SPLIT2A
+           3 = 2SPLIT2B
+           4 = 2SPLIT3A
+           5 = 2SPLIT3B
+           6 = 2SPLIT4A
+           7 = 2SPLIT4B
+           8 = 2SPLIT5A
+           9 = 2SPLIT5B
+           10 = 2SPLIT6A
+           11 = 2SPLIT6B
+           12 = 2SPLIT7A
+           13 = 2SPLIT7B
+           14 = 2SPLIT8A
            15 = 2SPLIT8B
     Returns:
     ----------
@@ -74,22 +74,22 @@ def get_nsep_options(loc, filt, bb, maxev, dis, nf):
     Parameters:
     ----------
         loc : localization of spectrum
-              0=Subsample and Refine,
-              1=Gridsearch,
-              2=Mixed
+                0=Subsample and Refine
+                1=Gridsearch
+                2=Mixed
         filt : filtering of spectrum
-               0=None,
-               1=Manual,
-               2=Auto
+                 0=None
+                 1=Manual
+                 2=Auto
         bb : bounding box used for manual filtering
         maxev : maximum number of evaluations for root refinement
         nf : normalization flag
         dis : discretization
-              0=2split2modal,
-              1=2split2a,
-              2=2split4a,
-              3=2split4b,
-              4=BO
+                0=2split2modal
+                1=2split2a
+                2=2split4a
+                3=2split4b
+                4=BO
     Returns:
     ----------
         options struct  for NSEP C call
@@ -98,7 +98,7 @@ def get_nsep_options(loc, filt, bb, maxev, dis, nf):
     check_value(filt, 0, 2)  # Bound state localization
     check_value(nf, 0, 1)  # Normflag
     check_value(dis, 0, 4)  # Discretization
-    bbtype = ctypes_double * 4
+    bbtype = 4 * ctypes_double
     return NsepOptionsStruct(loc, filt, bbtype(bb[0], bb[1], bb[2], bb[3]),
                                maxev, dis, nf)
 
@@ -108,26 +108,28 @@ def get_nsev_options(bsf, bsl, niter, dst, cst, nf, dis):
     Parameters:
     ----------
         bsf : bound state filtering
-               (0=none, 1=basic, 2=full; default=2)
+                0=none
+                1=basic
+                2=full
         bsl : bound state localization
-               0=Fast Eigenvalue,
-               1=Newton, 
-               2=Subsample and Refine
-        niter : number of iterations for Newton bsl
+                0=Fast Eigenvalue
+                1=Newton
+                2=Subsample and Refine
+        niter : number of iterations for Newton bound state location
         dst : type of discrete spectrum
-               0=norming constants,
-               1=residues,
-               2=both
+                 0=norming constants
+                 1=residues
+                 2=both
         cst : type of continuous spectrum
-               0=reflection coefficient,
-               1=a and b,
-               2=both
+                 0=reflection coefficient
+                 1=a and b
+                 2=both
         nf : normalization Flag 0=off, 1=on
         dis : discretization
-               0=2split2modal,
-               1=2split2a,
-               2=2split4a,
-               3=2split4b,
+               0=2split2modal
+               1=2split2a
+               2=2split4a
+               3=2split4b
                4=BO
     Returns:
     ----------
