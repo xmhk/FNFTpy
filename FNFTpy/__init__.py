@@ -39,7 +39,7 @@ def kdvv(u, tvec, m=128, xi1=-2, xi2=2, dis=15):
 def nsep(q, t1, t2, kappa=1, loc=2, filt=2, bb=None,
          maxev=20, dis=1, nf=1):
     """
-    calculates the Nonlinear Fourier Transform for the periodic Nonlinear Schroedinger Equation.
+    calculates the Nonlinear Fourier Transform for the periodic Nonlinear Schroedinger equation.
     Parameters:
     ----------
         q : numpy array holding the samples of the field to be analyzed
@@ -47,24 +47,27 @@ def nsep(q, t1, t2, kappa=1, loc=2, filt=2, bb=None,
         kappa : +/- 1 for focussing/defocussing nonlinearity 
                [optional, standard = +1]
         loc : localization of spectrum
-                0=Subsample and Refine,
-                1=Gridsearch,
-                2=Mixed [optional, default=2]
+                [optional, default=2]
+                0=Subsample and Refine
+                1=Gridsearch
+                2=Mixed
         filt : filtering of spectrum
-                 0=None,
-                 1=Manual,
-                 2=Auto [optional, default=2]
+                 [optional, default=2]
+                 0=None
+                 1=Manual
+                 2=Auto
         bb: bounding box used for manual filtering
             [optional, default=None (bb is set to [-200,200,-200,200])]
         maxev : maximum number of evaluations for root refinement
                 [optional, default=20]
         nf : normalization Flag 0=off, 1=on [optional, default=1]
         dis : discretization
-                0=2split2modal,
-                1=2split2a,
-                2=2split4a,
-                3=2split4b,
-                4=BO [optional, default=2]
+                [optional, default=2]
+                0=2split2modal
+                1=2split2a
+                2=2split4a
+                3=2split4b
+                4=BO
     Returns:
     ----------
     rdict : dictionary holding the fields (depending on options)
@@ -94,31 +97,37 @@ def nsev(q, tvec, xi1=-2, xi2=2, m=128, k=128, kappa=1, bsf=2,
         k : maximum number of bound states to calculate [optional, standard = 128]
         kappa : +/- 1 for focussing/defocussing nonlinearity [optional, standard = +1]
         bsf : bound state filtering
-                0=none,
-                1=basic,
-                2=full; [optional, default=2]
+                [optional, default=2]
+                0=none
+                1=basic
+                2=full
         bsl : bound state localization
-                0=Fast Eigenvalue,
-                1=Newton,
-                2=Subsample and Refine; [optional, default=0]
+                [optional, default=0]
+                0=Fast Eigenvalue
+                1=Newton
+                2=Subsample and Refine
         niter : number of iterations for Newton bsl [optional, default=10]
         dst : type of discrete spectrum
-               0=norming constants,
-               1=residues,
-               2=both; [optional, defaul=2]
+               [optional, defaul=2]
+               0=norming constants
+               1=residues
+               2=both
         cst : type of continuous spectrum
-               0=reflection coefficient,
-               1=a and b,
-               2=both; [optional, default=0]
+               [optional, default=0]
+               0=reflection coefficient
+               1=a and b
+               2=both
         nf : normalization Flag
+               [optional, default=1]
                0=off
-               1=on; [optional, default=1]
+               1=on
         dis : discretization
-                0=2split2modal,
-                1=2split2a,
-                2=2split4a,
-                3=2split4b,
-                4=BO; [optional, default=3]
+                [optional, default=3]
+                0=2split2modal
+                1=2split2a
+                2=2split4a
+                3=2split4b
+                4=BO
     Returns:
     ----------
     rdict : dictionary holding the fields (depending on options)
