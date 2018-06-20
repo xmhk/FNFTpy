@@ -12,7 +12,7 @@ def nsep_wrapper(clib_nsep_func, d, q, t1, t2, kappa,
         q : numpy array holding the samples of the field to be analyzed
         t1, t2  : time positions of the first and the (d+1) sample
         kappa   : +/- 1 for focussing/defocussing nonlinearity
-        options : options for nsev as nsev_options_struct
+        options : options for nsep as NsepOptionsStruct
     Returns:
     ----------
     rdict : dictionary holding the fields (depending on options)

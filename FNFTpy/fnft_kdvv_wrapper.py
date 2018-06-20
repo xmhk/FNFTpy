@@ -14,7 +14,7 @@ def kdvv_wrapper(clib_kdvv_func, d, u, t1, t2, m, xi1, xi2,
         m : number of values for the continuous spectrum to calculate
         xi1, xi2 : min and max frequency for the continuous spectrum        
         k : maximum number of bound states to calculate
-        options : options for nsev as nsev_options_struct
+        options : options for nsev as KdvvOptionsStruct
     Returns:
     ----------
     rdict : dictionary holding the fields (depending on options)

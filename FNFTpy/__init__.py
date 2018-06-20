@@ -159,6 +159,38 @@ def nsev(q, tvec, xi1=-2, xi2=2, m=128, k=128, kappa=1, bsf=2,
 
 def nsev_inverse(contspec, tvec, kappa, dis=1,
                  cst=0, cim=0, maxiter=100, osf=8):
+    """
+    Calculates the Inverse Nonlinear Fourier Transform for the Nonlinear Schroedinger equation with vanishing boundaries.
+
+    ! currently not what you might expect. time and frequency vector can not be chosen independently now ...
+    Parameters:
+    ----------
+        m : number of sample points for continuous spectrum
+        tvec : output time vector
+        kappa : +1/-1 for focussing / defocussing NSE
+        dis : discretization
+                [optional, default=1]
+                0=2split2_MODAL
+                1=2split2A
+                2=2split4A
+                3=2split4B
+                4=BO
+        cst : type of continuous spectrum
+                [optional, default=0]
+                0=reflection coefficient
+                1=b of tau
+        csi : type of inverse method for continuous spectrum
+                [optional, default=0]
+                0=default
+                1=TF-matrix contains reflection coeff.
+                2=TF-matrix contains a,b from iteration
+        maxiter : maximum number of iterations (continuous spectrum)
+                   [optional, default=100]
+        osf : oversampling factor
+                [optional, default=8]
+
+        options : options for nsev_inverse as NsevInverseOptionsStruct
+    """
     clib_nsev_inverse_func = fnft_clib.fnft_nsev_inverse
     clib_nsev_inverse_xi_func = fnft_clib.fnft_nsev_inverse_XI
     m = len(contspec)

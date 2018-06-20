@@ -2,6 +2,20 @@ from .typesdef import *
 
 
 def nsev_inverse_xi_wrapper(clib_nsev_inverse_xi_func, d, t1, t2, m, dis):
+    """
+        Helper function to calculate the spectral borders from the time window.
+        Parameters:
+        ----------
+            clib_nsev_inverse_xi_func : handle of the c function imported via ctypes
+            d : number of sample points for the time window
+            t1, t2 : borders of the time window
+            m : number of samples for the continuous spectrum
+            dis : nse discretization parameter
+        Returns:
+        ----------
+        rv : return value of the C-function
+        xi : two-element C double vector containing XI borders (frequency)
+        """
     clib_nsev_inverse_xi_func.restype = ctypes_int
     nsev_d = ctypes_uint(d)
     nsev_t = np.zeros(2, dtype=numpy_double)
@@ -26,6 +40,27 @@ def nsev_inverse_wrapper(clib_nsev_inverse_func,
                          m, contspec, xi1, xi2, k, bound_states,
                          normconst_or_residues, d, t1, t2, kappa,
                          options):
+    """
+    Wraps the python input and returns the result from libFNFT's fnft_nsev_inverse.
+    Parameters:
+    ----------
+        clib_nsev_inverse_func : handle of the c function imported via ctypes
+        m : number of sample points for continuous spectrum
+        contspec : numpy array holding the samples of the continuous spectrum
+        xi1, xi2  : frequencies defining the frequency range (cont spectrum)
+        k : number of bound states (currently not effect)
+        bound_states : bound states (currently not effect)
+        normconst_or_residues : bound state spectral coefficients (currently not effect)
+        d : number of samples for the output field
+        t1, t2 : borders of the desired time window
+        kappa : +1/-1 for focussing / defocussing NSE
+        options : options for nsev_inverse as NsevInverseOptionsStruct
+    Returns:
+    ----------
+    rdict : dictionary holding the fields (depending on options)
+        return_value : return value from libFNFT
+        q : time field resulting from inverse transform
+    """
     clib_nsev_inverse_func.restype = ctypes_int
     nsev_m = ctypes_uint(m)
     nsev_contspec = np.zeros(m, dtype=numpy_complex)

@@ -15,7 +15,7 @@ def nsev_wrapper(clib_nsev_func, d, q, t1, t2, xi1, xi2,
         m : number of values for the continuous spectrum to calculate
         k : maximum number of bound states to calculate
         kappa : +/- 1 for focussing/defocussing nonlinearity
-        options : options for nsev as nsev_options_struct
+        options : options for nsev as NsevOptionsStruct
     Returns:
     ----------
     rdict : dictionary holding the fields (depending on options)
