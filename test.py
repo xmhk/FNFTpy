@@ -15,7 +15,7 @@ def kdvvtest():
     res = kdvv(q, xvec)
     print(res['return_value'])
     res = kdvv(q, xvec, xi1=-10, xi2=10, DIS=15, M=2048)
-    print(res.keys())
+    print(res['return_value'])
 
 
 def nseptest():
@@ -58,10 +58,10 @@ def nsepexample():
     res = nsep(q, 0, 2 * np.pi, BB=[-2, 2, -2, 2], FILT=1)
     print("libFNFT return value: %d" % res['return_value'])
     print('main spectrum')
-    for i in range(res['K']):
+    for i in range(res['k']):
         print("%d   %.6f  %.6fj" % (i, np.real(res['main'][i]), np.imag(res['main'][i])))
     print('auxilary spectrum')
-    for i in range(res['M']):
+    for i in range(res['m']):
         print("%d   %.6f  %.6fj" % (i, np.real(res['aux'][i]), np.imag(res['aux'][i])))
 
 
@@ -85,10 +85,10 @@ def nsevexample():
 
 
 # nsevexample()
-# nsepexample()
+nsepexample()
 # kdvvexample()
 
 
-# nsevtest()
+nsevtest()
 # kdvvtest()
 # nseptest()
