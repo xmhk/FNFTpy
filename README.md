@@ -3,33 +3,24 @@
 This module contains wrapper functions for [libFNFT](https://github.com/FastNFT), a C library which allows to calculate
 the Nonlinear Fourier Transform of some input field.
 
-## current state
+## current state - access functions from libFNFT 0.1.1
 
-FNFTpy currently allows to call the following functions from libFNFT:
 
 * Korteweg-de-Fries equation with vanishing boundary conditions:
   * function kdvv: calculate the continuous spectrum
   * minimal example:
        ```
-       import numpy as np
-       from FNFTpy import kdvv
-       D = 256
-       tvec = np.linspace(-1,1,D)
-       q = np.zeros(D, dtype=np.complex128)
+       d = 256
+       tvec = np.linspace(-1, 1, d)
+       q = np.zeros(d, dtype=np.complex128)
        q[:] = 2.0 + 0.0j
-       xi1 = -2
-       xi2 = 2
-       M = 8
-       #
-       # call the function
-       #
-       res = kdvv(q, tvec, M, xi1=xi1, xi2=xi2, DIS=15)
-       #
-       # print results
-       #
-       print("libFNFT return value: %d"%res['return_value'])
+       x1 = -2
+       x2 = 2
+       m = 8
+       res = kdvv(q, tvec, m, xi1=x1, xi2=x2, dis=15)
+       print("libFNFT return value: %d" % res['return_value'])
        for i in range(len(res['contspec'])):
-           print("%d   %.6f  %.6fj"%(i, np.real(res['contspec'][i]),np.imag(res['contspec'][i])))
+           print("%d   %.6f  %.6fj" % (i, np.real(res['contspec'][i]), np.imag(res['contspec'][i])))
        ```
    * for full description of options call
        ```
@@ -41,26 +32,19 @@ FNFTpy currently allows to call the following functions from libFNFT:
   * function nsep: calculate the main and the auxilary spectrum 
   * minimal example:
       ```
-      import numpy as np
-      from FNFTpy import nsep
-      D= 256
-      dt = 2*np.pi/D
-      tvec = np.arange(D) * dt
+      d = 256
+      dt = 2 * np.pi / d
+      tvec = np.arange(d) * dt
       q = np.exp(2.0j * tvec)
-      #
-      # call the function
-      #
-      res = nsep(q, 0, 2*np.pi, BB=[-2,2,-2,2], FILT=1)
-      #
-      # print results
-      #
-      print("libFNFT return value: %d"%res['return_value'])
+      res = nsep(q, 0, 2 * np.pi, bb=[-2, 2, -2, 2], filt=1)
+      print("libFNFT return value: %d" % res['return_value'])
       print('main spectrum')
-      for i in range(res['K']):
-          print("%d   %.6f  %.6fj"%(i, np.real(res['main'][i]),np.imag(res['main'][i])))        
+      for i in range(res['k']):
+          print("%d   %.6f  %.6fj" % (i, np.real(res['main'][i]), np.imag(res['main'][i])))
       print('auxilary spectrum')
-      for i in range(res['M']):
-          print("%d   %.6f  %.6fj"%(i, np.real(res['aux'][i]),np.imag(res['aux'][i])))
+      for i in range(res['m']):
+          print("%d   %.6f  %.6fj" % (i, np.real(res['aux'][i]), np.imag(res['aux'][i])))
+
       ```
   * for full description of options call
        ```
@@ -73,32 +57,23 @@ FNFTpy currently allows to call the following functions from libFNFT:
     with bound states, residues, norming constants and reflection coefficients
   * minimal example:
       ```
-      import numpy as np
-      from FNFTpy import nsev
-      D=256        
-      tvec = np.linspace(-1,1,D)
+      d = 256
+      tvec = np.linspace(-1, 1, d)
       q = np.zeros(len(tvec), dtype=np.complex128)
-      q[:] = 2.0+0.0j
-      M = 8
-      xi1 = -2
-      xi2 = 2
-      #
-      # call the function
-      #
-      res = nsev(q, tvec, M=M, xi1=xi1, xi2=xi2, K=D)
-      #
-      # print results
-      #
-      print("libFNFT return value: %d"%res['return_value'])
+      q[:] = 2.0 + 0.0j
+      m = 8
+      res = nsev(q, tvec, m=m, xi1=-2, xi2=2, k=d)
+      print("libFNFT return value: %d" % res['return_value'])
       print("continuous spectrum")
       for i in range(len(res['c_ref'])):
-          print("%d   %.6f  %.6fj"%(i, np.real(res['c_ref'][i]),np.imag(res['c_ref'][i])))
+          print("%d   %.6f  %.6fj" % (i, np.real(res['c_ref'][i]), np.imag(res['c_ref'][i])))
       print("discrete spectrum")
       for i in range(len(res['bound_states'])):
-          print("%d   %.6f  %.6fj with norming const %.6f  %.6fj"%(i, np.real(res['bound_states'][i]),
-                                    np.imag(res['bound_states'][i]),
-                                    np.real(res['d_norm'][i]),
-                                    np.imag(res['d_norm'][i])))
+          print("%d   %.6f  %.6fj with norming const %.6f  %.6fj" % (i, np.real(res['bound_states'][i]),
+                                                                     np.imag(res['bound_states'][i]),
+                                                                     np.real(res['d_norm'][i]),
+                                                                     np.imag(res['d_norm'][i])))
+
        ```
   * for full description of options call
        ```
@@ -119,11 +94,11 @@ FNFTpy currently allows to call the following functions from libFNFT:
        
    ```
     def get_lib_path():
-      """return the path of the libFNFT file
-      This is something you have to edit.
-      See example strings.
-      """
-      libstr = "C:/Libraries/local/libfnft.dll"  # example for windows
-      #libstr = "/usr/local/lib/libfnft.so"    #example for linux
-    return libstr
+        """return the path of the libFNFT file
+        This is something you have to edit.
+        See example strings.
+        """
+        libstr = "C:/Libraries/local/libfnft.dll"  # example for windows
+        #libstr = "/usr/local/lib/libfnft.so"    #example for linux
+        return libstr
    ```
