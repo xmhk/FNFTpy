@@ -51,7 +51,7 @@ def nsep_wrapper(clib_nsep_func, d, q, t1, t2, kappa,
                                ndim=1, flags='C'),  # aux_spec
         type(nsep_sheet_indices),  # sheet indices
         type(nsep_kappa),  # kappa
-        ctypes.POINTER(nsep_options_struct)]  # options ptr
+        ctypes.POINTER(NsepOptionsStruct)]  # options ptr
 
     rv = clib_nsep_func(
         nsep_d,

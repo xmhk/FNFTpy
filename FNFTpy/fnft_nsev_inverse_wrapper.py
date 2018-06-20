@@ -62,7 +62,7 @@ def nsev_inverse_wrapper(clib_nsev_inverse_func,
         np.ctypeslib.ndpointer(dtype=ctypes_double,
                                ndim=1, flags='C'),  # t
         type(nsev_kappa),
-        ctypes.POINTER(nsev_inverse_options_struct)  # options ptr
+        ctypes.POINTER(NsevInverseOptionsStruct)  # options ptr
     ]
     rv = clib_nsev_inverse_func(
         nsev_m,

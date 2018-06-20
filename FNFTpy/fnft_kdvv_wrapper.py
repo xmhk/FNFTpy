@@ -53,7 +53,7 @@ def kdvv_wrapper(clib_kdvv_func, d, u, t1, t2, m, xi1, xi2,
         type(kdvv_nullptr),  # k_ptr
         type(kdvv_nullptr),  # boundstates
         type(kdvv_nullptr),  # normconsts res
-        ctypes.POINTER(kdvv_options_struct)]  # options ptr
+        ctypes.POINTER(KdvvOptionsStruct)]  # options ptr
     rv = clib_kdvv_func(
         kdvv_d,
         kdvv_u,

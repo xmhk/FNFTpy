@@ -71,7 +71,7 @@ def nsev_wrapper(clib_nsev_func, d, q, t1, t2, xi1, xi2,
         np.ctypeslib.ndpointer(dtype=numpy_complex,
                                ndim=1, flags='C'),  # normconst res
         type(nsev_kappa),  # kappa
-        ctypes.POINTER(nsev_options_struct)]  # options ptr
+        ctypes.POINTER(NsevOptionsStruct)]  # options ptr
 
     rv = clib_nsev_func(
         nsev_d,
