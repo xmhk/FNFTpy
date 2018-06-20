@@ -10,6 +10,8 @@ the Nonlinear Fourier Transform of some input field.
   * function kdvv: calculate the continuous spectrum
   * minimal example:
     ```
+    import numpy as np
+    from FNFTpy import kdvv
     d = 256
     tvec = np.linspace(-1, 1, d)
     q = np.zeros(d, dtype=np.complex128)
@@ -17,7 +19,7 @@ the Nonlinear Fourier Transform of some input field.
     xi1 = -2
     xi2 = 2
     m = 8
-    xivec = np.linspace(xi1, xi2, m)
+    xivec = np.linspace(xi1, xi2, m)    
     res = kdvv(q, tvec, m, xi1=xi1, xi2=xi2, dis=15)
     print("libFNFT return value: %d" % res['return_value'])
     for i in range(len(res['contspec'])):
@@ -34,6 +36,8 @@ the Nonlinear Fourier Transform of some input field.
   * function nsep: calculate the main and the auxilary spectrum 
   * minimal example:
       ```
+      import numpy as np
+      from FNFTpy import nsep
       d = 256
       dt = 2 * np.pi / d
       tvec = np.arange(d) * dt
@@ -59,6 +63,8 @@ the Nonlinear Fourier Transform of some input field.
     with bound states, residues, norming constants and reflection coefficients
   * minimal example:
     ```
+    import numpy as np
+    from FNFTpy import nsev
     d = 256
     tvec = np.linspace(-1, 1, d)
     q = np.zeros(len(tvec), dtype=np.complex128)
