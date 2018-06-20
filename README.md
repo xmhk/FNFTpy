@@ -9,23 +9,25 @@ the Nonlinear Fourier Transform of some input field.
 * Korteweg-de-Fries equation with vanishing boundary conditions:
   * function kdvv: calculate the continuous spectrum
   * minimal example:
-       ```
-       d = 256
-       tvec = np.linspace(-1, 1, d)
-       q = np.zeros(d, dtype=np.complex128)
-       q[:] = 2.0 + 0.0j
-       x1 = -2
-       x2 = 2
-       m = 8
-       res = kdvv(q, tvec, m, xi1=x1, xi2=x2, dis=15)
-       print("libFNFT return value: %d" % res['return_value'])
-       for i in range(len(res['contspec'])):
-           print("%d   %.6f  %.6fj" % (i, np.real(res['contspec'][i]), np.imag(res['contspec'][i])))
-       ```
+    ```
+    d = 256
+    tvec = np.linspace(-1, 1, d)
+    q = np.zeros(d, dtype=np.complex128)
+    q[:] = 2.0 + 0.0j
+    xi1 = -2
+    xi2 = 2
+    m = 8
+    xivec = np.linspace(xi1, xi2, m)
+    res = kdvv(q, tvec, m, xi1=xi1, xi2=xi2, dis=15)
+    print("libFNFT return value: %d" % res['return_value'])
+    for i in range(len(res['contspec'])):
+        print("%d. xi=%.4f   %.6f  %.6fj" % (i, xivec[i], np.real(res['contspec'][i]), 
+                                             np.imag(res['contspec'][i])))
+    ```
    * for full description of options call
-       ```
-       help(kdvv)
-       ```
+    ```
+    help(kdvv)
+    ```
      from inside a python console (after you imported kdvv)
   
 * Nonlinear Schroedinger Equation with periodic boundary conditions
@@ -56,24 +58,24 @@ the Nonlinear Fourier Transform of some input field.
   * function nsev: calculate the discrete and the continuous spectrum
     with bound states, residues, norming constants and reflection coefficients
   * minimal example:
-      ```
-      d = 256
-      tvec = np.linspace(-1, 1, d)
-      q = np.zeros(len(tvec), dtype=np.complex128)
-      q[:] = 2.0 + 0.0j
-      m = 8
-      res = nsev(q, tvec, m=m, xi1=-2, xi2=2, k=d)
-      print("libFNFT return value: %d" % res['return_value'])
-      print("continuous spectrum")
-      for i in range(len(res['c_ref'])):
-          print("%d   %.6f  %.6fj" % (i, np.real(res['c_ref'][i]), np.imag(res['c_ref'][i])))
-      print("discrete spectrum")
-      for i in range(len(res['bound_states'])):
-          print("%d   %.6f  %.6fj with norming const %.6f  %.6fj" % (i, np.real(res['bound_states'][i]),
-                                                                     np.imag(res['bound_states'][i]),
-                                                                     np.real(res['d_norm'][i]),
-                                                                     np.imag(res['d_norm'][i])))
-
+    ```
+    d = 256
+    tvec = np.linspace(-1, 1, d)
+    q = np.zeros(len(tvec), dtype=np.complex128)
+    q[:] = 2.0 + 0.0j
+    m = 8
+    res = nsev(q, tvec, m=m, xi1=-2, xi2=2, k=d)
+    xivec = np.linspace(-2, 2, m)
+    print("libFNFT return value: %d" % res['return_value'])
+    print("continuous spectrum")
+    for i in range(len(res['c_ref'])):
+        print("%d xi = %.4f   %.6f  %.6fj" % (i, xivec[i], np.real(res['c_ref'][i]), np.imag(res['c_ref'][i])))
+    print("discrete spectrum")
+    for i in range(len(res['bound_states'])):
+        print("%d %.6f  %.6fj with norming const %.6f  %.6fj" % (i, np.real(res['bound_states'][i]),
+                                                                   np.imag(res['bound_states'][i]),
+                                                                   np.real(res['d_norm'][i]),
+                                                                   np.imag(res['d_norm'][i])))
        ```
   * for full description of options call
        ```
