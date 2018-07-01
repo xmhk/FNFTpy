@@ -65,7 +65,7 @@ def kdvvexample():
     m = 8
     xivec = np.linspace(xi1, xi2, m)
     res = kdvv(q, tvec, m, xi1=xi1, xi2=xi2, dis=15)
-    print("libFNFT return value: %d" % res['return_value'])
+    print("FNFT return value: %d" % res['return_value'])
     for i in range(len(res['contspec'])):
         print("%d. xi=%.4f   %.6f  %.6fj" % (i, xivec[i], np.real(res['contspec'][i]), np.imag(res['contspec'][i])))
 
@@ -76,7 +76,7 @@ def nsepexample():
     tvec = np.arange(d) * dt
     q = np.exp(2.0j * tvec)
     res = nsep(q, 0, 2 * np.pi, bb=[-2, 2, -2, 2], filt=1)
-    print("libFNFT return value: %d" % res['return_value'])
+    print("FNFT return value: %d" % res['return_value'])
     print("number of samples: %d"%d)
     print('main spectrum')
     for i in range(res['k']):
@@ -92,7 +92,7 @@ def nsevexample2():
     q[:] = 2.0 + 0.0j
     m = 8
     res = nsev(q, tvec, m=m, xi1=-2, xi2=2, k=d)
-    print("libFNFT return value: %d" % res['return_value'])
+    print("FNFT return value: %d" % res['return_value'])
     print("continuous spectrum")
     for i in range(len(res['c_ref'])):
         print("%d   %.6f  %.6fj" % (i, np.real(res['c_ref'][i]), np.imag(res['c_ref'][i])))
@@ -114,7 +114,7 @@ def nsevexample():
     m = 8
     res = nsev(q, tvec, m=m, xi1=-2, xi2=2, k=d)
     xivec = np.linspace(-2, 2, m)
-    print("libFNFT return value: %d" % res['return_value'])
+    print("FNFT return value: %d" % res['return_value'])
     print("continuous spectrum")
     for i in range(len(res['c_ref'])):
         print("%d xi = %.4f   %.6f  %.6fj" % (i, xivec[i], np.real(res['c_ref'][i]), np.imag(res['c_ref'][i])))
