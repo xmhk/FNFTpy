@@ -1,9 +1,9 @@
-# FNFTpy - a wrapper for libFNFT
+# FNFTpy - a wrapper for FNFT
 
-This module contains wrapper functions for [libFNFT](https://github.com/FastNFT), a C library which allows to calculate
+This module contains wrapper functions for [FNFT](https://github.com/FastNFT), a C library which allows to calculate
 the Nonlinear Fourier Transform of some input field.
 
-## current state - access functions from libFNFT 0.1.1
+## current state - access functions from FNFT 0.1.1
 
 
 * Korteweg-de-Fries equation with vanishing boundary conditions:
@@ -21,7 +21,7 @@ the Nonlinear Fourier Transform of some input field.
     m = 8
     xivec = np.linspace(xi1, xi2, m)
     res = kdvv(q, tvec, m, xi1=xi1, xi2=xi2, dis=15)
-    print("libFNFT return value: %d" % res['return_value'])
+    print("FNFT return value: %d" % res['return_value'])
     for i in range(len(res['contspec'])):
         print("%d. xi=%.4f   %.6f  %.6fj" % (i, xivec[i], np.real(res['contspec'][i]), 
                                              np.imag(res['contspec'][i])))
@@ -43,7 +43,7 @@ the Nonlinear Fourier Transform of some input field.
       tvec = np.arange(d) * dt
       q = np.exp(2.0j * tvec)
       res = nsep(q, 0, 2 * np.pi, bb=[-2, 2, -2, 2], filt=1)
-      print("libFNFT return value: %d" % res['return_value'])
+      print("FNFT return value: %d" % res['return_value'])
       print('main spectrum')
       for i in range(res['k']):
           print("%d   %.6f  %.6fj" % (i, np.real(res['main'][i]), np.imag(res['main'][i])))
@@ -72,7 +72,7 @@ the Nonlinear Fourier Transform of some input field.
     m = 8
     res = nsev(q, tvec, m=m, xi1=-2, xi2=2, k=d)
     xivec = np.linspace(-2, 2, m)
-    print("libFNFT return value: %d" % res['return_value'])
+    print("FNFT return value: %d" % res['return_value'])
     print("continuous spectrum")
     for i in range(len(res['c_ref'])):
         print("%d xi = %.4f   %.6f  %.6fj" % (i, xivec[i], np.real(res['c_ref'][i]), np.imag(res['c_ref'][i])))
@@ -96,13 +96,13 @@ the Nonlinear Fourier Transform of some input field.
  
 ## installation
  * place the FNFTpy folder inside your python path
- * the module needs to know where the compiled copy of libFNFT is located. 
+ * the module needs to know where the compiled copy of FNFT is located. 
    The configuration is done via editing the function get_lib_path()
    in the file auxilary.py. Example:
        
    ```
     def get_lib_path():
-        """return the path of the libFNFT file
+        """return the path of the FNFT file
         This is something you have to edit.
         See example strings.
         """
