@@ -8,7 +8,7 @@ from .fnft_nsep_wrapper import nsep_wrapper
 from .fnft_nsev_wrapper import nsev_wrapper
 from .typesdef import *
 
-# get python ctypes object of libFNFT
+# get python ctypes object of FNFT
 libpath = get_lib_path()  # edit in auxilary.py
 fnft_clib = ctypes.CDLL(libpath)
 
@@ -44,7 +44,7 @@ def kdvv(u, tvec, m=128, xi1=-2, xi2=2, dis=15):
     Returns:
     ----------
     rdict : dictionary holding the fields (depending on options)
-        return_value : return value from libFNFT
+        return_value : return value from FNFT
         contspec : continuous spectrum        
     """
     d = len(u)
@@ -91,7 +91,7 @@ def nsep(q, t1, t2, kappa=1, loc=2, filt=2, bb=None,
     Returns:
     ----------
     rdict : dictionary holding the fields (depending on options)
-        return_value : return value from libFNFT
+        return_value : return value from FNFT
         k : number of points in the main spectrum
         main : main spectrum
         m: number of points in the auxillary spectrum
@@ -151,7 +151,7 @@ def nsev(q, tvec, xi1=-2, xi2=2, m=128, k=128, kappa=1, bsf=2,
     Returns:
     ----------
     rdict : dictionary holding the fields (depending on options)
-        return_value : return value from libFNFT
+        return_value : return value from FNFT
         bound_states_num : number of bound states found
         bound_states : array of bound states found 
         d_norm : discrete spectrum - norming constants

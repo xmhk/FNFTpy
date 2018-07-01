@@ -1,5 +1,5 @@
 def get_lib_path():
-    """return the path of the libFNFT file
+    """return the path of the FNFT file
     This is something you have to edit.
     See example strings.
 
