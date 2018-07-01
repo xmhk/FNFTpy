@@ -4,7 +4,7 @@ from .typesdef import *
 def nsep_wrapper(clib_nsep_func, d, q, t1, t2, kappa,
                  options):
     """
-    Wraps the python input and returns the result from libFNFT's fnft_nsep.
+    Wraps the python input and returns the result from FNFT's fnft_nsep.
     Parameters:
     ----------
         clib_nsep_func : handle of the c function imported via ctypes
@@ -16,7 +16,7 @@ def nsep_wrapper(clib_nsep_func, d, q, t1, t2, kappa,
     Returns:
     ----------
     rdict : dictionary holding the fields (depending on options)
-        return_value : return value from libFNFT
+        return_value : return value from FNFT
         k : number of points in the main spectrum
         main : main spectrum
         m: number of points in the auxilary spectrum

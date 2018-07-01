@@ -41,7 +41,7 @@ def nsev_inverse_wrapper(clib_nsev_inverse_func,
                          normconst_or_residues, d, t1, t2, kappa,
                          options):
     """
-    Wraps the python input and returns the result from libFNFT's fnft_nsev_inverse.
+    Wraps the python input and returns the result from FNFT's fnft_nsev_inverse.
     Parameters:
     ----------
         clib_nsev_inverse_func : handle of the c function imported via ctypes
@@ -58,7 +58,7 @@ def nsev_inverse_wrapper(clib_nsev_inverse_func,
     Returns:
     ----------
     rdict : dictionary holding the fields (depending on options)
-        return_value : return value from libFNFT
+        return_value : return value from FNFT
         q : time field resulting from inverse transform
     """
     clib_nsev_inverse_func.restype = ctypes_int
