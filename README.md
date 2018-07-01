@@ -45,10 +45,10 @@ the Nonlinear Fourier Transform of some input field.
       res = nsep(q, 0, 2 * np.pi, bb=[-2, 2, -2, 2], filt=1)
       print("FNFT return value: %d" % res['return_value'])
       print('main spectrum')
-      for i in range(res['k']):
+      for i in range(res['K']):
           print("%d   %.6f  %.6fj" % (i, np.real(res['main'][i]), np.imag(res['main'][i])))
       print('auxilary spectrum')
-      for i in range(res['m']):
+      for i in range(res['M']):
           print("%d   %.6f  %.6fj" % (i, np.real(res['aux'][i]), np.imag(res['aux'][i])))
 
       ```
