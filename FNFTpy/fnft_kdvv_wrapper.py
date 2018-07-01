@@ -1,20 +1,20 @@
 from .typesdef import *
 
 
-def kdvv_wrapper(clib_kdvv_func, d, u, t1, t2, m, xi1, xi2,
-                 k, options):
+def kdvv_wrapper(clib_kdvv_func, D, u, T1, T2, M, Xi1, Xi2,
+                 K, options):
     """
     Wraps the python input and returns the result from FNFT's fnft_kdvv.
     Parameters:
     ----------
         clib_kdvv_func : handle of the c function imported via ctypes
-        d : number of samples
+        D : number of samples
         u : numpy array holding the samples of the field to be analyzed
-        t1, t2  : time positions of the first and the last sample
-        m : number of values for the continuous spectrum to calculate
-        xi1, xi2 : min and max frequency for the continuous spectrum        
-        k : maximum number of bound states to calculate
-        options : options for nsev as KdvvOptionsStruct
+        T1, T2  : time positions of the first and the last sample
+        M : number of values for the continuous spectrum to calculate
+        Xi1, Xi2 : min and max frequency for the continuous spectrum
+        K : maximum number of bound states to calculate (no effect yet)
+        options : options for nsev as nsev_options_struct
     Returns:
     ----------
     rdict : dictionary holding the fields (depending on options)
@@ -22,17 +22,17 @@ def kdvv_wrapper(clib_kdvv_func, d, u, t1, t2, m, xi1, xi2,
         contspec : continuous spectrum        
     """
     clib_kdvv_func.restype = ctypes_int
-    kdvv_d = ctypes_uint(d)
-    kdvv_u = np.zeros(kdvv_d.value, dtype=numpy_complex)
+    kdvv_D = ctypes_uint(D)
+    kdvv_u = np.zeros(kdvv_D.value, dtype=numpy_complex)
     kdvv_u[:] = u[:] + 0.0j
-    kdvv_t = np.zeros(2, dtype=numpy_double)
-    kdvv_t[0] = t1
-    kdvv_t[1] = t2
-    kdvv_m = ctypes_uint(m)
-    kdvv_contspec = np.zeros(m, dtype=numpy_complex)
-    kdvv_xi = np.zeros(2, dtype=numpy_double)
-    kdvv_xi[0] = xi1
-    kdvv_xi[1] = xi2
+    kdvv_T = np.zeros(2, dtype=numpy_double)
+    kdvv_T[0] = T1
+    kdvv_T[1] = T2
+    kdvv_M = ctypes_uint(M)
+    kdvv_contspec = np.zeros(M, dtype=numpy_complex)
+    kdvv_Xi = np.zeros(2, dtype=numpy_double)
+    kdvv_Xi[0] = Xi1
+    kdvv_Xi[1] = Xi2
     # kdvv_k = ctypes_uint(k)
     # bound states -> will stay empty until implemented
     # kdvv_boundstates = np.zeros(k, dtype=numpy_complex)
@@ -40,27 +40,27 @@ def kdvv_wrapper(clib_kdvv_func, d, u, t1, t2, m, xi1, xi2,
     # kdvv_discspec = np.zeros(k, dtype=numpy_complex)
     kdvv_nullptr = ctypes.POINTER(ctypes.c_int)()
     clib_kdvv_func.argtypes = [
-        type(kdvv_d),  # d
+        type(kdvv_D),  # D
         np.ctypeslib.ndpointer(dtype=numpy_complex,
                                ndim=1, flags='C'),  # u
         np.ctypeslib.ndpointer(dtype=ctypes_double,
                                ndim=1, flags='C'),  # t
-        type(kdvv_m),  # m
+        type(kdvv_M),  # M
         np.ctypeslib.ndpointer(dtype=numpy_complex,
                                ndim=1, flags='C'),  # contspec
         np.ctypeslib.ndpointer(dtype=ctypes_double,
-                               ndim=1, flags='C'),  # xi
-        type(kdvv_nullptr),  # k_ptr
+                               ndim=1, flags='C'),  # Xi
+        type(kdvv_nullptr),  # K_ptr
         type(kdvv_nullptr),  # boundstates
         type(kdvv_nullptr),  # normconsts res
         ctypes.POINTER(KdvvOptionsStruct)]  # options ptr
     rv = clib_kdvv_func(
-        kdvv_d,
+        kdvv_D,
         kdvv_u,
-        kdvv_t,
-        kdvv_m,
+        kdvv_T,
+        kdvv_M,
         kdvv_contspec,
-        kdvv_xi,
+        kdvv_Xi,
         kdvv_nullptr,
         kdvv_nullptr,
         kdvv_nullptr,
