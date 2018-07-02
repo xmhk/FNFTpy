@@ -8,7 +8,7 @@ def kdvvtest():
     q = np.sin(2 * np.pi / 256 * xvec)
     res = kdvv(q, xvec)
     print(res['return_value'])
-    res = kdvv(q, xvec, xi1=-10, xi2=10, dis=15, m=2048)
+    res = kdvv(q, xvec, Xi1=-10, Xi2=10, dis=15, M=2048)
     print(res['return_value'])
 
 
@@ -38,14 +38,14 @@ def kdvvexample():
     tvec = np.linspace(-1, 1, d)
     q = np.zeros(d, dtype=np.complex128)
     q[:] = 2.0 + 0.0j
-    xi1 = -2
-    xi2 = 2
+    Xi1 = -2
+    Xi2 = 2
     m = 8
-    xivec = np.linspace(xi1, xi2, m)
-    res = kdvv(q, tvec, m, xi1=xi1, xi2=xi2, dis=15)
+    Xivec = np.linspace(Xi1, Xi2, m)
+    res = kdvv(q, tvec, m, Xi1=Xi1, Xi2=Xi2, dis=15)
     print("FNFT return value: %d" % res['return_value'])
     for i in range(len(res['contspec'])):
-        print("%d. xi=%.4f   %.6f  %.6fj" % (i, xivec[i], np.real(res['contspec'][i]), np.imag(res['contspec'][i])))
+        print("%d. Xi=%.4f   %.6f  %.6fj" % (i, Xivec[i], np.real(res['contspec'][i]), np.imag(res['contspec'][i])))
 
 
 def nsepexample():
@@ -60,7 +60,7 @@ def nsepexample():
     print('main spectrum')
     for i in range(res['K']):
         print("%d   %.6f  %.6fj" % (i, np.real(res['main'][i]), np.imag(res['main'][i])))
-    print('auxiliary spectrum')
+    print('auXiliary spectrum')
     for i in range(res['M']):
         print("%d   %.6f  %.6fj" % (i, np.real(res['aux'][i]), np.imag(res['aux'][i])))
 
@@ -72,12 +72,12 @@ def nsevexample():
     q = np.zeros(len(tvec), dtype=np.complex128)
     q[:] = 2.0 + 0.0j
     m = 8
-    res = nsev(q, tvec, m=m, xi1=-2, xi2=2, k=d)
-    xivec = np.linspace(-2, 2, m)
+    res = nsev(q, tvec, M=m, Xi1=-2, Xi2=2, K=d)
+    Xivec = np.linspace(-2, 2, m)
     print("FNFT return value: %d" % res['return_value'])
     print("continuous spectrum")
     for i in range(len(res['c_ref'])):
-        print("%d xi = %.4f   %.6f  %.6fj" % (i, xivec[i], np.real(res['c_ref'][i]), np.imag(res['c_ref'][i])))
+        print("%d Xi = %.4f   %.6f  %.6fj" % (i, Xivec[i], np.real(res['c_ref'][i]), np.imag(res['c_ref'][i])))
     print("discrete spectrum")
     for i in range(len(res['bound_states'])):
         print("%d %.6f  %.6fj with norming const %.6f  %.6fj" % (i, np.real(res['bound_states'][i]),
