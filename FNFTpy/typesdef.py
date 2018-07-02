@@ -1,6 +1,6 @@
 import ctypes
 import numpy as np
-from .auxilary import *
+from .auxiliary import *
 
 # data types for interfacing C
 

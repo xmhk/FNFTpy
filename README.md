@@ -98,7 +98,7 @@ the Nonlinear Fourier Transform of some input field.
  * place the FNFTpy folder inside your python path
  * the module needs to know where the compiled copy of FNFT is located. 
    The configuration is done via editing the function get_lib_path()
-   in the file auxilary.py. Example:
+   in the file auxiliary.py. Example:
        
    ```
     def get_lib_path():
