@@ -3,6 +3,7 @@ from FNFTpy import *
 
 
 def kdvvtest():
+    print("KDVV test")
     xvec = np.linspace(-10, 10, 256)
     q = np.sin(2 * np.pi / 256 * xvec)
     res = kdvv(q, xvec)
@@ -12,6 +13,7 @@ def kdvvtest():
 
 
 def nseptest():
+    print("NSEP test")
     xvec = np.linspace(0, 2 * np.pi, 256)
     q = np.sin(2 * np.pi / 256 * xvec)
     res = nsep(q, 0, 2 * np.pi)
@@ -21,6 +23,7 @@ def nseptest():
 
 
 def nsevtest():
+    print("NSEV test")
     xvec = np.linspace(0, 2 * np.pi, 256)
     q = np.sin(2 * np.pi / 256 * xvec)
     res = nsev(q, xvec)
@@ -30,6 +33,7 @@ def nsevtest():
 
 
 def kdvvexample():
+    print("KDVV example")
     d = 256
     tvec = np.linspace(-1, 1, d)
     q = np.zeros(d, dtype=np.complex128)
@@ -45,6 +49,7 @@ def kdvvexample():
 
 
 def nsepexample():
+    print("NSEP example")
     d = 256
     dt = 2 * np.pi / d
     tvec = np.arange(d) * dt
@@ -61,6 +66,7 @@ def nsepexample():
 
 
 def nsevexample():
+    print("NSEV example")
     d = 256
     tvec = np.linspace(-1, 1, d)
     q = np.zeros(len(tvec), dtype=np.complex128)
