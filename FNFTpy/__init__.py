@@ -9,7 +9,7 @@ from .fnft_nsev_wrapper import nsev_wrapper
 from .typesdef import *
 
 # get python ctypes object of FNFT
-libpath = get_lib_path()  # edit in auxilary.py
+libpath = get_lib_path()  # edit in auxiliary.py
 fnft_clib = ctypes.CDLL(libpath)
 
 
@@ -94,8 +94,8 @@ def nsep(q, t1, t2, kappa=1, loc=2, filt=2, bb=None,
         return_value : return value from FNFT
         k : number of points in the main spectrum
         main : main spectrum
-        m: number of points in the auxillary spectrum
-    aux: auxilary spectrum
+        m: number of points in the auxiliary spectrum
+    aux: auxiliary spectrum
     """
     if bb is None:  # set standard value for bb
         bb = [-200, 200, -200, 200]

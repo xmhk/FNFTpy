@@ -33,7 +33,7 @@ the Nonlinear Fourier Transform of some input field.
      from inside a python console (after you imported kdvv)
   
 * Nonlinear Schroedinger Equation with periodic boundary conditions
-  * function nsep: calculate the main and the auxilary spectrum 
+  * function nsep: calculate the main and the auxiliary spectrum 
   * minimal example:
       ```
       import numpy as np
@@ -47,7 +47,7 @@ the Nonlinear Fourier Transform of some input field.
       print('main spectrum')
       for i in range(res['K']):
           print("%d   %.6f  %.6fj" % (i, np.real(res['main'][i]), np.imag(res['main'][i])))
-      print('auxilary spectrum')
+      print('auxiliary spectrum')
       for i in range(res['M']):
           print("%d   %.6f  %.6fj" % (i, np.real(res['aux'][i]), np.imag(res['aux'][i])))
 

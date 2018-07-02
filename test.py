@@ -55,7 +55,7 @@ def nsepexample():
     print('main spectrum')
     for i in range(res['K']):
         print("%d   %.6f  %.6fj" % (i, np.real(res['main'][i]), np.imag(res['main'][i])))
-    print('auxilary spectrum')
+    print('auxiliary spectrum')
     for i in range(res['M']):
         print("%d   %.6f  %.6fj" % (i, np.real(res['aux'][i]), np.imag(res['aux'][i])))
 
