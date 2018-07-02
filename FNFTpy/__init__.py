@@ -1,6 +1,6 @@
 # import numpy as np
 # import ctypes
-from .auxilary import get_lib_path
+from .auxiliary import get_lib_path
 
 # import wrapper functions
 from .fnft_kdvv_wrapper import kdvv_wrapper
@@ -99,8 +99,8 @@ def nsep(q, t1, t2, kappa=1, loc=2, filt=2, bb=None,
         return_value : return value from FNFT
         k : number of points in the main spectrum
         main : main spectrum
-        m: number of points in the auxilary spectrum
-    aux: auxilary spectrum
+        m: number of points in the auxiliary spectrum
+    aux: auxiliary spectrum
     """
     clib_nsep_func = fnft_clib.fnft_nsep
     if bb is None:

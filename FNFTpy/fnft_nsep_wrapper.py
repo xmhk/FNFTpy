@@ -19,8 +19,8 @@ def nsep_wrapper(clib_nsep_func, D, q, T1, T2, kappa,
         return_value : return value from FNFT
         K : number of points in the main spectrum
         main : main spectrum
-        M: number of points in the auxilary spectrum
-        aux: auxilary spectrum"""
+        M: number of points in the auxiliary spectrum
+        aux: auxiliary spectrum"""
 
     clib_nsep_func.restype = ctypes_int
     nsep_D = ctypes_uint(D)

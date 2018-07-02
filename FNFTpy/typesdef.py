@@ -1,10 +1,10 @@
 import ctypes
 import numpy as np
-from .auxilary import *
+from .auxiliary import *
 
 # data types for interfacing C
 
-ctypes_int32 = ctypes.c_int32  # FNFT_INT, (C int32_t )
+ctypes_int32 = ctypes.c_int32  # FNFT_INT, (C int32_t)
 ctypes_uint = ctypes.c_size_t  # FNFT_UINT (C size_t)
 ctypes_int = ctypes.c_int  # plain c integer, e.g. union elements
 ctypes_double = ctypes.c_double  # FNFT_REAL
