@@ -13,6 +13,37 @@ libpath = get_lib_path()  # edit in auxiliary.py
 fnft_clib = ctypes.CDLL(libpath)
 
 
+
+
+def get_kdvv_default_wrapper():
+    fnft_kdvv_default_opts_fun = fnft_clib.fnft_kdvv_default_opts
+    fnft_kdvv_default_opts_fun.restype = KdvvOptionsStruct
+    #fnft_kdvv_default_opts_fun.restype = ctypes.Structure
+    fnft_kdvv_default_opts_fun.argtpes=[]
+
+    test1 = fnft_kdvv_default_opts_fun()
+    return test1
+
+def get_nsep_default_wrapper():
+    fnft_nsep_default_opts_fun = fnft_clib.fnft_nsep_default_opts
+    fnft_nsep_default_opts_fun.restype = NsepOptionsStruct
+    #fnft_nsep_default_opts_fun.restype = ctypes.Structure
+    fnft_nsep_default_opts_fun.argtpes=[]
+
+    test1 = fnft_nsep_default_opts_fun()
+    return test1
+
+def get_nsev_default_wrapper():
+    fnft_nsev_default_opts_fun = fnft_clib.fnft_nsev_default_opts
+    fnft_nsev_default_opts_fun.restype = NsevOptionsStruct
+    #fnft_nsev_default_opts_fun.restype = ctypes.Structure
+    fnft_nsev_default_opts_fun.argtpes=[]
+    test1 = fnft_nsev_default_opts_fun()
+    return test1
+
+
+
+
 def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=15):
     """calculates the Nonlinear Fourier Transform for the Korteweg-de Vries equation with vanishing boundaries.
     Parameters:

@@ -86,14 +86,80 @@ def nsevexample():
                                                                    np.imag(res['d_norm'][i])))
 
 
+def kdvvexample2():
+    print("KDVV example")
+    D = 256
+    tvec = np.linspace(-1, 1, D)
+    q = np.zeros(D, dtype=np.complex128)
+    q[:] = 2.0 + 0.0j
+    Xi1 = -2
+    Xi2 = 2
+    M = 8
+    Xivec = np.linspace(Xi1, Xi2, M)
+    #res = kdvv(q, tvec, M, Xi1=Xi1, Xi2=Xi2, dis=15)
+    D = len(q)
+    K = 0  # not yet implemented
+    T1 = np.min(tvec)
+    T2 = np.max(tvec)
+    #options = get_kdvv_options(dis)
+    options = get_kdvv_default_wrapper()
+    res =  kdvv_wrapper(fnft_clib.fnft_kdvv, D, q, T1, T2, M, Xi1, Xi2,
+                        K, options)
+
+
+
+    print("FNFT return value: %d" % res['return_value'])
+    for i in range(len(res['contspec'])):
+        print("%d. Xi=%.4f   %.6f  %.6fj" % (i, Xivec[i], np.real(res['contspec'][i]), np.imag(res['contspec'][i])))
+
+
+t1 = get_kdvv_default_wrapper()
+print("dis", t1.discretization)
+print("--")
+
+
+t2 = get_nsep_default_wrapper()
+print("loc", t2.localization)
+print("filt", t2.filtering)
+print("bb", t2.bounding_box[0], t2.bounding_box[1], t2.bounding_box[2], t2.bounding_box[3])
+print("max_evals", t2.max_evals)
+print("discretization", t2.discretization)
+print("normalization flag", t2.normalization_flag)
+
+
+
+print("---")
+t3 = get_nsev_default_wrapper()
+print("bound state loclization", t3.bound_state_localization)
+print("niter", t3.niter)
+print("discspec_type", t3.discspec_type)
+print("contspec_type", t3.contspec_type)
+print("discretization", t3.discretization)
+print("normalization flag", t3.normalization_flag)
+
+print("--")
+kdvvexample2()
+kdvvexample()
+
+
+
+#("bound_state_filtering", ctypes_int),
+#        ("bound_state_localization", ctypes_int),
+#        ("niter", ctypes_uint),
+#        ("discspec_type", ctypes_int),
+#        ("contspec_type", ctypes_int),
+#        ("normalization_flag", ctypes_int32),
+#        ("discretization", ctypes_int)]
+
+
 # detect some general errors
-nsevtest()
-kdvvtest()
-nseptest()
+#nsevtest()
+#kdvvtest()
+#nseptest()
 
 # mimic the example files
 
-nsevexample()
-kdvvexample()
-nsepexample()
+#nsevexample()
+#kdvvexample()
+#nsepexample()
 
