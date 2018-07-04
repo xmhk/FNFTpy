@@ -1,6 +1,17 @@
 from .typesdef import *
 
 
+def fnft_nsev_default_opts_wrapper(clib_func):
+    """
+    Call the default options for nsev directly from the library
+        Returns:
+            NsevOptionsStruct: holding default options
+    """
+    clib_func.restype = NsevOptionsStruct
+    clib_func.argtpes=[]
+    return clib_func()
+
+
 def nsev_wrapper(clib_nsev_func, D, q, T1, T2, Xi1, Xi2,
                  M, K, kappa, options):
     """
@@ -15,7 +26,7 @@ def nsev_wrapper(clib_nsev_func, D, q, T1, T2, Xi1, Xi2,
         M : number of values for the continuous spectrum to calculate
         K : maximum number of bound states to calculate
         kappa : +/- 1 for focussing/defocussing nonlinearity
-        options : options for nsev as nsev_options_struct
+        options : options for nsev as NsevOptionsStruct
     Returns:
     ----------
     rdict : dictionary holding the fields (depending on options)

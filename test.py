@@ -65,6 +65,7 @@ def nsepexample():
         print("%d   %.6f  %.6fj" % (i, np.real(res['aux'][i]), np.imag(res['aux'][i])))
 
 
+
 def nsevexample():
     print("NSEV example")
     D = 256
@@ -102,7 +103,7 @@ def kdvvexample2():
     T1 = np.min(tvec)
     T2 = np.max(tvec)
     #options = get_kdvv_options(dis)
-    options = get_kdvv_default_wrapper()
+    options = kdvv_default_opts()
     res =  kdvv_wrapper(fnft_clib.fnft_kdvv, D, q, T1, T2, M, Xi1, Xi2,
                         K, options)
 
@@ -113,33 +114,44 @@ def kdvvexample2():
         print("%d. Xi=%.4f   %.6f  %.6fj" % (i, Xivec[i], np.real(res['contspec'][i]), np.imag(res['contspec'][i])))
 
 
-t1 = get_kdvv_default_wrapper()
-print("dis", t1.discretization)
-print("--")
+def nsepexample2():
+    print("NSEP example")
+    D = 256
+    dt = 2 * np.pi / D
+    tvec = np.arange(D) * dt
+    T1 = np.min(tvec)
+    T2 = np.max(tvec)
+    q = np.exp(2.0j * tvec)
+    kappa=1
+
+    #if bb is None:  # set standard value for bb
+    #    bb = [-200, 200, -200, 200]
+    D = len(q)
+    #options = get_nsep_options(loc, filt, bb, maxev, dis, nf)
+    options = nsep_default_opts()
+    res= nsep_wrapper(fnft_clib.fnft_nsep, D, q, T1, T2,
+                        kappa, options)
+
+    res = nsep(q, 0, 2 * np.pi, bb=[-2, 2, -2, 2], filt=1)
+    print("FNFT return value: %d" % res['return_value'])
+    print("number of samples: %d"%D)
+    print('main spectrum')
+    for i in range(res['K']):
+        print("%d   %.6f  %.6fj" % (i, np.real(res['main'][i]), np.imag(res['main'][i])))
+    print('auxiliary spectrum')
+    for i in range(res['M']):
+        print("%d   %.6f  %.6fj" % (i, np.real(res['aux'][i]), np.imag(res['aux'][i])))
 
 
-t2 = get_nsep_default_wrapper()
-print("loc", t2.localization)
-print("filt", t2.filtering)
-print("bb", t2.bounding_box[0], t2.bounding_box[1], t2.bounding_box[2], t2.bounding_box[3])
-print("max_evals", t2.max_evals)
-print("discretization", t2.discretization)
-print("normalization flag", t2.normalization_flag)
 
 
 
-print("---")
-t3 = get_nsev_default_wrapper()
-print("bound state loclization", t3.bound_state_localization)
-print("niter", t3.niter)
-print("discspec_type", t3.discspec_type)
-print("contspec_type", t3.contspec_type)
-print("discretization", t3.discretization)
-print("normalization flag", t3.normalization_flag)
 
-print("--")
-kdvvexample2()
 kdvvexample()
+kdvvexample2()
+
+nsepexample()
+nsepexample2()
 
 
 
@@ -163,3 +175,13 @@ kdvvexample()
 #kdvvexample()
 #nsepexample()
 
+print( fnft_clib )
+print_kdvv_opts()
+
+print_nsep_opts()
+
+print_nsev_opts()
+
+o2 = nsev_default_opts()
+o2.bound_state_localization = 0
+print_nsev_opts(o2)

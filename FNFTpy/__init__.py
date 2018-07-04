@@ -3,9 +3,9 @@
 from .auxiliary import get_lib_path
 
 # import wrapper functions
-from .fnft_kdvv_wrapper import kdvv_wrapper
-from .fnft_nsep_wrapper import nsep_wrapper
-from .fnft_nsev_wrapper import nsev_wrapper
+from .fnft_kdvv_wrapper import kdvv_wrapper, fnft_kdvv_default_opts_wrapper
+from .fnft_nsep_wrapper import nsep_wrapper, fnft_nsep_default_opts_wrapper
+from .fnft_nsev_wrapper import nsev_wrapper, fnft_nsev_default_opts_wrapper
 from .typesdef import *
 
 # get python ctypes object of FNFT
@@ -14,33 +14,47 @@ fnft_clib = ctypes.CDLL(libpath)
 
 
 
+def kdvv_default_opts():
+    return fnft_kdvv_default_opts_wrapper(fnft_clib.fnft_kdvv_default_opts)
 
-def get_kdvv_default_wrapper():
-    fnft_kdvv_default_opts_fun = fnft_clib.fnft_kdvv_default_opts
-    fnft_kdvv_default_opts_fun.restype = KdvvOptionsStruct
-    #fnft_kdvv_default_opts_fun.restype = ctypes.Structure
-    fnft_kdvv_default_opts_fun.argtpes=[]
 
-    test1 = fnft_kdvv_default_opts_fun()
-    return test1
+def print_kdvv_opts(opts = None):
+    if opts is None:
+        opts = kdvv_default_opts()
+    print("kdvv options:")
+    print("   dis", opts.discretization)
 
-def get_nsep_default_wrapper():
-    fnft_nsep_default_opts_fun = fnft_clib.fnft_nsep_default_opts
-    fnft_nsep_default_opts_fun.restype = NsepOptionsStruct
-    #fnft_nsep_default_opts_fun.restype = ctypes.Structure
-    fnft_nsep_default_opts_fun.argtpes=[]
 
-    test1 = fnft_nsep_default_opts_fun()
-    return test1
+def nsep_default_opts():
+    return fnft_nsep_default_opts_wrapper(fnft_clib.fnft_nsep_default_opts)
 
-def get_nsev_default_wrapper():
-    fnft_nsev_default_opts_fun = fnft_clib.fnft_nsev_default_opts
-    fnft_nsev_default_opts_fun.restype = NsevOptionsStruct
-    #fnft_nsev_default_opts_fun.restype = ctypes.Structure
-    fnft_nsev_default_opts_fun.argtpes=[]
-    test1 = fnft_nsev_default_opts_fun()
-    return test1
 
+def print_nsep_opts(opts = None):
+    if opts is None:
+        opts = nsep_default_opts()
+    print("nsep options:")
+    print("    loc", opts.localization)
+    print("    filt", opts.filtering)
+    print("    bb", opts.bounding_box[0], opts.bounding_box[1], opts.bounding_box[2], opts.bounding_box[3])
+    print("    max_evals", opts.max_evals)
+    print("    discretization", opts.discretization)
+    print("    normalization flag", opts.normalization_flag)
+
+
+def nsev_default_opts():
+    return fnft_nsev_default_opts_wrapper(fnft_clib.fnft_nsev_default_opts)
+
+
+def print_nsev_opts(opts = None):
+    if opts is None:
+        opts = nsev_default_opts()
+    print("nsev options:")
+    print("    bound state localization", opts.bound_state_localization)
+    print("    niter", opts.niter)
+    print("    discspec_type", opts.discspec_type)
+    print("    contspec_type", opts.contspec_type)
+    print("    discretization", opts.discretization)
+    print("    normalization flag", opts.normalization_flag)
 
 
 

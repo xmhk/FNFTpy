@@ -1,6 +1,17 @@
 from .typesdef import *
 
 
+
+def fnft_kdvv_default_opts_wrapper(clib_func):
+    """
+    Call the default options for kdvv directly from the library
+    Returns:
+        KdvvOptionsStruct: holding default options
+    """
+    clib_func.restype = KdvvOptionsStruct
+    clib_func.argtpes=[]
+    return clib_func()
+
 def kdvv_wrapper(clib_kdvv_func, D, u, T1, T2, M, Xi1, Xi2,
                  K, options):
     """
@@ -14,7 +25,7 @@ def kdvv_wrapper(clib_kdvv_func, D, u, T1, T2, M, Xi1, Xi2,
         M : number of values for the continuous spectrum to calculate
         Xi1, Xi2 : min and max frequency for the continuous spectrum
         K : maximum number of bound states to calculate (no effect yet)
-        options : options for nsev as nsev_options_struct
+        options : options for kdvv as KdvvOptionsStruct
     Returns:
     ----------
     rdict : dictionary holding the fields (depending on options)

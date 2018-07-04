@@ -1,6 +1,16 @@
 from .typesdef import *
 
 
+def fnft_nsep_default_opts_wrapper(clib_func):
+    """
+        Call the default options for nsep directly from the library
+        Returns:
+            NsepOptionsStruct: holding default options
+        """
+    clib_func.restype = NsepOptionsStruct
+    clib_func.argtpes=[]
+    return clib_func()
+
 def nsep_wrapper(clib_nsep_func, D, q, T1, T2, kappa,
                  options):
     """
@@ -12,7 +22,7 @@ def nsep_wrapper(clib_nsep_func, D, q, T1, T2, kappa,
         q : numpy array holding the samples of the field to be analyzed
         T1, T2  : time positions of the first and the (D+1) sample
         kappa   : +/- 1 for focussing/defocussing nonlinearity
-        options : options for nsev as nsev_options_struct
+        options : options for nsep as NsepOptionsStruct
     Returns:
     ----------
     rdict : dictionary holding the fields (depending on options)
