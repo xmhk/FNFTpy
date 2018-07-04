@@ -1,10 +1,11 @@
 def get_lib_path():
-    """return the path of the libFNFT file
+    """return the path of the FNFT file
     This is something you have to edit.
     See example strings.
+
     """
-    libstr = "C:/Libraries/local/libfnft.dll"  # example for windows
-    # libstr = "/usr/local/lib/libfnft.so"    #example for linux
+    # libstr = "C:/Libraries/local/libfnft.dll"  # example for windows
+    libstr = "/usr/local/lib/libfnft.so"    #example for linux
     return libstr
 
 

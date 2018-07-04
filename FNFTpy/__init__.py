@@ -1,6 +1,6 @@
 # import numpy as np
 # import ctypes
-from .auxilary import get_lib_path
+from .auxiliary import get_lib_path
 
 # import wrapper functions
 from .fnft_kdvv_wrapper import kdvv_wrapper
@@ -8,20 +8,20 @@ from .fnft_nsep_wrapper import nsep_wrapper
 from .fnft_nsev_wrapper import nsev_wrapper
 from .typesdef import *
 
-# get python ctypes object of libFNFT
-libpath = get_lib_path()  # edit in auxilary.py
+# get python ctypes object of FNFT
+libpath = get_lib_path()  # edit in auxiliary.py
 fnft_clib = ctypes.CDLL(libpath)
 
 
-def kdvv(u, tvec, m=128, xi1=-2, xi2=2, dis=15):
+def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=15):
     """calculates the Nonlinear Fourier Transform for the Korteweg-de Vries equation with vanishing boundaries.
     Parameters:
     ----------       
         u : numpy array holding the samples of the field to be analyzed        
         tvec : time vector
-        m : number of samples for the continuous spectrum to calculate,
+        M : number of samples for the continuous spectrum to calculate,
             [optional, standard=128]
-        xi1, xi2 : min and max frequency for the continuous spectrum, 
+        Xi1, Xi2 : min and max frequency for the continuous spectrum, 
                    [optional, standard=-/+ 2]        
         dis : determines the discretization
                 [optional, standard=15]
@@ -44,26 +44,26 @@ def kdvv(u, tvec, m=128, xi1=-2, xi2=2, dis=15):
     Returns:
     ----------
     rdict : dictionary holding the fields (depending on options)
-        return_value : return value from libFNFT
+        return_value : return value from FNFT
         contspec : continuous spectrum        
     """
-    d = len(u)
-    k = 0  # not yet implemented
-    t1 = np.min(tvec)
-    t2 = np.max(tvec)
+    D = len(u)
+    K = 0  # not yet implemented
+    T1 = np.min(tvec)
+    T2 = np.max(tvec)
     options = get_kdvv_options(dis)
-    return kdvv_wrapper(fnft_clib.fnft_kdvv, d, u, t1, t2, m, xi1, xi2,
-                        k, options)
+    return kdvv_wrapper(fnft_clib.fnft_kdvv, D, u, T1, T2, M, Xi1, Xi2,
+                        K, options)
 
 
-def nsep(q, t1, t2, kappa=1, loc=2, filt=2, bb=None,
+def nsep(q, T1, T2, kappa=1, loc=2, filt=2, bb=None,
          maxev=20, dis=1, nf=1):
     """
     calculates the Nonlinear Fourier Transform for the periodic Nonlinear Schroedinger equation.
     Parameters:
     ----------
         q : numpy array holding the samples of the field to be analyzed
-        t1, t2  : time positions of the first and the (d+1) sample
+        T1, T2  : time positions of the first and the (d+1) sample
         kappa : +/- 1 for focussing/defocussing nonlinearity 
                [optional, standard = +1]
         loc : localization of spectrum
@@ -83,38 +83,38 @@ def nsep(q, t1, t2, kappa=1, loc=2, filt=2, bb=None,
         nf : normalization Flag 0=off, 1=on [optional, default=1]
         dis : discretization
                 [optional, default=2]
-                0=2split2modal
-                1=2split2a
+                0=2spliT2modal
+                1=2spliT2a
                 2=2split4a
                 3=2split4b
                 4=BO
     Returns:
     ----------
     rdict : dictionary holding the fields (depending on options)
-        return_value : return value from libFNFT
-        k : number of points in the main spectrum
+        return_value : return value from FNFT
+        K : number of points in the main spectrum
         main : main spectrum
-        m: number of points in the auxillary spectrum
-    aux: auxilary spectrum
+        m: number of points in the auxiliary spectrum
+    aux: auxiliary spectrum
     """
     if bb is None:  # set standard value for bb
         bb = [-200, 200, -200, 200]
-    d = len(q)
+    D = len(q)
     options = get_nsep_options(loc, filt, bb, maxev, dis, nf)
-    return nsep_wrapper(fnft_clib.fnft_nsep, d, q, t1, t2,
+    return nsep_wrapper(fnft_clib.fnft_nsep, D, q, T1, T2,
                         kappa, options)
 
 
-def nsev(q, tvec, xi1=-2, xi2=2, m=128, k=128, kappa=1, bsf=2,
+def nsev(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=2,
          bsl=2, niter=10, dst=0, cst=0, nf=1, dis=3):
     """Calculates the Nonlinear Fourier Transform for the Nonlinear Schroedinger equation with vanishing boundaries.
     Parameters:
     ----------
         q : numpy array holding the samples of the field to be analyzed
         tvec: time vector for q samples
-        xi1, xi2 : min and max frequency for the continuous spectrum. [optional, standard = -2,2]
-        m : number of values for the continuous spectrum to calculate [optional, standard = 128]
-        k : maximum number of bound states to calculate [optional, standard = 128]
+        Xi1, Xi2 : min and max frequency for the continuous spectrum. [optional, standard = -2,2]
+        M : number of values for the continuous spectrum to calculate [optional, standard = 128]
+        K : maximum number of bound states to calculate [optional, standard = 128]
         kappa : +/- 1 for focussing/defocussing nonlinearity [optional, standard = +1]
         bsf : bound state filtering
                 [optional, default=2]
@@ -143,15 +143,15 @@ def nsev(q, tvec, xi1=-2, xi2=2, m=128, k=128, kappa=1, bsf=2,
                1=on
         dis : discretization
                 [optional, default=3]
-                0=2split2modal
-                1=2split2a
+                0=2spliT2modal
+                1=2spliT2a
                 2=2split4a
                 3=2split4b
                 4=BO
     Returns:
     ----------
     rdict : dictionary holding the fields (depending on options)
-        return_value : return value from libFNFT
+        return_value : return value from FNFT
         bound_states_num : number of bound states found
         bound_states : array of bound states found 
         d_norm : discrete spectrum - norming constants
@@ -160,9 +160,9 @@ def nsev(q, tvec, xi1=-2, xi2=2, m=128, k=128, kappa=1, bsf=2,
         c_a : continuous spectrum - scattering coefficient a
         c_b : continuous spectrum - scattering coefficient b
     """
-    d = len(q)
-    t1 = np.min(tvec)
-    t2 = np.max(tvec)
+    D = len(q)
+    T1 = np.min(tvec)
+    T2 = np.max(tvec)
     options = get_nsev_options(bsf, bsl, niter, dst, cst, nf, dis)
-    return nsev_wrapper(fnft_clib.fnft_nsev, d, q, t1, t2, xi1, xi2,
-                        m, k, kappa, options)
+    return nsev_wrapper(fnft_clib.fnft_nsev, D, q, T1, T2, Xi1, Xi2,
+                        M, K, kappa, options)
