@@ -1,22 +1,31 @@
 from .auxiliary import get_lib_path, check_value
 from .typesdef import *
 
-# ------------------------------------------------------------------------------------
+
+#
+# options handling for kdvv
+#
 
 def fnft_kdvv_default_opts_wrapper():
     """
-    Call the default options for kdvv directly from the library
-    Returns:
-        KdvvOptionsStruct: holding default options
+    Get the default options for kdvv from FNFT.
+    Returns
+    -------
+        options : KdvvOptionsStruct with options for kdvv
     """
     fnft_clib = ctypes.CDLL(get_lib_path())
     clib_func = fnft_clib.fnft_kdvv_default_opts
-
     clib_func.restype = KdvvOptionsStruct
     clib_func.argtpes=[]
     return clib_func()
 
 def print_kdvv_options(opts = None):
+    """Print the options for kdvv.
+    When called without additional parameters, the default options from FNFT are printed.
+    Parameters:
+    -----------
+        opts : KdvvOptionsStruct, e.g. created by get_kdvv_options() [optional]
+    """
     if opts is None:
         opts = fnft_kdvv_default_opts_wrapper()
     print("kdvv options:")
@@ -24,7 +33,8 @@ def print_kdvv_options(opts = None):
 
 
 def get_kdvv_options(dis=None):
-    """returns an options struct for KDVV
+    """Returns an options struct for kdvv.
+    When called without additional parameters, the default values from FNFT are used.
     Parameters:
     ----------
         dis: discretization [optional]
@@ -46,7 +56,7 @@ def get_kdvv_options(dis=None):
                15 = 2SPLIT8B
     Returns:
     ----------
-        options struct for KDVV C call
+        options : KdvvOptionsStruct with options for kdvv
     """
     opts = fnft_kdvv_default_opts_wrapper()
     if not dis is None:
@@ -55,14 +65,17 @@ def get_kdvv_options(dis=None):
     return opts
 
 
-# -----------------------------------------------------------
+#
+# options handling for nsep
+#
 
 def fnft_nsep_default_opts_wrapper():
     """
-        Call the default options for nsep directly from the library
-        Returns:
-            NsepOptionsStruct: holding default options
-        """
+    Get the default options for nsep from FNFT.
+    Returns:
+    -------
+        NsepOptionsStruct : holding default options
+    """
     fnft_clib = ctypes.CDLL(get_lib_path())
     clib_func = fnft_clib.fnft_nsep_default_opts
     clib_func.restype = NsepOptionsStruct
@@ -71,6 +84,11 @@ def fnft_nsep_default_opts_wrapper():
 
 
 def print_nsep_options(opts = None):
+    """Print the options for nsep.
+    When called without additional parameters, the default options from FNFT are printed.    Parameters:
+    -----------
+        opts : NsepOptionsStruct, e.g. created by get_nsep_options() [optional]
+    """
     if opts is None:
         opts = fnft_nsep_default_opts_wrapper()
     print("nsep options:")
@@ -83,7 +101,8 @@ def print_nsep_options(opts = None):
 
 
 def get_nsep_options(loc=None, filt=None, bb=None, maxev=None, dis=None, nf=None):
-    """creates a options struct for NSEP
+    """creates a options struct for NSEP.
+    When called without additional parameters, the default values from FNFT are used.
     Parameters:
     ----------
         loc : localization of spectrum
@@ -105,7 +124,7 @@ def get_nsep_options(loc=None, filt=None, bb=None, maxev=None, dis=None, nf=None
                 4=BO
     Returns:
     ----------
-        options struct  for NSEP C call
+        options : NsepOptionsStruct with options for nsep
     """
     opts = fnft_nsep_default_opts_wrapper()
     if not loc is None:
@@ -131,16 +150,17 @@ def get_nsep_options(loc=None, filt=None, bb=None, maxev=None, dis=None, nf=None
     return opts
 
 
-# -----------------------------------------------------------
-
-
+#
+# options handling for nsev
+#
 
 
 def fnft_nsev_default_opts_wrapper():
     """
-    Call the default options for nsev directly from the library
-        Returns:
-            NsevOptionsStruct: holding default options
+    Get the default options for nsev from FNFT.
+    Returns:
+    -------
+        options : NsevOptionsStruct with options for nsev
     """
     fnft_clib = ctypes.CDLL(get_lib_path())
     clib_func = fnft_clib.fnft_nsev_default_opts
@@ -148,7 +168,15 @@ def fnft_nsev_default_opts_wrapper():
     clib_func.argtpes=[]
     return clib_func()
 
-def print_nsev_options(opts = None):
+
+def print_nsev_options(opts=None):
+    """Print the options for nsev.
+    When called without additional parameters, the default options from FNFT are printed.
+    Parameters:
+    -----------
+        opts : NsevOptionsStruct, e.g. created by get_nsev_options() [optional]
+    """
+
     if opts is None:
         opts =  fnft_nsev_default_opts_wrapper()
     print("nsev options:")
@@ -162,28 +190,29 @@ def print_nsev_options(opts = None):
 
 
 def get_nsev_options(bsf=None, bsl=None, niter=None, dst=None, cst=None, nf=None, dis=None):
-    """creates a options struct for NSEV
+    """creates a options struct for NSEV.
+    When called without additional parameters, the default values from FNFT are used.
     Parameters:
     ----------
-        bsf : bound state filtering
+        bsf : bound state filtering [optional]
                 0=none
                 1=basic
                 2=full
-        bsl : bound state localization
+        bsl : bound state localization [optional]
                 0=Fast Eigenvalue
                 1=Newton
                 2=Subsample and Refine
-        niter : number of iterations for Newton bound state location
-        dst : type of discrete spectrum
+        niter : number of iterations for Newton bound state location [optional]
+        dst : type of discrete spectrum [optional]
                  0=norming constants
                  1=residues
                  2=both
-        cst : type of continuous spectrum
+        cst : type of continuous spectrum [optional]
                  0=reflection coefficient
                  1=a and b
                  2=both
-        nf : normalization Flag 0=off, 1=on
-        dis : discretization
+        nf : normalization Flag 0=off, 1=on [optional]
+        dis : discretization [optional]
                0=2split2modal
                1=2split2a
                2=2split4a
@@ -191,7 +220,7 @@ def get_nsev_options(bsf=None, bsl=None, niter=None, dst=None, cst=None, nf=None
                4=BO
     Returns:
     ----------
-        options struct  for NSEV C call
+        options : NsevOptionsStruct with options for nsev
     """
     opts =  fnft_nsev_default_opts_wrapper()
     if not bsf is None:
