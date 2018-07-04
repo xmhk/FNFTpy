@@ -1,23 +1,64 @@
 from .typesdef import *
+from .auxiliary import get_lib_path
+#libpath = get_lib_path()  # edit in auxiliary.py
+#fnft_clib = ctypes.CDLL(libpath)
+from .options_handling import print_nsep_options, get_nsep_options
 
 
-def fnft_nsep_default_opts_wrapper(clib_func):
+def nsep(q, T1, T2, kappa=1, loc=None, filt=None, bb=None,
+         maxev=None, dis=None, nf=None):
     """
-        Call the default options for nsep directly from the library
-        Returns:
-            NsepOptionsStruct: holding default options
-        """
-    clib_func.restype = NsepOptionsStruct
-    clib_func.argtpes=[]
-    return clib_func()
+    calculates the Nonlinear Fourier Transform for the periodic Nonlinear Schroedinger equation.
+    Parameters:
+    ----------
+        q : numpy array holding the samples of the field to be analyzed
+        T1, T2  : time positions of the first and the (d+1) sample
+        kappa : +/- 1 for focussing/defocussing nonlinearity
+               [optional, standard = +1]
+        loc : localization of spectrum
+                [optional, default=2]
+                0=Subsample and Refine
+                1=Gridsearch
+                2=Mixed
+        filt : filtering of spectrum
+                 [optional, default=2]
+                 0=None
+                 1=Manual
+                 2=Auto
+        bb: bounding box used for manual filtering
+            [optional, default=None (bb is set to [-200,200,-200,200])]
+        maxev : maximum number of evaluations for root refinement
+                [optional, default=20]
+        nf : normalization Flag 0=off, 1=on [optional, default=1]
+        dis : discretization
+                [optional, default=2]
+                0=2spliT2modal
+                1=2spliT2a
+                2=2split4a
+                3=2split4b
+                4=BO
+    Returns:
+    ----------
+    rdict : dictionary holding the fields (depending on options)
+        return_value : return value from FNFT
+        K : number of points in the main spectrum
+        main : main spectrum
+        m: number of points in the auxiliary spectrum
+    aux: auxiliary spectrum
+    """
+    D = len(q)
+    options = get_nsep_options(loc=loc, filt=filt, bb=bb, maxev=maxev, dis=dis, nf=nf)
+    print_nsep_options(options)
+    return nsep_wrapper(D, q, T1, T2,
+                        kappa, options)
 
-def nsep_wrapper(clib_nsep_func, D, q, T1, T2, kappa,
+
+def nsep_wrapper(D, q, T1, T2, kappa,
                  options):
     """
     Wraps the python input and returns the result from FNFT's fnft_nsep.
     Parameters:
     ----------
-        clib_nsep_func : handle of the c function imported via ctypes
         D : number of sample points
         q : numpy array holding the samples of the field to be analyzed
         T1, T2  : time positions of the first and the (D+1) sample
@@ -31,7 +72,8 @@ def nsep_wrapper(clib_nsep_func, D, q, T1, T2, kappa,
         main : main spectrum
         M: number of points in the auxiliary spectrum
         aux: auxiliary spectrum"""
-
+    fnft_clib = ctypes.CDLL(get_lib_path())
+    clib_nsep_func = fnft_clib.fnft_nsep
     clib_nsep_func.restype = ctypes_int  
     nsep_D = ctypes_uint(D)
     nsep_q = np.zeros(nsep_D.value, dtype=numpy_complex)

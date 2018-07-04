@@ -1,24 +1,78 @@
 from .typesdef import *
+from .auxiliary import *
+from .options_handling import print_nsev_options, get_nsev_options
 
 
-def fnft_nsev_default_opts_wrapper(clib_func):
+def nsev(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=None,
+         bsl=None, niter=None, dst=None, cst=None, nf=None, dis=None):
+    """Calculates the Nonlinear Fourier Transform for the Nonlinear Schroedinger equation with vanishing boundaries.
+    Parameters:
+    ----------
+        q : numpy array holding the samples of the field to be analyzed
+        tvec: time vector for q samples
+        Xi1, Xi2 : min and max frequency for the continuous spectrum. [optional, standard = -2,2]
+        M : number of values for the continuous spectrum to calculate [optional, standard = 128]
+        K : maximum number of bound states to calculate [optional, standard = 128]
+        kappa : +/- 1 for focussing/defocussing nonlinearity [optional, standard = +1]
+        bsf : bound state filtering
+                [optional, default=2]
+                0=none
+                1=basic
+                2=full
+        bsl : bound state localization
+                [optional, default=0]
+                0=Fast Eigenvalue
+                1=Newton
+                2=Subsample and Refine
+        niter : number of iterations for Newton bsl [optional, default=10]
+        dst : type of discrete spectrum
+               [optional, defaul=2]
+               0=norming constants
+               1=residues
+               2=both
+        cst : type of continuous spectrum
+               [optional, default=0]
+               0=reflection coefficient
+               1=a and b
+               2=both
+        nf : normalization Flag
+               [optional, default=1]
+               0=off
+               1=on
+        dis : discretization
+                [optional, default=3]
+                0=2spliT2modal
+                1=2spliT2a
+                2=2split4a
+                3=2split4b
+                4=BO
+    Returns:
+    ----------
+    rdict : dictionary holding the fields (depending on options)
+        return_value : return value from FNFT
+        bound_states_num : number of bound states found
+        bound_states : array of bound states found
+        d_norm : discrete spectrum - norming constants
+        d_res : discrete spectrum - residues
+        c_ref : continuous spectrum - reflection coefficient
+        c_a : continuous spectrum - scattering coefficient a
+        c_b : continuous spectrum - scattering coefficient b
     """
-    Call the default options for nsev directly from the library
-        Returns:
-            NsevOptionsStruct: holding default options
-    """
-    clib_func.restype = NsevOptionsStruct
-    clib_func.argtpes=[]
-    return clib_func()
+    D = len(q)
+    T1 = np.min(tvec)
+    T2 = np.max(tvec)
+    options = get_nsev_options(bsf=bsf, bsl=bsl, niter=niter, dst=dst, cst=cst, nf=nf, dis=dis)
+    print_nsev_options(options)
+    return nsev_wrapper( D, q, T1, T2, Xi1, Xi2,
+                        M, K, kappa, options)
 
 
-def nsev_wrapper(clib_nsev_func, D, q, T1, T2, Xi1, Xi2,
+def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
                  M, K, kappa, options):
     """
     Wraps the python input and returns the result from FNFT's fnft_nsev.
     Parameters:
     ----------
-        clib_nsev_func : handle of the c function imported via ctypes
         D : number of sample points
         q : numpy array holding the samples of the field to be analyzed
         T1, T2 : time positions of the first and the last sample
@@ -39,6 +93,8 @@ def nsev_wrapper(clib_nsev_func, D, q, T1, T2, Xi1, Xi2,
         c_a : continuous spectrum - scattering coefficient a
         c_b : continuous spectrum - scattering coefficient b
     """
+    fnft_clib = ctypes.CDLL(get_lib_path())
+    clib_nsev_func = fnft_clib.fnft_nsev
     clib_nsev_func.restype = ctypes_int
     nsev_D = ctypes_uint(D)
     nsev_M = ctypes_uint(M)

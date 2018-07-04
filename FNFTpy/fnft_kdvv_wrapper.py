@@ -1,24 +1,66 @@
+
 from .typesdef import *
+from .options_handling import get_kdvv_options, print_kdvv_options
+from .auxiliary import get_lib_path
+#libpath = get_lib_path()  # edit in auxiliary.py
+#fnft_clib = ctypes.CDLL(libpath)
 
-
-
-def fnft_kdvv_default_opts_wrapper(clib_func):
-    """
-    Call the default options for kdvv directly from the library
+def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None):
+    """calculates the Nonlinear Fourier Transform for the Korteweg-de Vries equation with vanishing boundaries.
+    Parameters:
+    ----------
+        u : numpy array holding the samples of the field to be analyzed
+        tvec : time vector
+        M : number of samples for the continuous spectrum to calculate,
+            [optional, standard=128]
+        Xi1, Xi2 : min and max frequency for the continuous spectrum,
+                   [optional, standard=-/+ 2]
+        dis : determines the discretization
+                [optional, standard=15]
+                0 = 2SPLIT1A
+                1 = 2SPLIT1B
+                2 = 2SPLIT2A
+                3 = 2SPLIT2B
+                4 = 2SPLIT3A
+                5 = 2SPLIT3B
+                6 = 2SPLIT4A
+                7 = 2SPLIT4B
+                8 = 2SPLIT5A
+                9 = 2SPLIT5B
+                10 = 2SPLIT6A
+                11 = 2SPLIT6B
+                12 = 2SPLIT7A
+                13 = 2SPLIT7B
+                14 = 2SPLIT8A
+                15 = 2SPLIT8B
     Returns:
-        KdvvOptionsStruct: holding default options
+    ----------
+    rdict : dictionary holding the fields (depending on options)
+        return_value : return value from FNFT
+        contspec : continuous spectrum
     """
-    clib_func.restype = KdvvOptionsStruct
-    clib_func.argtpes=[]
-    return clib_func()
 
-def kdvv_wrapper(clib_kdvv_func, D, u, T1, T2, M, Xi1, Xi2,
+    D = len(u)
+    K = 0  # not yet implemented
+    T1 = np.min(tvec)
+    T2 = np.max(tvec)
+    options = get_kdvv_options(dis=dis)
+    print_kdvv_options(options)
+    return kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
+                        K, options)
+
+
+
+
+
+
+
+def kdvv_wrapper( D, u, T1, T2, M, Xi1, Xi2,
                  K, options):
     """
     Wraps the python input and returns the result from FNFT's fnft_kdvv
     Parameters:
     ----------
-        clib_kdvv_func : handle of the c function imported via ctypes
         D : number of samples
         u : numpy array holding the samples of the field to be analyzed
         T1, T2  : time positions of the first and the last sample
@@ -32,6 +74,8 @@ def kdvv_wrapper(clib_kdvv_func, D, u, T1, T2, M, Xi1, Xi2,
         return_value : return value from FNFT
         contspec : continuous spectrum        
     """
+    fnft_clib = ctypes.CDLL(get_lib_path())
+    clib_kdvv_func = fnft_clib.fnft_kdvv
     clib_kdvv_func.restype = ctypes_int
     kdvv_D = ctypes_uint(D)
     kdvv_u = np.zeros(kdvv_D.value, dtype=numpy_complex)
