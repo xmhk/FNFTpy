@@ -103,7 +103,7 @@ the Nonlinear Fourier Transform of some input field.
         q = np.zeros(len(tvec), dtype=np.complex128)
         q[:] = 2.0 + 0.0j
         M = 8
-        res = nsev(q, tvec, M=M, Xi1=-2, Xi2=2, K=D, dis=1, bsf=1, bsl=0, niter=20, dst=2, cst=2, nf=0)
+        res = nsev(q, tvec, M=M, Xi1=-2, Xi2=2)
         Xivec = np.linspace(-2, 2, M)
         print("FNFT return value: %d (should be 0)" % res['return_value'])
         print("continuous spectrum")
