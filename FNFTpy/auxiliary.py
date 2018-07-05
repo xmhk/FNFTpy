@@ -19,7 +19,7 @@ def check_value(val, vmin, vmax, vtype=int):
             vmin : minimum value val should take
             vmax : maximum value val should take
 
-        optional Arguments:
+        Optional Arguments:
 
             vtype : type val should take
     """

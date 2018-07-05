@@ -4,17 +4,29 @@ from .auxiliary import get_lib_path
 
 
 def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None):
-    """calculates the Nonlinear Fourier Transform for the Korteweg-de Vries equation with vanishing boundaries.
-    Parameters:
-    ----------
+    """Calculate the Nonlinear Fourier Transform for the Korteweg-de Vries equation with vanishing boundaries.
+
+    This function is intended to be 'clutter-free', which means it automatically calculates some variables
+    needed to call the C-library.
+    It converts all Python input into the C equivalent and returns the result from FNFT.
+    If a more C-like interface is desired, the function 'kdvv_wrapper' can be used (see documentation there).
+
+    Arguments:
+
         u : numpy array holding the samples of the field to be analyzed
+
         tvec : time vector
+
         M : number of samples for the continuous spectrum to calculate,
-            [optional, standard=128]
-        Xi1, Xi2 : min and max frequency for the continuous spectrum,
-                   [optional, standard=-/+ 2]
+
+
+    Optional Arguments:
+
+        Xi1, Xi2 : min and max frequency for the continuous spectrum
+                   default = -2, 2
+
         dis : determines the discretization
-                [optional, standard=15]
+                default = 2
                 0 = 2SPLIT1A
                 1 = 2SPLIT1B
                 2 = 2SPLIT2A
@@ -32,10 +44,11 @@ def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None):
                 14 = 2SPLIT8A
                 15 = 2SPLIT8B
     Returns:
-    ----------
-    rdict : dictionary holding the fields (depending on options)
-        return_value : return value from FNFT
-        contspec : continuous spectrum
+
+        rdict : dictionary holding the fields (depending on options)
+
+            return_value : return value from FNFT
+            contspec : continuous spectrum
     """
 
     D = len(u)
@@ -50,22 +63,37 @@ def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None):
 
 def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
                  K, options):
-    """
-    Wraps the python input and returns the result from FNFT's fnft_kdvv
-    Parameters:
-    ----------
+    """Calculate the Nonlinear Fourier Transform for the Korteweg-de Vries equation with vanishing boundaries.
+
+    This function's interface mimics the behavior of the function 'fnft_kdvv' of FNFT.
+    It converts all Python input into the C equivalent and returns the result from FNFT.
+    If a more simplified version is desired, 'kdvv' can be used (see documentation there).
+
+
+    Arguments:
+
         D : number of samples
+
         u : numpy array holding the samples of the field to be analyzed
+
         T1, T2  : time positions of the first and the last sample
+
         M : number of values for the continuous spectrum to calculate
+
         Xi1, Xi2 : min and max frequency for the continuous spectrum
+
         K : maximum number of bound states to calculate (no effect yet)
-        options : options for kdvv as KdvvOptionsStruct
+
+        options : options for kdvv as KdvvOptionsStruct, which can be generated e.g. with 'get_kdvv_options()'
+
     Returns:
     ----------
+
     rdict : dictionary holding the fields (depending on options)
+
         return_value : return value from FNFT
         contspec : continuous spectrum        
+
     """
     fnft_clib = ctypes.CDLL(get_lib_path())
     clib_kdvv_func = fnft_clib.fnft_kdvv
