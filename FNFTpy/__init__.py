@@ -9,3 +9,4 @@ from .fnft_nsev_wrapper import nsev_wrapper, nsev
 from .typesdef import *
 from .options_handling import *
 
+from .tests import *

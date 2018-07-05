@@ -30,8 +30,7 @@ def print_kdvv_options(opts=None):
     """
     if opts is None:
         opts = fnft_kdvv_default_opts_wrapper()
-    print("kdvv options:")
-    print("  discretization : dis ", opts.discretization)
+    print(repr(opts))
 
 
 def get_kdvv_options(dis=None):
@@ -100,14 +99,7 @@ def print_nsep_options(opts=None):
     """
     if opts is None:
         opts = fnft_nsep_default_opts_wrapper()
-    print("nsep options:")
-    print("  bound state localization      : loc   ", opts.localization)
-    print("  bound state filtering         : filt  ", opts.filtering)
-    print("  bounding box                  : bb    ", opts.bounding_box[0], opts.bounding_box[1], opts.bounding_box[2], opts.bounding_box[3])
-    print("  maximum number of eigenvalues : max_v ", opts.max_evals)
-    print("  discretization                : dis   " , opts.discretization)
-    print("  normalization                 : nf    ", opts.normalization_flag)
-    print(" ")
+    print(repr(opts))
 
 
 def get_nsep_options(loc=None, filt=None, bb=None, maxev=None, dis=None, nf=None):
@@ -206,15 +198,7 @@ def print_nsev_options(opts=None):
 
     if opts is None:
         opts = fnft_nsev_default_opts_wrapper()
-    print("nsev options:")
-    print("  bound state filtering    : bsf", opts.bound_state_filtering)
-    print("  bound state localization : bsl", opts.bound_state_localization)
-    print("  number of iteratons      : niter", opts.niter)
-    print("  discrete spectrum type   : dst", opts.discspec_type)
-    print("  continuous spectrum type : cst ", opts.contspec_type)
-    print("  discretization           : dis", opts.discretization)
-    print("  normalization flag       : nf", opts.normalization_flag)
-    print(" ")
+    print(repr(opts))
 
 
 def get_nsev_options(bsf=None, bsl=None, niter=None, dst=None, cst=None, nf=None, dis=None):

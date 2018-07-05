@@ -58,7 +58,6 @@ def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None):
     T1 = np.min(tvec)
     T2 = np.max(tvec)
     options = get_kdvv_options(dis=dis)
-    print_kdvv_options(options)
     return kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
                         K, options)
 

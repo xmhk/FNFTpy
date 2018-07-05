@@ -69,7 +69,6 @@ def nsep(q, T1, T2, kappa=1, loc=None, filt=None, bb=None,
         """
     D = len(q)
     options = get_nsep_options(loc=loc, filt=filt, bb=bb, maxev=maxev, dis=dis, nf=nf)
-    print_nsep_options(options)
     return nsep_wrapper(D, q, T1, T2,
                         kappa, options)
 
