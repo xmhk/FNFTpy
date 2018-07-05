@@ -120,6 +120,13 @@ the Nonlinear Fourier Transform of some input field.
         ```
         help(nsev)
         ```
+        
+  * function **nsev_wrapper**:
+    * mimics the function fnft_nsev from FNFT.
+    * for full description of options call
+      ```
+        help(nsev_wrapper)
+        ```
      
   
   
