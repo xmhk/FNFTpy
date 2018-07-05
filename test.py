@@ -56,14 +56,13 @@ def nsepexample():
     q = np.exp(2.0j * tvec)
     res = nsep(q, 0, 2 * np.pi, bb=[-2, 2, -2, 2], filt=1)
     print("FNFT return value: %d" % res['return_value'])
-    print("number of samples: %d"%D)
+    print("number of samples: %d" % D)
     print('main spectrum')
     for i in range(res['K']):
         print("%d   %.6f  %.6fj" % (i, np.real(res['main'][i]), np.imag(res['main'][i])))
     print('auxiliary spectrum')
     for i in range(res['M']):
         print("%d   %.6f  %.6fj" % (i, np.real(res['aux'][i]), np.imag(res['aux'][i])))
-
 
 
 def nsevexample():
@@ -73,7 +72,7 @@ def nsevexample():
     q = np.zeros(len(tvec), dtype=np.complex128)
     q[:] = 2.0 + 0.0j
     M = 8
-    res = nsev(q, tvec, M=M, Xi1=-2, Xi2=2, K=D,  dis=1, bsf=1, bsl=0, niter=20, dst=2, cst=2, nf=0)
+    res = nsev(q, tvec, M=M, Xi1=-2, Xi2=2, K=D, dis=1, bsf=1, bsl=0, niter=20, dst=2, cst=2, nf=0)
     Xivec = np.linspace(-2, 2, M)
     print("FNFT return value: %d" % res['return_value'])
     print("continuous spectrum")
@@ -82,21 +81,15 @@ def nsevexample():
     print("discrete spectrum")
     for i in range(len(res['bound_states'])):
         print("%d %.6f  %.6fj with norming const %.6f  %.6fj" % (i, np.real(res['bound_states'][i]),
-                                                                   np.imag(res['bound_states'][i]),
-                                                                   np.real(res['d_norm'][i]),
-                                                                   np.imag(res['d_norm'][i])))
+                                                                 np.imag(res['bound_states'][i]),
+                                                                 np.real(res['d_norm'][i]),
+                                                                 np.imag(res['d_norm'][i])))
 
 
+# nsepexample()
 
 
-
-
-#nsepexample()
-
-
-
-
-#("bound_state_filtering", ctypes_int),
+# ("bound_state_filtering", ctypes_int),
 #        ("bound_state_localization", ctypes_int),
 #        ("niter", ctypes_uint),
 #        ("discspec_type", ctypes_int),
@@ -113,13 +106,11 @@ nseptest()
 # mimic the example files
 
 print_nsev_options()
-#nsevexample()
+# nsevexample()
 kdvvexample()
 nsepexample()
 nsevexample()
 
-
-#o2 = nsev_default_opts()
-#o2.bound_state_localization = 0
-#print_nsev_opts(o2)
-
+# o2 = nsev_default_opts()
+# o2.bound_state_localization = 0
+# print_nsev_opts(o2)

@@ -63,7 +63,7 @@ def nsev(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=None,
     T2 = np.max(tvec)
     options = get_nsev_options(bsf=bsf, bsl=bsl, niter=niter, dst=dst, cst=cst, nf=nf, dis=dis)
     print_nsev_options(options)
-    return nsev_wrapper( D, q, T1, T2, Xi1, Xi2,
+    return nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
                         M, K, kappa, options)
 
 

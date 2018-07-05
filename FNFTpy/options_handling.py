@@ -16,10 +16,11 @@ def fnft_kdvv_default_opts_wrapper():
     fnft_clib = ctypes.CDLL(get_lib_path())
     clib_func = fnft_clib.fnft_kdvv_default_opts
     clib_func.restype = KdvvOptionsStruct
-    clib_func.argtpes=[]
+    clib_func.argtpes = []
     return clib_func()
 
-def print_kdvv_options(opts = None):
+
+def print_kdvv_options(opts=None):
     """Print the options for kdvv.
     When called without additional parameters, the default options from FNFT are printed.
     Parameters:
@@ -79,11 +80,11 @@ def fnft_nsep_default_opts_wrapper():
     fnft_clib = ctypes.CDLL(get_lib_path())
     clib_func = fnft_clib.fnft_nsep_default_opts
     clib_func.restype = NsepOptionsStruct
-    clib_func.argtpes=[]
+    clib_func.argtpes = []
     return clib_func()
 
 
-def print_nsep_options(opts = None):
+def print_nsep_options(opts=None):
     """Print the options for nsep.
     When called without additional parameters, the default options from FNFT are printed.    Parameters:
     -----------
@@ -140,7 +141,7 @@ def get_nsep_options(loc=None, filt=None, bb=None, maxev=None, dis=None, nf=None
         check_value(dis, 0, 4)  # Discretization
         opts.discretization = dis
     if not bb is None:
-        #bbtype = 4 * ctypes_double
+        # bbtype = 4 * ctypes_double
         opts.bounding_box[0] = bb[0]
         opts.bounding_box[1] = bb[1]
         opts.bounding_box[2] = bb[2]
@@ -165,7 +166,7 @@ def fnft_nsev_default_opts_wrapper():
     fnft_clib = ctypes.CDLL(get_lib_path())
     clib_func = fnft_clib.fnft_nsev_default_opts
     clib_func.restype = NsevOptionsStruct
-    clib_func.argtpes=[]
+    clib_func.argtpes = []
     return clib_func()
 
 
@@ -178,7 +179,7 @@ def print_nsev_options(opts=None):
     """
 
     if opts is None:
-        opts =  fnft_nsev_default_opts_wrapper()
+        opts = fnft_nsev_default_opts_wrapper()
     print("nsev options:")
     print("    bsf", opts.bound_state_filtering)
     print("    bsl", opts.bound_state_localization)
@@ -222,7 +223,7 @@ def get_nsev_options(bsf=None, bsl=None, niter=None, dst=None, cst=None, nf=None
     ----------
         options : NsevOptionsStruct with options for nsev
     """
-    opts =  fnft_nsev_default_opts_wrapper()
+    opts = fnft_nsev_default_opts_wrapper()
     if not bsf is None:
         check_value(bsf, 0, 2)  # Bound state filtering
         opts.bound_state_filtering = bsf
