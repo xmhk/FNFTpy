@@ -9,6 +9,3 @@ from .fnft_nsev_wrapper import nsev_wrapper, nsev
 from .typesdef import *
 from .options_handling import *
 
-# get python ctypes object of FNFT
-# libpath = get_lib_path()  # edit in auxiliary.py
-# fnft_clib = ctypes.CDLL(libpath)
