@@ -15,7 +15,7 @@ the Nonlinear Fourier Transform of some input field.
         import numpy as np
         from FNFTpy import kdvv, print_kdvv_options
         print("\n\nKDVV example")
-        print("standard options used:")
+        print("standard options:")
         print_kdvv_options()
         print("")
         #
@@ -64,7 +64,7 @@ the Nonlinear Fourier Transform of some input field.
       import numpy as np
       from FNFTpy import nsep, print_nsep_options
       print("\n\nNSEP example")
-      print("standard options used:")
+      print("standard options:")
       print_nsep_options()
       print("")
       #
@@ -113,7 +113,7 @@ the Nonlinear Fourier Transform of some input field.
         import numpy as np
         from FNFTpy import nsev, print_nsev_options
         print("\n\nNSEV example")
-        print("standard options used:")
+        print("standard options:")
         print_nsev_options()
         print("")
         #

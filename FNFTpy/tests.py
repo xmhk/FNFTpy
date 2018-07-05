@@ -6,9 +6,12 @@ from .fnft_nsev_wrapper import *
 def kdvvexample():
     """Mimics the C example for calling fnft_kdvv."""
     print("\n\nKDVV example")
-    print("standard options used:")
+    print("standard options:")
     print_kdvv_options()
     print("")
+    #
+    # set values
+    #
     D = 256
     tvec = np.linspace(-1, 1, D)
     q = np.zeros(D, dtype=np.complex128)
@@ -17,7 +20,13 @@ def kdvvexample():
     Xi2 = 2
     M = 8
     Xivec = np.linspace(Xi1, Xi2, M)
+    #
+    # call function
+    #
     res = kdvv(q, tvec, M, Xi1=Xi1, Xi2=Xi2)
+    #
+    # print results
+    #
     print("FNFT return value: %d (should be 0)" % res['return_value'])
     for i in range(len(res['contspec'])):
         print("%d. Xi=%.4f   %.6f  %.6fj" % (i, Xivec[i], np.real(res['contspec'][i]), np.imag(res['contspec'][i])))
@@ -26,14 +35,23 @@ def kdvvexample():
 def nsepexample():
     """Mimics the C example for calling fnft_nsep."""
     print("\n\nNSEP example")
-    print("standard options used:")
+    print("standard options:")
     print_nsep_options()
     print("")
+    #
+    # set values
+    #
     D = 256
     dt = 2 * np.pi / D
     tvec = np.arange(D) * dt
     q = np.exp(2.0j * tvec)
+    #
+    # call function
+    #
     res = nsep(q, 0, 2 * np.pi, bb=[-2, 2, -2, 2], filt=1)
+    #
+    # print results
+    #
     print("FNFT return value: %d (should be 0)" % res['return_value'])
     print("number of samples: %d" % D)
     print('main spectrum')
@@ -47,15 +65,24 @@ def nsepexample():
 def nsevexample():
     """Mimics the C example for calling fnft_nsev."""
     print("\n\nNSEV example")
-    print("standard options used:")
+    print("standard options:")
     print_nsev_options()
     print("")
+    #
+    # set values
+    #
     D = 256
     tvec = np.linspace(-1, 1, D)
     q = np.zeros(len(tvec), dtype=np.complex128)
     q[:] = 2.0 + 0.0j
     M = 8
+    #
+    # call function
+    #
     res = nsev(q, tvec, M=M, Xi1=-2, Xi2=2)
+    #
+    # print results
+    #
     Xivec = np.linspace(-2, 2, M)
     print("FNFT return value: %d (should be 0)" % res['return_value'])
     print("continuous spectrum")
