@@ -3,15 +3,14 @@ from .typesdef import *
 
 
 #
-# options handling for kdvv
+# Get and view options for kdvv (Korteweg-de Vries equation, vanishing boundaries)
 #
 
 def fnft_kdvv_default_opts_wrapper():
-    """
-    Get the default options for kdvv from FNFT.
+    """Get the default options for kdvv directly from the FNFT C-library.
+
     Returns
-    -------
-        options : KdvvOptionsStruct with options for kdvv
+        options : KdvvOptionsStruct with options for kdvv_wrapper
     """
     fnft_clib = ctypes.CDLL(get_lib_path())
     clib_func = fnft_clib.fnft_kdvv_default_opts
@@ -21,10 +20,12 @@ def fnft_kdvv_default_opts_wrapper():
 
 
 def print_kdvv_options(opts=None):
-    """Print the options for kdvv.
-    When called without additional parameters, the default options from FNFT are printed.
-    Parameters:
-    -----------
+    """Print options of a KdvvOptionsStruct for kdvv.
+
+    When called without additional argument, the default options from FNFT are printed.
+
+    Optional Arguments:
+
         opts : KdvvOptionsStruct, e.g. created by get_kdvv_options() [optional]
     """
     if opts is None:
@@ -34,30 +35,34 @@ def print_kdvv_options(opts=None):
 
 
 def get_kdvv_options(dis=None):
-    """Returns an options struct for kdvv.
+    """Get an KdvvOptionsStruct struct for use with kdvv_wrapper.
+
     When called without additional parameters, the default values from FNFT are used.
-    Parameters:
-    ----------
-        dis: discretization [optional]
-               0 = 2SPLIT1A
-               1 = 2SPLIT1B
-               2 = 2SPLIT2A
-               3 = 2SPLIT2B
-               4 = 2SPLIT3A
-               5 = 2SPLIT3B
-               6 = 2SPLIT4A
-               7 = 2SPLIT4B
-               8 = 2SPLIT5A
-               9 = 2SPLIT5B
-               10 = 2SPLIT6A
-               11 = 2SPLIT6B
-               12 = 2SPLIT7A
-               13 = 2SPLIT7B
-               14 = 2SPLIT8A
-               15 = 2SPLIT8B
+
+    Optional Arguments:
+
+        dis: discretization
+
+            0 = 2SPLIT1A
+            1 = 2SPLIT1B
+            2 = 2SPLIT2A
+            3 = 2SPLIT2B
+            4 = 2SPLIT3A
+            5 = 2SPLIT3B
+            6 = 2SPLIT4A
+            7 = 2SPLIT4B
+            8 = 2SPLIT5A
+            9 = 2SPLIT5B
+            10 = 2SPLIT6A
+            11 = 2SPLIT6B
+            12 = 2SPLIT7A
+            13 = 2SPLIT7B
+            14 = 2SPLIT8A
+            15 = 2SPLIT8B
+
     Returns:
-    ----------
-        options : KdvvOptionsStruct with options for kdvv
+
+        options : KdvvOptionsStruct.
     """
     opts = fnft_kdvv_default_opts_wrapper()
     if not dis is None:
@@ -67,15 +72,15 @@ def get_kdvv_options(dis=None):
 
 
 #
-# options handling for nsep
+#  Get and view options for nsep (Nonlinear Schroedinger equation, periodic boundaries)
 #
 
 def fnft_nsep_default_opts_wrapper():
-    """
-    Get the default options for nsep from FNFT.
+    """Get the default options for nsep directly from the FNFT C-library.
+
     Returns:
-    -------
-        NsepOptionsStruct : holding default options
+
+        options : NsepOptionsStruct for nsep_wrapper
     """
     fnft_clib = ctypes.CDLL(get_lib_path())
     clib_func = fnft_clib.fnft_nsep_default_opts
@@ -85,10 +90,13 @@ def fnft_nsep_default_opts_wrapper():
 
 
 def print_nsep_options(opts=None):
-    """Print the options for nsep.
-    When called without additional parameters, the default options from FNFT are printed.    Parameters:
-    -----------
-        opts : NsepOptionsStruct, e.g. created by get_nsep_options() [optional]
+    """Print options of a NsepOptionsStruct for nsep.
+
+    When called without additional arguments, the default options from FNFT are printed.
+
+    Optional Arguments:
+
+        opts : NsepOptionsStruc, e.g. created by get_nsep_options
     """
     if opts is None:
         opts = fnft_nsep_default_opts_wrapper()
@@ -102,37 +110,49 @@ def print_nsep_options(opts=None):
 
 
 def get_nsep_options(loc=None, filt=None, bb=None, maxev=None, dis=None, nf=None):
-    """creates a options struct for NSEP.
+    """Get a NsepOptionsStruct struct for use with nsep_wrapper.
+
     When called without additional parameters, the default values from FNFT are used.
-    Parameters:
-    ----------
+
+    Optional Arguments:
+
         loc : localization of spectrum
-                0=Subsample and Refine
-                1=Gridsearch
-                2=Mixed
+
+            0=Subsample and Refine
+            1=Gridsearch
+            2=Mixed
+
         filt : filtering of spectrum
-                 0=None
-                 1=Manual
-                 2=Auto
+
+            0=None
+            1=Manual
+            2=Auto
+
         bb : bounding box used for manual filtering
+
         maxev : maximum number of evaluations for root refinement
+
         nf : normalization flag
+
         dis : discretization
-                0=2split2modal
-                1=2split2a
-                2=2split4a
-                3=2split4b
-                4=BO
+
+            0=2split2modal
+            1=2split2a
+            2=2split4a
+            3=2split4b
+            4=BO
+
     Returns:
-    ----------
-        options : NsepOptionsStruct with options for nsep
+
+        options : NsepOptionsStruct with options for nsep_wrapper
+
     """
     opts = fnft_nsep_default_opts_wrapper()
     if not loc is None:
-        check_value(loc, 0, 2)  # Bound state loclization
+        check_value(loc, 0, 2)  # Bound state localization
         opts.localization = loc
     if not filt is None:
-        check_value(filt, 0, 2)  # Bound state localization
+        check_value(filt, 0, 2)  # Bound state filtering
         opts.filtering = filt
     if not nf is None:
         check_value(nf, 0, 1)  # Normflag
@@ -152,17 +172,19 @@ def get_nsep_options(loc=None, filt=None, bb=None, maxev=None, dis=None, nf=None
 
 
 #
-# options handling for nsev
+#  Get and view options for nsep (Nonlinear Schroedinger equation, periodic boundaries)
 #
 
 
 def fnft_nsev_default_opts_wrapper():
+    """Get the default options for nsev directly from the FNFT C-library.
+
+    Returns
+
+        options : NsevOptionsStruct with options for nsev_wrapper
+
     """
-    Get the default options for nsev from FNFT.
-    Returns:
-    -------
-        options : NsevOptionsStruct with options for nsev
-    """
+
     fnft_clib = ctypes.CDLL(get_lib_path())
     clib_func = fnft_clib.fnft_nsev_default_opts
     clib_func.restype = NsevOptionsStruct
@@ -171,10 +193,13 @@ def fnft_nsev_default_opts_wrapper():
 
 
 def print_nsev_options(opts=None):
-    """Print the options for nsev.
-    When called without additional parameters, the default options from FNFT are printed.
-    Parameters:
-    -----------
+    """Print options of a NsevOptionsStruct for nsev.
+
+    When called without additional argument, the default options from FNFT are printed.
+
+
+    Optional Arguments:
+
         opts : NsevOptionsStruct, e.g. created by get_nsev_options() [optional]
     """
 
@@ -191,36 +216,53 @@ def print_nsev_options(opts=None):
 
 
 def get_nsev_options(bsf=None, bsl=None, niter=None, dst=None, cst=None, nf=None, dis=None):
-    """creates a options struct for NSEV.
-    When called without additional parameters, the default values from FNFT are used.
-    Parameters:
-    ----------
-        bsf : bound state filtering [optional]
-                0=none
-                1=basic
-                2=full
-        bsl : bound state localization [optional]
-                0=Fast Eigenvalue
-                1=Newton
-                2=Subsample and Refine
-        niter : number of iterations for Newton bound state location [optional]
-        dst : type of discrete spectrum [optional]
-                 0=norming constants
-                 1=residues
-                 2=both
-        cst : type of continuous spectrum [optional]
-                 0=reflection coefficient
-                 1=a and b
-                 2=both
-        nf : normalization Flag 0=off, 1=on [optional]
-        dis : discretization [optional]
-               0=2split2modal
-               1=2split2a
-               2=2split4a
-               3=2split4b
-               4=BO
-    Returns:
-    ----------
+    """Get a NsevOptionsStruct for use with nsev_wrapper.
+
+        When called without additional parameters, the default values from FNFT are used.
+
+    Optional parameters
+
+        bsf : bound state filtering
+
+            0=none
+            1=basic
+            2=full
+
+        bsl : bound state localization
+
+            0=Fast Eigenvalue
+            1=Newton
+            2=Subsample and refine
+
+        niter : number of iterations for Newton bound state location
+
+        dst : type of discrete spectrum
+
+            0=norming constants
+            1=residues
+            2=both
+
+        cst : type of continuous spectrum
+
+            0=reflection coefficient
+            1=a and b
+            2=both
+
+        nf : normalization Flag
+
+            0=off
+            1=on
+
+        dis : discretization
+
+            0=2split2modal
+            1=2split2a
+            2=2split4a
+            3=2split4b
+            4=BO
+
+    Returns
+
         options : NsevOptionsStruct with options for nsev
     """
     opts = fnft_nsev_default_opts_wrapper()

@@ -9,6 +9,7 @@ def nsev(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=None,
 
     This function is intended to be 'clutter-free', which means it automatically calculates some variables
     needed to call the C-library.
+    Options can be set by passing optional arguments (see below).
     It converts all Python input into the C equivalent and returns the result from FNFT.
     If a more C-like interface is desired, the function 'nsev_wrapper' can be used (see documentation there).
 
@@ -146,7 +147,7 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
             c_a : continuous spectrum - scattering coefficient a
 
             c_b : continuous spectrum - scattering coefficient b
-            
+
     """
     fnft_clib = ctypes.CDLL(get_lib_path())
     clib_nsev_func = fnft_clib.fnft_nsev

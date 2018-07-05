@@ -8,6 +8,7 @@ def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None):
 
     This function is intended to be 'clutter-free', which means it automatically calculates some variables
     needed to call the C-library.
+    Options can be set by passing optional arguments (see below).
     It converts all Python input into the C equivalent and returns the result from FNFT.
     If a more C-like interface is desired, the function 'kdvv_wrapper' can be used (see documentation there).
 
