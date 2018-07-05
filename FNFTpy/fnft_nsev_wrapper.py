@@ -57,11 +57,6 @@ def nsev(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=None,
             1=a and b
             2=both
 
-        nf : normalization flag, default = 1
-
-            0=off
-            1=on
-
         dis : discretization, default = 3
 
             0=2spliT2modal
@@ -69,6 +64,11 @@ def nsev(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=None,
             2=2split4a
             3=2split4b
             4=BO
+
+        nf : normalization flag, default = 1
+
+            0=off
+            1=on
 
     Returns:
 

@@ -26,7 +26,7 @@ def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None):
         Xi1, Xi2 : min and max frequency for the continuous spectrum
                    default = -2, 2
 
-        dis : determines the discretization, default = 2
+        dis : determines the discretization, default = 15
 
                 0 = 2SPLIT1A
                 1 = 2SPLIT1B

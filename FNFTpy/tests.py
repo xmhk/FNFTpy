@@ -68,6 +68,7 @@ def nsevexample():
                                                                  np.real(res['d_norm'][i]),
                                                                  np.imag(res['d_norm'][i])))
 
+
 def kdvvtest():
     print("KDVV test")
     xvec = np.linspace(-10, 10, 256)
@@ -76,7 +77,6 @@ def kdvvtest():
     print(res['return_value'])
     res = kdvv(q, xvec, Xi1=-10, Xi2=10, dis=15, M=2048)
     print(res['return_value'])
-
 
 
 def nseptest():

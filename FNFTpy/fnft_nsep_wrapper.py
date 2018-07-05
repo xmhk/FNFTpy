@@ -26,7 +26,7 @@ def nsep(q, T1, T2, kappa=1, loc=None, filt=None, bb=None,
 
         loc : localization method for the spectrum, default = 2
 
-            0=Subsample and Refine
+            0=Subsample and refine
             1=Gridsearch
             2=Mixed
 

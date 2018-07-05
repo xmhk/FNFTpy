@@ -40,7 +40,7 @@ def get_kdvv_options(dis=None):
 
     Optional Arguments:
 
-        dis: discretization
+        dis: discretization, default = 15
 
             0 = 2SPLIT1A
             1 = 2SPLIT1B
@@ -64,7 +64,7 @@ def get_kdvv_options(dis=None):
         options : KdvvOptionsStruct.
     """
     opts = fnft_kdvv_default_opts_wrapper()
-    if not dis is None:
+    if dis is not None:
         check_value(dis, 0, 15)  # Discretization
         opts.discretization = dis
     return opts
@@ -109,25 +109,28 @@ def get_nsep_options(loc=None, filt=None, bb=None, maxev=None, dis=None, nf=None
 
     Optional Arguments:
 
-        loc : localization of spectrum
+        loc : localization of spectrum, default = 2
 
             0=Subsample and Refine
             1=Gridsearch
             2=Mixed
 
-        filt : filtering of spectrum
+        filt : filtering of spectrum, default = 2
 
             0=None
             1=Manual
             2=Auto
 
-        bb : bounding box used for manual filtering
+        bb : bounding box used for manual filtering, default = [-inf, inf, -inf, inf]
 
-        maxev : maximum number of evaluations for root refinement
+        maxev : maximum number of evaluations for root refinement, default = 20
 
-        nf : normalization flag
+        nf : normalization flag, default = 1
 
-        dis : discretization
+            0=off
+            1=on
+
+        dis : discretization, default = 1
 
             0=2split2modal
             1=2split2a
@@ -141,25 +144,25 @@ def get_nsep_options(loc=None, filt=None, bb=None, maxev=None, dis=None, nf=None
 
     """
     opts = fnft_nsep_default_opts_wrapper()
-    if not loc is None:
+    if loc is not None:
         check_value(loc, 0, 2)  # Bound state localization
         opts.localization = loc
-    if not filt is None:
+    if filt is not None:
         check_value(filt, 0, 2)  # Bound state filtering
         opts.filtering = filt
-    if not nf is None:
+    if nf is not None:
         check_value(nf, 0, 1)  # Normflag
         opts.normalization_flag = nf
-    if not dis is None:
+    if dis is not None:
         check_value(dis, 0, 4)  # Discretization
         opts.discretization = dis
-    if not bb is None:
+    if bb is not None:
         # bbtype = 4 * ctypes_double
         opts.bounding_box[0] = bb[0]
         opts.bounding_box[1] = bb[1]
         opts.bounding_box[2] = bb[2]
         opts.bounding_box[3] = bb[3]
-    if not maxev is None:
+    if maxev is not None:
         opts.max_evals = maxev
     return opts
 
@@ -208,38 +211,33 @@ def get_nsev_options(bsf=None, bsl=None, niter=None, dst=None, cst=None, nf=None
 
     Optional parameters
 
-        bsf : bound state filtering
+        bsf : bound state filtering, default =
 
             0=none
             1=basic
             2=full
 
-        bsl : bound state localization
+        bsl : bound state localization, default  =2
 
             0=Fast Eigenvalue
             1=Newton
             2=Subsample and refine
 
-        niter : number of iterations for Newton bound state location
+        niter : number of iterations for Newton bound state location, default = 10
 
-        dst : type of discrete spectrum
+        dst : type of discrete spectrum, default = 0
 
             0=norming constants
             1=residues
             2=both
 
-        cst : type of continuous spectrum
+        cst : type of continuous spectrum, default = 0
 
             0=reflection coefficient
             1=a and b
             2=both
 
-        nf : normalization Flag
-
-            0=off
-            1=on
-
-        dis : discretization
+        dis : discretization, default = 3
 
             0=2split2modal
             1=2split2a
@@ -247,29 +245,36 @@ def get_nsev_options(bsf=None, bsl=None, niter=None, dst=None, cst=None, nf=None
             3=2split4b
             4=BO
 
+        nf : normalization Flag, default =  1
+
+            0=off
+            1=on
+
+
+
     Returns
 
         options : NsevOptionsStruct with options for nsev
     """
     opts = fnft_nsev_default_opts_wrapper()
-    if not bsf is None:
+    if bsf is not None:
         check_value(bsf, 0, 2)  # Bound state filtering
         opts.bound_state_filtering = bsf
-    if not bsl is None:
+    if bsl is not None:
         check_value(bsl, 0, 2)  # Bound state localization
         opts.bound_state_localization = bsl
-    if not niter is None:
+    if niter is not None:
         opts.niter = niter
-    if not dst is None:
+    if dst is not None:
         check_value(dst, 0, 2)  # Discspec type
         opts.discspec_type = dst
-    if not cst is None:
+    if cst is not None:
         check_value(cst, 0, 2)  # Contspec type
         opts.contspec_type = cst
-    if not nf is None:
+    if nf is not None:
         check_value(nf, 0, 1)  # Normflag
         opts.normalization_flag = nf
-    if not dis is None:
+    if dis is not None:
         check_value(dis, 0, 4)  # Discretization
         opts.discretization = dis
     return opts
