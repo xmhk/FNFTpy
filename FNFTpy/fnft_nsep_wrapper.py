@@ -5,45 +5,67 @@ from .options_handling import print_nsep_options, get_nsep_options
 
 def nsep(q, T1, T2, kappa=1, loc=None, filt=None, bb=None,
          maxev=None, dis=None, nf=None):
-    """
-    calculates the Nonlinear Fourier Transform for the periodic Nonlinear Schroedinger equation.
-    Parameters:
-    ----------
+    """Calculate the Nonlinear Fourier Transform for the Nonlinear Schroedinger equation with periodic boundaries.
+
+    This function is intended to be 'clutter-free', which means it automatically calculates some variables
+    needed to call the C-library.
+    It converts all Python input into the C equivalent and returns the result from FNFT.
+    If a more C-like interface is desired, the function 'nsep_wrapper' can be used (see documentation there).
+
+    Arguments:
+
         q : numpy array holding the samples of the field to be analyzed
+
         T1, T2  : time positions of the first and the (d+1) sample
-        kappa : +/- 1 for focussing/defocussing nonlinearity
-               [optional, standard = +1]
-        loc : localization of spectrum
-                [optional, default=2]
-                0=Subsample and Refine
-                1=Gridsearch
-                2=Mixed
-        filt : filtering of spectrum
-                 [optional, default=2]
-                 0=None
-                 1=Manual
-                 2=Auto
-        bb: bounding box used for manual filtering
-            [optional, default=None (bb is set to [-200,200,-200,200])]
-        maxev : maximum number of evaluations for root refinement
-                [optional, default=20]
-        nf : normalization Flag 0=off, 1=on [optional, default=1]
-        dis : discretization
-                [optional, default=2]
-                0=2spliT2modal
-                1=2spliT2a
-                2=2split4a
-                3=2split4b
-                4=BO
+
+
+    Optional Arguments:
+
+        kappa : +/- 1 for focussing/defocussing nonlinearity, default = 1
+
+        loc : localization method for the spectrum, default = 2
+
+            0=Subsample and Refine
+            1=Gridsearch
+            2=Mixed
+
+        filt : filtering of spectrum, default = 2
+
+            0=None
+            1=Manual
+            2=Auto
+
+        bb: bounding box used for manual filtering, default = [-inf, inf, -inf, inf]
+
+        maxev : maximum number of evaluations for root refinement, default = 20
+
+        nf : normalization Flag default = 1
+
+            0=off
+            1=on
+
+        dis : discretization, default = 2
+
+            0=2spliT2modal
+            1=2spliT2a
+            2=2split4a
+            3=2split4b
+            4=BO
+
     Returns:
-    ----------
-    rdict : dictionary holding the fields (depending on options)
-        return_value : return value from FNFT
-        K : number of points in the main spectrum
-        main : main spectrum
-        m: number of points in the auxiliary spectrum
-    aux: auxiliary spectrum
-    """
+
+        rdict : dictionary holding the fields (depending on options)
+
+            return_value : return value from FNFT
+
+            K : number of points in the main spectrum
+
+            main : main spectrum
+
+            m: number of points in the auxiliary spectrum
+
+            aux: auxiliary spectrum
+        """
     D = len(q)
     options = get_nsep_options(loc=loc, filt=filt, bb=bb, maxev=maxev, dis=dis, nf=nf)
     print_nsep_options(options)
@@ -53,23 +75,38 @@ def nsep(q, T1, T2, kappa=1, loc=None, filt=None, bb=None,
 
 def nsep_wrapper(D, q, T1, T2, kappa,
                  options):
-    """
-    Wraps the python input and returns the result from FNFT's fnft_nsep.
-    Parameters:
-    ----------
+    """Calculate the Nonlinear Fourier Transform for the Nonlinear Schroedinger equation with periodic boundaries.
+
+    This function's interface mimics the behavior of the function 'fnft_nsep' of FNFT.
+    It converts all Python input into the C equivalent and returns the result from FNFT.
+    If a more simplified version is desired, 'nsep' can be used (see documentation there).
+
+
+    Arguments:
+
         D : number of sample points
+
         q : numpy array holding the samples of the field to be analyzed
+
         T1, T2  : time positions of the first and the (D+1) sample
+
         kappa   : +/- 1 for focussing/defocussing nonlinearity
-        options : options for nsep as NsepOptionsStruct
+
+        options : options for nsep as NsepOptionsStruct. Can be generated e.g. with 'get_nsep_options()'
+
     Returns:
-    ----------
-    rdict : dictionary holding the fields (depending on options)
-        return_value : return value from FNFT
-        K : number of points in the main spectrum
-        main : main spectrum
-        M: number of points in the auxiliary spectrum
-        aux: auxiliary spectrum"""
+
+        rdict : dictionary holding the fields (depending on options)
+
+            return_value : return value from FNFT
+
+            K : number of points in the main spectrum
+
+            main : main spectrum
+
+            M: number of points in the auxiliary spectrum
+
+            aux: auxiliary spectrum"""
     fnft_clib = ctypes.CDLL(get_lib_path())
     clib_nsep_func = fnft_clib.fnft_nsep
     clib_nsep_func.restype = ctypes_int

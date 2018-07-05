@@ -25,8 +25,8 @@ def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None):
         Xi1, Xi2 : min and max frequency for the continuous spectrum
                    default = -2, 2
 
-        dis : determines the discretization
-                default = 2
+        dis : determines the discretization, default = 2
+
                 0 = 2SPLIT1A
                 1 = 2SPLIT1B
                 2 = 2SPLIT2A
@@ -48,6 +48,7 @@ def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None):
         rdict : dictionary holding the fields (depending on options)
 
             return_value : return value from FNFT
+
             contspec : continuous spectrum
     """
 
@@ -84,15 +85,16 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
 
         K : maximum number of bound states to calculate (no effect yet)
 
-        options : options for kdvv as KdvvOptionsStruct, which can be generated e.g. with 'get_kdvv_options()'
+        options : options for kdvv as KdvvOptionsStruct. Can be generated e.g. with 'get_kdvv_options()'
 
     Returns:
     ----------
 
-    rdict : dictionary holding the fields (depending on options)
+        rdict : dictionary holding the fields (depending on options)
 
-        return_value : return value from FNFT
-        contspec : continuous spectrum        
+            return_value : return value from FNFT
+
+            contspec : continuous spectrum
 
     """
     fnft_clib = ctypes.CDLL(get_lib_path())

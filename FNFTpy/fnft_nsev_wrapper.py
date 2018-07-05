@@ -5,58 +5,90 @@ from .options_handling import print_nsev_options, get_nsev_options
 
 def nsev(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=None,
          bsl=None, niter=None, dst=None, cst=None, nf=None, dis=None):
-    """Calculates the Nonlinear Fourier Transform for the Nonlinear Schroedinger equation with vanishing boundaries.
-    Parameters:
-    ----------
+    """Calculate the Nonlinear Fourier Transform for the Nonlinear Schroedinger equation with vanishing boundaries.
+
+    This function is intended to be 'clutter-free', which means it automatically calculates some variables
+    needed to call the C-library.
+    It converts all Python input into the C equivalent and returns the result from FNFT.
+    If a more C-like interface is desired, the function 'nsev_wrapper' can be used (see documentation there).
+
+
+    Arguments:
+
         q : numpy array holding the samples of the field to be analyzed
+
         tvec: time vector for q samples
-        Xi1, Xi2 : min and max frequency for the continuous spectrum. [optional, standard = -2,2]
-        M : number of values for the continuous spectrum to calculate [optional, standard = 128]
-        K : maximum number of bound states to calculate [optional, standard = 128]
-        kappa : +/- 1 for focussing/defocussing nonlinearity [optional, standard = +1]
-        bsf : bound state filtering
-                [optional, default=2]
-                0=none
-                1=basic
-                2=full
-        bsl : bound state localization
-                [optional, default=0]
-                0=Fast Eigenvalue
-                1=Newton
-                2=Subsample and Refine
-        niter : number of iterations for Newton bsl [optional, default=10]
-        dst : type of discrete spectrum
-               [optional, defaul=2]
-               0=norming constants
-               1=residues
-               2=both
-        cst : type of continuous spectrum
-               [optional, default=0]
-               0=reflection coefficient
-               1=a and b
-               2=both
-        nf : normalization Flag
-               [optional, default=1]
-               0=off
-               1=on
-        dis : discretization
-                [optional, default=3]
-                0=2spliT2modal
-                1=2spliT2a
-                2=2split4a
-                3=2split4b
-                4=BO
+
+    Optional Arguments:
+
+        Xi1, Xi2 : min and max frequency for the continuous spectrum. default = -2,2
+
+        M : number of values for the continuous spectrum to calculate default = 128
+
+        K : maximum number of bound states to calculatem default = 128
+
+        kappa : +/- 1 for focussing/defocussing nonlinearity, default = 1
+
+
+        bsf : bound state filtering, default =2
+
+            0=none
+            1=basic
+            2=full
+
+        bsl : bound state localization, default = 0
+
+            0=Fast Eigenvalue
+            1=Newton
+            2=Subsample and Refine
+
+        niter : number of iterations for Newton bound state localization, default = 10
+
+        dst : type of discrete spectrum, default = 2
+
+            0=norming constants
+            1=residues
+            2=both
+
+        cst : type of continuous spectrum, default = 0
+
+            0=reflection coefficient
+            1=a and b
+            2=both
+
+        nf : normalization flag, default = 1
+
+            0=off
+            1=on
+
+        dis : discretization, default = 3
+
+            0=2spliT2modal
+            1=2spliT2a
+            2=2split4a
+            3=2split4b
+            4=BO
+
     Returns:
-    ----------
-    rdict : dictionary holding the fields (depending on options)
-        return_value : return value from FNFT
-        bound_states_num : number of bound states found
-        bound_states : array of bound states found
-        d_norm : discrete spectrum - norming constants
-        d_res : discrete spectrum - residues
-        c_ref : continuous spectrum - reflection coefficient
-        c_a : continuous spectrum - scattering coefficient a
-        c_b : continuous spectrum - scattering coefficient b
+
+        rdict : dictionary holding the fields (depending on options)
+
+            return_value : return value from FNFT
+
+            bound_states_num : number of bound states found
+
+            bound_states : array of bound states found
+
+            d_norm : discrete spectrum - norming constants
+
+            d_res : discrete spectrum - residues
+
+            c_ref : continuous spectrum - reflection coefficient
+
+            c_a : continuous spectrum - scattering coefficient a
+
+            c_b : continuous spectrum - scattering coefficient b
+
     """
     D = len(q)
     T1 = np.min(tvec)
@@ -69,29 +101,52 @@ def nsev(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=None,
 
 def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
                  M, K, kappa, options):
-    """
-    Wraps the python input and returns the result from FNFT's fnft_nsev.
-    Parameters:
-    ----------
+    """Calculate the Nonlinear Fourier Transform for the Nonlinear Schroedinger equation with vanishing boundaries.
+
+    This function's interface mimics the behavior of the function 'fnft_nsev' of FNFT.
+    It converts all Python input into the C equivalent and returns the result from FNFT.
+    If a more simplified version is desired, 'nsev' can be used (see documentation there).
+
+    Arguments:
+
+
         D : number of sample points
+
         q : numpy array holding the samples of the field to be analyzed
+
         T1, T2 : time positions of the first and the last sample
+
         Xi1, Xi2 : min and max frequency for the continuous spectrum
+
         M : number of values for the continuous spectrum to calculate
+
         K : maximum number of bound states to calculate
+
         kappa : +/- 1 for focussing/defocussing nonlinearity
+
         options : options for nsev as NsevOptionsStruct
+
+
     Returns:
-    ----------
-    rdict : dictionary holding the fields (depending on options)
-        return_value : return value from FNFT
-        bound_states_num : number of bound states found
-        bound_states : array of bound states found 
-        d_norm : discrete spectrum - norming constants
-        d_res : discrete spectrum - residues
-        c_ref : continuous spectrum - reflection coefficient
-        c_a : continuous spectrum - scattering coefficient a
-        c_b : continuous spectrum - scattering coefficient b
+
+        rdict : dictionary holding the fields (depending on options)
+
+            return_value : return value from FNFT
+
+            bound_states_num : number of bound states found
+
+            bound_states : array of bound states found
+
+            d_norm : discrete spectrum - norming constants
+
+            d_res : discrete spectrum - residues
+
+            c_ref : continuous spectrum - reflection coefficient
+
+            c_a : continuous spectrum - scattering coefficient a
+
+            c_b : continuous spectrum - scattering coefficient b
+            
     """
     fnft_clib = ctypes.CDLL(get_lib_path())
     clib_nsev_func = fnft_clib.fnft_nsev

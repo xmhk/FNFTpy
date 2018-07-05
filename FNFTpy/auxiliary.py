@@ -1,9 +1,12 @@
 def get_lib_path():
     """Return the path of the FNFT file.
 
-
     Here you can set the location of the compiled library for FNFT.
     See example strings below.
+
+    Returns:
+
+        libstring : string holding library path
     """
     libstr = "C:/Libraries/local/libfnft.dll"  # example for windows
     # libstr = "/usr/local/lib/libfnft.so"  # example for linux
