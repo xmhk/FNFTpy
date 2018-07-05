@@ -3,9 +3,6 @@ from .options_handling import get_kdvv_options, print_kdvv_options
 from .auxiliary import get_lib_path
 
 
-# libpath = get_lib_path()  # edit in auxiliary.py
-# fnft_clib = ctypes.CDLL(libpath)
-
 def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None):
     """calculates the Nonlinear Fourier Transform for the Korteweg-de Vries equation with vanishing boundaries.
     Parameters:

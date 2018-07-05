@@ -1,7 +1,5 @@
 from .typesdef import *
 from .auxiliary import get_lib_path
-# libpath = get_lib_path()  # edit in auxiliary.py
-# fnft_clib = ctypes.CDLL(libpath)
 from .options_handling import print_nsep_options, get_nsep_options
 
 
