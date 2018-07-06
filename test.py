@@ -10,7 +10,7 @@ from FNFTpy import *
 # mimic the example files
 
 kdvvexample()
-nsepexample()
-nsevexample()
+#nsepexample()
+#nsevexample()
 
 print_default_options()
