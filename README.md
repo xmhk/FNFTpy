@@ -3,7 +3,7 @@
 This module contains wrapper functions for [FNFT](https://github.com/FastNFT), a C library which allows to calculate
 the Nonlinear Fourier Transform of some input field.
 
-## current state - access functions from FNFT 0.1.1
+## current state - access functions from FNFT V.??????????????????????????????????????
 
 
 ### Korteweg-de-Fries equation with vanishing boundary conditions:
@@ -132,7 +132,9 @@ the Nonlinear Fourier Transform of some input field.
     * mimics the function fnft_nsev from FNFT.
     * for full description call ```help(nsev_wrapper)```
      
-  
+### Nonlinear Schroedinger Equation with vanishing boundary conditions (Inverse Transformation): 
+ * still to be documented 
+
   
 # Requirements
  * python 3
