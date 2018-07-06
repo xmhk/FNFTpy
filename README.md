@@ -38,20 +38,13 @@ the Nonlinear Fourier Transform of some input field.
         for i in range(len(res['contspec'])):
             print("%d : Xi=%.4f   %.6f  %.6fj" % (i, Xivec[i],
                   np.real(res['contspec'][i]), np.imag(res['contspec'][i])))
-
         ```
-    * for full description call
-        ```
-        help(kdvv)
-        ```
+    * for full description call ```help(kdvv)```
       
       
   * function **kdvv_wrapper**:
     * mimics the function fnft_kdvv from FNFT.
-    * for full description call
-      ```
-        help(kdvv_wrapper)
-        ```
+    * for full description call ```help(kdvv_wrapper)```
       
         
   
@@ -87,19 +80,11 @@ the Nonlinear Fourier Transform of some input field.
       for i in range(res['M']):
           print("%d :  %.6f  %.6fj" % (i, np.real(res['aux'][i]), 
                                        np.imag(res['aux'][i])))
-
-
        ```
-   * for full description call
-        ```
-        help(nsep)
-        ```
+   * for full description call ```help(nsep)```
   * function **nsep_wrapper**:
     * mimics the function fnft_nsep from FNFT.
-    * for full description call
-      ```
-        help(nsep_wrapper)
-        ```
+    * for full description call ```help(nsep_wrapper)```
      
   
 ### Nonlinear Schroedinger Equation with vanishing boundary conditions:
@@ -140,19 +125,12 @@ the Nonlinear Fourier Transform of some input field.
                                                                      np.imag(res['bound_states'][i]),
                                                                      np.real(res['d_norm'][i]),
                                                                      np.imag(res['d_norm'][i])))
-                
         ```
-    * for full description call
-        ```
-        help(nsev)
-        ```
+    * for full description call ```help(nsev)```
         
   * function **nsev_wrapper**:
     * mimics the function fnft_nsev from FNFT.
-    * for full description call
-      ```
-        help(nsev_wrapper)
-        ```
+    * for full description call ```help(nsev_wrapper)```
      
   
   
@@ -163,7 +141,8 @@ the Nonlinear Fourier Transform of some input field.
 # Setup
 
  * Add FNFTpy folder to your python path.
- * Of course, you need a compiled version of the FNFT C-library. See the [documentation for FNFT](https://github.com/FastNFT/FNFT) on how about to build 
+ * Of course, you need a compiled version of the FNFT C-library. See the
+  [documentation for FNFT](https://github.com/FastNFT/FNFT) on how to build 
    the library on your device. 
  * FNFTpy needs to know where the C-library is located. 
    This configuration can be done by editing the function get_lib_path()
