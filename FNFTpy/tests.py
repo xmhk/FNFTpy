@@ -130,8 +130,7 @@ def nsevtest():
     print("NSEV test")
     xvec = np.linspace(0, 2 * np.pi, 256)
     q = np.sin(2 * np.pi / 256 * xvec)
-    res = nsev(q, xvec)
+    res = nsev(q, xvec, Dsub=32)
     print(res['return_value'])
-    res = nsev(q, xvec, dst=2)
-    print(res['return_value'])
+    print(res['options'])
 

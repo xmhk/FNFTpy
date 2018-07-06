@@ -53,15 +53,17 @@ class NsevOptionsStruct(ctypes.Structure):
         ("bound_state_filtering", ctypes_int),
         ("bound_state_localization", ctypes_int),
         ("niter", ctypes_uint),
+        ("Dsub", ctypes_uint),
         ("discspec_type", ctypes_int),
         ("contspec_type", ctypes_int),
         ("normalization_flag", ctypes_int32),
         ("discretization", ctypes_int)]
 
     def __repr__(self):
-        s = "  bound state filtering    : bsf " + repr(self.bound_state_filtering)
+        s = "   bound state filtering    : bsf " + repr(self.bound_state_filtering)
         s += "\n   bound state localization : bsl " + repr(self.bound_state_localization)
         s += "\n   number of iteratons      : niter " + repr(self.niter)
+        s += "\n   samples for subsampling  : Dsub " + repr(self.Dsub)
         s += "\n   discrete spectrum type   : dst " + repr(self.discspec_type)
         s += "\n   continuous spectrum type : cst " + repr(self.contspec_type)
         s += "\n   discretization           : dis " + repr(self.discretization)

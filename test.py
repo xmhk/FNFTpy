@@ -9,8 +9,9 @@ from FNFTpy import *
 
 # mimic the example files
 
-kdvvexample()
-#nsepexample()
-#nsevexample()
+# kdvvexample()
+# nsepexample()
+nsevexample()
 
-print_default_options()
+#print_default_options()
+#nsevtest()

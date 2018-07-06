@@ -4,7 +4,7 @@ from .options_handling import print_nsev_options, get_nsev_options
 
 
 def nsev(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=None,
-         bsl=None, niter=None, dst=None, cst=None, nf=None, dis=None):
+         bsl=None, niter=None, Dsub=None, dst=None, cst=None, nf=None, dis=None):
     """Calculate the Nonlinear Fourier Transform for the Nonlinear Schroedinger equation with vanishing boundaries.
 
     This function is intended to be 'clutter-free', which means it automatically calculates some variables
@@ -44,6 +44,8 @@ def nsev(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=None,
             2=Subsample and Refine
 
         niter : number of iterations for Newton bound state localization, default = 10
+
+        Dsub : number of samples used for 'subsampling and refine'-method, default = 0 (auto)
 
         dst : type of discrete spectrum, default = 2
 
@@ -94,7 +96,7 @@ def nsev(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=None,
     D = len(q)
     T1 = np.min(tvec)
     T2 = np.max(tvec)
-    options = get_nsev_options(bsf=bsf, bsl=bsl, niter=niter, dst=dst, cst=cst, nf=nf, dis=dis)
+    options = get_nsev_options(bsf=bsf, bsl=bsl, niter=niter, Dsub=Dsub, dst=dst, cst=cst, nf=nf, dis=dis)
     return nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
                         M, K, kappa, options)
 

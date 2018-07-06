@@ -207,7 +207,7 @@ def print_nsev_options(opts=None):
     print(repr(opts))
 
 
-def get_nsev_options(bsf=None, bsl=None, niter=None, dst=None, cst=None, nf=None, dis=None):
+def get_nsev_options(bsf=None, bsl=None, niter=None, Dsub=None, dst=None, cst=None, nf=None, dis=None):
     """Get a NsevOptionsStruct for use with nsev_wrapper.
 
         When called without additional optional arguments, the default values from FNFT are used.
@@ -227,6 +227,8 @@ def get_nsev_options(bsf=None, bsl=None, niter=None, dst=None, cst=None, nf=None
             2=Subsample and refine
 
         niter : number of iterations for Newton bound state location, default = 10
+
+        Dsub : number of samples used for 'subsampling and refine'-method, default = 0 (auto)
 
         dst : type of discrete spectrum, default = 0
 
@@ -266,6 +268,8 @@ def get_nsev_options(bsf=None, bsl=None, niter=None, dst=None, cst=None, nf=None
         opts.bound_state_localization = bsl
     if niter is not None:
         opts.niter = niter
+    if Dsub is not None:
+        opts.Dsub = Dsub
     if dst is not None:
         check_value(dst, 0, 2)  # Discspec type
         opts.discspec_type = dst
