@@ -9,7 +9,7 @@ the Nonlinear Fourier Transform of some input field.
 ### Korteweg-de-Fries equation with vanishing boundary conditions:
   * currently, only the continuous spectrum is calculated
   * function **kdvv**: 
-    * easy-to-use python function. Options can be passed as optinal arguments 
+    * easy-to-use python function, options can be passed as optional arguments 
     * minimal example:
         ```
         import numpy as np
@@ -51,7 +51,7 @@ the Nonlinear Fourier Transform of some input field.
 ### Nonlinear Schroedinger Equation with periodic boundary conditions
   * the main and auxiliary spectra can be calculated
   * function **nsep**: 
-    * easy-to-use python function. Options can be passed as optinal arguments 
+    * easy-to-use python function, options can be passed as optional arguments 
     * minimal example:
       ```
       import numpy as np
@@ -90,7 +90,7 @@ the Nonlinear Fourier Transform of some input field.
 ### Nonlinear Schroedinger Equation with vanishing boundary conditions:
   * the discrete and continuous spectra can be calculated
   * function **nsev**:
-    * easy-to-use python function. Options can be passed as optinal arguments 
+    * easy-to-use python function, options can be passed as optional arguments 
     
     * minimal example:
         ```
