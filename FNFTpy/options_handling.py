@@ -285,9 +285,6 @@ def get_nsev_options(bsf=None, bsl=None, niter=None, Dsub=None, dst=None, cst=No
     return opts
 
 
-
-
-
 def fnft_nsev_inverse_default_opts_wrapper():
     """Get the default options for nsev_inverse directly from the FNFT C-library.
 
@@ -349,10 +346,6 @@ def get_nsev_inverse_options(dis=None, cst=None, csim=None, max_iter=None, osf=N
         max_iter : maximum number of iterations for iterative methods, default = 100
 
         osf : oversampling factor
-
-
-
-
 
     Returns:
 

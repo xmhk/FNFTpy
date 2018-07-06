@@ -1,6 +1,7 @@
 from .fnft_kdvv_wrapper import *
 from .fnft_nsep_wrapper import *
 from .fnft_nsev_wrapper import *
+from .fnft_nsev_inverse_wrapper import *
 
 
 def print_default_options():
@@ -104,7 +105,39 @@ def nsevexample():
                                                                  np.real(res['disc_norm'][i]),
                                                                  np.imag(res['disc_norm'][i])))
 
+def nsevinversetest():
+    """Mimics the C example for calling fnft_nsev_inverse."""
+    print("\nnsev inverse example")
 
+    # set values
+    M = 2048
+    D = 1024
+    dis = 1
+    tvec = np.linspace(-2, 2, D)
+    alpha = 2.0
+    beta = -0.55
+    kappa = 1
+
+    # get xi for our parameters
+    rv, XI = nsev_inverse_xi_wrapper(D, np.min(tvec),
+                                     np.max(tvec), M, dis)
+    Xiv = XI[0] + np.arange(M) * (XI[1] - XI[0]) / (M - 1)
+    contspec = alpha / (Xiv - beta * 1.0j)
+
+    # call function
+    res = nsev_inverse(contspec, tvec, kappa, osf=8)
+
+    # print results
+    print("\n----- options used ----")
+    print(res['options'])
+    print("\n------ results --------")
+    print("FNFT return value: %d (should be 0)" % res['return_value'])
+    print("Total number of samples calculated: %d")
+    print("some sample - samples:")
+    for i in range(0, D, 64):
+        print("  %d : q(t=%.5f) = %.5e + %.5e j "%(i, tvec[i],
+                                                np.real(res['q'][i]),
+                                                np.imag(res['q'][i])))
 
 def kdvvtest():
     print("KDVV test")

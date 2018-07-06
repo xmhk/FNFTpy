@@ -1,97 +1,153 @@
 from .typesdef import *
+from .auxiliary import *
+from .options_handling import get_nsev_inverse_options
 
+def nsev_inverse(contspec, tvec, kappa, dis=1,
+                 cst=0, csim=0, max_iter=100, osf=8):
+    """Calculate the  Inverse Nonlinear Fourier Transform for the Nonlinear Schroedinger equation with vanishing boundaries.
 
-def nsev_inverse_xi_wrapper(clib_nsev_inverse_xi_func, d, t1, t2, m, dis):
-    """
-        Helper function to calculate the spectral borders from the time window.
-        Parameters:
-        ----------
-            clib_nsev_inverse_xi_func : handle of the c function imported via ctypes
-            d : number of sample points for the time window
-            t1, t2 : borders of the time window
-            m : number of samples for the continuous spectrum
-            dis : nse discretization parameter
-        Returns:
-        ----------
-        rv : return value of the C-function
-        xi : two-element C double vector containing XI borders (frequency)
-        """
-    clib_nsev_inverse_xi_func.restype = ctypes_int
-    nsev_d = ctypes_uint(d)
-    nsev_t = np.zeros(2, dtype=numpy_double)
-    nsev_t[0] = t1
-    nsev_t[1] = t2
-    nsev_m = ctypes_uint(m)
-    nsev_xi = np.zeros(2, dtype=numpy_double)
-    nsev_dis = ctypes_int32(dis)
-    clib_nsev_inverse_xi_func.argtypes = [
-        type(nsev_d),  # d
-        np.ctypeslib.ndpointer(dtype=ctypes_double,
-                               ndim=1, flags='C'),  # t
-        type(nsev_m),  # m
-        np.ctypeslib.ndpointer(dtype=ctypes_double,
-                               ndim=1, flags='C'),  # xi
-        type(nsev_dis)]
-    rv = clib_nsev_inverse_xi_func(nsev_d, nsev_t, nsev_m, nsev_xi, dis)
-    return rv, nsev_xi
+    This function is intended to be 'clutter-free', which means it automatically calculates some variables
+    needed to call the C-library.
+    Options can be set by passing optional arguments (see below).
+    It converts all Python input into the C equivalent and returns the result from FNFT.
+    If a more C-like interface is desired, the function 'nsev_inverse_wrapper' can be used (see documentation there).
 
+    !!! Currently, time and frequency vector can not be chosen independently.
+    The frequency vector used is calculated from the time vector set.
 
-def nsev_inverse_wrapper(clib_nsev_inverse_func,
-                         m, contspec, xi1, xi2, k, bound_states,
-                         normconst_or_residues, d, t1, t2, kappa,
-                         options):
-    """
-    Wraps the python input and returns the result from FNFT's fnft_nsev_inverse.
-    Parameters:
-    ----------
-        clib_nsev_inverse_func : handle of the c function imported via ctypes
-        m : number of sample points for continuous spectrum
-        contspec : numpy array holding the samples of the continuous spectrum
-        xi1, xi2  : frequencies defining the frequency range (cont spectrum)
-        k : number of bound states (currently not effect)
-        bound_states : bound states (currently not effect)
-        normconst_or_residues : bound state spectral coefficients (currently not effect)
-        d : number of samples for the output field
-        t1, t2 : borders of the desired time window
+    Arguments:
+
+        M : number of sample points for continuous spectrum
+
+        tvec : output time vector
+
         kappa : +1/-1 for focussing / defocussing NSE
-        options : options for nsev_inverse as NsevInverseOptionsStruct
+
+    Optional arguments:
+
+        dis : discretization, default = 1
+
+                0=2split2_MODAL
+                1=2split2A
+                2=2split4A
+                3=2split4B
+                4=BO
+
+        cst : type of continuous spectrum, default = 0
+
+                0=reflection coefficient
+                1=b of tau
+
+        csim : type of inverse method for continuous spectrum, default = 0
+
+                0=default
+                1=TF-matrix contains reflection coeff.
+                2=TF-matrix contains a,b from iteration
+
+        max_iter : maximum number of iterations (continuous spectrum), default = 100
+
+        osf : oversampling factor, default = 8
+
+
     Returns:
-    ----------
-    rdict : dictionary holding the fields (depending on options)
-        return_value : return value from FNFT
-        q : time field resulting from inverse transform
+
+        rdict : dictionary holding the fields (depending on options)
+
+            return_value : return value from FNFT
+
+            q : time field resulting from inverse transform
+
+            options : options for nsev_inverse as NsevInverseOptionsStruct
+
     """
+    M = len(contspec)
+    D = len(tvec)
+    T1 = np.min(tvec)
+    T2 = np.max(tvec)
+    K = 0
+    rv, tmpxi = nsev_inverse_xi_wrapper(D, T1, T2, M, dis)
+    if rv != 0:
+        raise ValueError("nsev_inverse_xi calculation failed")
+    options = get_nsev_inverse_options(dis, cst, csim, max_iter, osf)
+    rdict = nsev_inverse_wrapper(M, contspec, tmpxi[0], tmpxi[1], K, None, None, D, T1, T2, kappa, options)
+    return rdict
+
+
+def nsev_inverse_wrapper(M, contspec, Xi1, Xi2, K, bound_states,
+                         normconst_or_residues, D, T1, T2, kappa,
+                         options):
+    """Calculate the  Inverse Nonlinear Fourier Transform for the Nonlinear Schroedinger equation with vanishing boundaries.
+
+    This function's interface mimics the behavior of the function 'fnft_nsev_inverse' of FNFT.
+    It converts all Python input into the C equivalent and returns the result from FNFT.
+    If a more simplified version is desired, 'nsev_inverse' can be used (see documentation there).
+
+    Arguments:
+
+
+        M : number of sample points for continuous spectrum
+
+        contspec : numpy array holding the samples of the continuous spectrum
+
+        Xi1, Xi2  : frequencies defining the frequency range (cont spectrum)
+
+        K : number of bound states (currently no effect)
+
+        bound_states : bound states (currently no effect)
+
+        normconst_or_residues : bound state spectral coefficients (currently no effect)
+
+        D : number of samples for the output field
+
+        T1, T2 : borders of the desired time window
+
+        kappa : +1/-1 for focussing / defocussing NSE
+
+        options : options for nsev_inverse as NsevInverseOptionsStruct
+
+    Returns:
+
+        rdict : dictionary holding the fields (depending on options)
+
+            return_value : return value from FNFT
+
+            q : time field resulting from inverse transform
+
+            options : options for nsev_inverse as NsevInverseOptionsStruct
+    """
+    fnft_clib = ctypes.CDLL(get_lib_path())
+    clib_nsev_inverse_func = fnft_clib.fnft_nsev_inverse
     clib_nsev_inverse_func.restype = ctypes_int
-    nsev_m = ctypes_uint(m)
-    nsev_contspec = np.zeros(m, dtype=numpy_complex)
+    nsev_M = ctypes_uint(M)
+    nsev_contspec = np.zeros(M, dtype=numpy_complex)
     nsev_contspec[:] = contspec[:]
-    nsev_xi = np.zeros(2, dtype=numpy_double)
-    nsev_xi[0] = xi1
-    nsev_xi[1] = xi2
-    nsev_k = ctypes_uint(k)
-    # nsev_boundstates = np.zeros(k,dtype=numpy_complex)
-    # nsev_discspec = np.zeros(k, dtype=numpy_complex)
-    nsev_d = ctypes_uint(d)
-    nsev_t = np.zeros(2, dtype=numpy_double)
-    nsev_t[0] = t1
-    nsev_t[1] = t2
+    nsev_Xi = np.zeros(2, dtype=numpy_double)
+    nsev_Xi[0] = Xi1
+    nsev_Xi[1] = Xi2
+    nsev_K = ctypes_uint(K)
+    # nsev_boundstates = np.zeros(K,dtype=numpy_complex)
+    # nsev_discspec = np.zeros(K, dtype=numpy_complex)
+    nsev_D = ctypes_uint(D)
+    nsev_T = np.zeros(2, dtype=numpy_double)
+    nsev_T[0] = T1
+    nsev_T[1] = T2
     nsev_kappa = ctypes_int(kappa)
-    nsev_q = np.zeros(nsev_d.value, dtype=numpy_complex)
+    nsev_q = np.zeros(nsev_D.value, dtype=numpy_complex)
     nsev_nullptr = ctypes.POINTER(ctypes.c_int)()
     clib_nsev_inverse_func.argtypes = [
-        type(nsev_m),
+        type(nsev_M),
         np.ctypeslib.ndpointer(dtype=numpy_complex,
                                ndim=1, flags='C'),  # contspec
         np.ctypeslib.ndpointer(dtype=ctypes_double,
                                ndim=1, flags='C'),  # xi
-        type(nsev_k),
+        type(nsev_K),
         type(nsev_nullptr),  # boundstates (tmp)
         # np.ctypeslib.ndpointer(dtype=numpy_complex,
         #                       ndim=1, flags='C'),  # boundstates
         type(nsev_nullptr),  # normconst_res (tmp)
         # np.ctypeslib.ndpointer(dtype=numpy_complex,
         #                       ndim=1, flags='C'),  # normconst res
-        type(nsev_d),
+        type(nsev_D),
         np.ctypeslib.ndpointer(dtype=numpy_complex,
                                ndim=1, flags='C'),  # q
         np.ctypeslib.ndpointer(dtype=ctypes_double,
@@ -100,20 +156,65 @@ def nsev_inverse_wrapper(clib_nsev_inverse_func,
         ctypes.POINTER(NsevInverseOptionsStruct)  # options ptr
     ]
     rv = clib_nsev_inverse_func(
-        nsev_m,
+        nsev_M,
         nsev_contspec,
-        nsev_xi,
-        nsev_k,
+        nsev_Xi,
+        nsev_K,
         nsev_nullptr,  # boundstates
         nsev_nullptr,  # normconst
-        nsev_d,
+        nsev_D,
         nsev_q,
-        nsev_t,
+        nsev_T,
         nsev_kappa,
         ctypes.byref(options)
     )
     rdict = {
         'return_value': rv,
-        'q': nsev_q
+        'q': nsev_q,
+        'options': repr(options)
     }
     return rdict
+
+
+def nsev_inverse_xi_wrapper(D, T1, T2, M, dis):
+    """Helper function for nsev_inverse to calculate the spectral borders from the time window.
+
+    Return value is an array holding the position of the first and the last spectral
+    sample to be used for nsev_inverse.
+
+
+    Arguments:
+
+        D : number of sample points for the time window
+
+        T1, T2 : borders of the time window
+
+        M : number of samples for the continuous spectrum
+
+        dis : nse discretization parameter
+
+    Returns:
+
+        rv : return value of the C-function
+
+        xi : two-element C double vector containing XI borders
+
+    """
+    fnft_clib = ctypes.CDLL(get_lib_path())
+    clib_nsev_inverse_xi_func  = fnft_clib.fnft_nsev_inverse_XI
+    clib_nsev_inverse_xi_func.restype = ctypes_int
+    nsev_D = ctypes_uint(D)
+    nsev_T = np.zeros(2, dtype=numpy_double)
+    nsev_T[0] = T1
+    nsev_T[1] = T2
+    nsev_M = ctypes_uint(M)
+    nsev_Xi = np.zeros(2, dtype=numpy_double)
+    nsev_dis = ctypes_int32(dis)
+    clib_nsev_inverse_xi_func.argtypes = [
+        type(nsev_D),  # D
+        np.ctypeslib.ndpointer(dtype=ctypes_double, ndim=1, flags='C'),  # t
+        type(nsev_M),  # M
+        np.ctypeslib.ndpointer(dtype=ctypes_double, ndim=1, flags='C'),  # xi
+        type(nsev_dis)]
+    rv = clib_nsev_inverse_xi_func(nsev_D, nsev_T, nsev_M, nsev_Xi, dis)
+    return rv, nsev_Xi
