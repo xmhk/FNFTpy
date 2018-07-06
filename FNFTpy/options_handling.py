@@ -318,3 +318,62 @@ def print_nsev_inverse_options(opts=None):
     if opts is None:
         opts = fnft_nsev_inverse_default_opts_wrapper()
     print(repr(opts))
+
+
+def get_nsev_inverse_options(dis=None, cst=None, csim=None, max_iter=None, osf=None):
+    """Get a NsevInverseOptionsStruct for use with nsev_inverse_wrapper.
+
+        When called without additional optional arguments, the default values from FNFT are used.
+
+    Optional arguments:
+
+        dis : discretization, default = 3
+
+            0=2split2modal
+            1=2split2a
+            2=2split4a
+            3=2split4b
+            4=BO
+
+        cst : type of continuous spectrum, default = 0
+
+            0=Reflection coefficient
+            1=B of tau
+
+        csim : inversion method for the continuous part, default = 0
+
+            0=default
+            1=Transfermatrix with reflection coefficients
+            2=Transfermatrix with a,b from iteration
+
+        max_iter : maximum number of iterations for iterative methods, default = 100
+
+        osf : oversampling factor
+
+
+
+
+
+    Returns:
+
+        options : NsevInverseOptionsStruct with options for nsev_inverse_wrapper.
+    """
+    opts = fnft_nsev_inverse_default_opts_wrapper()
+    if dis is not None:
+        check_value(dis, 0, 4)
+        opts.discretization = dis
+    if cst is not None:
+        check_value(cst, 0, 1)
+        opts.contspec_type = cst
+    if csim is not None:
+        check_value(csim, 0, 2)
+        opts.contspec_inversion_method = csim
+    if max_iter is not None:
+        opts.max_iter = max_iter
+    if osf is not None:
+        opts.oversampling_factor = osf
+    return opts
+
+
+
+
