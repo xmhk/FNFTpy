@@ -3,7 +3,7 @@ from .fnft_nsep_wrapper import *
 from .fnft_nsev_wrapper import *
 
 
-def print_standard_options():
+def print_default_options():
     kdvvopts = get_kdvv_options()
     print("\n ----\n kdvv default options:\n %s \n\n"%repr(kdvvopts))
     nsepopts = get_nsep_options()

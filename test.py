@@ -13,4 +13,4 @@ kdvvexample()
 nsepexample()
 nsevexample()
 
-print_standard_options()
+print_default_options()

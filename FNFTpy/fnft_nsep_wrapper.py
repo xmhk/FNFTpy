@@ -20,7 +20,7 @@ def nsep(q, T1, T2, kappa=1, loc=None, filt=None, bb=None,
         T1, T2  : time positions of the first and the (d+1) sample
 
 
-    Optional Arguments:
+    Optional arguments:
 
         kappa : +/- 1 for focussing/defocussing nonlinearity, default = 1
 

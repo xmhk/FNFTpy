@@ -21,7 +21,7 @@ def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None):
         M : number of samples for the continuous spectrum to calculate,
 
 
-    Optional Arguments:
+    Optional arguments:
 
         Xi1, Xi2 : min and max frequency for the continuous spectrum
                    default = -2, 2

@@ -9,7 +9,8 @@ from .typesdef import *
 def fnft_kdvv_default_opts_wrapper():
     """Get the default options for kdvv directly from the FNFT C-library.
 
-    Returns
+    Returns:
+
         options : KdvvOptionsStruct with options for kdvv_wrapper
     """
     fnft_clib = ctypes.CDLL(get_lib_path())
@@ -24,9 +25,9 @@ def print_kdvv_options(opts=None):
 
     When called without additional argument, the default options from FNFT are printed.
 
-    Optional Arguments:
+    Optional arguments:
 
-        opts : KdvvOptionsStruct, e.g. created by get_kdvv_options() [optional]
+        opts : KdvvOptionsStruct, e.g. created by get_kdvv_options()
     """
     if opts is None:
         opts = fnft_kdvv_default_opts_wrapper()
@@ -36,9 +37,9 @@ def print_kdvv_options(opts=None):
 def get_kdvv_options(dis=None):
     """Get an KdvvOptionsStruct struct for use with kdvv_wrapper.
 
-    When called without additional parameters, the default values from FNFT are used.
+    When called without additional optional arguments, the default values from FNFT are used.
 
-    Optional Arguments:
+    Optional arguments:
 
         dis: discretization, default = 15
 
@@ -61,7 +62,7 @@ def get_kdvv_options(dis=None):
 
     Returns:
 
-        options : KdvvOptionsStruct.
+        options : KdvvOptionsStruct
     """
     opts = fnft_kdvv_default_opts_wrapper()
     if dis is not None:
@@ -93,7 +94,7 @@ def print_nsep_options(opts=None):
 
     When called without additional arguments, the default options from FNFT are printed.
 
-    Optional Arguments:
+    Optional arguments:
 
         opts : NsepOptionsStruc, e.g. created by get_nsep_options
     """
@@ -105,9 +106,9 @@ def print_nsep_options(opts=None):
 def get_nsep_options(loc=None, filt=None, bb=None, maxev=None, dis=None, nf=None):
     """Get a NsepOptionsStruct struct for use with nsep_wrapper.
 
-    When called without additional parameters, the default values from FNFT are used.
+    When called without additional optional argument, the default values from FNFT are used.
 
-    Optional Arguments:
+    Optional arguments:
 
         loc : localization of spectrum, default = 2
 
@@ -175,7 +176,7 @@ def get_nsep_options(loc=None, filt=None, bb=None, maxev=None, dis=None, nf=None
 def fnft_nsev_default_opts_wrapper():
     """Get the default options for nsev directly from the FNFT C-library.
 
-    Returns
+    Returns:
 
         options : NsevOptionsStruct with options for nsev_wrapper
 
@@ -194,9 +195,9 @@ def print_nsev_options(opts=None):
     When called without additional argument, the default options from FNFT are printed.
 
 
-    Optional Arguments:
+    Optional arguments:
 
-        opts : NsevOptionsStruct, e.g. created by get_nsev_options() [optional]
+        opts : NsevOptionsStruct, e.g. created by get_nsev_options()
     """
 
     if opts is None:
@@ -207,17 +208,17 @@ def print_nsev_options(opts=None):
 def get_nsev_options(bsf=None, bsl=None, niter=None, dst=None, cst=None, nf=None, dis=None):
     """Get a NsevOptionsStruct for use with nsev_wrapper.
 
-        When called without additional parameters, the default values from FNFT are used.
+        When called without additional optional arguments, the default values from FNFT are used.
 
-    Optional parameters
+    Optional arguments:
 
-        bsf : bound state filtering, default =
+        bsf : bound state filtering, default = 2
 
             0=none
             1=basic
             2=full
 
-        bsl : bound state localization, default  =2
+        bsl : bound state localization, default = 2
 
             0=Fast Eigenvalue
             1=Newton
@@ -245,14 +246,12 @@ def get_nsev_options(bsf=None, bsl=None, niter=None, dst=None, cst=None, nf=None
             3=2split4b
             4=BO
 
-        nf : normalization Flag, default =  1
+        nf : normalization flag, default =  1
 
             0=off
             1=on
 
-
-
-    Returns
+    Returns:
 
         options : NsevOptionsStruct with options for nsev
     """

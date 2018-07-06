@@ -20,7 +20,7 @@ def nsev(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=None,
 
         tvec: time vector for q samples
 
-    Optional Arguments:
+    Optional arguments:
 
         Xi1, Xi2 : min and max frequency for the continuous spectrum. default = -2,2
 
