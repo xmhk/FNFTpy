@@ -283,3 +283,38 @@ def get_nsev_options(bsf=None, bsl=None, niter=None, Dsub=None, dst=None, cst=No
         check_value(dis, 0, 4)  # Discretization
         opts.discretization = dis
     return opts
+
+
+
+
+
+def fnft_nsev_inverse_default_opts_wrapper():
+    """Get the default options for nsev_inverse directly from the FNFT C-library.
+
+    Returns:
+
+        options : NsevInverseOptionsStruct with options for nsev_inverse_wrapper
+
+    """
+
+    fnft_clib = ctypes.CDLL(get_lib_path())
+    clib_func = fnft_clib.fnft_nsev_inverse_default_opts
+    clib_func.restype = NsevInverseOptionsStruct
+    clib_func.argtpes = []
+    return clib_func()
+
+
+def print_nsev_inverse_options(opts=None):
+    """Print options of a NsevInverseOptionsStruct for nsev_inverse.
+
+    When called without additional argument, the default options from FNFT are printed.
+
+
+    Optional arguments:
+
+        opts : NsevInverseOptionsStruct, e.g. created by get_nsev_options()
+    """
+
+    if opts is None:
+        opts = fnft_nsev_inverse_default_opts_wrapper()
+    print(repr(opts))
