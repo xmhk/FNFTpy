@@ -36,14 +36,14 @@ class NsepOptionsStruct(ctypes.Structure):
         ("normalization_flag", ctypes_int32)]
 
     def __repr__(self):
-        s = "  bound state localization      : loc   " + repr(self.localization)
-        s += "\n   bound state filtering         : filt  " + repr(self.filtering)
+        s = "  localization                  : loc   " + repr(self.localization)
+        s += "\n   filtering                     : filt  " + repr(self.filtering)
         s += "\n   bounding box                  : bb    " + repr(self.bounding_box[0]) + " " \
              + repr(self.bounding_box[1]) + " " + repr(self.bounding_box[2]) + " " \
              + repr(self.bounding_box[3])
-        s += "\n   maximum number of eigenvalues : maxev " + repr(self.max_evals)
+        s += "\n   maximum number of evaluations : maxev " + repr(self.max_evals)
         s += "\n   discretization                : dis   " + repr(self.discretization)
-        s += "\n   normalization                 : nf    " + repr(self.normalization_flag)
+        s += "\n   normalization flag            : nf    " + repr(self.normalization_flag)
         return s
 
 
