@@ -21,8 +21,7 @@ class KdvvOptionsStruct(ctypes.Structure):
         ("discretization", ctypes_int)]
 
     def __repr__(self):
-        s = "--options for kdvv--"
-        s += "\n  discretization : dis " + repr(self.discretization)
+        s = "  discretization : dis " + repr(self.discretization)
         return s
 
 
@@ -37,15 +36,14 @@ class NsepOptionsStruct(ctypes.Structure):
         ("normalization_flag", ctypes_int32)]
 
     def __repr__(self):
-        s = "--options for nsep--"
-        s += "\n  bound state localization      : loc   " + repr(self.localization)
-        s += "\n  bound state filtering         : filt  " + repr(self.filtering)
-        s += "\n  bounding box                  : bb    " + repr(self.bounding_box[0]) + " " \
+        s = "  bound state localization      : loc   " + repr(self.localization)
+        s += "\n   bound state filtering         : filt  " + repr(self.filtering)
+        s += "\n   bounding box                  : bb    " + repr(self.bounding_box[0]) + " " \
              + repr(self.bounding_box[1]) + " " + repr(self.bounding_box[2]) + " " \
              + repr(self.bounding_box[3])
-        s += "\n  maximum number of eigenvalues : max_v " + repr(self.max_evals)
-        s += "\n  discretization                : dis   " + repr(self.discretization)
-        s += "\n  normalization                 : nf    " + repr(self.normalization_flag)
+        s += "\n   maximum number of eigenvalues : maxev " + repr(self.max_evals)
+        s += "\n   discretization                : dis   " + repr(self.discretization)
+        s += "\n   normalization                 : nf    " + repr(self.normalization_flag)
         return s
 
 
@@ -61,12 +59,11 @@ class NsevOptionsStruct(ctypes.Structure):
         ("discretization", ctypes_int)]
 
     def __repr__(self):
-        s = "--options for nsev--"
-        s += "\n  bound state filtering    : bsf " + repr(self.bound_state_filtering)
-        s += "\n  bound state localization : bsl " + repr(self.bound_state_localization)
-        s += "\n  number of iteratons      : niter " + repr(self.niter)
-        s += "\n  discrete spectrum type   : dst " + repr(self.discspec_type)
-        s += "\n  continuous spectrum type : cst " + repr(self.contspec_type)
-        s += "\n  discretization           : dis " + repr(self.discretization)
-        s += "\n  normalization flag       : nf " + repr(self.normalization_flag)
+        s = "  bound state filtering    : bsf " + repr(self.bound_state_filtering)
+        s += "\n   bound state localization : bsl " + repr(self.bound_state_localization)
+        s += "\n   number of iteratons      : niter " + repr(self.niter)
+        s += "\n   discrete spectrum type   : dst " + repr(self.discspec_type)
+        s += "\n   continuous spectrum type : cst " + repr(self.contspec_type)
+        s += "\n   discretization           : dis " + repr(self.discretization)
+        s += "\n   normalization flag       : nf " + repr(self.normalization_flag)
         return s

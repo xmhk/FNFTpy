@@ -143,5 +143,5 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
         kdvv_nullptr,
         kdvv_nullptr,
         ctypes.byref(options))
-    rdict = {'return_value': rv, 'contspec': kdvv_contspec}
+    rdict = {'return_value': rv, 'contspec': kdvv_contspec, 'options':repr(options)}
     return rdict

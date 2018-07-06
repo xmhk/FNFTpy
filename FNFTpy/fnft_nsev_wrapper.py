@@ -233,4 +233,5 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
         rdict['c_b'] = nsev_contspec[2 * M:3 * M]
     else:
         pass
+    rdict['options'] = repr(options)
     return rdict

@@ -3,12 +3,17 @@ from .fnft_nsep_wrapper import *
 from .fnft_nsev_wrapper import *
 
 
+def print_standard_options():
+    kdvvopts = get_kdvv_options()
+    print("\n ----\n kdvv default options:\n %s \n\n"%repr(kdvvopts))
+    nsepopts = get_nsep_options()
+    print("\n ----\n nsep default options:\n %s \n\n" % repr(nsepopts))
+    nsevopts = get_nsev_options()
+    print("\n ----\n nsev default options:\n %s \n\n" % repr(nsevopts))
+
 def kdvvexample():
     """Mimics the C example for calling fnft_kdvv."""
-    print("\n\nKDVV example")
-    print("standard options:")
-    print_kdvv_options()
-    print("")
+    print("\n\nkdvv example")
     #
     # set values
     #
@@ -27,17 +32,18 @@ def kdvvexample():
     #
     # print results
     #
+    print("\n----- options used ----")
+    print(res['options'])
+    print("\n------ results --------")
     print("FNFT return value: %d (should be 0)" % res['return_value'])
     for i in range(len(res['contspec'])):
-        print("%d. Xi=%.4f   %.6f  %.6fj" % (i, Xivec[i], np.real(res['contspec'][i]), np.imag(res['contspec'][i])))
+        print("%d : Xi=%.4f   %.6f  %.6fj" % (i, Xivec[i], np.real(res['contspec'][i]), np.imag(res['contspec'][i])))
+
 
 
 def nsepexample():
     """Mimics the C example for calling fnft_nsep."""
-    print("\n\nNSEP example")
-    print("standard options:")
-    print_nsep_options()
-    print("")
+    print("\n\nnsep example")
     #
     # set values
     #
@@ -52,22 +58,22 @@ def nsepexample():
     #
     # print results
     #
+    print("\n----- options used ----")
+    print(res['options'])
+    print("\n------ results --------")
     print("FNFT return value: %d (should be 0)" % res['return_value'])
     print("number of samples: %d" % D)
     print('main spectrum')
     for i in range(res['K']):
-        print("%d   %.6f  %.6fj" % (i, np.real(res['main'][i]), np.imag(res['main'][i])))
+        print("%d :  %.6f  %.6fj" % (i, np.real(res['main'][i]), np.imag(res['main'][i])))
     print('auxiliary spectrum')
     for i in range(res['M']):
-        print("%d   %.6f  %.6fj" % (i, np.real(res['aux'][i]), np.imag(res['aux'][i])))
+        print("%d :  %.6f  %.6fj" % (i, np.real(res['aux'][i]), np.imag(res['aux'][i])))
 
 
 def nsevexample():
     """Mimics the C example for calling fnft_nsev."""
-    print("\n\nNSEV example")
-    print("standard options:")
-    print_nsev_options()
-    print("")
+    print("\n\nnsev example")
     #
     # set values
     #
@@ -76,24 +82,29 @@ def nsevexample():
     q = np.zeros(len(tvec), dtype=np.complex128)
     q[:] = 2.0 + 0.0j
     M = 8
+    Xivec = np.linspace(-2, 2, M)
     #
     # call function
     #
-    res = nsev(q, tvec, M=M, Xi1=-2, Xi2=2)
+    res = nsev(q, tvec, M=M, Xi1=np.min(Xivec), Xi2=np.max(Xivec))
     #
     # print results
     #
-    Xivec = np.linspace(-2, 2, M)
+    print("\n----- options used ----")
+    print(res['options'])
+    print("\n------ results --------")
+
     print("FNFT return value: %d (should be 0)" % res['return_value'])
     print("continuous spectrum")
     for i in range(len(res['c_ref'])):
-        print("%d Xi = %.4f   %.6f  %.6fj" % (i, Xivec[i], np.real(res['c_ref'][i]), np.imag(res['c_ref'][i])))
+        print("%d :  Xi = %.4f   %.6f  %.6fj" % (i, Xivec[i], np.real(res['c_ref'][i]), np.imag(res['c_ref'][i])))
     print("discrete spectrum")
     for i in range(len(res['bound_states'])):
-        print("%d %.6f  %.6fj with norming const %.6f  %.6fj" % (i, np.real(res['bound_states'][i]),
+        print("%d : %.6f  %.6fj with norming const %.6f  %.6fj" % (i, np.real(res['bound_states'][i]),
                                                                  np.imag(res['bound_states'][i]),
                                                                  np.real(res['d_norm'][i]),
                                                                  np.imag(res['d_norm'][i])))
+
 
 
 def kdvvtest():
@@ -124,3 +135,4 @@ def nsevtest():
     print(res['return_value'])
     res = nsev(q, xvec, dst=2)
     print(res['return_value'])
+
