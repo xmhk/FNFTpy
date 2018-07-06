@@ -37,9 +37,9 @@ def kdvvexample():
     print("\n------ results --------")
     print("FNFT return value: %d (should be 0)" % res['return_value'])
     print("continuous spectrum: ")
-    for i in range(len(res['contspec'])):
+    for i in range(len(res['cont'])):
         print("%d : Xi=%.4f   %.6f  %.6fj" % (i, Xivec[i],
-              np.real(res['contspec'][i]), np.imag(res['contspec'][i])))
+              np.real(res['cont'][i]), np.imag(res['cont'][i])))
 
 
 def nsepexample():
@@ -95,14 +95,14 @@ def nsevexample():
 
     print("FNFT return value: %d (should be 0)" % res['return_value'])
     print("continuous spectrum")
-    for i in range(len(res['c_ref'])):
-        print("%d :  Xi = %.4f   %.6f  %.6fj" % (i, Xivec[i], np.real(res['c_ref'][i]), np.imag(res['c_ref'][i])))
+    for i in range(len(res['cont_ref'])):
+        print("%d :  Xi = %.4f   %.6f  %.6fj" % (i, Xivec[i], np.real(res['cont_ref'][i]), np.imag(res['cont_ref'][i])))
     print("discrete spectrum")
     for i in range(len(res['bound_states'])):
         print("%d : %.6f  %.6fj with norming const %.6f  %.6fj" % (i, np.real(res['bound_states'][i]),
                                                                  np.imag(res['bound_states'][i]),
-                                                                 np.real(res['d_norm'][i]),
-                                                                 np.imag(res['d_norm'][i])))
+                                                                 np.real(res['disc_norm'][i]),
+                                                                 np.imag(res['disc_norm'][i])))
 
 
 

@@ -80,15 +80,15 @@ def nsev(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=None,
 
             bound_states : array of bound states found
 
-            d_norm : discrete spectrum - norming constants
+            disc_norm : discrete spectrum - norming constants
 
-            d_res : discrete spectrum - residues
+            disc_res : discrete spectrum - residues
 
-            c_ref : continuous spectrum - reflection coefficient
+            cont_ref : continuous spectrum - reflection coefficient
 
-            c_a : continuous spectrum - scattering coefficient a
+            cont_a : continuous spectrum - scattering coefficient a
 
-            c_b : continuous spectrum - scattering coefficient b
+            cont_b : continuous spectrum - scattering coefficient b
 
     """
     D = len(q)
@@ -137,15 +137,15 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
 
             bound_states : array of bound states found
 
-            d_norm : discrete spectrum - norming constants
+            disc_norm : discrete spectrum - norming constants
 
-            d_res : discrete spectrum - residues
+            disc_res : discrete spectrum - residues
 
-            c_ref : continuous spectrum - reflection coefficient
+            cont_ref : continuous spectrum - reflection coefficient
 
-            c_a : continuous spectrum - scattering coefficient a
+            cont_a : continuous spectrum - scattering coefficient a
 
-            c_b : continuous spectrum - scattering coefficient b
+            cont_b : continuous spectrum - scattering coefficient b
 
     """
     fnft_clib = ctypes.CDLL(get_lib_path())
@@ -171,11 +171,11 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
         nsev_discspec = np.zeros(K, dtype=numpy_complex)
     # continuous spectrum -> reflection coefficient and / or a,b    
     if options.contspec_type == 0:
-        nsev_contspec = np.zeros(M, dtype=numpy_complex)
+        nsev_cont = np.zeros(M, dtype=numpy_complex)
     elif options.contspec_type == 1:
-        nsev_contspec = np.zeros(2 * M, dtype=numpy_complex)
+        nsev_cont = np.zeros(2 * M, dtype=numpy_complex)
     else:
-        nsev_contspec = np.zeros(3 * M, dtype=numpy_complex)
+        nsev_cont = np.zeros(3 * M, dtype=numpy_complex)
     clib_nsev_func.argtypes = [
         type(nsev_D),  # D
         np.ctypeslib.ndpointer(dtype=numpy_complex,
@@ -184,7 +184,7 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
                                ndim=1, flags='C'),  # t
         type(nsev_M),  # M
         np.ctypeslib.ndpointer(dtype=numpy_complex,
-                               ndim=1, flags='C'),  # contspec
+                               ndim=1, flags='C'),  # cont
         np.ctypeslib.ndpointer(dtype=ctypes_double,
                                ndim=1, flags='C'),  # xi
         ctypes.POINTER(ctypes_uint),  # K_ptr
@@ -200,7 +200,7 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
         nsev_q,
         nsev_T,
         nsev_M,
-        nsev_contspec,
+        nsev_cont,
         nsev_Xi,
         nsev_K,
         nsev_boundstates,
@@ -214,23 +214,23 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
         'bound_states': nsev_boundstates[0:K_new]}
 
     if options.discspec_type == 0:
-        rdict['d_norm'] = nsev_discspec[0:K_new]
+        rdict['disc_norm'] = nsev_discspec[0:K_new]
     elif options.discspec_type == 1:
-        rdict['d_res'] = nsev_discspec[0:K_new]
+        rdict['disc_res'] = nsev_discspec[0:K_new]
     elif options.discspec_type == 2:
-        rdict['d_norm'] = nsev_discspec[0:K_new]
-        rdict['d_res'] = nsev_discspec[K_new:2 * K_new]
+        rdict['disc_norm'] = nsev_discspec[0:K_new]
+        rdict['disc_res'] = nsev_discspec[K_new:2 * K_new]
     else:
         pass
     if options.contspec_type == 0:
-        rdict['c_ref'] = nsev_contspec[0:M]
+        rdict['cont_ref'] = nsev_cont[0:M]
     elif options.contspec_type == 1:
-        rdict['c_a'] = nsev_contspec[0:M]
-        rdict['c_b'] = nsev_contspec[M:2 * M]
+        rdict['cont_a'] = nsev_cont[0:M]
+        rdict['cont_b'] = nsev_cont[M:2 * M]
     elif options.contspec_type == 2:
-        rdict['c_ref'] = nsev_contspec[0:M]
-        rdict['c_a'] = nsev_contspec[M:2 * M]
-        rdict['c_b'] = nsev_contspec[2 * M:3 * M]
+        rdict['cont_ref'] = nsev_cont[0:M]
+        rdict['cont_a'] = nsev_cont[M:2 * M]
+        rdict['cont_b'] = nsev_cont[2 * M:3 * M]
     else:
         pass
     rdict['options'] = repr(options)

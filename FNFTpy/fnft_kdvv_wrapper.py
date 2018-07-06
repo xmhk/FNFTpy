@@ -50,7 +50,7 @@ def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None):
 
             return_value : return value from FNFT
 
-            contspec : continuous spectrum
+            cont : continuous spectrum
     """
 
     D = len(u)
@@ -94,7 +94,7 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
 
             return_value : return value from FNFT
 
-            contspec : continuous spectrum
+            cont : continuous spectrum
 
     """
     fnft_clib = ctypes.CDLL(get_lib_path())
@@ -107,7 +107,7 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
     kdvv_T[0] = T1
     kdvv_T[1] = T2
     kdvv_M = ctypes_uint(M)
-    kdvv_contspec = np.zeros(M, dtype=numpy_complex)
+    kdvv_cont = np.zeros(M, dtype=numpy_complex)
     kdvv_Xi = np.zeros(2, dtype=numpy_double)
     kdvv_Xi[0] = Xi1
     kdvv_Xi[1] = Xi2
@@ -125,7 +125,7 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
                                ndim=1, flags='C'),  # t
         type(kdvv_M),  # M
         np.ctypeslib.ndpointer(dtype=numpy_complex,
-                               ndim=1, flags='C'),  # contspec
+                               ndim=1, flags='C'),  # cont
         np.ctypeslib.ndpointer(dtype=ctypes_double,
                                ndim=1, flags='C'),  # Xi
         type(kdvv_nullptr),  # K_ptr
@@ -137,11 +137,11 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
         kdvv_u,
         kdvv_T,
         kdvv_M,
-        kdvv_contspec,
+        kdvv_cont,
         kdvv_Xi,
         kdvv_nullptr,
         kdvv_nullptr,
         kdvv_nullptr,
         ctypes.byref(options))
-    rdict = {'return_value': rv, 'contspec': kdvv_contspec, 'options':repr(options)}
+    rdict = {'return_value': rv, 'cont': kdvv_cont, 'options':repr(options)}
     return rdict
