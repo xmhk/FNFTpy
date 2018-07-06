@@ -163,7 +163,8 @@ the Nonlinear Fourier Transform of some input field.
 # Setup
 
  * Add FNFTpy folder to your python path.
- * Of course, you need a compiled version of the FNFT C-library.   
+ * Of course, you need a compiled version of the FNFT C-library. See the [documentation for FNFT](https://github.com/FastNFT/FNFT) on how about to build 
+   the library on your device. 
  * FNFTpy needs to know where the C-library is located. 
    This configuration can be done by editing the function get_lib_path()
    in auxiliary.py. 
