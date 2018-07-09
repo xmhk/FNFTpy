@@ -66,6 +66,7 @@ def nsep(q, T1, T2, kappa=1, loc=None, filt=None, bb=None,
             m: number of points in the auxiliary spectrum
 
             aux: auxiliary spectrum
+
         """
     D = len(q)
     options = get_nsep_options(loc=loc, filt=filt, bb=bb, maxev=maxev, dis=dis, nf=nf)
@@ -106,7 +107,9 @@ def nsep_wrapper(D, q, T1, T2, kappa,
 
             M: number of points in the auxiliary spectrum
 
-            aux: auxiliary spectrum"""
+            aux: auxiliary spectrum
+
+    """
     fnft_clib = ctypes.CDLL(get_lib_path())
     clib_nsep_func = fnft_clib.fnft_nsep
     clib_nsep_func.restype = ctypes_int

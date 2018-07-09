@@ -51,6 +51,7 @@ def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None):
             return_value : return value from FNFT
 
             cont : continuous spectrum
+
     """
 
     D = len(u)
@@ -88,7 +89,6 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
         options : options for kdvv as KdvvOptionsStruct. Can be generated e.g. with 'get_kdvv_options()'
 
     Returns:
-    ----------
 
         rdict : dictionary holding the fields (depending on options)
 
