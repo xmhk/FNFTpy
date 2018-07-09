@@ -43,22 +43,22 @@ def get_kdvv_options(dis=None):
 
         dis: discretization, default = 15
 
-            0 = 2SPLIT1A
-            1 = 2SPLIT1B
-            2 = 2SPLIT2A
-            3 = 2SPLIT2B
-            4 = 2SPLIT3A
-            5 = 2SPLIT3B
-            6 = 2SPLIT4A
-            7 = 2SPLIT4B
-            8 = 2SPLIT5A
-            9 = 2SPLIT5B
-            10 = 2SPLIT6A
-            11 = 2SPLIT6B
-            12 = 2SPLIT7A
-            13 = 2SPLIT7B
-            14 = 2SPLIT8A
-            15 = 2SPLIT8B
+            0 = 2split1a
+            1 = 2split1b
+            2 = 2split2a
+            3 = 2split2b
+            4 = 2split3a
+            5 = 2split3b
+            6 = 2split4a
+            7 = 2split4b
+            8 = 2split5a
+            9 = 2split5b
+            10 = 2split6a
+            11 = 2split6b
+            12 = 2split7a
+            13 = 2split7b
+            14 = 2split8a
+            15 = 2split8b
 
     Returns:
 
