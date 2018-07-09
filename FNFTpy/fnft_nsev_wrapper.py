@@ -61,8 +61,8 @@ def nsev(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=None,
 
         dis : discretization, default = 3
 
-            0=2spliT2modal
-            1=2spliT2a
+            0=2split2modal
+            1=2split2a
             2=2split4a
             3=2split4b
             4=BO
