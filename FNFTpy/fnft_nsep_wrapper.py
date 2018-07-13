@@ -47,8 +47,8 @@ def nsep(q, T1, T2, kappa=1, loc=None, filt=None, bb=None,
 
         dis : discretization, default = 2
 
-            0=2spliT2modal
-            1=2spliT2a
+            0=2split2modal
+            1=2split2a
             2=2split4a
             3=2split4b
             4=BO
@@ -66,6 +66,7 @@ def nsep(q, T1, T2, kappa=1, loc=None, filt=None, bb=None,
             m: number of points in the auxiliary spectrum
 
             aux: auxiliary spectrum
+
         """
     D = len(q)
     options = get_nsep_options(loc=loc, filt=filt, bb=bb, maxev=maxev, dis=dis, nf=nf)
@@ -106,7 +107,9 @@ def nsep_wrapper(D, q, T1, T2, kappa,
 
             M: number of points in the auxiliary spectrum
 
-            aux: auxiliary spectrum"""
+            aux: auxiliary spectrum
+
+    """
     fnft_clib = ctypes.CDLL(get_lib_path())
     clib_nsep_func = fnft_clib.fnft_nsep
     clib_nsep_func.restype = ctypes_int

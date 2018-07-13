@@ -28,24 +28,25 @@ def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None):
 
         dis : determines the discretization, default = 17
 
-            0 = 2SPLIT1A
-            1 = 2SPLIT1B
-            2 = 2SPLIT2A
-            3 = 2SPLIT2B
-            4 = 2SPLIT2S
-            5 = 2SPLIT3A
-            6 = 2SPLIT3B
-            7 = 2SPLIT3S
-            8 = 2SPLIT4A
-            9 = 2SPLIT4B
-            10 = 2SPLIT5A
-            11 = 2SPLIT5B
-            12 = 2SPLIT6A
-            13 = 2SPLIT6B
-            14 = 2SPLIT7A
-            15 = 2SPLIT7B
-            16 = 2SPLIT8A
-            17 = 2SPLIT8B
+            0 = 2split1a
+            1 = 2split1b
+            2 = 2split2a
+            3 = 2split2b
+            4 = 2split2s
+            5 = 2split3a
+            6 = 2split3b
+            7 = 2split3s
+            8 = 2split4a
+            9 = 2split4b
+            10 = 2split5a
+            11 = 2split5b
+            12 = 2split6a
+            13 = 2split6b
+            14 = 2split7a
+            15 = 2split7b
+            16 = 2split8a
+            17 = 2split8b
+
 
     Returns:
 
@@ -56,7 +57,6 @@ def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None):
             cont : continuous spectrum
 
     """
-
 
     D = len(u)
     K = 0  # not yet implemented
