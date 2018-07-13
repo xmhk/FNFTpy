@@ -46,6 +46,7 @@ def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None):
             15 = 2SPLIT7B
             16 = 2SPLIT8A
             17 = 2SPLIT8B
+
     Returns:
 
         rdict : dictionary holding the fields (depending on options)
@@ -53,7 +54,9 @@ def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None):
             return_value : return value from FNFT
 
             cont : continuous spectrum
+
     """
+
 
     D = len(u)
     K = 0  # not yet implemented
@@ -90,7 +93,6 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
         options : options for kdvv as KdvvOptionsStruct. Can be generated e.g. with 'get_kdvv_options()'
 
     Returns:
-    ----------
 
         rdict : dictionary holding the fields (depending on options)
 
