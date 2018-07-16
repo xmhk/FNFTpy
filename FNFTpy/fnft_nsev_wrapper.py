@@ -1,3 +1,33 @@
+"""
+This file is part of FNFTpy.
+FNFTpy provides wrapper functions to interact with FNFT,
+a library for the numerical computation of nonlinear Fourier transforms.
+
+For FNFTpy to work, a copy of FNFT has to be installed.
+For general information, source files and installation of FNFT,
+visit FNFT's github page: https://github.com/FastNFT
+
+For information about setup and usage of FNFTpy see README.md.
+
+FNFTpy is free software; you can redistribute it and/or
+modify it under the terms of the version 2 of the GNU General
+Public License as published by the Free Software Foundation.
+
+FNFTpy is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+Contributors:
+
+Christoph Mahnke, 2018
+
+"""
+
+
 from .typesdef import *
 from .auxiliary import *
 from .options_handling import print_nsev_options, get_nsev_options
@@ -7,9 +37,12 @@ def nsev(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=None,
          bsl=None, niter=None, Dsub=None, dst=None, cst=None, nf=None, dis=None):
     """Calculate the Nonlinear Fourier Transform for the Nonlinear Schroedinger equation with vanishing boundaries.
 
-    This function is intended to be 'clutter-free', which means it automatically calculates some variables
-    needed to call the C-library.
+    This function is intended to be 'convenient', which means it
+    automatically calculates some variables needed to call the
+    C-library and uses some default options.
+    Own options can be set by passing optional arguments (see below).
     Options can be set by passing optional arguments (see below).
+
     It converts all Python input into the C equivalent and returns the result from FNFT.
     If a more C-like interface is desired, the function 'nsev_wrapper' can be used (see documentation there).
 

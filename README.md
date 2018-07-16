@@ -161,8 +161,14 @@ the Nonlinear Fourier Transform of some input field.
         Returns:
     
             libstring : string holding library path
+    
+        Example paths:
+    
+            libstr = "C:/Libraries/local/libfnft.dll"  # example for windows
+            libstr = "C:\\Libraries\\local\\libfnft.dll" # windows - with backslash
+            libstr = "/usr/local/lib/libfnft.so"  # example for linux
+    
         """
-        libstr = "C:/Libraries/local/libfnft.dll"  # example for windows
-        # libstr = "/usr/local/lib/libfnft.so"  # example for linux
-        return libstr
+        libstr = "/usr/local/lib/libfnft.so"  # example for linux
+        return libstr        
     ```
