@@ -37,9 +37,15 @@ def get_lib_path():
     Returns:
 
         libstring : string holding library path
+
+    Example paths:
+
+        libstr = "C:/Libraries/local/libfnft.dll"  # example for windows
+        libstr = "C:\\Libraries\\local\\libfnft.dll" # windows - with backslash
+        libstr = "/usr/local/lib/libfnft.so"  # example for linux
+
     """
-    libstr = "C:/Libraries/local/libfnft.dll"  # example for windows
-    # libstr = "/usr/local/lib/libfnft.so"  # example for linux
+    libstr = "/usr/local/lib/libfnft.so"  # example for linux
     return libstr
 
 
