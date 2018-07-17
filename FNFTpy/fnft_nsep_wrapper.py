@@ -7,7 +7,7 @@ For FNFTpy to work, a copy of FNFT has to be installed.
 For general information, source files and installation of FNFT,
 visit FNFT's github page: https://github.com/FastNFT
 
-For information about setup and usage of FNFTpy see README.md.
+For information about setup and usage of FNFTpy see README.md or documentation.
 
 FNFTpy is free software; you can redistribute it and/or
 modify it under the terms of the version 2 of the GNU General

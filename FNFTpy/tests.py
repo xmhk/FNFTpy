@@ -7,7 +7,7 @@ For FNFTpy to work, a copy of FNFT has to be installed.
 For general information, source files and installation of FNFT,
 visit FNFT's github page: https://github.com/FastNFT
 
-For information about setup and usage of FNFTpy see README.md.
+For information about setup and usage of FNFTpy see README.md or documentation.
 
 FNFTpy is free software; you can redistribute it and/or
 modify it under the terms of the version 2 of the GNU General
@@ -34,6 +34,9 @@ from .fnft_nsev_inverse_wrapper import *
 
 
 def print_default_options():
+    """Print the default options for kdvv, nsep and nsev."""
+
+    
     kdvvopts = get_kdvv_options()
     print("\n ----\n kdvv default options:\n %s \n\n"%repr(kdvvopts))
 
