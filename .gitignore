@@ -21,4 +21,7 @@ documentation/latex/latexmkrc
 documentation/latex/Makefile
 documentation/sphinx/source/_static
 documentation/sphinx/source/_template
+
+documentation/singlehtml/objects.inv
+documentation/singlehtml/.buildinfo
 .idea/
