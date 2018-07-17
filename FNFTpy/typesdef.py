@@ -102,6 +102,7 @@ class NsevOptionsStruct(ctypes.Structure):
 
 
 class NsevInverseOptionsStruct(ctypes.Structure):
+    """Ctypes options struct for interfacing fnft_nsev_inverse."""
     _fields_ = [
         ("discretization", ctypes_int),
         ("contspec_type", ctypes_int),
