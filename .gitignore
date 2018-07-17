@@ -14,3 +14,5 @@ documentation/latex/*.ist
 documentation/latex/latexmkjarc
 documentation/latex/latexmkrc
 documentation/latex/Makefile
+documentation/sphinx/source/_static
+documentation/sphinx/source/_template
