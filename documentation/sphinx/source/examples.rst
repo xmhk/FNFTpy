@@ -9,3 +9,5 @@ example functions
 .. autofunction:: FNFTpy.tests.nsepexample
 
 .. autofunction:: FNFTpy.tests.nsevexample
+
+.. autofunction:: FNFTpy.tests.nsevinversetest

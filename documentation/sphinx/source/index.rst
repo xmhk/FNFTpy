@@ -22,4 +22,6 @@ Welcome to FNFTpy's documentation!
    
    nsev.rst
 
+   nsev_inverse.rst
+
    examples.rst
