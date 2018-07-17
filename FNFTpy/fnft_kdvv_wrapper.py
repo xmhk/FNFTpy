@@ -84,6 +84,7 @@ def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None):
 
             cont : continuous spectrum
 
+
     """
 
     D = len(u)
