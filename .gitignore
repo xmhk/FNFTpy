@@ -11,8 +11,14 @@ documentation/latex/*.ind
 documentation/latex/*.log
 documentation/latex/*.out
 documentation/latex/*.ist
+documentation/latex/*.idx
+
+documentation/latex/*.sty
+documentation/latex/*.tex
+documentation/latex/*.cls
 documentation/latex/latexmkjarc
 documentation/latex/latexmkrc
 documentation/latex/Makefile
 documentation/sphinx/source/_static
 documentation/sphinx/source/_template
+.idea/
