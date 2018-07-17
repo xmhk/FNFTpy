@@ -33,6 +33,9 @@ from .fnft_nsev_wrapper import *
 
 
 def print_default_options():
+    """Print the default options for kdvv, nsep and nsev."""
+
+    
     kdvvopts = get_kdvv_options()
     print("\n ----\n kdvv default options:\n %s \n\n"%repr(kdvvopts))
 
