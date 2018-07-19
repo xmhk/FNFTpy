@@ -48,9 +48,9 @@ def nsep(q, T1, T2, kappa=1, loc=None, filt=None, bb=None,
 
     Arguments:
 
-        q : numpy array holding the samples of the field to be analyzed
+        q : numpy array holding the samples of the input field
 
-        T1, T2  : time positions of the first and the (d+1) sample
+        T1, T2  : time positions of the first and the (D+1) sample, where D is the number of samples
 
 
     Optional arguments:
@@ -59,21 +59,21 @@ def nsep(q, T1, T2, kappa=1, loc=None, filt=None, bb=None,
 
         loc : localization method for the spectrum, default = 2
 
-            0=Subsample and refine
-            1=Gridsearch
-            2=Mixed
+            0=subsample and refine
+            1=gridsearch
+            2=mixed
 
         filt : filtering of spectrum, default = 2
 
-            0=None
-            1=Manual
-            2=Auto
+            0=none
+            1=manual
+            2=auto
 
         bb: bounding box used for manual filtering, default = [-inf, inf, -inf, inf]
 
         maxev : maximum number of evaluations for root refinement, default = 20
 
-        nf : normalization Flag default = 1
+        nf : normalization flag default = 1
 
             0=off
             1=on
@@ -96,7 +96,7 @@ def nsep(q, T1, T2, kappa=1, loc=None, filt=None, bb=None,
 
             main : main spectrum
 
-            m: number of points in the auxiliary spectrum
+            M: number of points in the auxiliary spectrum
 
             aux: auxiliary spectrum
 
@@ -120,7 +120,7 @@ def nsep_wrapper(D, q, T1, T2, kappa,
 
         D : number of sample points
 
-        q : numpy array holding the samples of the field to be analyzed
+        q : numpy array holding the samples of the input field
 
         T1, T2  : time positions of the first and the (D+1) sample
 

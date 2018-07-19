@@ -49,9 +49,9 @@ def nsev(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=None,
 
     Arguments:
 
-        q : numpy array holding the samples of the field to be analyzed
+        q : numpy array holding the samples of the input field
 
-        tvec: time vector for q samples
+        tvec: time vector
 
     Optional arguments:
 
@@ -72,9 +72,9 @@ def nsev(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=None,
 
         bsl : bound state localization, default = 0
 
-            0=Fast Eigenvalue
+            0=fast eigenvalue
             1=Newton
-            2=Subsample and Refine
+            2=subsample and refine
 
         niter : number of iterations for Newton bound state localization, default = 10
 

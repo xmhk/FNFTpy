@@ -42,6 +42,7 @@ def fnft_kdvv_default_opts_wrapper():
     Returns:
 
         options : KdvvOptionsStruct with options for kdvv_wrapper
+
     """
     fnft_clib = ctypes.CDLL(get_lib_path())
     clib_func = fnft_clib.fnft_kdvv_default_opts
@@ -51,13 +52,14 @@ def fnft_kdvv_default_opts_wrapper():
 
 
 def print_kdvv_options(opts=None):
-    """Print options of a KdvvOptionsStruct for kdvv.
+    """Print options of a KdvvOptionsStruct.
 
     When called without additional argument, the default options from FNFT are printed.
 
     Optional arguments:
 
         opts : KdvvOptionsStruct, e.g. created by get_kdvv_options()
+
     """
     if opts is None:
         opts = fnft_kdvv_default_opts_wrapper()
@@ -93,6 +95,7 @@ def get_kdvv_options(dis=None):
     Returns:
 
         options : KdvvOptionsStruct
+
     """
     opts = fnft_kdvv_default_opts_wrapper()
     if dis is not None:
@@ -111,6 +114,7 @@ def fnft_nsep_default_opts_wrapper():
     Returns:
 
         options : NsepOptionsStruct for nsep_wrapper
+
     """
     fnft_clib = ctypes.CDLL(get_lib_path())
     clib_func = fnft_clib.fnft_nsep_default_opts
@@ -120,13 +124,14 @@ def fnft_nsep_default_opts_wrapper():
 
 
 def print_nsep_options(opts=None):
-    """Print options of a NsepOptionsStruct for nsep.
+    """Print options of a NsepOptionsStruct.
 
     When called without additional arguments, the default options from FNFT are printed.
 
     Optional arguments:
 
         opts : NsepOptionsStruc, e.g. created by get_nsep_options
+
     """
     if opts is None:
         opts = fnft_nsep_default_opts_wrapper()
@@ -142,15 +147,15 @@ def get_nsep_options(loc=None, filt=None, bb=None, maxev=None, dis=None, nf=None
 
         loc : localization of spectrum, default = 2
 
-            0=Subsample and Refine
-            1=Gridsearch
-            2=Mixed
+            0=subsample and refine
+            1=gridsearch
+            2=mixed
 
         filt : filtering of spectrum, default = 2
 
-            0=None
-            1=Manual
-            2=Auto
+            0=none
+            1=manual
+            2=auto
 
         bb : bounding box used for manual filtering, default = [-inf, inf, -inf, inf]
 
@@ -171,7 +176,7 @@ def get_nsep_options(loc=None, filt=None, bb=None, maxev=None, dis=None, nf=None
 
     Returns:
 
-        options : NsepOptionsStruct with options for nsep_wrapper
+        options : NsepOptionsStruct
 
     """
     opts = fnft_nsep_default_opts_wrapper()
@@ -220,7 +225,7 @@ def fnft_nsev_default_opts_wrapper():
 
 
 def print_nsev_options(opts=None):
-    """Print options of a NsevOptionsStruct for nsev.
+    """Print options of a NsevOptionsStruct.
 
     When called without additional argument, the default options from FNFT are printed.
 
@@ -250,9 +255,9 @@ def get_nsev_options(bsf=None, bsl=None, niter=None, dst=None, cst=None, nf=None
 
         bsl : bound state localization, default = 2
 
-            0=Fast Eigenvalue
+            0=fast eigenvalue
             1=Newton
-            2=Subsample and refine
+            2=subsample and refine
 
         niter : number of iterations for Newton bound state location, default = 10
 
@@ -283,7 +288,7 @@ def get_nsev_options(bsf=None, bsl=None, niter=None, dst=None, cst=None, nf=None
 
     Returns:
 
-        options : NsevOptionsStruct with options for nsev
+        options : NsevOptionsStruct
     """
     opts = fnft_nsev_default_opts_wrapper()
     if bsf is not None:

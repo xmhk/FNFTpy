@@ -46,7 +46,14 @@ numpy_double = np.double  # FNFT_REAL for Arrays (C-double)
 # option structs for interfacing C
 #
 class KdvvOptionsStruct(ctypes.Structure):
-    """Ctypes options struct for interfacing fnft_kdvv"""
+    """Ctypes options struct for interfacing fnft_kdvv.
+
+
+    Fields:
+
+        discretization
+
+    """
     _fields_ = [
         ("discretization", ctypes_int)]
 
@@ -56,7 +63,24 @@ class KdvvOptionsStruct(ctypes.Structure):
 
 
 class NsepOptionsStruct(ctypes.Structure):
-    """Ctypes options struct for interfacing fnft_nsep"""
+    """Ctypes options struct for interfacing fnft_nsep.
+
+    Fields:
+
+        localization
+
+        filtering
+
+        bounding_box
+
+        max_evals
+
+        discretization
+
+        normalization_flag
+
+
+    """
     _fields_ = [
         ("localization", ctypes_int),
         ("filtering", ctypes_int),
@@ -78,7 +102,26 @@ class NsepOptionsStruct(ctypes.Structure):
 
 
 class NsevOptionsStruct(ctypes.Structure):
-    """Ctypes options struct for interfacing fnft_kdvv"""
+    """Ctypes options struct for interfacing fnft_kdvv.
+
+    Fields:
+
+        bound_state_filtering
+
+        bound_state_localization
+
+        niter
+
+        discspec_type
+
+        contspec_type
+
+        normalization_flag
+
+        discretization
+
+
+        """
     _fields_ = [
         ("bound_state_filtering", ctypes_int),
         ("bound_state_localization", ctypes_int),
