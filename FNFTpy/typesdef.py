@@ -102,7 +102,7 @@ class NsepOptionsStruct(ctypes.Structure):
 
 
 class NsevOptionsStruct(ctypes.Structure):
-    """Ctypes options struct for interfacing fnft_kdvv.
+    """Ctypes options struct for interfacing fnft_nsev.
 
     Fields:
 

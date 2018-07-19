@@ -64,6 +64,7 @@ along with this program. If not, see &lt;<a class="reference external" href="htt
 automatically calculates some variables needed to call the
 C-library and uses some default options.
 Own options can be set by passing optional arguments (see below).</p>
+<p>Currently, only the contiuous spectrum is calculated.</p>
 <p>It converts all Python input into the C equivalent and returns the result from FNFT.
 If a more C-like interface is desired, the function ‘kdvv_wrapper’ can be used (see documentation there).</p>
 <p>Arguments:</p>
@@ -74,10 +75,7 @@ If a more C-like interface is desired, the function ‘kdvv_wrapper’ can be us
 </div></blockquote>
 <p>Optional arguments:</p>
 <blockquote>
-<div><dl class="docutils">
-<dt>Xi1, Xi2 <span class="classifier-delimiter">:</span> <span class="classifier">min and max frequency for the continuous spectrum</span></dt>
-<dd>default = -2, 2</dd>
-</dl>
+<div><p>Xi1, Xi2 : min and max frequency for the continuous spectrum, default = [-2,2]</p>
 <p>dis : determines the discretization, default = 15</p>
 <blockquote>
 <div>0 = 2split1a
@@ -99,7 +97,7 @@ If a more C-like interface is desired, the function ‘kdvv_wrapper’ can be us
 </div></blockquote>
 <p>Returns:</p>
 <blockquote>
-<div><p>rdict : dictionary holding the fields (depending on options)</p>
+<div><p>rdict : dictionary holding the fields:</p>
 <blockquote>
 <div><p>return_value : return value from FNFT</p>
 <p>cont : continuous spectrum</p>
@@ -117,6 +115,7 @@ If a more C-like interface is desired, the function ‘kdvv_wrapper’ can be us
 <p>This function’s interface mimics the behavior of the function ‘fnft_kdvv’ of FNFT.
 It converts all Python input into the C equivalent and returns the result from FNFT.
 If a more simplified version is desired, ‘kdvv’ can be used (see documentation there).</p>
+<p>Currently, only the contiuous spectrum is calculated.</p>
 <p>Arguments:</p>
 <blockquote>
 <div><p>D : number of samples</p>
@@ -129,7 +128,7 @@ If a more simplified version is desired, ‘kdvv’ can be used (see documentati
 </div></blockquote>
 <p>Returns:</p>
 <blockquote>
-<div><p>rdict : dictionary holding the fields (depending on options)</p>
+<div><p>rdict : dictionary holding the fields:</p>
 <blockquote>
 <div><p>return_value : return value from FNFT</p>
 <p>cont : continuous spectrum</p>
@@ -152,7 +151,7 @@ If a more simplified version is desired, ‘kdvv’ can be used (see documentati
 <dl class="function">
 <dt id="FNFTpy.options_handling.print_kdvv_options">
 <code class="descclassname">FNFTpy.options_handling.</code><code class="descname">print_kdvv_options</code><span class="sig-paren">(</span><em>opts=None</em><span class="sig-paren">)</span><a class="headerlink" href="#FNFTpy.options_handling.print_kdvv_options" title="Permalink to this definition">¶</a></dt>
-<dd><p>Print options of a KdvvOptionsStruct for kdvv.</p>
+<dd><p>Print options of a KdvvOptionsStruct.</p>
 <p>When called without additional argument, the default options from FNFT are printed.</p>
 <p>Optional arguments:</p>
 <blockquote>
@@ -196,7 +195,10 @@ If a more simplified version is desired, ‘kdvv’ can be used (see documentati
 <dl class="class">
 <dt id="FNFTpy.typesdef.KdvvOptionsStruct">
 <em class="property">class </em><code class="descclassname">FNFTpy.typesdef.</code><code class="descname">KdvvOptionsStruct</code><a class="headerlink" href="#FNFTpy.typesdef.KdvvOptionsStruct" title="Permalink to this definition">¶</a></dt>
-<dd><p>Ctypes options struct for interfacing fnft_kdvv</p>
+<dd><p>Ctypes options struct for interfacing fnft_kdvv.</p>
+<p>Fields:</p>
+<blockquote>
+<div>discretization</div></blockquote>
 </dd></dl>
 
 </div>
@@ -218,25 +220,25 @@ Options can be set by passing optional arguments (see below).</p>
 If a more C-like interface is desired, the function ‘nsep_wrapper’ can be used (see documentation there).</p>
 <p>Arguments:</p>
 <blockquote>
-<div><p>q : numpy array holding the samples of the field to be analyzed</p>
-<p>T1, T2  : time positions of the first and the (d+1) sample</p>
+<div><p>q : numpy array holding the samples of the input field</p>
+<p>T1, T2  : time positions of the first and the (D+1) sample, where D is the number of samples</p>
 </div></blockquote>
 <p>Optional arguments:</p>
 <blockquote>
 <div><p>kappa : +/- 1 for focussing/defocussing nonlinearity, default = 1</p>
 <p>loc : localization method for the spectrum, default = 2</p>
 <blockquote>
-<div>0=Subsample and refine
-1=Gridsearch
-2=Mixed</div></blockquote>
+<div>0=subsample and refine
+1=gridsearch
+2=mixed</div></blockquote>
 <p>filt : filtering of spectrum, default = 2</p>
 <blockquote>
-<div>0=None
-1=Manual
-2=Auto</div></blockquote>
+<div>0=none
+1=manual
+2=auto</div></blockquote>
 <p>bb: bounding box used for manual filtering, default = [-inf, inf, -inf, inf]</p>
 <p>maxev : maximum number of evaluations for root refinement, default = 20</p>
-<p>nf : normalization Flag default = 1</p>
+<p>nf : normalization flag default = 1</p>
 <blockquote>
 <div>0=off
 1=on</div></blockquote>
@@ -255,7 +257,7 @@ If a more C-like interface is desired, the function ‘nsep_wrapper’ can be us
 <div><p>return_value : return value from FNFT</p>
 <p>K : number of points in the main spectrum</p>
 <p>main : main spectrum</p>
-<p>m: number of points in the auxiliary spectrum</p>
+<p>M: number of points in the auxiliary spectrum</p>
 <p>aux: auxiliary spectrum</p>
 </div></blockquote>
 </div></blockquote>
@@ -274,7 +276,7 @@ If a more simplified version is desired, ‘nsep’ can be used (see documentati
 <p>Arguments:</p>
 <blockquote>
 <div><p>D : number of sample points</p>
-<p>q : numpy array holding the samples of the field to be analyzed</p>
+<p>q : numpy array holding the samples of the input field</p>
 <p>T1, T2  : time positions of the first and the (D+1) sample</p>
 <p>kappa   : +/- 1 for focussing/defocussing nonlinearity</p>
 <p>options : options for nsep as NsepOptionsStruct. Can be generated e.g. with ‘get_nsep_options()’</p>
@@ -307,7 +309,7 @@ If a more simplified version is desired, ‘nsep’ can be used (see documentati
 <dl class="function">
 <dt id="FNFTpy.options_handling.print_nsep_options">
 <code class="descclassname">FNFTpy.options_handling.</code><code class="descname">print_nsep_options</code><span class="sig-paren">(</span><em>opts=None</em><span class="sig-paren">)</span><a class="headerlink" href="#FNFTpy.options_handling.print_nsep_options" title="Permalink to this definition">¶</a></dt>
-<dd><p>Print options of a NsepOptionsStruct for nsep.</p>
+<dd><p>Print options of a NsepOptionsStruct.</p>
 <p>When called without additional arguments, the default options from FNFT are printed.</p>
 <p>Optional arguments:</p>
 <blockquote>
@@ -323,14 +325,14 @@ If a more simplified version is desired, ‘nsep’ can be used (see documentati
 <blockquote>
 <div><p>loc : localization of spectrum, default = 2</p>
 <blockquote>
-<div>0=Subsample and Refine
-1=Gridsearch
-2=Mixed</div></blockquote>
+<div>0=subsample and refine
+1=gridsearch
+2=mixed</div></blockquote>
 <p>filt : filtering of spectrum, default = 2</p>
 <blockquote>
-<div>0=None
-1=Manual
-2=Auto</div></blockquote>
+<div>0=none
+1=manual
+2=auto</div></blockquote>
 <p>bb : bounding box used for manual filtering, default = [-inf, inf, -inf, inf]</p>
 <p>maxev : maximum number of evaluations for root refinement, default = 20</p>
 <p>nf : normalization flag, default = 1</p>
@@ -347,7 +349,7 @@ If a more simplified version is desired, ‘nsep’ can be used (see documentati
 </div></blockquote>
 <p>Returns:</p>
 <blockquote>
-<div>options : NsepOptionsStruct with options for nsep_wrapper</div></blockquote>
+<div>options : NsepOptionsStruct</div></blockquote>
 </dd></dl>
 
 </div>
@@ -356,7 +358,16 @@ If a more simplified version is desired, ‘nsep’ can be used (see documentati
 <dl class="class">
 <dt id="FNFTpy.typesdef.NsepOptionsStruct">
 <em class="property">class </em><code class="descclassname">FNFTpy.typesdef.</code><code class="descname">NsepOptionsStruct</code><a class="headerlink" href="#FNFTpy.typesdef.NsepOptionsStruct" title="Permalink to this definition">¶</a></dt>
-<dd><p>Ctypes options struct for interfacing fnft_nsep</p>
+<dd><p>Ctypes options struct for interfacing fnft_nsep.</p>
+<p>Fields:</p>
+<blockquote>
+<div><p>localization</p>
+<p>filtering</p>
+<p>bounding_box</p>
+<p>max_evals</p>
+<p>discretization</p>
+<p>normalization_flag</p>
+</div></blockquote>
 </dd></dl>
 
 </div>
@@ -378,8 +389,8 @@ Options can be set by passing optional arguments (see below).</p>
 If a more C-like interface is desired, the function ‘nsev_wrapper’ can be used (see documentation there).</p>
 <p>Arguments:</p>
 <blockquote>
-<div><p>q : numpy array holding the samples of the field to be analyzed</p>
-<p>tvec: time vector for q samples</p>
+<div><p>q : numpy array holding the samples of the input field</p>
+<p>tvec: time vector</p>
 </div></blockquote>
 <p>Optional arguments:</p>
 <blockquote>
@@ -394,9 +405,9 @@ If a more C-like interface is desired, the function ‘nsev_wrapper’ can be us
 2=full</div></blockquote>
 <p>bsl : bound state localization, default = 0</p>
 <blockquote>
-<div>0=Fast Eigenvalue
+<div>0=fast eigenvalue
 1=Newton
-2=Subsample and Refine</div></blockquote>
+2=subsample and refine</div></blockquote>
 <p>niter : number of iterations for Newton bound state localization, default = 10</p>
 <p>dst : type of discrete spectrum, default = 2</p>
 <blockquote>
@@ -488,7 +499,7 @@ If a more simplified version is desired, ‘nsev’ can be used (see documentati
 <dl class="function">
 <dt id="FNFTpy.options_handling.print_nsev_options">
 <code class="descclassname">FNFTpy.options_handling.</code><code class="descname">print_nsev_options</code><span class="sig-paren">(</span><em>opts=None</em><span class="sig-paren">)</span><a class="headerlink" href="#FNFTpy.options_handling.print_nsev_options" title="Permalink to this definition">¶</a></dt>
-<dd><p>Print options of a NsevOptionsStruct for nsev.</p>
+<dd><p>Print options of a NsevOptionsStruct.</p>
 <p>When called without additional argument, the default options from FNFT are printed.</p>
 <p>Optional arguments:</p>
 <blockquote>
@@ -510,9 +521,9 @@ If a more simplified version is desired, ‘nsev’ can be used (see documentati
 2=full</div></blockquote>
 <p>bsl : bound state localization, default = 2</p>
 <blockquote>
-<div>0=Fast Eigenvalue
+<div>0=fast eigenvalue
 1=Newton
-2=Subsample and refine</div></blockquote>
+2=subsample and refine</div></blockquote>
 <p>niter : number of iterations for Newton bound state location, default = 10</p>
 <p>dst : type of discrete spectrum, default = 0</p>
 <blockquote>
@@ -538,7 +549,7 @@ If a more simplified version is desired, ‘nsev’ can be used (see documentati
 </div></blockquote>
 <p>Returns:</p>
 <blockquote>
-<div>options : NsevOptionsStruct with options for nsev</div></blockquote>
+<div>options : NsevOptionsStruct</div></blockquote>
 </dd></dl>
 
 </div>
@@ -547,7 +558,17 @@ If a more simplified version is desired, ‘nsev’ can be used (see documentati
 <dl class="class">
 <dt id="FNFTpy.typesdef.NsevOptionsStruct">
 <em class="property">class </em><code class="descclassname">FNFTpy.typesdef.</code><code class="descname">NsevOptionsStruct</code><a class="headerlink" href="#FNFTpy.typesdef.NsevOptionsStruct" title="Permalink to this definition">¶</a></dt>
-<dd><p>Ctypes options struct for interfacing fnft_kdvv</p>
+<dd><p>Ctypes options struct for interfacing fnft_nsev.</p>
+<p>Fields:</p>
+<blockquote>
+<div><p>bound_state_filtering</p>
+<p>bound_state_localization</p>
+<p>niter</p>
+<p>discspec_type</p>
+<p>contspec_type</p>
+<p>normalization_flag</p>
+<p>discretization</p>
+</div></blockquote>
 </dd></dl>
 
 </div>
@@ -628,7 +649,7 @@ If a more simplified version is desired, ‘nsev’ can be used (see documentati
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Christoph Mahnke.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.5.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6.
     </div>
   </body>
 </html>
