@@ -30,7 +30,7 @@ Christoph Mahnke, 2018
 
 from .typesdef import *
 from .options_handling import get_kdvv_options, print_kdvv_options
-from .auxiliary import get_lib_path
+from .auxiliary import get_lib_path, check_return_code
 
 
 def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None):
@@ -169,6 +169,7 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
         type(kdvv_nullptr),  # boundstates
         type(kdvv_nullptr),  # normconsts res
         ctypes.POINTER(KdvvOptionsStruct)]  # options ptr
+    options.discretization=20
     rv = clib_kdvv_func(
         kdvv_D,
         kdvv_u,
@@ -180,5 +181,6 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
         kdvv_nullptr,
         kdvv_nullptr,
         ctypes.byref(options))
+    check_return_code(rv)
     rdict = {'return_value': rv, 'cont': kdvv_cont, 'options':repr(options)}
     return rdict
