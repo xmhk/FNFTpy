@@ -64,6 +64,7 @@ along with this program. If not, see &lt;<a class="reference external" href="htt
 automatically calculates some variables needed to call the
 C-library and uses some default options.
 Own options can be set by passing optional arguments (see below).</p>
+<p>Currently, only the contiuous spectrum is calculated.</p>
 <p>It converts all Python input into the C equivalent and returns the result from FNFT.
 If a more C-like interface is desired, the function ‘kdvv_wrapper’ can be used (see documentation there).</p>
 <p>Arguments:</p>
@@ -74,34 +75,29 @@ If a more C-like interface is desired, the function ‘kdvv_wrapper’ can be us
 </div></blockquote>
 <p>Optional arguments:</p>
 <blockquote>
-<div><dl class="docutils">
-<dt>Xi1, Xi2 <span class="classifier-delimiter">:</span> <span class="classifier">min and max frequency for the continuous spectrum</span></dt>
-<dd>default = -2, 2</dd>
-</dl>
-<p>dis : determines the discretization, default = 17</p>
+<div><p>Xi1, Xi2 : min and max frequency for the continuous spectrum, default = [-2,2]</p>
+<p>dis : determines the discretization, default = 15</p>
 <blockquote>
 <div>0 = 2split1a
 1 = 2split1b
 2 = 2split2a
 3 = 2split2b
-4 = 2split2s
-5 = 2split3a
-6 = 2split3b
-7 = 2split3s
-8 = 2split4a
-9 = 2split4b
-10 = 2split5a
-11 = 2split5b
-12 = 2split6a
-13 = 2split6b
-14 = 2split7a
-15 = 2split7b
-16 = 2split8a
-17 = 2split8b</div></blockquote>
+4 = 2split3a
+5 = 2split3b
+6 = 2split4a
+7 = 2split4b
+8 = 2split5a
+9 = 2split5b
+10 = 2split6a
+11 = 2split6b
+12 = 2split7a
+13 = 2split7b
+14 = 2split8a
+15 = 2split8b</div></blockquote>
 </div></blockquote>
 <p>Returns:</p>
 <blockquote>
-<div><p>rdict : dictionary holding the fields (depending on options)</p>
+<div><p>rdict : dictionary holding the fields:</p>
 <blockquote>
 <div><p>return_value : return value from FNFT</p>
 <p>cont : continuous spectrum</p>
@@ -119,6 +115,7 @@ If a more C-like interface is desired, the function ‘kdvv_wrapper’ can be us
 <p>This function’s interface mimics the behavior of the function ‘fnft_kdvv’ of FNFT.
 It converts all Python input into the C equivalent and returns the result from FNFT.
 If a more simplified version is desired, ‘kdvv’ can be used (see documentation there).</p>
+<p>Currently, only the contiuous spectrum is calculated.</p>
 <p>Arguments:</p>
 <blockquote>
 <div><p>D : number of samples</p>
@@ -131,7 +128,7 @@ If a more simplified version is desired, ‘kdvv’ can be used (see documentati
 </div></blockquote>
 <p>Returns:</p>
 <blockquote>
-<div><p>rdict : dictionary holding the fields (depending on options)</p>
+<div><p>rdict : dictionary holding the fields:</p>
 <blockquote>
 <div><p>return_value : return value from FNFT</p>
 <p>cont : continuous spectrum</p>
@@ -154,7 +151,7 @@ If a more simplified version is desired, ‘kdvv’ can be used (see documentati
 <dl class="function">
 <dt id="FNFTpy.options_handling.print_kdvv_options">
 <code class="descclassname">FNFTpy.options_handling.</code><code class="descname">print_kdvv_options</code><span class="sig-paren">(</span><em>opts=None</em><span class="sig-paren">)</span><a class="headerlink" href="#FNFTpy.options_handling.print_kdvv_options" title="Permalink to this definition">¶</a></dt>
-<dd><p>Print options of a KdvvOptionsStruct for kdvv.</p>
+<dd><p>Print options of a KdvvOptionsStruct.</p>
 <p>When called without additional argument, the default options from FNFT are printed.</p>
 <p>Optional arguments:</p>
 <blockquote>
@@ -168,26 +165,24 @@ If a more simplified version is desired, ‘kdvv’ can be used (see documentati
 <p>When called without additional optional arguments, the default values from FNFT are used.</p>
 <p>Optional arguments:</p>
 <blockquote>
-<div><p>dis: discretization, default = 17</p>
+<div><p>dis: discretization, default = 15</p>
 <blockquote>
 <div>0 = 2split1a
 1 = 2split1b
 2 = 2split2a
 3 = 2split2b
-4 = 2split2s
-5 = 2split3a
-6 = 2split3b
-7 = 2split3s
-8 = 2split4a
-9 = 2split4b
-10 = 2split5a
-11 = 2split5b
-12 = 2split6a
-13 = 2split6b
-14 = 2split7a
-15 = 2split7b
-16 = 2split8a
-17 = 2split8b</div></blockquote>
+4 = 2split3a
+5 = 2split3b
+6 = 2split4a
+7 = 2split4b
+8 = 2split5a
+9 = 2split5b
+10 = 2split6a
+11 = 2split6b
+12 = 2split7a
+13 = 2split7b
+14 = 2split8a
+15 = 2split8b</div></blockquote>
 </div></blockquote>
 <p>Returns:</p>
 <blockquote>
@@ -200,7 +195,10 @@ If a more simplified version is desired, ‘kdvv’ can be used (see documentati
 <dl class="class">
 <dt id="FNFTpy.typesdef.KdvvOptionsStruct">
 <em class="property">class </em><code class="descclassname">FNFTpy.typesdef.</code><code class="descname">KdvvOptionsStruct</code><a class="headerlink" href="#FNFTpy.typesdef.KdvvOptionsStruct" title="Permalink to this definition">¶</a></dt>
-<dd><p>Ctypes options struct for interfacing fnft_kdvv</p>
+<dd><p>Ctypes options struct for interfacing fnft_kdvv.</p>
+<p>Fields:</p>
+<blockquote>
+<div>discretization</div></blockquote>
 </dd></dl>
 
 </div>
@@ -222,25 +220,25 @@ Options can be set by passing optional arguments (see below).</p>
 If a more C-like interface is desired, the function ‘nsep_wrapper’ can be used (see documentation there).</p>
 <p>Arguments:</p>
 <blockquote>
-<div><p>q : numpy array holding the samples of the field to be analyzed</p>
-<p>T1, T2  : time positions of the first and the (d+1) sample</p>
+<div><p>q : numpy array holding the samples of the input field</p>
+<p>T1, T2  : time positions of the first and the (D+1) sample, where D is the number of samples</p>
 </div></blockquote>
 <p>Optional arguments:</p>
 <blockquote>
 <div><p>kappa : +/- 1 for focussing/defocussing nonlinearity, default = 1</p>
 <p>loc : localization method for the spectrum, default = 2</p>
 <blockquote>
-<div>0=Subsample and refine
-1=Gridsearch
-2=Mixed</div></blockquote>
+<div>0=subsample and refine
+1=gridsearch
+2=mixed</div></blockquote>
 <p>filt : filtering of spectrum, default = 2</p>
 <blockquote>
-<div>0=None
-1=Manual
-2=Auto</div></blockquote>
+<div>0=none
+1=manual
+2=auto</div></blockquote>
 <p>bb: bounding box used for manual filtering, default = [-inf, inf, -inf, inf]</p>
 <p>maxev : maximum number of evaluations for root refinement, default = 20</p>
-<p>nf : normalization Flag default = 1</p>
+<p>nf : normalization flag default = 1</p>
 <blockquote>
 <div>0=off
 1=on</div></blockquote>
@@ -259,7 +257,7 @@ If a more C-like interface is desired, the function ‘nsep_wrapper’ can be us
 <div><p>return_value : return value from FNFT</p>
 <p>K : number of points in the main spectrum</p>
 <p>main : main spectrum</p>
-<p>m: number of points in the auxiliary spectrum</p>
+<p>M: number of points in the auxiliary spectrum</p>
 <p>aux: auxiliary spectrum</p>
 </div></blockquote>
 </div></blockquote>
@@ -278,7 +276,7 @@ If a more simplified version is desired, ‘nsep’ can be used (see documentati
 <p>Arguments:</p>
 <blockquote>
 <div><p>D : number of sample points</p>
-<p>q : numpy array holding the samples of the field to be analyzed</p>
+<p>q : numpy array holding the samples of the input field</p>
 <p>T1, T2  : time positions of the first and the (D+1) sample</p>
 <p>kappa   : +/- 1 for focussing/defocussing nonlinearity</p>
 <p>options : options for nsep as NsepOptionsStruct. Can be generated e.g. with ‘get_nsep_options()’</p>
@@ -311,7 +309,7 @@ If a more simplified version is desired, ‘nsep’ can be used (see documentati
 <dl class="function">
 <dt id="FNFTpy.options_handling.print_nsep_options">
 <code class="descclassname">FNFTpy.options_handling.</code><code class="descname">print_nsep_options</code><span class="sig-paren">(</span><em>opts=None</em><span class="sig-paren">)</span><a class="headerlink" href="#FNFTpy.options_handling.print_nsep_options" title="Permalink to this definition">¶</a></dt>
-<dd><p>Print options of a NsepOptionsStruct for nsep.</p>
+<dd><p>Print options of a NsepOptionsStruct.</p>
 <p>When called without additional arguments, the default options from FNFT are printed.</p>
 <p>Optional arguments:</p>
 <blockquote>
@@ -327,14 +325,14 @@ If a more simplified version is desired, ‘nsep’ can be used (see documentati
 <blockquote>
 <div><p>loc : localization of spectrum, default = 2</p>
 <blockquote>
-<div>0=Subsample and Refine
-1=Gridsearch
-2=Mixed</div></blockquote>
+<div>0=subsample and refine
+1=gridsearch
+2=mixed</div></blockquote>
 <p>filt : filtering of spectrum, default = 2</p>
 <blockquote>
-<div>0=None
-1=Manual
-2=Auto</div></blockquote>
+<div>0=none
+1=manual
+2=auto</div></blockquote>
 <p>bb : bounding box used for manual filtering, default = [-inf, inf, -inf, inf]</p>
 <p>maxev : maximum number of evaluations for root refinement, default = 20</p>
 <p>nf : normalization flag, default = 1</p>
@@ -351,7 +349,7 @@ If a more simplified version is desired, ‘nsep’ can be used (see documentati
 </div></blockquote>
 <p>Returns:</p>
 <blockquote>
-<div>options : NsepOptionsStruct with options for nsep_wrapper</div></blockquote>
+<div>options : NsepOptionsStruct</div></blockquote>
 </dd></dl>
 
 </div>
@@ -360,94 +358,58 @@ If a more simplified version is desired, ‘nsep’ can be used (see documentati
 <dl class="class">
 <dt id="FNFTpy.typesdef.NsepOptionsStruct">
 <em class="property">class </em><code class="descclassname">FNFTpy.typesdef.</code><code class="descname">NsepOptionsStruct</code><a class="headerlink" href="#FNFTpy.typesdef.NsepOptionsStruct" title="Permalink to this definition">¶</a></dt>
-<dd><p>Ctypes options struct for interfacing fnft_nsep</p>
+<dd><p>Ctypes options struct for interfacing fnft_nsep.</p>
+<p>Fields:</p>
+<blockquote>
+<div><p>localization</p>
+<p>filtering</p>
+<p>bounding_box</p>
+<p>max_evals</p>
+<p>discretization</p>
+<p>normalization_flag</p>
+</div></blockquote>
 </dd></dl>
 
 </div>
 </div>
 <span id="document-nsev"></span><div class="section" id="nonlinear-schroedinger-equation-with-vanishing-boundaries">
 <h2>Nonlinear Schroedinger equation with vanishing boundaries<a class="headerlink" href="#nonlinear-schroedinger-equation-with-vanishing-boundaries" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="nsev-inverse-calculate-the-inverse-nonlinear-fourier-transform">
-<h3>nsev_inverse - calculate the Inverse Nonlinear Fourier Transform<a class="headerlink" href="#nsev-inverse-calculate-the-inverse-nonlinear-fourier-transform" title="Permalink to this headline">¶</a></h3>
-<p>nsev_inverse
-.. autofunction:: FNFTpy.fnft_nsev_inverse_wrapper.nsev_inverse</p>
-</div>
-<div class="section" id="nsev-inverse-wrapper-interact-with-fnft-library">
-<h3>nsev_inverse_wrapper - interact with FNFT library<a class="headerlink" href="#nsev-inverse-wrapper-interact-with-fnft-library" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="nsev-calculate-the-nonlinear-fourier-transform">
+<h3>nsev - calculate the Nonlinear Fourier Transform<a class="headerlink" href="#nsev-calculate-the-nonlinear-fourier-transform" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
-<dt id="FNFTpy.fnft_nsev_inverse_wrapper.nsev_inverse_wrapper">
-<code class="descclassname">FNFTpy.fnft_nsev_inverse_wrapper.</code><code class="descname">nsev_inverse_wrapper</code><span class="sig-paren">(</span><em>M</em>, <em>contspec</em>, <em>Xi1</em>, <em>Xi2</em>, <em>K</em>, <em>bound_states</em>, <em>normconst_or_residues</em>, <em>D</em>, <em>T1</em>, <em>T2</em>, <em>kappa</em>, <em>options</em><span class="sig-paren">)</span><a class="headerlink" href="#FNFTpy.fnft_nsev_inverse_wrapper.nsev_inverse_wrapper" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate the  Inverse Nonlinear Fourier Transform for the Nonlinear Schroedinger equation with vanishing boundaries.</p>
-<p>This function’s interface mimics the behavior of the function ‘fnft_nsev_inverse’ of FNFT.
-It converts all Python input into the C equivalent and returns the result from FNFT.
-If a more simplified version is desired, ‘nsev_inverse’ can be used (see documentation there).</p>
+<dt id="FNFTpy.fnft_nsev_wrapper.nsev">
+<code class="descclassname">FNFTpy.fnft_nsev_wrapper.</code><code class="descname">nsev</code><span class="sig-paren">(</span><em>q</em>, <em>tvec</em>, <em>Xi1=-2</em>, <em>Xi2=2</em>, <em>M=128</em>, <em>K=128</em>, <em>kappa=1</em>, <em>bsf=None</em>, <em>bsl=None</em>, <em>niter=None</em>, <em>dst=None</em>, <em>cst=None</em>, <em>nf=None</em>, <em>dis=None</em><span class="sig-paren">)</span><a class="headerlink" href="#FNFTpy.fnft_nsev_wrapper.nsev" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the Nonlinear Fourier Transform for the Nonlinear Schroedinger equation with vanishing boundaries.</p>
+<p>This function is intended to be ‘convenient’, which means it
+automatically calculates some variables needed to call the
+C-library and uses some default options.
+Own options can be set by passing optional arguments (see below).
+Options can be set by passing optional arguments (see below).</p>
+<p>It converts all Python input into the C equivalent and returns the result from FNFT.
+If a more C-like interface is desired, the function ‘nsev_wrapper’ can be used (see documentation there).</p>
 <p>Arguments:</p>
 <blockquote>
-<div><p>M : number of sample points for continuous spectrum</p>
-<p>contspec : numpy array holding the samples of the continuous spectrum</p>
-<p>Xi1, Xi2  : frequencies defining the frequency range (cont spectrum)</p>
-<p>K : number of bound states (currently no effect)</p>
-<p>bound_states : bound states (currently no effect)</p>
-<p>normconst_or_residues : bound state spectral coefficients (currently no effect)</p>
-<p>D : number of samples for the output field</p>
-<p>T1, T2 : borders of the desired time window</p>
-<p>kappa : +1/-1 for focussing / defocussing NSE</p>
-<p>options : options for nsev_inverse as NsevInverseOptionsStruct</p>
+<div><p>q : numpy array holding the samples of the input field</p>
+<p>tvec: time vector</p>
 </div></blockquote>
-<p>Returns:</p>
-<blockquote>
-<div><p>rdict : dictionary holding the fields (depending on options)</p>
-<blockquote>
-<div><p>return_value : return value from FNFT</p>
-<p>q : time field resulting from inverse transform</p>
-<p>options : options for nsev_inverse as NsevInverseOptionsStruct</p>
-</div></blockquote>
-</div></blockquote>
-</dd></dl>
-
-</div>
-<div class="section" id="get-set-and-view-options-for-nsev-inverse-wrapper">
-<h3>get, set and view options for nsev_inverse_wrapper<a class="headerlink" href="#get-set-and-view-options-for-nsev-inverse-wrapper" title="Permalink to this headline">¶</a></h3>
-<dl class="function">
-<dt id="FNFTpy.options_handling.fnft_nsev_default_opts_wrapper">
-<code class="descclassname">FNFTpy.options_handling.</code><code class="descname">fnft_nsev_default_opts_wrapper</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#FNFTpy.options_handling.fnft_nsev_default_opts_wrapper" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the default options for nsev directly from the FNFT C-library.</p>
-<p>Returns:</p>
-<blockquote>
-<div>options : NsevOptionsStruct with options for nsev_wrapper</div></blockquote>
-</dd></dl>
-
-<dl class="function">
-<dt id="FNFTpy.options_handling.print_nsev_options">
-<code class="descclassname">FNFTpy.options_handling.</code><code class="descname">print_nsev_options</code><span class="sig-paren">(</span><em>opts=None</em><span class="sig-paren">)</span><a class="headerlink" href="#FNFTpy.options_handling.print_nsev_options" title="Permalink to this definition">¶</a></dt>
-<dd><p>Print options of a NsevOptionsStruct for nsev.</p>
-<p>When called without additional argument, the default options from FNFT are printed.</p>
 <p>Optional arguments:</p>
 <blockquote>
-<div>opts : NsevOptionsStruct, e.g. created by get_nsev_options()</div></blockquote>
-</dd></dl>
-
-<dl class="function">
-<dt id="FNFTpy.options_handling.get_nsev_options">
-<code class="descclassname">FNFTpy.options_handling.</code><code class="descname">get_nsev_options</code><span class="sig-paren">(</span><em>bsf=None</em>, <em>bsl=None</em>, <em>niter=None</em>, <em>Dsub=None</em>, <em>dst=None</em>, <em>cst=None</em>, <em>nf=None</em>, <em>dis=None</em><span class="sig-paren">)</span><a class="headerlink" href="#FNFTpy.options_handling.get_nsev_options" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get a NsevOptionsStruct for use with nsev_wrapper.</p>
-<blockquote>
-<div>When called without additional optional arguments, the default values from FNFT are used.</div></blockquote>
-<p>Optional arguments:</p>
-<blockquote>
-<div><p>bsf : bound state filtering, default = 2</p>
+<div><p>Xi1, Xi2 : min and max frequency for the continuous spectrum. default = -2,2</p>
+<p>M : number of values for the continuous spectrum to calculate default = 128</p>
+<p>K : maximum number of bound states to calculatem default = 128</p>
+<p>kappa : +/- 1 for focussing/defocussing nonlinearity, default = 1</p>
+<p>bsf : bound state filtering, default =2</p>
 <blockquote>
 <div>0=none
 1=basic
 2=full</div></blockquote>
-<p>bsl : bound state localization, default = 2</p>
+<p>bsl : bound state localization, default = 0</p>
 <blockquote>
-<div>0=Fast Eigenvalue
+<div>0=fast eigenvalue
 1=Newton
-2=Subsample and refine</div></blockquote>
-<p>niter : number of iterations for Newton bound state location, default = 10</p>
-<p>Dsub : number of samples used for ‘subsampling and refine’-method, default = 0 (auto)</p>
-<p>dst : type of discrete spectrum, default = 0</p>
+2=subsample and refine</div></blockquote>
+<p>niter : number of iterations for Newton bound state localization, default = 10</p>
+<p>dst : type of discrete spectrum, default = 2</p>
 <blockquote>
 <div>0=norming constants
 1=residues
@@ -464,31 +426,30 @@ If a more simplified version is desired, ‘nsev_inverse’ can be used (see doc
 2=2split4a
 3=2split4b
 4=BO</div></blockquote>
-<p>nf : normalization flag, default =  1</p>
+<p>nf : normalization flag, default = 1</p>
 <blockquote>
 <div>0=off
 1=on</div></blockquote>
 </div></blockquote>
 <p>Returns:</p>
 <blockquote>
-<div>options : NsevOptionsStruct with options for nsev</div></blockquote>
+<div><p>rdict : dictionary holding the fields (depending on options)</p>
+<blockquote>
+<div><p>return_value : return value from FNFT</p>
+<p>bound_states_num : number of bound states found</p>
+<p>bound_states : array of bound states found</p>
+<p>disc_norm : discrete spectrum - norming constants</p>
+<p>disc_res : discrete spectrum - residues</p>
+<p>cont_ref : continuous spectrum - reflection coefficient</p>
+<p>cont_a : continuous spectrum - scattering coefficient a</p>
+<p>cont_b : continuous spectrum - scattering coefficient b</p>
+</div></blockquote>
+</div></blockquote>
 </dd></dl>
 
 </div>
-<div class="section" id="options-structure">
-<h3>options structure<a class="headerlink" href="#options-structure" title="Permalink to this headline">¶</a></h3>
-<dl class="class">
-<dt id="FNFTpy.typesdef.NsevOptionsStruct">
-<em class="property">class </em><code class="descclassname">FNFTpy.typesdef.</code><code class="descname">NsevOptionsStruct</code><a class="headerlink" href="#FNFTpy.typesdef.NsevOptionsStruct" title="Permalink to this definition">¶</a></dt>
-<dd><p>Ctypes options struct for interfacing fnft_kdvv</p>
-</dd></dl>
-
-</div>
-</div>
-<span id="document-nsev_inverse"></span><div class="section" id="nonlinear-schroedinger-equation-with-vanishing-boundaries-inverse-nonlinear-fourier-transform">
-<h2>Nonlinear Schroedinger equation with vanishing boundaries - Inverse Nonlinear Fourier Transform<a class="headerlink" href="#nonlinear-schroedinger-equation-with-vanishing-boundaries-inverse-nonlinear-fourier-transform" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="nsev-inverse-wrapper-interact-with-fnft-library">
-<h3>nsev_inverse_wrapper - interact with FNFT library<a class="headerlink" href="#nsev-inverse-wrapper-interact-with-fnft-library" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="nsev-wrapper-interact-with-fnft-library">
+<h3>nsev_wrapper - interact with FNFT library<a class="headerlink" href="#nsev-wrapper-interact-with-fnft-library" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="FNFTpy.fnft_nsev_wrapper.nsev_wrapper">
 <code class="descclassname">FNFTpy.fnft_nsev_wrapper.</code><code class="descname">nsev_wrapper</code><span class="sig-paren">(</span><em>D</em>, <em>q</em>, <em>T1</em>, <em>T2</em>, <em>Xi1</em>, <em>Xi2</em>, <em>M</em>, <em>K</em>, <em>kappa</em>, <em>options</em><span class="sig-paren">)</span><a class="headerlink" href="#FNFTpy.fnft_nsev_wrapper.nsev_wrapper" title="Permalink to this definition">¶</a></dt>
@@ -524,66 +485,90 @@ If a more simplified version is desired, ‘nsev’ can be used (see documentati
 </dd></dl>
 
 </div>
-<div class="section" id="get-set-and-view-options-for-nsev-inverse-wrapper">
-<h3>get, set and view options for nsev_inverse_wrapper<a class="headerlink" href="#get-set-and-view-options-for-nsev-inverse-wrapper" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="get-set-and-view-options-for-nsev-wrapper">
+<h3>get, set and view options for nsev_wrapper<a class="headerlink" href="#get-set-and-view-options-for-nsev-wrapper" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
-<dt id="FNFTpy.options_handling.fnft_nsev_inverse_default_opts_wrapper">
-<code class="descclassname">FNFTpy.options_handling.</code><code class="descname">fnft_nsev_inverse_default_opts_wrapper</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#FNFTpy.options_handling.fnft_nsev_inverse_default_opts_wrapper" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the default options for nsev_inverse directly from the FNFT C-library.</p>
+<dt id="FNFTpy.options_handling.fnft_nsev_default_opts_wrapper">
+<code class="descclassname">FNFTpy.options_handling.</code><code class="descname">fnft_nsev_default_opts_wrapper</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#FNFTpy.options_handling.fnft_nsev_default_opts_wrapper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the default options for nsev directly from the FNFT C-library.</p>
 <p>Returns:</p>
 <blockquote>
-<div>options : NsevInverseOptionsStruct with options for nsev_inverse_wrapper</div></blockquote>
+<div>options : NsevOptionsStruct with options for nsev_wrapper</div></blockquote>
 </dd></dl>
 
 <dl class="function">
-<dt id="FNFTpy.options_handling.print_nsev_inverse_options">
-<code class="descclassname">FNFTpy.options_handling.</code><code class="descname">print_nsev_inverse_options</code><span class="sig-paren">(</span><em>opts=None</em><span class="sig-paren">)</span><a class="headerlink" href="#FNFTpy.options_handling.print_nsev_inverse_options" title="Permalink to this definition">¶</a></dt>
-<dd><p>Print options of a NsevInverseOptionsStruct for nsev_inverse.</p>
+<dt id="FNFTpy.options_handling.print_nsev_options">
+<code class="descclassname">FNFTpy.options_handling.</code><code class="descname">print_nsev_options</code><span class="sig-paren">(</span><em>opts=None</em><span class="sig-paren">)</span><a class="headerlink" href="#FNFTpy.options_handling.print_nsev_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print options of a NsevOptionsStruct.</p>
 <p>When called without additional argument, the default options from FNFT are printed.</p>
 <p>Optional arguments:</p>
 <blockquote>
-<div>opts : NsevInverseOptionsStruct, e.g. created by get_nsev_options()</div></blockquote>
+<div>opts : NsevOptionsStruct, e.g. created by get_nsev_options()</div></blockquote>
 </dd></dl>
 
 <dl class="function">
-<dt id="FNFTpy.options_handling.get_nsev_inverse_options">
-<code class="descclassname">FNFTpy.options_handling.</code><code class="descname">get_nsev_inverse_options</code><span class="sig-paren">(</span><em>dis=None</em>, <em>cst=None</em>, <em>csim=None</em>, <em>max_iter=None</em>, <em>osf=None</em><span class="sig-paren">)</span><a class="headerlink" href="#FNFTpy.options_handling.get_nsev_inverse_options" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get a NsevInverseOptionsStruct for use with nsev_inverse_wrapper.</p>
+<dt id="FNFTpy.options_handling.get_nsev_options">
+<code class="descclassname">FNFTpy.options_handling.</code><code class="descname">get_nsev_options</code><span class="sig-paren">(</span><em>bsf=None</em>, <em>bsl=None</em>, <em>niter=None</em>, <em>dst=None</em>, <em>cst=None</em>, <em>nf=None</em>, <em>dis=None</em><span class="sig-paren">)</span><a class="headerlink" href="#FNFTpy.options_handling.get_nsev_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a NsevOptionsStruct for use with nsev_wrapper.</p>
 <blockquote>
 <div>When called without additional optional arguments, the default values from FNFT are used.</div></blockquote>
 <p>Optional arguments:</p>
 <blockquote>
-<div><p>dis : discretization, default = 3</p>
+<div><p>bsf : bound state filtering, default = 2</p>
+<blockquote>
+<div>0=none
+1=basic
+2=full</div></blockquote>
+<p>bsl : bound state localization, default = 2</p>
+<blockquote>
+<div>0=fast eigenvalue
+1=Newton
+2=subsample and refine</div></blockquote>
+<p>niter : number of iterations for Newton bound state location, default = 10</p>
+<p>dst : type of discrete spectrum, default = 0</p>
+<blockquote>
+<div>0=norming constants
+1=residues
+2=both</div></blockquote>
+<p>cst : type of continuous spectrum, default = 0</p>
+<blockquote>
+<div>0=reflection coefficient
+1=a and b
+2=both</div></blockquote>
+<p>dis : discretization, default = 3</p>
 <blockquote>
 <div>0=2split2modal
 1=2split2a
 2=2split4a
 3=2split4b
 4=BO</div></blockquote>
-<p>cst : type of continuous spectrum, default = 0</p>
+<p>nf : normalization flag, default =  1</p>
 <blockquote>
-<div>0=Reflection coefficient
-1=B of tau</div></blockquote>
-<p>csim : inversion method for the continuous part, default = 0</p>
-<blockquote>
-<div>0=default
-1=Transfermatrix with reflection coefficients
-2=Transfermatrix with a,b from iteration</div></blockquote>
-<p>max_iter : maximum number of iterations for iterative methods, default = 100</p>
-<p>osf : oversampling factor</p>
+<div>0=off
+1=on</div></blockquote>
 </div></blockquote>
 <p>Returns:</p>
 <blockquote>
-<div>options : NsevInverseOptionsStruct with options for nsev_inverse_wrapper.</div></blockquote>
+<div>options : NsevOptionsStruct</div></blockquote>
 </dd></dl>
 
 </div>
 <div class="section" id="options-structure">
 <h3>options structure<a class="headerlink" href="#options-structure" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
-<dt id="FNFTpy.typesdef.NsevInverseOptionsStruct">
-<em class="property">class </em><code class="descclassname">FNFTpy.typesdef.</code><code class="descname">NsevInverseOptionsStruct</code><a class="headerlink" href="#FNFTpy.typesdef.NsevInverseOptionsStruct" title="Permalink to this definition">¶</a></dt>
-<dd><p>Ctypes options struct for interfacing fnft_nsev_inverse.</p>
+<dt id="FNFTpy.typesdef.NsevOptionsStruct">
+<em class="property">class </em><code class="descclassname">FNFTpy.typesdef.</code><code class="descname">NsevOptionsStruct</code><a class="headerlink" href="#FNFTpy.typesdef.NsevOptionsStruct" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ctypes options struct for interfacing fnft_nsev.</p>
+<p>Fields:</p>
+<blockquote>
+<div><p>bound_state_filtering</p>
+<p>bound_state_localization</p>
+<p>niter</p>
+<p>discspec_type</p>
+<p>contspec_type</p>
+<p>normalization_flag</p>
+<p>discretization</p>
+</div></blockquote>
 </dd></dl>
 
 </div>
@@ -612,12 +597,6 @@ If a more simplified version is desired, ‘nsev’ can be used (see documentati
 <dt id="FNFTpy.tests.nsevexample">
 <code class="descclassname">FNFTpy.tests.</code><code class="descname">nsevexample</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#FNFTpy.tests.nsevexample" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mimics the C example for calling fnft_nsev.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="FNFTpy.tests.nsevinversetest">
-<code class="descclassname">FNFTpy.tests.</code><code class="descname">nsevinversetest</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#FNFTpy.tests.nsevinversetest" title="Permalink to this definition">¶</a></dt>
-<dd><p>Mimics the C example for calling fnft_nsev_inverse.</p>
 </dd></dl>
 
 </div>
@@ -649,15 +628,9 @@ If a more simplified version is desired, ‘nsev’ can be used (see documentati
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="index.html#document-nsev">Nonlinear Schroedinger equation with vanishing boundaries</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="index.html#nsev-inverse-calculate-the-inverse-nonlinear-fourier-transform">nsev_inverse - calculate the Inverse Nonlinear Fourier Transform</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#nsev-inverse-wrapper-interact-with-fnft-library">nsev_inverse_wrapper - interact with FNFT library</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#get-set-and-view-options-for-nsev-inverse-wrapper">get, set and view options for nsev_inverse_wrapper</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#options-structure">options structure</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="index.html#document-nsev_inverse">Nonlinear Schroedinger equation with vanishing boundaries - Inverse Nonlinear Fourier Transform</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="index.html#nsev-inverse-wrapper-interact-with-fnft-library">nsev_inverse_wrapper - interact with FNFT library</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#get-set-and-view-options-for-nsev-inverse-wrapper">get, set and view options for nsev_inverse_wrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#nsev-calculate-the-nonlinear-fourier-transform">nsev - calculate the Nonlinear Fourier Transform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#nsev-wrapper-interact-with-fnft-library">nsev_wrapper - interact with FNFT library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#get-set-and-view-options-for-nsev-wrapper">get, set and view options for nsev_wrapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#options-structure">options structure</a></li>
 </ul>
 </li>
@@ -676,7 +649,7 @@ If a more simplified version is desired, ‘nsev’ can be used (see documentati
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Christoph Mahnke.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.5.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6.
     </div>
   </body>
 </html>

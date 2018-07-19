@@ -41,6 +41,8 @@ def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None):
     C-library and uses some default options.
     Own options can be set by passing optional arguments (see below).
 
+    Currently, only the contiuous spectrum is calculated.
+
     It converts all Python input into the C equivalent and returns the result from FNFT.
     If a more C-like interface is desired, the function 'kdvv_wrapper' can be used (see documentation there).
 
@@ -55,8 +57,8 @@ def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None):
 
     Optional arguments:
 
-        Xi1, Xi2 : min and max frequency for the continuous spectrum
-                   default = -2, 2
+
+        Xi1, Xi2 : min and max frequency for the continuous spectrum, default = [-2,2]
 
         dis : determines the discretization, default = 17
 
@@ -82,7 +84,7 @@ def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None):
 
     Returns:
 
-        rdict : dictionary holding the fields (depending on options)
+        rdict : dictionary holding the fields:
 
             return_value : return value from FNFT
 
@@ -109,6 +111,8 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
     If a more simplified version is desired, 'kdvv' can be used (see documentation there).
 
 
+    Currently, only the contiuous spectrum is calculated.
+
     Arguments:
 
         D : number of samples
@@ -127,7 +131,7 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
 
     Returns:
 
-        rdict : dictionary holding the fields (depending on options)
+        rdict : dictionary holding the fields:
 
             return_value : return value from FNFT
 
