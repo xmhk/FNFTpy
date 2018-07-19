@@ -26,7 +26,7 @@ Contributors:
 Christoph Mahnke, 2018
 
 """
-
+from warnings import warn
 
 def get_lib_path():
     """Return the path of the FNFT file.
@@ -66,3 +66,17 @@ def check_value(val, vmin, vmax, vtype=int):
         raise ValueError("Type mismatch expected {}, got {}".format(vtype, type(val)))
     if not (vmin <= val <= vmax):
         raise ValueError("Value Error: variable out of range")
+
+def check_return_code(rv):
+    """Check the return code of a library call. Give warning if Code is not 0.
+
+    Arguments:
+
+        rv : return value
+
+
+    """
+    if rv == 0:
+        pass
+    else:
+        warn("An error occured when calling FNFT: error code %d"%rv )

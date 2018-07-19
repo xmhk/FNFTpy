@@ -28,7 +28,7 @@ Christoph Mahnke, 2018
 """
 
 
-from .auxiliary import get_lib_path, check_value
+from .auxiliary import get_lib_path
 from .typesdef import *
 
 
@@ -101,7 +101,6 @@ def get_kdvv_options(dis=None):
     """
     opts = fnft_kdvv_default_opts_wrapper()
     if dis is not None:
-        check_value(dis, 0, 15)  # Discretization
         opts.discretization = dis
     return opts
 
@@ -183,19 +182,14 @@ def get_nsep_options(loc=None, filt=None, bb=None, maxev=None, dis=None, nf=None
     """
     opts = fnft_nsep_default_opts_wrapper()
     if loc is not None:
-        check_value(loc, 0, 2)  # Bound state localization
         opts.localization = loc
     if filt is not None:
-        check_value(filt, 0, 2)  # Bound state filtering
         opts.filtering = filt
     if nf is not None:
-        check_value(nf, 0, 1)  # Normflag
         opts.normalization_flag = nf
     if dis is not None:
-        check_value(dis, 0, 4)  # Discretization
         opts.discretization = dis
     if bb is not None:
-        # bbtype = 4 * ctypes_double
         opts.bounding_box[0] = bb[0]
         opts.bounding_box[1] = bb[1]
         opts.bounding_box[2] = bb[2]
@@ -298,26 +292,20 @@ def get_nsev_options(bsf=None, bsl=None, niter=None, Dsub=None, dst=None, cst=No
     """
     opts = fnft_nsev_default_opts_wrapper()
     if bsf is not None:
-        check_value(bsf, 0, 2)  # Bound state filtering
         opts.bound_state_filtering = bsf
     if bsl is not None:
-        check_value(bsl, 0, 2)  # Bound state localization
         opts.bound_state_localization = bsl
     if niter is not None:
         opts.niter = niter
     if Dsub is not None:
         opts.Dsub = Dsub
     if dst is not None:
-        check_value(dst, 0, 2)  # Discspec type
         opts.discspec_type = dst
     if cst is not None:
-        check_value(cst, 0, 2)  # Contspec type
         opts.contspec_type = cst
     if nf is not None:
-        check_value(nf, 0, 1)  # Normflag
         opts.normalization_flag = nf
     if dis is not None:
-        check_value(dis, 0, 4)  # Discretization
         opts.discretization = dis
     return opts
 

@@ -29,7 +29,7 @@ Christoph Mahnke, 2018
 
 
 from .typesdef import *
-from .auxiliary import *
+from .auxiliary import get_lib_path, check_return_code
 from .options_handling import print_nsev_options, get_nsev_options
 
 
@@ -242,6 +242,7 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
         nsev_discspec,
         nsev_kappa,
         ctypes.byref(options))
+    check_return_code(rv)
     K_new = nsev_K.value
     rdict = {
         'return_value': rv,

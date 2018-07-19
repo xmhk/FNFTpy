@@ -29,7 +29,7 @@ Christoph Mahnke, 2018
 
 
 from .typesdef import *
-from .auxiliary import get_lib_path
+from .auxiliary import get_lib_path, check_return_code
 from .options_handling import print_nsep_options, get_nsep_options
 
 
@@ -186,6 +186,7 @@ def nsep_wrapper(D, q, T1, T2, kappa,
         nsep_sheet_indices,
         nsep_kappa,
         ctypes.byref(options))
+    check_return_code(rv)
     rdict = {
         'return_value': rv,
         'K': nsep_K.value,
