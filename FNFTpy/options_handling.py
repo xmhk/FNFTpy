@@ -235,6 +235,7 @@ def print_nsev_options(opts=None):
     Optional arguments:
 
         opts : NsevOptionsStruct, e.g. created by get_nsev_options()
+
     """
 
     if opts is None:
@@ -293,6 +294,7 @@ def get_nsev_options(bsf=None, bsl=None, niter=None, Dsub=None, dst=None, cst=No
     Returns:
 
         options : NsevOptionsStruct
+
     """
     opts = fnft_nsev_default_opts_wrapper()
     if bsf is not None:
@@ -384,7 +386,8 @@ def get_nsev_inverse_options(dis=None, cst=None, csim=None, max_iter=None, osf=N
 
     Returns:
 
-        options : NsevInverseOptionsStruct with options for nsev_inverse_wrapper.
+        options : NsevInverseOptionsStruct
+
     """
     opts = fnft_nsev_inverse_default_opts_wrapper()
     if dis is not None:

@@ -110,6 +110,8 @@ class NsevOptionsStruct(ctypes.Structure):
 
         bound_state_localization
 
+        Dsub
+
         niter
 
         discspec_type
@@ -145,7 +147,21 @@ class NsevOptionsStruct(ctypes.Structure):
 
 
 class NsevInverseOptionsStruct(ctypes.Structure):
-    """Ctypes options struct for interfacing fnft_nsev_inverse."""
+    """Ctypes options struct for interfacing fnft_nsev_inverse.
+
+    Fields:
+
+        discretization
+
+        contspec_type
+
+        contspec_inversion_method
+
+        max_iter
+
+        oversampling_factor
+
+    """
     _fields_ = [
         ("discretization", ctypes_int),
         ("contspec_type", ctypes_int),

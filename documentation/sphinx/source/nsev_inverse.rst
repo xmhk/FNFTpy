@@ -7,7 +7,7 @@ Nonlinear Schroedinger equation with vanishing boundaries - Inverse Nonlinear Fo
 nsev_inverse_wrapper - interact with FNFT library
 -------------------------------------------------
 
-.. autofunction:: FNFTpy.fnft_nsev_wrapper.nsev_wrapper
+.. autofunction:: FNFTpy.fnft_nsev_inverse_wrapper.nsev_inverse_wrapper
 
 
 
