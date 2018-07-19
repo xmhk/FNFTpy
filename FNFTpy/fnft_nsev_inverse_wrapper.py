@@ -197,6 +197,7 @@ def nsev_inverse_wrapper(M, contspec, Xi1, Xi2, K, bound_states,
         nsev_kappa,
         ctypes.byref(options)
     )
+    check_return_code(rv)
     rdict = {
         'return_value': rv,
         'q': nsev_q,

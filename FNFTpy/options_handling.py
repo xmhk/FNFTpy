@@ -379,13 +379,10 @@ def get_nsev_inverse_options(dis=None, cst=None, csim=None, max_iter=None, osf=N
     """
     opts = fnft_nsev_inverse_default_opts_wrapper()
     if dis is not None:
-        check_value(dis, 0, 4)
         opts.discretization = dis
     if cst is not None:
-        check_value(cst, 0, 1)
         opts.contspec_type = cst
     if csim is not None:
-        check_value(csim, 0, 2)
         opts.contspec_inversion_method = csim
     if max_iter is not None:
         opts.max_iter = max_iter
