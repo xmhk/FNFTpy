@@ -170,3 +170,16 @@ the Nonlinear Fourier Transform of some input field.
         libstr = "/usr/local/lib/libfnft.so"  # example for linux
         return libstr        
     ```
+    
+    
+ # License 
+  
+FNFTpy is provided under the terms of the [GNU General Public License, version 2.](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
+
+# Contact and contribution
+
+* for bug reports, please use the github issue tracker
+
+* contributors: 
+
+    * Christoph Mahnke (chmhnk_at_googlemail_dot_com)
