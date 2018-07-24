@@ -1,14 +1,19 @@
 # FNFTpy - a wrapper for FNFT
 
-This module contains wrapper functions for [FNFT](https://github.com/FastNFT), a C library which allows to calculate
-the Nonlinear Fourier Transform of some input field.
+This module provides wrapper functions for [FNFT](https://github.com/FastNFT), 
+a library for the numerical computation of nonlinear Fourier transforms.
+
+For FNFTpy to work, a copy of FNFT has to be installed.
+For general information, source files and installation of FNFT,
+visit FNFT's github page: [https://github.com/FastNFT](https://github.com/FastNFT)
+
 
 ## current state - access functions from FNFT 0.1.1
 
 
 ### Korteweg-de-Fries equation with vanishing boundary conditions:
-  * currently, only the continuous spectrum is calculated
-  * function **kdvv**: 
+  * Currently, the continuous spectrum can be calculated.
+  * Function **kdvv**: 
     * easy-to-use Python function, options can be passed as optional arguments 
     * minimal example:
         ```
@@ -49,8 +54,8 @@ the Nonlinear Fourier Transform of some input field.
         
   
 ### Nonlinear Schroedinger Equation with periodic boundary conditions
-  * the main and auxiliary spectra can be calculated
-  * function **nsep**: 
+  * The main and auxiliary spectra can be calculated.
+  * Function **nsep**: 
     * easy-to-use Python function, options can be passed as optional arguments 
     * minimal example:
       ```
@@ -82,14 +87,14 @@ the Nonlinear Fourier Transform of some input field.
                                        np.imag(res['aux'][i])))
        ```
    * for full description call ```help(nsep)```
-  * function **nsep_wrapper**:
+  * Function **nsep_wrapper**:
     * mimics the function fnft_nsep from FNFT.
     * for full description call ```help(nsep_wrapper)```
      
   
 ### Nonlinear Schroedinger Equation with vanishing boundary conditions:
-  * the discrete and continuous spectra can be calculated
-  * function **nsev**:
+  * The discrete and continuous spectra can be calculated.
+  * Function **nsev**:
     * easy-to-use Python function, options can be passed as optional arguments 
     
     * minimal example:
@@ -128,7 +133,7 @@ the Nonlinear Fourier Transform of some input field.
         ```
     * for full description call ```help(nsev)```
         
-  * function **nsev_wrapper**:
+  * Function **nsev_wrapper**:
     * mimics the function fnft_nsev from FNFT.
     * for full description call ```help(nsev_wrapper)```
      
