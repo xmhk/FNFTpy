@@ -28,7 +28,7 @@ get, set and view options for nsep_wrapper
 
 .. autofunction:: FNFTpy.options_handling.get_nsep_options
 
-options structure
-------------------------------------------
+options NsepOptionsStruct
+-------------------------
 
 .. autoclass::    FNFTpy.typesdef.NsepOptionsStruct
