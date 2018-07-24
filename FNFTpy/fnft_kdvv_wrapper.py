@@ -41,7 +41,7 @@ def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None):
     C-library and uses some default options.
     Own options can be set by passing optional arguments (see below).
 
-    Currently, only the contiuous spectrum is calculated.
+    Currently, only the continuous spectrum is calculated.
 
     It converts all Python input into the C equivalent and returns the result from FNFT.
     If a more C-like interface is desired, the function 'kdvv_wrapper' can be used (see documentation there).

@@ -1,15 +1,20 @@
 # FNFTpy - a wrapper for FNFT
 
-This module contains wrapper functions for [FNFT](https://github.com/FastNFT), a C library which allows to calculate
-the Nonlinear Fourier Transform of some input field.
+This module provides wrapper functions for [FNFT](https://github.com/FastNFT), 
+a library for the numerical computation of nonlinear Fourier transforms.
+
+For FNFTpy to work, a copy of FNFT has to be installed.
+For general information, source files and installation of FNFT,
+visit FNFT's github page: [https://github.com/FastNFT](https://github.com/FastNFT)
+
 
 ## current state - access functions from FNFT version. ?????????
 
 
 ### Korteweg-de-Fries equation with vanishing boundary conditions:
-  * currently, only the continuous spectrum is calculated
-  * function **kdvv**: 
-    * easy-to-use python function, options can be passed as optional arguments 
+  * Currently, the continuous spectrum can be calculated.
+  * Function **kdvv**: 
+    * easy-to-use Python function, options can be passed as optional arguments 
     * minimal example:
         ```
         import numpy as np
@@ -49,9 +54,9 @@ the Nonlinear Fourier Transform of some input field.
         
   
 ### Nonlinear Schroedinger Equation with periodic boundary conditions
-  * the main and auxiliary spectra can be calculated
-  * function **nsep**: 
-    * easy-to-use python function, options can be passed as optional arguments 
+  * The main and auxiliary spectra can be calculated.
+  * Function **nsep**: 
+    * easy-to-use Python function, options can be passed as optional arguments 
     * minimal example:
       ```
       import numpy as np
@@ -82,15 +87,15 @@ the Nonlinear Fourier Transform of some input field.
                                        np.imag(res['aux'][i])))
        ```
    * for full description call ```help(nsep)```
-  * function **nsep_wrapper**:
+  * Function **nsep_wrapper**:
     * mimics the function fnft_nsep from FNFT.
     * for full description call ```help(nsep_wrapper)```
      
   
 ### Nonlinear Schroedinger Equation with vanishing boundary conditions:
-  * the discrete and continuous spectra can be calculated
-  * function **nsev**:
-    * easy-to-use python function, options can be passed as optional arguments 
+  * The discrete and continuous spectra can be calculated.
+  * Function **nsev**:
+    * easy-to-use Python function, options can be passed as optional arguments 
     
     * minimal example:
         ```
@@ -128,7 +133,7 @@ the Nonlinear Fourier Transform of some input field.
         ```
     * for full description call ```help(nsev)```
         
-  * function **nsev_wrapper**:
+  * Function **nsev_wrapper**:
     * mimics the function fnft_nsev from FNFT.
     * for full description call ```help(nsev_wrapper)```
      
@@ -137,12 +142,12 @@ the Nonlinear Fourier Transform of some input field.
 
   
 # Requirements
- * python 3
- * additional modules: numpy 
+ * Python 3
+ * additional Python module: NumPy (python-numpy)  
  
 # Setup
 
- * Add FNFTpy folder to your python path.
+ * Add FNFTpy folder to your Python path.
  * Of course, you need a compiled version of the FNFT C-library. See the
   [documentation for FNFT](https://github.com/FastNFT/FNFT) on how to build 
    the library on your device. 

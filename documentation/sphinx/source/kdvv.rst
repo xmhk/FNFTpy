@@ -28,7 +28,7 @@ get, set and view options for kdvv_wrapper
 
 .. autofunction:: FNFTpy.options_handling.get_kdvv_options
 
-options structure
------------------
+options KdvvOptionsStruct
+-------------------------
 
 .. autoclass::    FNFTpy.typesdef.KdvvOptionsStruct
