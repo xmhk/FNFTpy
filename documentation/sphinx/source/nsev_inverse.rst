@@ -21,7 +21,7 @@ get, set and view options for nsev_inverse_wrapper
 
 .. autofunction:: FNFTpy.options_handling.get_nsev_inverse_options
 
-options structure
------------------
+options NsevInverseOptionsStruct
+--------------------------------
 
 .. autoclass::    FNFTpy.typesdef.NsevInverseOptionsStruct
