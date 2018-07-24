@@ -164,8 +164,8 @@ def nsevinversetest():
     print(res['options'])
     print("\n------ results --------")
     print("FNFT return value: %d (should be 0)" % res['return_value'])
-    print("Total number of samples calculated: %d")
-    print("some sample - samples:")
+    print("Total number of samples calculated: %d"%D)
+    print("some samples:")
     for i in range(0, D, 64):
         print("  %d : q(t=%.5f) = %.5e + %.5e j "%(i, tvec[i],
                                                 np.real(res['q'][i]),
