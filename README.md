@@ -9,7 +9,7 @@ the Nonlinear Fourier Transform of some input field.
 ### Korteweg-de-Fries equation with vanishing boundary conditions:
   * currently, only the continuous spectrum is calculated
   * function **kdvv**: 
-    * easy-to-use python function, options can be passed as optional arguments 
+    * easy-to-use Python function, options can be passed as optional arguments 
     * minimal example:
         ```
         import numpy as np
@@ -51,7 +51,7 @@ the Nonlinear Fourier Transform of some input field.
 ### Nonlinear Schroedinger Equation with periodic boundary conditions
   * the main and auxiliary spectra can be calculated
   * function **nsep**: 
-    * easy-to-use python function, options can be passed as optional arguments 
+    * easy-to-use Python function, options can be passed as optional arguments 
     * minimal example:
       ```
       import numpy as np
@@ -90,7 +90,7 @@ the Nonlinear Fourier Transform of some input field.
 ### Nonlinear Schroedinger Equation with vanishing boundary conditions:
   * the discrete and continuous spectra can be calculated
   * function **nsev**:
-    * easy-to-use python function, options can be passed as optional arguments 
+    * easy-to-use Python function, options can be passed as optional arguments 
     
     * minimal example:
         ```
@@ -135,12 +135,12 @@ the Nonlinear Fourier Transform of some input field.
   
   
 # Requirements
- * python 3
- * additional modules: numpy 
+ * Python 3
+ * additional Python module: NumPy (python-numpy)  
  
 # Setup
 
- * Add FNFTpy folder to your python path.
+ * Add FNFTpy folder to your Python path.
  * Of course, you need a compiled version of the FNFT C-library. See the
   [documentation for FNFT](https://github.com/FastNFT/FNFT) on how to build 
    the library on your device. 
