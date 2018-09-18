@@ -32,9 +32,9 @@ from FNFTpy import *
 
 
 # detect some general errors
-#nsevtest()
-#kdvvtest()
-#nseptest()
+nsevtest()
+kdvvtest()
+nseptest()
 
 # mimic the example files
 
@@ -43,4 +43,3 @@ nsepexample()
 nsevexample()
 
 print_default_options()
-
