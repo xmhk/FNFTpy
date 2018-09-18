@@ -173,7 +173,6 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
         type(kdvv_nullptr),  # boundstates
         type(kdvv_nullptr),  # normconsts res
         ctypes.POINTER(KdvvOptionsStruct)]  # options ptr
-    options.discretization=20
     rv = clib_kdvv_func(
         kdvv_D,
         kdvv_u,
