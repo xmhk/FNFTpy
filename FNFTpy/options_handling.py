@@ -342,7 +342,7 @@ def print_nsev_inverse_options(opts=None):
     print(repr(opts))
 
 
-def get_nsev_inverse_options(dis=None, cst=None, csim=None, max_iter=None, osf=None):
+def get_nsev_inverse_options(dis=None, cst=None, csim=None, dst=None, max_iter=None, osf=None):
     """Get a NsevInverseOptionsStruct for use with nsev_inverse_wrapper.
 
         When called without additional optional arguments, the default values from FNFT are used.
@@ -368,6 +368,11 @@ def get_nsev_inverse_options(dis=None, cst=None, csim=None, max_iter=None, osf=N
             1=Transfermatrix with reflection coefficients
             2=Transfermatrix with a,b from iteration
 
+        dst : type of discrete spectrum
+
+            0 = norming constants
+            1 = residues
+
         max_iter : maximum number of iterations for iterative methods, default = 100
 
         osf : oversampling factor
@@ -384,6 +389,8 @@ def get_nsev_inverse_options(dis=None, cst=None, csim=None, max_iter=None, osf=N
         opts.contspec_type = cst
     if csim is not None:
         opts.contspec_inversion_method = csim
+    if dst is not None:
+        opts.discspec_type = dst
     if max_iter is not None:
         opts.max_iter = max_iter
     if osf is not None:

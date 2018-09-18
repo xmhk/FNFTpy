@@ -32,15 +32,16 @@ from FNFTpy import *
 
 
 # detect some general errors
-nsevtest()
-kdvvtest()
-nseptest()
+#nsevtest()
+#kdvvtest()
+#nseptest()
 
 # mimic the example files
 
-kdvvexample()
-nsepexample()
-nsevexample()
+#kdvvexample()
+#nsepexample()
+#nsevexample()
 nsevinversetest()
 
-print_default_options()
+#print_default_options()
+

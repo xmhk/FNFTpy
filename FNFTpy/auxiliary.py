@@ -45,7 +45,10 @@ def get_lib_path():
         libstr = "/usr/local/lib/libfnft.so"  # example for linux
 
     """
-    libstr = "/usr/local/lib/libfnft-devel.so"  # example for linux
+    libstr = "/usr/local/lib/libfnft.so.0.1.1-dev"  # example for linux
+    #libstr = "/usr/local/lib/libfnft-devel.so"  # example for linux
+
+
     return libstr
 
 

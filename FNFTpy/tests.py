@@ -144,7 +144,7 @@ def nsevinversetest():
     # set values
     M = 2048
     D = 1024
-    dis = 1
+    dis = 4
     tvec = np.linspace(-2, 2, D)
     alpha = 2.0
     beta = -0.55
@@ -158,6 +158,10 @@ def nsevinversetest():
 
     # call function
     res = nsev_inverse(contspec, tvec, kappa, osf=8)
+
+    nsev_inverse_wrapper(M, contspec, Xi1, Xi2, K, bound_states,
+                         normconst_or_residues, D, T1, T2, kappa,
+                         options)
 
     # print results
     print("\n----- options used ----")

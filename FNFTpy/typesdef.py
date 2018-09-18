@@ -157,6 +157,8 @@ class NsevInverseOptionsStruct(ctypes.Structure):
 
         contspec_inversion_method
 
+        discspec_type
+
         max_iter
 
         oversampling_factor
@@ -166,16 +168,18 @@ class NsevInverseOptionsStruct(ctypes.Structure):
         ("discretization", ctypes_int),
         ("contspec_type", ctypes_int),
         ("contspec_inversion_method", ctypes_int),
+        ("discspec_type", ctypes_int),
         ("max_iter", ctypes_uint),
         ("oversampling_factor", ctypes_uint)]
 
 
     def __repr__(self):
-        s = "  discretization              : dis " + repr(self.discretization)
-        s += "\n  contspec_type               : cst " + repr(self.contspec_type)
-        s += "\n  contspec_inversion_method   : csim " + repr(self.contspec_inversion_method)
-        s += "\n  maxium number of iterations : max_iter " + repr(self.max_iter)
-        s += "\n  oversampling factor         : osf " + repr(self.oversampling_factor)
+        s = "  discretization               : dis " + repr(self.discretization)
+        s += "\n  contspec_type                : cst " + repr(self.contspec_type)
+        s += "\n  contspec_inversion_method    : csim " + repr(self.contspec_inversion_method)
+        s += "\n  discspec_type                : dst " + repr(self.discspec_type)
+        s += "\n  maximum number of iterations : max_iter " + repr(self.max_iter)
+        s += "\n  oversampling factor          : osf " + repr(self.oversampling_factor)
         return s
 
 

@@ -31,8 +31,9 @@ from .typesdef import *
 from .auxiliary import *
 from .options_handling import get_nsev_inverse_options
 
-def nsev_inverse(contspec, tvec, kappa, dis=1,
-                 cst=0, csim=0, max_iter=100, osf=8):
+def nsev_inverse(contspec, tvec, kappa, dis=4,
+                 cst=None, csim=None,  dst=None, max_iter=None, osf=None):
+
     """Calculate the  Inverse Nonlinear Fourier Transform for the Nonlinear Schroedinger equation with vanishing boundaries.
 
     This function is intended to be 'clutter-free', which means it automatically calculates some variables
@@ -61,6 +62,11 @@ def nsev_inverse(contspec, tvec, kappa, dis=1,
                 2=2split4A
                 3=2split4B
                 4=BO
+
+        dst : type of discrete spectrum
+
+            0 = norming constants
+            1 = residues
 
         cst : type of continuous spectrum, default = 0
 
@@ -97,7 +103,7 @@ def nsev_inverse(contspec, tvec, kappa, dis=1,
     rv, tmpxi = nsev_inverse_xi_wrapper(D, T1, T2, M, dis)
     if rv != 0:
         raise ValueError("nsev_inverse_xi calculation failed")
-    options = get_nsev_inverse_options(dis, cst, csim, max_iter, osf)
+    options = get_nsev_inverse_options(dis, cst, csim, dst, max_iter, osf)
     rdict = nsev_inverse_wrapper(M, contspec, tmpxi[0], tmpxi[1], K, None, None, D, T1, T2, kappa, options)
     return rdict
 
