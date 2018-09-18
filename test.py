@@ -41,7 +41,48 @@ from FNFTpy import *
 #kdvvexample()
 #nsepexample()
 #nsevexample()
-nsevinversetest()
+#nsevinversetest()
 
 #print_default_options()
 
+def nsevinversetest2():
+    from matplotlib import pyplot as plt
+
+    tvec = np.linspace(-15,15,16*128)
+    feld = 0.3 / np.cosh(tvec)
+    D = len(tvec)
+    M = len(tvec)
+    res, xi = nsev_inverse_xi_wrapper(D, tvec[0], tvec[-1], M, dis=4)
+    print(res, xi)
+
+    res2 = nsev(feld, tvec, xi[0], xi[1], dis=4, cst=2,M=M)
+    print(res2.keys())
+    contspec = res2['cont_ref']
+    print(len(contspec))
+    boundstates=0
+    normres=0
+    kappa=1
+    options = get_nsev_inverse_options()
+    res3 = nsev_inverse_wrapper(M, contspec, xi[0], xi[1],0,boundstates, normres,
+                                D, tvec[0], tvec[-1],
+                                kappa, options)
+    opts2 = get_nsev_inverse_options(cst=1)
+    contspec=res2['cont_b']
+    res4 = nsev_inverse_wrapper(M, contspec, xi[0], xi[1],0,boundstates, normres,
+                                D, tvec[0], tvec[-1],
+                                kappa, opts2)
+
+    print(res3.keys())
+    plt.figure()
+    plt.subplot(131)
+    plt.plot(np.abs(res3['q']),'o')
+    plt.plot(np.angle(res3['q']))
+    plt.subplot(132)
+    plt.plot(np.abs(feld),'x')
+    plt.plot(np.angle(feld),'--')
+    plt.subplot(133)
+    plt.plot(np.abs(res4['q']),'o')
+    plt.plot(np.angle(res4['q']))
+    plt.show()
+nsevinversetest2()
+#help(nsev)
