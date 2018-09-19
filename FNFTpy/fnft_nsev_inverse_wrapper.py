@@ -161,7 +161,6 @@ def nsev_inverse_wrapper(M, contspec, Xi1, Xi2, K, bound_states,
     nsev_Xi[0] = Xi1
     nsev_Xi[1] = Xi2
     nsev_K = ctypes_uint(K)
-    print(K)
     if K>0:  # at least one bound state present
         nsev_boundstates = np.zeros(K,dtype=numpy_complex)
         nsev_boundstates[:] = bound_states[:]
@@ -183,8 +182,6 @@ def nsev_inverse_wrapper(M, contspec, Xi1, Xi2, K, bound_states,
     nsev_T[1] = T2
     nsev_kappa = ctypes_int(kappa)
     nsev_q = np.zeros(nsev_D.value, dtype=numpy_complex)
-    print(nsev_dstype)
-    print(nsev_bstype)
     clib_nsev_inverse_func.argtypes = [
         type(nsev_M),
         np.ctypeslib.ndpointer(dtype=numpy_complex,
