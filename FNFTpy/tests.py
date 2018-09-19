@@ -143,18 +143,27 @@ def nsevinversetest():
 
     # set values
     M = 2048
+    K=0
     D = 1024
-    dis = 4
     tvec = np.linspace(-2, 2, D)
+    T1 = tvec[0]
+    T2 = tvec[-1]
     alpha = 2.0
     beta = -0.55
     kappa = 1
+    bound_states=None
+    normconst_or_residues=None
+
+    options = get_nsev_inverse_options()
 
     # get xi for our parameters
-    rv, XI = nsev_inverse_xi_wrapper(D, np.min(tvec),
-                                     np.max(tvec), M, dis)
+    rv, XI = nsev_inverse_xi_wrapper(D, T1,
+                                     T2, M, dis=options.discretization)
     Xiv = XI[0] + np.arange(M) * (XI[1] - XI[0]) / (M - 1)
     contspec = alpha / (Xiv - beta * 1.0j)
+
+    Xi1 = XI[0]
+    Xi2 = XI[1]
 
     # call function
     res = nsev_inverse(contspec, tvec, kappa, osf=8)

@@ -135,5 +135,11 @@ def nsevinversetest3():
 
 #nsevinversetest2()
 
-nsevinversetest3()
+#nsevinversetest3()
 #help(nsev)
+
+#print_default_options()
+
+#print_nsev_inverse_options()
+
+nsevinversetest()
