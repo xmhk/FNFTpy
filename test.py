@@ -142,4 +142,42 @@ def nsevinversetest3():
 
 #print_nsev_inverse_options()
 
-nsevinversetest()
+#nsevinversetest()
+
+
+tvec = np.linspace(-10,10, 1024)
+q = 1.3/np.cosh(tvec)
+
+res = nsev(q, tvec, dst=2, cst=2)
+
+print(res.keys())
+
+from matplotlib import pyplot as plt
+
+plt.figure()
+
+def plri(x):
+    plt.plot(np.real(x), np.imag(x))
+def plap(x):
+    plt.plot(np.abs(x))
+    plt.plot(np.angle(x),'--')
+
+plt.subplot(231)
+plri(res['cont_ref'])
+plt.subplot(234)
+plap(res['cont_ref'])
+
+plt.subplot(232)
+plri(res['cont_a'])
+plt.subplot(235)
+plap(res['cont_a'])
+
+plt.subplot(233)
+plri(res['cont_b'])
+plt.subplot(236)
+plap(res['cont_b'])
+#plt.plot(np.abs(res['cont_ref']))
+#plt.plot(np.angle(res['cont_ref']))
+#plt.plot(np.real(res['cont_ref']), np.imag(res['cont_ref']))
+print(res['cont_b'])
+plt.show()

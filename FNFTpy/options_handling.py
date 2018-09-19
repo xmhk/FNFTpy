@@ -360,13 +360,15 @@ def get_nsev_inverse_options(dis=None, cst=None, csim=None, dst=None, max_iter=N
         cst : type of continuous spectrum, default = 0
 
             0=Reflection coefficient
-            1=B of tau
+            1=b of xi
+            2=b of tau
 
         csim : inversion method for the continuous part, default = 0
 
             0=default
             1=Transfermatrix with reflection coefficients
             2=Transfermatrix with a,b from iteration
+            3=seed potential
 
         dst : type of discrete spectrum
 

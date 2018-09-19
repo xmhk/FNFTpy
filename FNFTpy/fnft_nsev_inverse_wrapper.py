@@ -71,13 +71,15 @@ def nsev_inverse(contspec, tvec, kappa, dis=4,
         cst : type of continuous spectrum, default = 0
 
                 0=reflection coefficient
-                1=b of tau
+                1=b of xi
+                2=b of tau
 
         csim : type of inverse method for continuous spectrum, default = 0
 
                 0=default
                 1=TF-matrix contains reflection coeff.
                 2=TF-matrix contains a,b from iteration
+                3=seed potential
 
         max_iter : maximum number of iterations (continuous spectrum), default = 100
 
