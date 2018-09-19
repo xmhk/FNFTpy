@@ -126,11 +126,11 @@ def nsev_inverse_wrapper(M, contspec, Xi1, Xi2, K, bound_states,
 
         Xi1, Xi2  : frequencies defining the frequency range (cont spectrum)
 
-        K : number of bound states (currently no effect)
+        K : number of bound states
 
-        bound_states : bound states (currently no effect)
+        bound_states : bound states
 
-        normconst_or_residues : bound state spectral coefficients (currently no effect)
+        normconst_or_residues : bound state spectral coefficients
 
         D : number of samples for the output field
 
@@ -153,6 +153,7 @@ def nsev_inverse_wrapper(M, contspec, Xi1, Xi2, K, bound_states,
     fnft_clib = ctypes.CDLL(get_lib_path())
     clib_nsev_inverse_func = fnft_clib.fnft_nsev_inverse
     clib_nsev_inverse_func.restype = ctypes_int
+    nsev_nullptr = ctypes.POINTER(ctypes.c_int)()
     nsev_M = ctypes_uint(M)
     nsev_contspec = np.zeros(M, dtype=numpy_complex)
     nsev_contspec[:] = contspec[:]
@@ -160,15 +161,30 @@ def nsev_inverse_wrapper(M, contspec, Xi1, Xi2, K, bound_states,
     nsev_Xi[0] = Xi1
     nsev_Xi[1] = Xi2
     nsev_K = ctypes_uint(K)
-    # nsev_boundstates = np.zeros(K,dtype=numpy_complex)
-    # nsev_discspec = np.zeros(K, dtype=numpy_complex)
+    print(K)
+    if K>0:  # at least one bound state present
+        nsev_boundstates = np.zeros(K,dtype=numpy_complex)
+        nsev_boundstates[:] = bound_states[:]
+        nsev_discspec = np.zeros(K, dtype=numpy_complex)
+        nsev_discspec[:]=normconst_or_residues[:]
+        nsev_bstype = np.ctypeslib.ndpointer(dtype=numpy_complex,
+                               ndim=1, flags='C')
+        nsev_dstype = np.ctypeslib.ndpointer(dtype=numpy_complex,
+                               ndim=1, flags='C')
+    else: # no bound states
+        nsev_boundstates = nsev_nullptr
+        nsev_discspec =nsev_nullptr
+        nsev_bstype = type(nsev_nullptr)
+        nsev_dstype = type(nsev_nullptr)
+
     nsev_D = ctypes_uint(D)
     nsev_T = np.zeros(2, dtype=numpy_double)
     nsev_T[0] = T1
     nsev_T[1] = T2
     nsev_kappa = ctypes_int(kappa)
     nsev_q = np.zeros(nsev_D.value, dtype=numpy_complex)
-    nsev_nullptr = ctypes.POINTER(ctypes.c_int)()
+    print(nsev_dstype)
+    print(nsev_bstype)
     clib_nsev_inverse_func.argtypes = [
         type(nsev_M),
         np.ctypeslib.ndpointer(dtype=numpy_complex,
@@ -176,12 +192,8 @@ def nsev_inverse_wrapper(M, contspec, Xi1, Xi2, K, bound_states,
         np.ctypeslib.ndpointer(dtype=ctypes_double,
                                ndim=1, flags='C'),  # xi
         type(nsev_K),
-        type(nsev_nullptr),  # boundstates (tmp)
-        # np.ctypeslib.ndpointer(dtype=numpy_complex,
-        #                       ndim=1, flags='C'),  # boundstates
-        type(nsev_nullptr),  # normconst_res (tmp)
-        # np.ctypeslib.ndpointer(dtype=numpy_complex,
-        #                       ndim=1, flags='C'),  # normconst res
+        nsev_bstype, # boundstates type
+        nsev_dstype, # normconstants or residues type
         type(nsev_D),
         np.ctypeslib.ndpointer(dtype=numpy_complex,
                                ndim=1, flags='C'),  # q
@@ -195,8 +207,8 @@ def nsev_inverse_wrapper(M, contspec, Xi1, Xi2, K, bound_states,
         nsev_contspec,
         nsev_Xi,
         nsev_K,
-        nsev_nullptr,  # boundstates
-        nsev_nullptr,  # normconst
+        nsev_boundstates,
+        nsev_discspec,
         nsev_D,
         nsev_q,
         nsev_T,
