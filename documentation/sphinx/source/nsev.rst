@@ -4,7 +4,7 @@
 Nonlinear Schroedinger equation with vanishing boundaries
 =========================================================
 
-nsev - calculate the Inverse Nonlinear Fourier Transform
+nsev - calculate the Nonlinear Fourier Transform
 --------------------------------------------------------
 
 .. autofunction:: FNFTpy.fnft_nsev_wrapper.nsev

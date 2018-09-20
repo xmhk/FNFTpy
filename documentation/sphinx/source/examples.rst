@@ -11,3 +11,5 @@ example functions
 .. autofunction:: FNFTpy.tests.nsevexample
 
 .. autofunction:: FNFTpy.tests.nsevinverseexample
+
+.. autofunction:: FNFTpy.tests.nsevinverseexample2

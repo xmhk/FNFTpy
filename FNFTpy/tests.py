@@ -182,7 +182,7 @@ def nsevinverseexample():
 
 
 def nsevinverseexample2():
-    """nsev_inverse example: create a N=2.2 Satsuma-Yajima pulse from nonlinear spectrum."""
+    """nsev_inverse_example: create a N=2.2 Satsuma-Yajima pulse from nonlinear spectrum."""
     D = 1024
     M = 2*D
     Tmax = 15

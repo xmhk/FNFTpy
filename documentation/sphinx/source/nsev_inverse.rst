@@ -9,6 +9,12 @@ nsev_inverse_xi_wrapper
 .. autofunction:: FNFTpy.nsev_inverse_xi_wrapper
 
 
+nsev_inverse - calculate the Inverse Nonlinear Fourier Transform
+----------------------------------------------------------------
+
+.. autofunction:: FNFTpy.fnft_nsev_inverse_wrapper.nsev_inverse
+
+
 nsev_inverse_wrapper - interact with FNFT library
 -------------------------------------------------
 
