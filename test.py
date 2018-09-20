@@ -30,6 +30,9 @@ Christoph Mahnke, 2018
 import numpy as np
 from FNFTpy import *
 
+# genereal info
+print_fnft_version()
+
 
 # detect some general errors
 #nsevtest()
@@ -41,8 +44,7 @@ from FNFTpy import *
 #kdvvexample()
 #nsepexample()
 #nsevexample()
-#nsevinversetest()
-
+nsevinverseexample()
 #print_default_options()
 
 def nsevinversetest2():
@@ -184,5 +186,3 @@ plt.show()
 
 """
 
-print_fnft_version()
-print_default_options()

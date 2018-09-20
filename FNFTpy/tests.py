@@ -140,7 +140,7 @@ def nsevexample():
                                                                  np.real(res['disc_norm'][i]),
                                                                  np.imag(res['disc_norm'][i])))
 
-def nsevinversetest():
+def nsevinverseexample():
     """Mimics the C example for calling fnft_nsev_inverse."""
     print("\nnsev inverse example")
 
@@ -160,17 +160,14 @@ def nsevinversetest():
     options = get_nsev_inverse_options()
 
     # get xi for our parameters
-    rv, XI = nsev_inverse_xi_wrapper(D, T1,
-                                     T2, M, dis=options.discretization)
+    rv, XI = nsev_inverse_xi_wrapper(D, T1, T2, M, dis=options.discretization)
+    Xi1 = XI[0]
+    Xi2 = XI[1]
     Xiv = XI[0] + np.arange(M) * (XI[1] - XI[0]) / (M - 1)
     contspec = alpha / (Xiv - beta * 1.0j)
 
-    Xi1 = XI[0]
-    Xi2 = XI[1]
-
     # call function
     res = nsev_inverse(contspec, tvec, kappa, osf=8)
-
     nsev_inverse_wrapper(M, contspec, Xi1, Xi2, K, bound_states,
                          normconst_or_residues, D, T1, T2, kappa,
                          options)

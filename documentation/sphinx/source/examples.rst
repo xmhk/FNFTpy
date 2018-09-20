@@ -10,4 +10,4 @@ example functions
 
 .. autofunction:: FNFTpy.tests.nsevexample
 
-.. autofunction:: FNFTpy.tests.nsevinversetest
+.. autofunction:: FNFTpy.tests.nsevinverseexample
