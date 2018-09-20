@@ -27,7 +27,7 @@ Christoph Mahnke, 2018
 
 """
 
-from .auxiliary import get_lib_path
+from .auxiliary import get_lib_path, get_fnft_version, print_fnft_version
 
 # import wrapper functions
 from .fnft_kdvv_wrapper import kdvv_wrapper, kdvv

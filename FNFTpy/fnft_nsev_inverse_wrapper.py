@@ -126,13 +126,15 @@ def nsev_inverse_wrapper(M, contspec, Xi1, Xi2, K, bound_states,
 
         contspec : numpy array holding the samples of the continuous spectrum
 
-        Xi1, Xi2  : frequencies defining the frequency range (cont spectrum)
+        Xi1, Xi2  : frequencies defining the frequency range of the continuous spectrum.
+                    ! Currently, the positions returned by nsev_inverse_xi_wrapper must be used !
+
 
         K : number of bound states
 
-        bound_states : bound states
+        bound_states : bound states (can be None if K=0)
 
-        normconst_or_residues : bound state spectral coefficients
+        normconst_or_residues : bound state spectral coefficients (can be None if K=0)
 
         D : number of samples for the output field
 
@@ -224,7 +226,7 @@ def nsev_inverse_wrapper(M, contspec, Xi1, Xi2, K, bound_states,
 
 
 def nsev_inverse_xi_wrapper(D, T1, T2, M, dis):
-    """Helper function for nsev_inverse to calculate the spectral borders from the time window.
+    """Helper function for nsev_inverse to calculate the spectral borders for a given time window.
 
     Return value is an array holding the position of the first and the last spectral
     sample to be used for nsev_inverse.

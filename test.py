@@ -144,7 +144,7 @@ def nsevinversetest3():
 
 #nsevinversetest()
 
-
+"""
 tvec = np.linspace(-10,10, 1024)
 q = 1.3/np.cosh(tvec)
 
@@ -181,3 +181,8 @@ plap(res['cont_b'])
 #plt.plot(np.real(res['cont_ref']), np.imag(res['cont_ref']))
 print(res['cont_b'])
 plt.show()
+
+"""
+
+print_fnft_version()
+print_default_options()

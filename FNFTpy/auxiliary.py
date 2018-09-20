@@ -27,6 +27,8 @@ Christoph Mahnke, 2018
 
 """
 from warnings import warn
+from .typesdef import *
+
 
 def get_lib_path():
     """Return the path of the FNFT file.
@@ -41,15 +43,77 @@ def get_lib_path():
     Example paths:
 
         libstr = "C:/Libraries/local/libfnft.dll"  # example for windows
+
         libstr = "C:\\Libraries\\local\\libfnft.dll" # windows - with backslash
+
         libstr = "/usr/local/lib/libfnft.so"  # example for linux
 
     """
-    libstr = "/usr/local/lib/libfnft.so.0.1.1-dev"  # example for linux
+    #libstr = "/usr/local/lib/libfnft.so.0.1.1-dev"  # example for linux
+    libstr = "/usr/local/lib/libfnft.so.0.2.0-beta"
     #libstr = "/usr/local/lib/libfnft-devel.so"  # example for linux
-
-
     return libstr
+
+
+def get_fnft_version():
+    """
+    Get the version of FNFT used by calling fnft_version.
+
+    Returns:
+
+        rdict: dictionary holding the fields:
+
+            return_value : return value from FNFT
+
+            major : major version number
+
+            minor : minor version number
+
+            patch : patch level
+
+            suffix : suffix string
+            -
+    """
+    suffix_maxlen = 8  # defined in  FNFT/include/fnft_config.h.in
+    fnft_clib = ctypes.CDLL(get_lib_path())
+    clib_versionf = fnft_clib.fnft_version
+    clib_versionf.restype = ctypes_int
+    version_major = ctypes_uint(0)
+    version_minor = ctypes_uint(0)
+    version_patch = ctypes_uint(0)
+    suffix_buff = ctypes.create_string_buffer(suffix_maxlen)
+    clib_versionf.argtypes = [
+        ctypes.POINTER(ctypes_uint),
+        ctypes.POINTER(ctypes_uint),
+        ctypes.POINTER(ctypes_uint),
+        type(suffix_buff)]
+
+    rv = clib_versionf(ctypes.byref(version_major),
+                       ctypes.byref(version_minor),
+                       ctypes.byref(version_patch),
+                       suffix_buff)
+    check_return_code(rv)
+
+    rdict = {
+        'return value': rv,
+        'major': int(version_major.value),
+        'minor': int(version_minor.value),
+        'patch': int(version_patch.value),
+        'suffix': suffix_buff.value.decode('UTF-8')}
+    return rdict
+
+
+def print_fnft_version():
+    """
+    Prints the  path and the version of FNFT library used.
+    """
+    pathloc = get_lib_path()
+    versiondict = get_fnft_version()
+    print("\n FNFT library location: %s" % pathloc)
+    print("               version: %d.%d.%d%s" % (versiondict['major'],
+                                                  versiondict['minor'],
+                                                  versiondict['patch'],
+                                                  versiondict['suffix']))
 
 
 def check_value(val, vmin, vmax, vtype=int):
@@ -76,7 +140,6 @@ def check_return_code(rv):
     Arguments:
 
         rv : return value
-
 
     """
     if rv == 0:

@@ -16,6 +16,8 @@ Welcome to FNFTpy's documentation!
 
    moduleinfo.rst
 
+   aux.rst
+
    kdvv.rst
    
    nsep.rst

@@ -9,10 +9,13 @@
     <title>FNFTpy 0.1 documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" /> 
   </head><body>
@@ -51,6 +54,36 @@ GNU General Public License for more details.</p>
 along with this program. If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
 <p>Contributors:</p>
 <p>Christoph Mahnke, 2018</p>
+</div>
+<span id="document-aux"></span><div class="section" id="auxiliary-functions">
+<h2>Auxiliary functions<a class="headerlink" href="#auxiliary-functions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="get-and-print-fnft-version">
+<h3>get and print FNFT version<a class="headerlink" href="#get-and-print-fnft-version" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="FNFTpy.get_fnft_version">
+<code class="descclassname">FNFTpy.</code><code class="descname">get_fnft_version</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#FNFTpy.get_fnft_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the version of FNFT used by calling fnft_version.</p>
+<p>Returns:</p>
+<blockquote>
+<div><p>rdict: dictionary holding the fields:</p>
+<blockquote>
+<div><p>return_value : return value from FNFT</p>
+<p>major : major version number</p>
+<p>minor : minor version number</p>
+<p>patch : patch level</p>
+<p>suffix : suffix string
+-</p>
+</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="FNFTpy.print_fnft_version">
+<code class="descclassname">FNFTpy.</code><code class="descname">print_fnft_version</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#FNFTpy.print_fnft_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints the  path and the version of FNFT library used.</p>
+</dd></dl>
+
+</div>
 </div>
 <span id="document-kdvv"></span><div class="section" id="korteweg-de-fries-equation">
 <h2>Korteweg-de-Fries equation<a class="headerlink" href="#korteweg-de-fries-equation" title="Permalink to this headline">¶</a></h2>
@@ -582,6 +615,29 @@ If a more simplified version is desired, ‘nsev’ can be used (see documentati
 </div>
 <span id="document-nsev_inverse"></span><div class="section" id="nonlinear-schroedinger-equation-with-vanishing-boundaries-inverse-nonlinear-fourier-transform">
 <h2>Nonlinear Schroedinger equation with vanishing boundaries - Inverse Nonlinear Fourier Transform<a class="headerlink" href="#nonlinear-schroedinger-equation-with-vanishing-boundaries-inverse-nonlinear-fourier-transform" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="nsev-inverse-xi-wrapper">
+<h3>nsev_inverse_xi_wrapper<a class="headerlink" href="#nsev-inverse-xi-wrapper" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="FNFTpy.nsev_inverse_xi_wrapper">
+<code class="descclassname">FNFTpy.</code><code class="descname">nsev_inverse_xi_wrapper</code><span class="sig-paren">(</span><em>D</em>, <em>T1</em>, <em>T2</em>, <em>M</em>, <em>dis</em><span class="sig-paren">)</span><a class="headerlink" href="#FNFTpy.nsev_inverse_xi_wrapper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function for nsev_inverse to calculate the spectral borders for a given time window.</p>
+<p>Return value is an array holding the position of the first and the last spectral
+sample to be used for nsev_inverse.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p>D : number of sample points for the time window</p>
+<p>T1, T2 : borders of the time window</p>
+<p>M : number of samples for the continuous spectrum</p>
+<p>dis : nse discretization parameter</p>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><p>rv : return value of the C-function</p>
+<p>xi : two-element C double vector containing XI borders</p>
+</div></blockquote>
+</dd></dl>
+
+</div>
 <div class="section" id="nsev-inverse-wrapper-interact-with-fnft-library">
 <h3>nsev_inverse_wrapper - interact with FNFT library<a class="headerlink" href="#nsev-inverse-wrapper-interact-with-fnft-library" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
@@ -595,10 +651,13 @@ If a more simplified version is desired, ‘nsev_inverse’ can be used (see doc
 <blockquote>
 <div><p>M : number of sample points for continuous spectrum</p>
 <p>contspec : numpy array holding the samples of the continuous spectrum</p>
-<p>Xi1, Xi2  : frequencies defining the frequency range (cont spectrum)</p>
-<p>K : number of bound states (currently no effect)</p>
-<p>bound_states : bound states (currently no effect)</p>
-<p>normconst_or_residues : bound state spectral coefficients (currently no effect)</p>
+<dl class="docutils">
+<dt>Xi1, Xi2 <span class="classifier-delimiter">:</span> <span class="classifier">frequencies defining the frequency range of the continuous spectrum.</span></dt>
+<dd>! Currently, the positions returned by nsev_inverse_xi_wrapper must be used !</dd>
+</dl>
+<p>K : number of bound states</p>
+<p>bound_states : bound states (can be None if K=0)</p>
+<p>normconst_or_residues : bound state spectral coefficients (can be None if K=0)</p>
 <p>D : number of samples for the output field</p>
 <p>T1, T2 : borders of the desired time window</p>
 <p>kappa : +1/-1 for focussing / defocussing NSE</p>
@@ -639,7 +698,7 @@ If a more simplified version is desired, ‘nsev_inverse’ can be used (see doc
 
 <dl class="function">
 <dt id="FNFTpy.options_handling.get_nsev_inverse_options">
-<code class="descclassname">FNFTpy.options_handling.</code><code class="descname">get_nsev_inverse_options</code><span class="sig-paren">(</span><em>dis=None</em>, <em>cst=None</em>, <em>csim=None</em>, <em>max_iter=None</em>, <em>osf=None</em><span class="sig-paren">)</span><a class="headerlink" href="#FNFTpy.options_handling.get_nsev_inverse_options" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">FNFTpy.options_handling.</code><code class="descname">get_nsev_inverse_options</code><span class="sig-paren">(</span><em>dis=None</em>, <em>cst=None</em>, <em>csim=None</em>, <em>dst=None</em>, <em>max_iter=None</em>, <em>osf=None</em><span class="sig-paren">)</span><a class="headerlink" href="#FNFTpy.options_handling.get_nsev_inverse_options" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get a NsevInverseOptionsStruct for use with nsev_inverse_wrapper.</p>
 <blockquote>
 <div>When called without additional optional arguments, the default values from FNFT are used.</div></blockquote>
@@ -655,12 +714,18 @@ If a more simplified version is desired, ‘nsev_inverse’ can be used (see doc
 <p>cst : type of continuous spectrum, default = 0</p>
 <blockquote>
 <div>0=Reflection coefficient
-1=B of tau</div></blockquote>
+1=b of xi
+2=b of tau</div></blockquote>
 <p>csim : inversion method for the continuous part, default = 0</p>
 <blockquote>
 <div>0=default
 1=Transfermatrix with reflection coefficients
-2=Transfermatrix with a,b from iteration</div></blockquote>
+2=Transfermatrix with a,b from iteration
+3=seed potential</div></blockquote>
+<p>dst : type of discrete spectrum</p>
+<blockquote>
+<div>0 = norming constants
+1 = residues</div></blockquote>
 <p>max_iter : maximum number of iterations for iterative methods, default = 100</p>
 <p>osf : oversampling factor</p>
 </div></blockquote>
@@ -681,6 +746,7 @@ If a more simplified version is desired, ‘nsev_inverse’ can be used (see doc
 <div><p>discretization</p>
 <p>contspec_type</p>
 <p>contspec_inversion_method</p>
+<p>discspec_type</p>
 <p>max_iter</p>
 <p>oversampling_factor</p>
 </div></blockquote>
@@ -693,7 +759,7 @@ If a more simplified version is desired, ‘nsev_inverse’ can be used (see doc
 <dl class="function">
 <dt id="FNFTpy.tests.print_default_options">
 <code class="descclassname">FNFTpy.tests.</code><code class="descname">print_default_options</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#FNFTpy.tests.print_default_options" title="Permalink to this definition">¶</a></dt>
-<dd><p>Print the default options for kdvv, nsep and nsev.</p>
+<dd><p>Print the default options for kdvv, nsep, nsev and nsev_inverse.</p>
 </dd></dl>
 
 <dl class="function">
@@ -730,10 +796,14 @@ If a more simplified version is desired, ‘nsev_inverse’ can be used (see doc
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html#document-index">Table Of Contents</a></h3>
+  <h3><a href="index.html#document-index">Table of Contents</a></h3>
   <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="index.html#document-moduleinfo">Module overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-aux">Auxiliary functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#get-and-print-fnft-version">get and print FNFT version</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="index.html#document-kdvv">Korteweg-de-Fries equation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="index.html#kdvv-calculate-the-nonlinear-fourier-transform">kdvv - calculate the Nonlinear Fourier Transform</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#kdvv-wrapper-interact-with-fnft-library">kdvv_wrapper - interact with FNFT library</a></li>
@@ -756,6 +826,7 @@ If a more simplified version is desired, ‘nsev_inverse’ can be used (see doc
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="index.html#document-nsev_inverse">Nonlinear Schroedinger equation with vanishing boundaries - Inverse Nonlinear Fourier Transform</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#nsev-inverse-xi-wrapper">nsev_inverse_xi_wrapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#nsev-inverse-wrapper-interact-with-fnft-library">nsev_inverse_wrapper - interact with FNFT library</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#get-set-and-view-options-for-nsev-inverse-wrapper">get, set and view options for nsev_inverse_wrapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#options-nsevinverseoptionsstruct">options NsevInverseOptionsStruct</a></li>
@@ -776,7 +847,7 @@ If a more simplified version is desired, ‘nsev_inverse’ can be used (see doc
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Christoph Mahnke.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.0.
     </div>
   </body>
 </html>

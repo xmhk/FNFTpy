@@ -34,7 +34,7 @@ from .fnft_nsev_inverse_wrapper import *
 
 
 def print_default_options():
-    """Print the default options for kdvv, nsep and nsev."""
+    """Print the default options for kdvv, nsep, nsev and nsev_inverse."""
 
     
     kdvvopts = get_kdvv_options()
@@ -45,6 +45,9 @@ def print_default_options():
 
     nsevopts = get_nsev_options()
     print("\n ----\n nsev default options:\n %s \n\n" % repr(nsevopts))
+
+    nsevinverseopts = get_nsev_inverse_options()
+    print("\n ----\n nsev inverse default options:\n %s \n\n" % repr(nsevinverseopts))
 
 
 def kdvvexample():

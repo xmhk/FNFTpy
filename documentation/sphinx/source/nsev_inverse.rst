@@ -3,6 +3,11 @@
 Nonlinear Schroedinger equation with vanishing boundaries - Inverse Nonlinear Fourier Transform
 ===============================================================================================
 
+nsev_inverse_xi_wrapper
+-----------------------
+
+.. autofunction:: FNFTpy.nsev_inverse_xi_wrapper
+
 
 nsev_inverse_wrapper - interact with FNFT library
 -------------------------------------------------
