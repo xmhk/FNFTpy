@@ -146,7 +146,7 @@ def nsevinverseexample():
 
     # set values
     M = 2048
-    K=0
+    K = 0
     D = 1024
     tvec = np.linspace(-2, 2, D)
     T1 = tvec[0]
@@ -159,7 +159,7 @@ def nsevinverseexample():
 
     options = get_nsev_inverse_options()
 
-    # get xi for our parameters
+    # get the frequency intervall suited for the given time vector
     rv, XI = nsev_inverse_xi_wrapper(D, T1, T2, M, dis=options.discretization)
     Xi1 = XI[0]
     Xi2 = XI[1]
@@ -167,8 +167,8 @@ def nsevinverseexample():
     contspec = alpha / (Xiv - beta * 1.0j)
 
     # call function
-    res = nsev_inverse(contspec, tvec, kappa, osf=8)
-    nsev_inverse_wrapper(M, contspec, Xi1, Xi2, K, bound_states,
+
+    res = nsev_inverse_wrapper(M, contspec, Xi1, Xi2, K, bound_states,
                          normconst_or_residues, D, T1, T2, kappa,
                          options)
 

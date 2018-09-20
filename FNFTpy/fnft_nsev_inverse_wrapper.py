@@ -31,9 +31,9 @@ from .typesdef import *
 from .auxiliary import *
 from .options_handling import get_nsev_inverse_options
 
-def nsev_inverse(contspec, tvec, kappa, dis=4,
-                 cst=None, csim=None,  dst=None, max_iter=None, osf=None):
 
+def nsev_inverse(contspec, tvec, kappa, dis=4,
+                 cst=None, csim=None, dst=None, max_iter=None, osf=None):
     """Calculate the  Inverse Nonlinear Fourier Transform for the Nonlinear Schroedinger equation with vanishing boundaries.
 
     This function is intended to be 'clutter-free', which means it automatically calculates some variables
@@ -95,6 +95,7 @@ def nsev_inverse(contspec, tvec, kappa, dis=4,
             q : time field resulting from inverse transform
 
             options : options for nsev_inverse as NsevInverseOptionsStruct
+
 
     """
     M = len(contspec)
@@ -165,18 +166,18 @@ def nsev_inverse_wrapper(M, contspec, Xi1, Xi2, K, bound_states,
     nsev_Xi[0] = Xi1
     nsev_Xi[1] = Xi2
     nsev_K = ctypes_uint(K)
-    if K>0:  # at least one bound state present
-        nsev_boundstates = np.zeros(K,dtype=numpy_complex)
+    if K > 0:  # at least one bound state present
+        nsev_boundstates = np.zeros(K, dtype=numpy_complex)
         nsev_boundstates[:] = bound_states[:]
         nsev_discspec = np.zeros(K, dtype=numpy_complex)
-        nsev_discspec[:]=normconst_or_residues[:]
+        nsev_discspec[:] = normconst_or_residues[:]
         nsev_bstype = np.ctypeslib.ndpointer(dtype=numpy_complex,
-                               ndim=1, flags='C')
+                                             ndim=1, flags='C')
         nsev_dstype = np.ctypeslib.ndpointer(dtype=numpy_complex,
-                               ndim=1, flags='C')
-    else: # no bound states
+                                             ndim=1, flags='C')
+    else:  # no bound states
         nsev_boundstates = nsev_nullptr
-        nsev_discspec =nsev_nullptr
+        nsev_discspec = nsev_nullptr
         nsev_bstype = type(nsev_nullptr)
         nsev_dstype = type(nsev_nullptr)
 
@@ -193,8 +194,8 @@ def nsev_inverse_wrapper(M, contspec, Xi1, Xi2, K, bound_states,
         np.ctypeslib.ndpointer(dtype=ctypes_double,
                                ndim=1, flags='C'),  # xi
         type(nsev_K),
-        nsev_bstype, # boundstates type
-        nsev_dstype, # normconstants or residues type
+        nsev_bstype,  # boundstates type
+        nsev_dstype,  # normconstants or residues type
         type(nsev_D),
         np.ctypeslib.ndpointer(dtype=numpy_complex,
                                ndim=1, flags='C'),  # q
@@ -250,7 +251,7 @@ def nsev_inverse_xi_wrapper(D, T1, T2, M, dis):
 
     """
     fnft_clib = ctypes.CDLL(get_lib_path())
-    clib_nsev_inverse_xi_func  = fnft_clib.fnft_nsev_inverse_XI
+    clib_nsev_inverse_xi_func = fnft_clib.fnft_nsev_inverse_XI
     clib_nsev_inverse_xi_func.restype = ctypes_int
     nsev_D = ctypes_uint(D)
     nsev_T = np.zeros(2, dtype=numpy_double)

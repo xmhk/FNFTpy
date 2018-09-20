@@ -140,7 +140,8 @@ last update of FNFTpy: 20.09.2018
     * for full description call ```help(nsev_wrapper)```
      
 ### Nonlinear Schroedinger Equation with vanishing boundary conditions (Inverse Transformation): 
- * still to be documented 
+ * Perform the Inverse Nonlinear Fourier transform: the temporal field is calculated from the nonlinear spectrum.
+ * the continuous part and (optional) the discrete part of the spectrum can be given.  
 
   
 # Requirements
