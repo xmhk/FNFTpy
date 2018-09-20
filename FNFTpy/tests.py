@@ -198,6 +198,8 @@ def nsevinverseexample2():
     bound_states = np.array([0.7j, 1.7j])
     disc_norming_const_ana = [1.0, -1.0]
     cont_b_ana = 0.587783 / np.cosh(xivec * np.pi) * np.exp(1.0j * np.pi)
+
+    # call the function
     res = nsev_inverse(xivec, tvec, cont_b_ana, bound_states, disc_norming_const_ana, cst=1, dst=0)
 
     # compare result to analytic function

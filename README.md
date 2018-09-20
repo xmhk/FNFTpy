@@ -143,7 +143,40 @@ last update of FNFTpy: 20.09.2018
  * Perform the Inverse Nonlinear Fourier transform: the temporal field is calculated from the nonlinear spectrum.
  * the continuous part and (optional) the discrete part of the spectrum can be given.  
 
-  
+ * function **nsev_inverse**
+    * easy-to-use Python function, options can be passed as optional arguments 
+    * minimal example:
+         ```
+         from FNFTpy import nsev_inverse, nsev_inverse_xi_wrapper
+        import numpy as np
+        
+        D = 1024
+        M = 2*D
+        Tmax = 15
+        tvec = np.linspace(-Tmax, Tmax, D)
+        # calculate suitable frequency bonds (xi)
+        rv, xi = nsev_inverse_xi_wrapper(D, tvec[0], tvec[-1], M)
+        xivec = xi[0] + np.arange(M) * (xi[1] - xi[0]) / (M - 1)
+        
+        # analytic field: chirp-free N=2.2 Satsuma-Yajima pulse
+        q = 2.2 / np.cosh(tvec)
+        
+        # semi-analytic nonlinear spectrum
+        bound_states = np.array([0.7j, 1.7j])
+        disc_norming_const_ana = [1.0, -1.0]
+        cont_b_ana = 0.587783 / np.cosh(xivec * np.pi) * np.exp(1.0j * np.pi)
+        
+        # call the function
+        res = nsev_inverse(xivec, tvec, cont_b_ana, bound_states, disc_norming_const_ana, cst=1, dst=0)
+        
+        # compare result to analytic function
+        print("\n\nnsev-inverse example: Satsuma-Yajima N=2.2")
+        print("Difference analytic - numeric: sum((q_ana-q_num)**2) = %.2e  (should be approx 0) "%np.sum(np.abs(q-res['q'])**2))        
+         ```
+         
+  * Function **nsev_inverse_wrapper**:
+    * mimics the function fnft_nsev_inverse from FNFT.
+    * for full description call ```help(nsev_inverse_wrapper)```
 # Requirements
  * Python 3
  * additional Python module: NumPy (python-numpy)  
