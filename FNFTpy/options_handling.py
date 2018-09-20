@@ -349,7 +349,7 @@ def get_nsev_inverse_options(dis=None, cst=None, csim=None, dst=None, max_iter=N
 
     Optional arguments:
 
-        dis : discretization, default = 3
+        dis : discretization, default = 4
 
             0=2split2modal
             1=2split2a
@@ -377,7 +377,7 @@ def get_nsev_inverse_options(dis=None, cst=None, csim=None, dst=None, max_iter=N
 
         max_iter : maximum number of iterations for iterative methods, default = 100
 
-        osf : oversampling factor
+        osf : oversampling factor, default = 8
 
     Returns:
 

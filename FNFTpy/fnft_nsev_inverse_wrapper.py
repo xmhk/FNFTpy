@@ -32,8 +32,8 @@ from .auxiliary import *
 from .options_handling import get_nsev_inverse_options
 
 
-def nsev_inverse(contspec, tvec, kappa, dis=4,
-                 cst=None, csim=None, dst=None, max_iter=None, osf=None):
+def nsev_inverse(xivec, tvec, contspec, bound_states, discspec,
+                  dis=None, cst=None, csim=None, dst=None, max_iter=None, osf=None, kappa=1):
     """Calculate the  Inverse Nonlinear Fourier Transform for the Nonlinear Schroedinger equation with vanishing boundaries.
 
     This function is intended to be 'clutter-free', which means it automatically calculates some variables
@@ -42,72 +42,65 @@ def nsev_inverse(contspec, tvec, kappa, dis=4,
     It converts all Python input into the C equivalent and returns the result from FNFT.
     If a more C-like interface is desired, the function 'nsev_inverse_wrapper' can be used (see documentation there).
 
-    !!! Currently, time and frequency vector can not be chosen independently.
-    The frequency vector used is calculated from the time vector set.
+
+    !!! Attention: time and frequency vector can not be choosen independently (yet).
+      use nsev_inverse_xi_wrapper to calculate xivec forom tvec !!!
 
     Arguments:
 
-        M : number of sample points for continuous spectrum
+       xivec: frequency vector
 
-        tvec : output time vector
+       tvec: time vection
 
-        kappa : +1/-1 for focussing / defocussing NSE
+       contspec: continuous spectrum (of xi)
+
+       bound_states: array holding the bound states. Pass None if no bound states present.
+
+       discspec: discrete spectrum. Pass None if no bound states present.
+
 
     Optional arguments:
 
-        dis : discretization, default = 1
+        dis : discretization, default = 4
 
-                0=2split2_MODAL
-                1=2split2A
-                2=2split4A
-                3=2split4B
-                4=BO
+            0=2split2modal
+            1=2split2a
+            2=2split4a
+            3=2split4b
+            4=BO
+
+        cst : type of continuous spectrum, default = 0
+
+            0=Reflection coefficient
+            1=b of xi
+            2=b of tau
+
+        csim : inversion method for the continuous part, default = 0
+
+            0=default
+            1=Transfermatrix with reflection coefficients
+            2=Transfermatrix with a,b from iteration
+            3=seed potential
 
         dst : type of discrete spectrum
 
             0 = norming constants
             1 = residues
 
-        cst : type of continuous spectrum, default = 0
-
-                0=reflection coefficient
-                1=b of xi
-                2=b of tau
-
-        csim : type of inverse method for continuous spectrum, default = 0
-
-                0=default
-                1=TF-matrix contains reflection coeff.
-                2=TF-matrix contains a,b from iteration
-                3=seed potential
-
-        max_iter : maximum number of iterations (continuous spectrum), default = 100
+        max_iter : maximum number of iterations for iterative methods, default = 100
 
         osf : oversampling factor, default = 8
 
-
-    Returns:
-
-        rdict : dictionary holding the fields (depending on options)
-
-            return_value : return value from FNFT
-
-            q : time field resulting from inverse transform
-
-            options : options for nsev_inverse as NsevInverseOptionsStruct
-
-
     """
-    M = len(contspec)
+    M = len(xivec)
     D = len(tvec)
-    T1 = np.min(tvec)
-    T2 = np.max(tvec)
-    K = 0
-    rv, tmpxi = nsev_inverse_xi_wrapper(D, T1, T2, M, dis)
-    if rv != 0:
-        raise ValueError("nsev_inverse_xi calculation failed")
+    if bound_states is not None:
+        K = len(bound_states)
+    else:
+        K = 0
     options = get_nsev_inverse_options(dis, cst, csim, dst, max_iter, osf)
-    rdict = nsev_inverse_wrapper(M, contspec, tmpxi[0], tmpxi[1], K, None, None, D, T1, T2, kappa, options)
+    rdict = nsev_inverse_wrapper(M, contspec, xivec[0], xivec[-1], K, bound_states, discspec, D, tvec[0], tvec[-1],
+                                 kappa, options)
     return rdict
 
 
@@ -226,7 +219,7 @@ def nsev_inverse_wrapper(M, contspec, Xi1, Xi2, K, bound_states,
     return rdict
 
 
-def nsev_inverse_xi_wrapper(D, T1, T2, M, dis):
+def nsev_inverse_xi_wrapper(D, T1, T2, M, dis=None):
     """Helper function for nsev_inverse to calculate the spectral borders for a given time window.
 
     Return value is an array holding the position of the first and the last spectral
@@ -241,7 +234,15 @@ def nsev_inverse_xi_wrapper(D, T1, T2, M, dis):
 
         M : number of samples for the continuous spectrum
 
-        dis : nse discretization parameter
+    Optional Arguments:
+
+        dis : nse discretization parameter, default = 4
+
+            0=2split2modal
+            1=2split2a
+            2=2split4a
+            3=2split4b
+            4=BO
 
     Returns:
 
@@ -259,6 +260,9 @@ def nsev_inverse_xi_wrapper(D, T1, T2, M, dis):
     nsev_T[1] = T2
     nsev_M = ctypes_uint(M)
     nsev_Xi = np.zeros(2, dtype=numpy_double)
+    if dis is None:
+        tmpopts = get_nsev_inverse_options()
+        dis = tmpopts.discretization
     nsev_dis = ctypes_int32(dis)
     clib_nsev_inverse_xi_func.argtypes = [
         type(nsev_D),  # D
@@ -266,5 +270,5 @@ def nsev_inverse_xi_wrapper(D, T1, T2, M, dis):
         type(nsev_M),  # M
         np.ctypeslib.ndpointer(dtype=ctypes_double, ndim=1, flags='C'),  # xi
         type(nsev_dis)]
-    rv = clib_nsev_inverse_xi_func(nsev_D, nsev_T, nsev_M, nsev_Xi, dis)
+    rv = clib_nsev_inverse_xi_func(nsev_D, nsev_T, nsev_M, nsev_Xi, nsev_dis)
     return rv, nsev_Xi

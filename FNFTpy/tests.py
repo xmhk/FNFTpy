@@ -140,6 +140,7 @@ def nsevexample():
                                                                  np.real(res['disc_norm'][i]),
                                                                  np.imag(res['disc_norm'][i])))
 
+
 def nsevinverseexample():
     """Mimics the C example for calling fnft_nsev_inverse."""
     print("\nnsev inverse example")
@@ -154,35 +155,55 @@ def nsevinverseexample():
     alpha = 2.0
     beta = -0.55
     kappa = 1
-    bound_states=None
-    normconst_or_residues=None
-
-    options = get_nsev_inverse_options()
+    bound_states = None
+    normconst_or_residues = None
 
     # get the frequency intervall suited for the given time vector
-    rv, XI = nsev_inverse_xi_wrapper(D, T1, T2, M, dis=options.discretization)
+    rv, XI = nsev_inverse_xi_wrapper(D, T1, T2, M)
     Xi1 = XI[0]
     Xi2 = XI[1]
-    Xiv = XI[0] + np.arange(M) * (XI[1] - XI[0]) / (M - 1)
-    contspec = alpha / (Xiv - beta * 1.0j)
+    xivec = XI[0] + np.arange(M) * (XI[1] - XI[0]) / (M - 1)
+    contspec = alpha / (xivec - beta * 1.0j)
 
     # call function
-
-    res = nsev_inverse_wrapper(M, contspec, Xi1, Xi2, K, bound_states,
-                         normconst_or_residues, D, T1, T2, kappa,
-                         options)
+    res = nsev_inverse(xivec, tvec, contspec, None, None)
 
     # print results
     print("\n----- options used ----")
     print(res['options'])
     print("\n------ results --------")
     print("FNFT return value: %d (should be 0)" % res['return_value'])
-    print("Total number of samples calculated: %d"%D)
+    print("Total number of samples calculated: %d" % D)
     print("some samples:")
     for i in range(0, D, 64):
-        print("  %d : q(t=%.5f) = %.5e + %.5e j "%(i, tvec[i],
-                                                np.real(res['q'][i]),
-                                                np.imag(res['q'][i])))
+        print("  %d : q(t=%.5f) = %.5e + %.5e j " % (i, tvec[i],
+                                                     np.real(res['q'][i]),
+                                                     np.imag(res['q'][i])))
+
+
+def nsevinverseexample2():
+    """nsev_inverse example: create a N=2.2 Satsuma-Yajima pulse from nonlinear spectrum."""
+    D = 1024
+    M = 2*D
+    Tmax = 15
+    tvec = np.linspace(-Tmax, Tmax, D)
+    # calculate suitable frequency bonds (xi)
+    rv, xi = nsev_inverse_xi_wrapper(D, tvec[0], tvec[-1], M)
+    xivec = xi[0] + np.arange(M) * (xi[1] - xi[0]) / (M - 1)
+
+    # analytic field: chirp-free N=2.2 Satsuma-Yajima pulse
+    q = 2.2 / np.cosh(tvec)
+
+    # semi-analytic nonlinear spectrum
+    bound_states = np.array([0.7j, 1.7j])
+    disc_norming_const_ana = [1.0, -1.0]
+    cont_b_ana = 0.587783 / np.cosh(xivec * np.pi) * np.exp(1.0j * np.pi)
+    res = nsev_inverse(xivec, tvec, cont_b_ana, bound_states, disc_norming_const_ana, cst=1, dst=0)
+
+    # compare result to analytic function
+    print("\n\nnsev-inverse example: Satsuma-Yajima N=2.2")
+    print("Difference analytic - numeric: sum((q_ana-q_num)**2) = %.2e  (should be approx 0) "%np.sum(np.abs(q-res['q'])**2))
+
 
 def kdvvtest():
     print("KDVV test")
