@@ -48,57 +48,63 @@ def nsep(q, T1, T2, kappa=1, loc=None, filt=None, bb=None,
 
     Arguments:
 
-        q : numpy array holding the samples of the input field
-
-        T1, T2  : time positions of the first and the (D+1) sample, where D is the number of samples
-
+    * q : numpy array holding the samples of the input field
+    * T1, T2  : time positions of the first and the (D+1) sample, where D is the number of samples
 
     Optional arguments:
 
-        kappa : +/- 1 for focussing/defocussing nonlinearity, default = 1
+    * kappa : +/- 1 for focussing/defocussing nonlinearity, default = 1
+    * loc : localization method for the spectrum, default = 2
+        * 0 = subsample and refine
+        * 1 = gridsearch
+        * 2 = mixed
 
-        loc : localization method for the spectrum, default = 2
+    * filt : filtering of spectrum, default = 2
+        * 0 = none
+        * 1 = manual
+        * 2 = auto
 
-            0=subsample and refine
-            1=gridsearch
-            2=mixed
+    * bb: bounding box used for manual filtering, default = [-inf, inf, -inf, inf]
+    * maxev : maximum number of evaluations for root refinement, default = 20
+    * nf : normalization flag default = 1
+        * 0 = off
+        * 1 = on
 
-        filt : filtering of spectrum, default = 2
+    * dis : discretization, default = 4
+        * 0 = 2SPLIT2_MODAL
+        * 1 = BO
+        * 2 = 2SPLIT1A
+        * 3 = 2SPLIT1B
+        * 4 = 2SPLIT2A
+        * 5 = 2SPLIT2B
+        * 6 = 2SPLIT2S
+        * 7 = 2SPLIT3A
+        * 8 = 2SPLIT3B
+        * 9 = 2SPLIT3S
+        * 10 = 2SPLIT4A
+        * 11 = 2SPLIT4B
+        * 12 = 2SPLIT5A
+        * 13 = 2SPLIT5B
+        * 14 = 2SPLIT6A
+        * 15 = 2SPLIT6B
+        * 16 = 2SPLIT7A
+        * 17 = 2SPLIT7B
+        * 18 = 2SPLIT8A
+        * 19 = 2SPLIT8B
 
-            0=none
-            1=manual
-            2=auto
-
-        bb: bounding box used for manual filtering, default = [-inf, inf, -inf, inf]
-
-        maxev : maximum number of evaluations for root refinement, default = 20
-
-        nf : normalization flag default = 1
-
-            0=off
-            1=on
-
-        dis : discretization, default = 2
-
-            0=2split2modal
-            1=2split2a
-            2=2split4a
-            3=2split4b
-            4=BO
+    * nf : normalization flag, default=1
+        * 0 = off
+        * 1 = on
 
     Returns:
 
-        rdict : dictionary holding the fields (depending on options)
-
-            return_value : return value from FNFT
-
-            K : number of points in the main spectrum
-
-            main : main spectrum
-
-            M: number of points in the auxiliary spectrum
-
-            aux: auxiliary spectrum
+    * rdict : dictionary holding the fields (depending on options)
+        * return_value : return value from FNFT
+        * K : number of points in the main spectrum
+        * main : main spectrum
+        * M: number of points in the auxiliary spectrum
+        * aux: auxiliary spectrum
+        * options : NsepOptionsStruct with options used
 
         """
     D = len(q)
@@ -115,34 +121,26 @@ def nsep_wrapper(D, q, T1, T2, kappa,
     It converts all Python input into the C equivalent and returns the result from FNFT.
     If a more simplified version is desired, 'nsep' can be used (see documentation there).
 
-
     Arguments:
 
-        D : number of sample points
-
-        q : numpy array holding the samples of the input field
-
-        T1, T2  : time positions of the first and the (D+1) sample
-
-        kappa   : +/- 1 for focussing/defocussing nonlinearity
-
-        options : options for nsep as NsepOptionsStruct. Can be generated e.g. with 'get_nsep_options()'
+    * D : number of sample points
+    * q : numpy array holding the samples of the input field
+    * T1, T2  : time positions of the first and the (D+1) sample
+    * kappa   : +/- 1 for focussing/defocussing nonlinearity
+    * options : options for nsep as NsepOptionsStruct. Can be generated e.g. with 'get_nsep_options()'
 
     Returns:
 
-        rdict : dictionary holding the fields (depending on options)
-
-            return_value : return value from FNFT
-
-            K : number of points in the main spectrum
-
-            main : main spectrum
-
-            M: number of points in the auxiliary spectrum
-
-            aux: auxiliary spectrum
+    * rdict : dictionary holding the fields (depending on options)
+        * return_value : return value from FNFT
+        * K : number of points in the main spectrum
+        * main : main spectrum
+        * M: number of points in the auxiliary spectrum
+        * aux: auxiliary spectrum
+        * options : NsepOptionsStruct with options used
 
     """
+
     fnft_clib = ctypes.CDLL(get_lib_path())
     clib_nsep_func = fnft_clib.fnft_nsep
     clib_nsep_func.restype = ctypes_int

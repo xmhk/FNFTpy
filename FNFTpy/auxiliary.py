@@ -61,18 +61,13 @@ def get_fnft_version():
 
     Returns:
 
-        rdict: dictionary holding the fields:
+    * rdict: dictionary holding the fields:
+        * return_value : return value from FNFT
+        * major : major version number
+        * minor : minor version number
+        * patch : patch level
+        * suffix : suffix string
 
-            return_value : return value from FNFT
-
-            major : major version number
-
-            minor : minor version number
-
-            patch : patch level
-
-            suffix : suffix string
-            -
     """
     suffix_maxlen = 8  # defined in  FNFT/include/fnft_config.h.in
     fnft_clib = ctypes.CDLL(get_lib_path())
@@ -119,15 +114,15 @@ def print_fnft_version():
 def check_value(val, vmin, vmax, vtype=int):
     """Raise and ValueError when variable has wrong type or is out of range.
 
-        Arguments:
+    Arguments:
 
-            val : variable to check
-            vmin : minimum value val should take
-            vmax : maximum value val should take
+    * val : variable to check
+    * vmin : minimum value val should take
+    * vmax : maximum value val should take
 
-        Optional arguments:
+    Optional arguments:
 
-            vtype : type val should take
+    * vtype : type val should take
     """
     if type(val) != vtype:
         raise ValueError("Type mismatch expected {}, got {}".format(vtype, type(val)))
@@ -139,7 +134,7 @@ def check_return_code(rv):
 
     Arguments:
 
-        rv : return value
+    * rv : return value
 
     """
     if rv == 0:

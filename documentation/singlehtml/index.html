@@ -64,17 +64,20 @@ along with this program. If not, see &lt;<a class="reference external" href="htt
 <code class="descclassname">FNFTpy.</code><code class="descname">get_fnft_version</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#FNFTpy.get_fnft_version" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the version of FNFT used by calling fnft_version.</p>
 <p>Returns:</p>
-<blockquote>
-<div><p>rdict: dictionary holding the fields:</p>
-<blockquote>
-<div><p>return_value : return value from FNFT</p>
-<p>major : major version number</p>
-<p>minor : minor version number</p>
-<p>patch : patch level</p>
-<p>suffix : suffix string
--</p>
-</div></blockquote>
-</div></blockquote>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>rdict: dictionary holding the fields:</dt>
+<dd><ul class="first last">
+<li>return_value : return value from FNFT</li>
+<li>major : major version number</li>
+<li>minor : minor version number</li>
+<li>patch : patch level</li>
+<li>suffix : suffix string</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
 </dd></dl>
 
 <dl class="function">
@@ -101,43 +104,53 @@ Own options can be set by passing optional arguments (see below).</p>
 <p>It converts all Python input into the C equivalent and returns the result from FNFT.
 If a more C-like interface is desired, the function ‘kdvv_wrapper’ can be used (see documentation there).</p>
 <p>Arguments:</p>
-<blockquote>
-<div><p>u : numpy array holding the samples of the field to be analyzed</p>
-<p>tvec : time vector</p>
-<p>M : number of samples for the continuous spectrum to calculate,</p>
-</div></blockquote>
+<ul class="simple">
+<li>u : numpy array holding the samples of the field to be analyzed</li>
+<li>tvec : time vector</li>
+<li>M : number of samples for the continuous spectrum to calculate,</li>
+</ul>
 <p>Optional arguments:</p>
-<blockquote>
-<div><p>Xi1, Xi2 : min and max frequency for the continuous spectrum, default = [-2,2]</p>
-<p>dis : determines the discretization, default = 17</p>
-<blockquote>
-<div>0 = 2split1a
-1 = 2split1b
-2 = 2split2a
-3 = 2split2b
-4 = 2split2s
-5 = 2split3a
-6 = 2split3b
-7 = 2split3s
-8 = 2split4a
-9 = 2split4b
-10 = 2split5a
-11 = 2split5b
-12 = 2split6a
-13 = 2split6b
-14 = 2split7a
-15 = 2split7b
-16 = 2split8a
-17 = 2split8b</div></blockquote>
-</div></blockquote>
+<ul class="simple">
+<li>Xi1, Xi2 : min and max frequency for the continuous spectrum, default = [-2,2]</li>
+<li><dl class="first docutils">
+<dt>dis <span class="classifier-delimiter">:</span> <span class="classifier">determines the discretization, default = 17</span></dt>
+<dd><ul class="first last">
+<li>0 = 2split1a</li>
+<li>1 = 2split1b</li>
+<li>2 = 2split2a</li>
+<li>3 = 2split2b</li>
+<li>4 = 2split2s</li>
+<li>5 = 2split3a</li>
+<li>6 = 2split3b</li>
+<li>7 = 2split3s</li>
+<li>8 = 2split4a</li>
+<li>9 = 2split4b</li>
+<li>10 = 2split5a</li>
+<li>11 = 2split5b</li>
+<li>12 = 2split6a</li>
+<li>13 = 2split6b</li>
+<li>14 = 2split7a</li>
+<li>15 = 2split7b</li>
+<li>16 = 2split8a</li>
+<li>17 = 2split8b</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
 <p>Returns:</p>
-<blockquote>
-<div><p>rdict : dictionary holding the fields:</p>
-<blockquote>
-<div><p>return_value : return value from FNFT</p>
-<p>cont : continuous spectrum</p>
-</div></blockquote>
-</div></blockquote>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>rdict <span class="classifier-delimiter">:</span> <span class="classifier">dictionary holding the fields:</span></dt>
+<dd><ul class="first last">
+<li>return_value : return value from FNFT</li>
+<li>cont : continuous spectrum</li>
+<li>options : KdvvOptionsStruct with options used</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
 </dd></dl>
 
 </div>
@@ -150,25 +163,30 @@ If a more C-like interface is desired, the function ‘kdvv_wrapper’ can be us
 <p>This function’s interface mimics the behavior of the function ‘fnft_kdvv’ of FNFT.
 It converts all Python input into the C equivalent and returns the result from FNFT.
 If a more simplified version is desired, ‘kdvv’ can be used (see documentation there).</p>
-<p>Currently, only the contiuous spectrum is calculated.</p>
+<p>Currently, only the continuous spectrum is calculated.</p>
 <p>Arguments:</p>
-<blockquote>
-<div><p>D : number of samples</p>
-<p>u : numpy array holding the samples of the field to be analyzed</p>
-<p>T1, T2  : time positions of the first and the last sample</p>
-<p>M : number of values for the continuous spectrum to calculate</p>
-<p>Xi1, Xi2 : min and max frequency for the continuous spectrum</p>
-<p>K : maximum number of bound states to calculate (no effect yet)</p>
-<p>options : options for kdvv as KdvvOptionsStruct. Can be generated e.g. with ‘get_kdvv_options()’</p>
-</div></blockquote>
+<ul class="simple">
+<li>D : number of samples</li>
+<li>u : numpy array holding the samples of the field to be analyzed</li>
+<li>T1, T2  : time positions of the first and the last sample</li>
+<li>M : number of values for the continuous spectrum to calculate</li>
+<li>Xi1, Xi2 : min and max frequency for the continuous spectrum</li>
+<li>K : maximum number of bound states to calculate (no effect yet)</li>
+<li>options : options for kdvv as KdvvOptionsStruct. Can be generated e.g. with ‘get_kdvv_options()’</li>
+</ul>
 <p>Returns:</p>
-<blockquote>
-<div><p>rdict : dictionary holding the fields:</p>
-<blockquote>
-<div><p>return_value : return value from FNFT</p>
-<p>cont : continuous spectrum</p>
-</div></blockquote>
-</div></blockquote>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>rdict <span class="classifier-delimiter">:</span> <span class="classifier">dictionary holding the fields:</span></dt>
+<dd><ul class="first last">
+<li>return_value : return value from FNFT</li>
+<li>cont : continuous spectrum</li>
+<li>options : KdvvOptionsStruct with options used</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
 </dd></dl>
 
 </div>
@@ -179,8 +197,9 @@ If a more simplified version is desired, ‘kdvv’ can be used (see documentati
 <code class="descclassname">FNFTpy.options_handling.</code><code class="descname">fnft_kdvv_default_opts_wrapper</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#FNFTpy.options_handling.fnft_kdvv_default_opts_wrapper" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the default options for kdvv directly from the FNFT C-library.</p>
 <p>Returns:</p>
-<blockquote>
-<div>options : KdvvOptionsStruct with options for kdvv_wrapper</div></blockquote>
+<ul class="simple">
+<li>options : KdvvOptionsStruct with options for kdvv_wrapper</li>
+</ul>
 </dd></dl>
 
 <dl class="function">
@@ -189,8 +208,9 @@ If a more simplified version is desired, ‘kdvv’ can be used (see documentati
 <dd><p>Print options of a KdvvOptionsStruct.</p>
 <p>When called without additional argument, the default options from FNFT are printed.</p>
 <p>Optional arguments:</p>
-<blockquote>
-<div>opts : KdvvOptionsStruct, e.g. created by get_kdvv_options()</div></blockquote>
+<ul class="simple">
+<li>opts : KdvvOptionsStruct, e.g. created by get_kdvv_options()</li>
+</ul>
 </dd></dl>
 
 <dl class="function">
@@ -199,31 +219,37 @@ If a more simplified version is desired, ‘kdvv’ can be used (see documentati
 <dd><p>Get an KdvvOptionsStruct struct for use with kdvv_wrapper.</p>
 <p>When called without additional optional arguments, the default values from FNFT are used.</p>
 <p>Optional arguments:</p>
-<blockquote>
-<div><p>dis: discretization, default = 17</p>
-<blockquote>
-<div>0 = 2split1a
-1 = 2split1b
-2 = 2split2a
-3 = 2split2b
-4 = 2split2s
-5 = 2split3a
-6 = 2split3b
-7 = 2split3s
-8 = 2split4a
-9 = 2split4b
-10 = 2split5a
-11 = 2split5b
-12 = 2split6a
-13 = 2split6b
-14 = 2split7a
-15 = 2split7b
-16 = 2split8a
-17 = 2split8b</div></blockquote>
-</div></blockquote>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>dis: discretization, default = 17</dt>
+<dd><ul class="first last">
+<li>0 = 2split1a</li>
+<li>1 = 2split1b</li>
+<li>2 = 2split2a</li>
+<li>3 = 2split2b</li>
+<li>4 = 2split2s</li>
+<li>5 = 2split3a</li>
+<li>6 = 2split3b</li>
+<li>7 = 2split3s</li>
+<li>8 = 2split4a</li>
+<li>9 = 2split4b</li>
+<li>10 = 2split5a</li>
+<li>11 = 2split5b</li>
+<li>12 = 2split6a</li>
+<li>13 = 2split6b</li>
+<li>14 = 2split7a</li>
+<li>15 = 2split7b</li>
+<li>16 = 2split8a</li>
+<li>17 = 2split8b</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
 <p>Returns:</p>
-<blockquote>
-<div>options : KdvvOptionsStruct</div></blockquote>
+<ul class="simple">
+<li>options : KdvvOptionsStruct</li>
+</ul>
 </dd></dl>
 
 </div>
@@ -234,8 +260,9 @@ If a more simplified version is desired, ‘kdvv’ can be used (see documentati
 <em class="property">class </em><code class="descclassname">FNFTpy.typesdef.</code><code class="descname">KdvvOptionsStruct</code><a class="headerlink" href="#FNFTpy.typesdef.KdvvOptionsStruct" title="Permalink to this definition">¶</a></dt>
 <dd><p>Ctypes options struct for interfacing fnft_kdvv.</p>
 <p>Fields:</p>
-<blockquote>
-<div>discretization</div></blockquote>
+<ul class="simple">
+<li>discretization</li>
+</ul>
 </dd></dl>
 
 </div>
@@ -256,48 +283,97 @@ Options can be set by passing optional arguments (see below).</p>
 <p>It converts all Python input into the C equivalent and returns the result from FNFT.
 If a more C-like interface is desired, the function ‘nsep_wrapper’ can be used (see documentation there).</p>
 <p>Arguments:</p>
-<blockquote>
-<div><p>q : numpy array holding the samples of the input field</p>
-<p>T1, T2  : time positions of the first and the (D+1) sample, where D is the number of samples</p>
-</div></blockquote>
+<ul class="simple">
+<li>q : numpy array holding the samples of the input field</li>
+<li>T1, T2  : time positions of the first and the (D+1) sample, where D is the number of samples</li>
+</ul>
 <p>Optional arguments:</p>
-<blockquote>
-<div><p>kappa : +/- 1 for focussing/defocussing nonlinearity, default = 1</p>
-<p>loc : localization method for the spectrum, default = 2</p>
-<blockquote>
-<div>0=subsample and refine
-1=gridsearch
-2=mixed</div></blockquote>
-<p>filt : filtering of spectrum, default = 2</p>
-<blockquote>
-<div>0=none
-1=manual
-2=auto</div></blockquote>
-<p>bb: bounding box used for manual filtering, default = [-inf, inf, -inf, inf]</p>
-<p>maxev : maximum number of evaluations for root refinement, default = 20</p>
-<p>nf : normalization flag default = 1</p>
-<blockquote>
-<div>0=off
-1=on</div></blockquote>
-<p>dis : discretization, default = 2</p>
-<blockquote>
-<div>0=2split2modal
-1=2split2a
-2=2split4a
-3=2split4b
-4=BO</div></blockquote>
-</div></blockquote>
+<ul class="simple">
+<li>kappa : +/- 1 for focussing/defocussing nonlinearity, default = 1</li>
+<li><dl class="first docutils">
+<dt>loc <span class="classifier-delimiter">:</span> <span class="classifier">localization method for the spectrum, default = 2</span></dt>
+<dd><ul class="first last">
+<li>0 = subsample and refine</li>
+<li>1 = gridsearch</li>
+<li>2 = mixed</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>filt <span class="classifier-delimiter">:</span> <span class="classifier">filtering of spectrum, default = 2</span></dt>
+<dd><ul class="first last">
+<li>0 = none</li>
+<li>1 = manual</li>
+<li>2 = auto</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li>bb: bounding box used for manual filtering, default = [-inf, inf, -inf, inf]</li>
+<li>maxev : maximum number of evaluations for root refinement, default = 20</li>
+<li><dl class="first docutils">
+<dt>nf <span class="classifier-delimiter">:</span> <span class="classifier">normalization flag default = 1</span></dt>
+<dd><ul class="first last">
+<li>0 = off</li>
+<li>1 = on</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>dis <span class="classifier-delimiter">:</span> <span class="classifier">discretization, default = 4</span></dt>
+<dd><ul class="first last">
+<li>0 = 2SPLIT2_MODAL</li>
+<li>1 = BO</li>
+<li>2 = 2SPLIT1A</li>
+<li>3 = 2SPLIT1B</li>
+<li>4 = 2SPLIT2A</li>
+<li>5 = 2SPLIT2B</li>
+<li>6 = 2SPLIT2S</li>
+<li>7 = 2SPLIT3A</li>
+<li>8 = 2SPLIT3B</li>
+<li>9 = 2SPLIT3S</li>
+<li>10 = 2SPLIT4A</li>
+<li>11 = 2SPLIT4B</li>
+<li>12 = 2SPLIT5A</li>
+<li>13 = 2SPLIT5B</li>
+<li>14 = 2SPLIT6A</li>
+<li>15 = 2SPLIT6B</li>
+<li>16 = 2SPLIT7A</li>
+<li>17 = 2SPLIT7B</li>
+<li>18 = 2SPLIT8A</li>
+<li>19 = 2SPLIT8B</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>nf <span class="classifier-delimiter">:</span> <span class="classifier">normalization flag, default=1</span></dt>
+<dd><ul class="first last">
+<li>0 = off</li>
+<li>1 = on</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
 <p>Returns:</p>
-<blockquote>
-<div><p>rdict : dictionary holding the fields (depending on options)</p>
-<blockquote>
-<div><p>return_value : return value from FNFT</p>
-<p>K : number of points in the main spectrum</p>
-<p>main : main spectrum</p>
-<p>M: number of points in the auxiliary spectrum</p>
-<p>aux: auxiliary spectrum</p>
-</div></blockquote>
-</div></blockquote>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>rdict <span class="classifier-delimiter">:</span> <span class="classifier">dictionary holding the fields (depending on options)</span></dt>
+<dd><ul class="first last">
+<li>return_value : return value from FNFT</li>
+<li>K : number of points in the main spectrum</li>
+<li>main : main spectrum</li>
+<li>M: number of points in the auxiliary spectrum</li>
+<li>aux: auxiliary spectrum</li>
+<li>options : NsepOptionsStruct with options used</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
 </dd></dl>
 
 </div>
@@ -311,24 +387,29 @@ If a more C-like interface is desired, the function ‘nsep_wrapper’ can be us
 It converts all Python input into the C equivalent and returns the result from FNFT.
 If a more simplified version is desired, ‘nsep’ can be used (see documentation there).</p>
 <p>Arguments:</p>
-<blockquote>
-<div><p>D : number of sample points</p>
-<p>q : numpy array holding the samples of the input field</p>
-<p>T1, T2  : time positions of the first and the (D+1) sample</p>
-<p>kappa   : +/- 1 for focussing/defocussing nonlinearity</p>
-<p>options : options for nsep as NsepOptionsStruct. Can be generated e.g. with ‘get_nsep_options()’</p>
-</div></blockquote>
+<ul class="simple">
+<li>D : number of sample points</li>
+<li>q : numpy array holding the samples of the input field</li>
+<li>T1, T2  : time positions of the first and the (D+1) sample</li>
+<li>kappa   : +/- 1 for focussing/defocussing nonlinearity</li>
+<li>options : options for nsep as NsepOptionsStruct. Can be generated e.g. with ‘get_nsep_options()’</li>
+</ul>
 <p>Returns:</p>
-<blockquote>
-<div><p>rdict : dictionary holding the fields (depending on options)</p>
-<blockquote>
-<div><p>return_value : return value from FNFT</p>
-<p>K : number of points in the main spectrum</p>
-<p>main : main spectrum</p>
-<p>M: number of points in the auxiliary spectrum</p>
-<p>aux: auxiliary spectrum</p>
-</div></blockquote>
-</div></blockquote>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>rdict <span class="classifier-delimiter">:</span> <span class="classifier">dictionary holding the fields (depending on options)</span></dt>
+<dd><ul class="first last">
+<li>return_value : return value from FNFT</li>
+<li>K : number of points in the main spectrum</li>
+<li>main : main spectrum</li>
+<li>M: number of points in the auxiliary spectrum</li>
+<li>aux: auxiliary spectrum</li>
+<li>options : NsepOptionsStruct with options used</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
 </dd></dl>
 
 </div>
@@ -339,8 +420,9 @@ If a more simplified version is desired, ‘nsep’ can be used (see documentati
 <code class="descclassname">FNFTpy.options_handling.</code><code class="descname">fnft_nsep_default_opts_wrapper</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#FNFTpy.options_handling.fnft_nsep_default_opts_wrapper" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the default options for nsep directly from the FNFT C-library.</p>
 <p>Returns:</p>
-<blockquote>
-<div>options : NsepOptionsStruct for nsep_wrapper</div></blockquote>
+<ul class="simple">
+<li>options : NsepOptionsStruct for nsep_wrapper</li>
+</ul>
 </dd></dl>
 
 <dl class="function">
@@ -349,8 +431,9 @@ If a more simplified version is desired, ‘nsep’ can be used (see documentati
 <dd><p>Print options of a NsepOptionsStruct.</p>
 <p>When called without additional arguments, the default options from FNFT are printed.</p>
 <p>Optional arguments:</p>
-<blockquote>
-<div>opts : NsepOptionsStruc, e.g. created by get_nsep_options</div></blockquote>
+<ul class="simple">
+<li>opts : NsepOptionsStruct, e.g. created by get_nsep_options</li>
+</ul>
 </dd></dl>
 
 <dl class="function">
@@ -359,34 +442,70 @@ If a more simplified version is desired, ‘nsep’ can be used (see documentati
 <dd><p>Get a NsepOptionsStruct struct for use with nsep_wrapper.</p>
 <p>When called without additional optional argument, the default values from FNFT are used.</p>
 <p>Optional arguments:</p>
-<blockquote>
-<div><p>loc : localization of spectrum, default = 2</p>
-<blockquote>
-<div>0=subsample and refine
-1=gridsearch
-2=mixed</div></blockquote>
-<p>filt : filtering of spectrum, default = 2</p>
-<blockquote>
-<div>0=none
-1=manual
-2=auto</div></blockquote>
-<p>bb : bounding box used for manual filtering, default = [-inf, inf, -inf, inf]</p>
-<p>maxev : maximum number of evaluations for root refinement, default = 20</p>
-<p>nf : normalization flag, default = 1</p>
-<blockquote>
-<div>0=off
-1=on</div></blockquote>
-<p>dis : discretization, default = 1</p>
-<blockquote>
-<div>0=2split2modal
-1=2split2a
-2=2split4a
-3=2split4b
-4=BO</div></blockquote>
-</div></blockquote>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>loc <span class="classifier-delimiter">:</span> <span class="classifier">localization method for the spectrum, default = 2</span></dt>
+<dd><ul class="first last">
+<li>0 = subsample and refine</li>
+<li>1 = gridsearch</li>
+<li>2 = mixed</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>filt <span class="classifier-delimiter">:</span> <span class="classifier">filtering of spectrum, default = 2</span></dt>
+<dd><ul class="first last">
+<li>0 = none</li>
+<li>1 = manual</li>
+<li>2 = auto</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li>bb: bounding box used for manual filtering, default = [-inf, inf, -inf, inf]</li>
+<li>maxev : maximum number of evaluations for root refinement, default = 20</li>
+<li><dl class="first docutils">
+<dt>dis <span class="classifier-delimiter">:</span> <span class="classifier">discretization, default = 4</span></dt>
+<dd><ul class="first last">
+<li>0 = 2SPLIT2_MODAL</li>
+<li>1 = BO</li>
+<li>2 = 2SPLIT1A</li>
+<li>3 = 2SPLIT1B</li>
+<li>4 = 2SPLIT2A</li>
+<li>5 = 2SPLIT2B</li>
+<li>6 = 2SPLIT2S</li>
+<li>7 = 2SPLIT3A</li>
+<li>8 = 2SPLIT3B</li>
+<li>9 = 2SPLIT3S</li>
+<li>10 = 2SPLIT4A</li>
+<li>11 = 2SPLIT4B</li>
+<li>12 = 2SPLIT5A</li>
+<li>13 = 2SPLIT5B</li>
+<li>14 = 2SPLIT6A</li>
+<li>15 = 2SPLIT6B</li>
+<li>16 = 2SPLIT7A</li>
+<li>17 = 2SPLIT7B</li>
+<li>18 = 2SPLIT8A</li>
+<li>19 = 2SPLIT8B</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>nf <span class="classifier-delimiter">:</span> <span class="classifier">normalization flag, default=1</span></dt>
+<dd><ul class="first last">
+<li>0 = off</li>
+<li>1 = on</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
 <p>Returns:</p>
-<blockquote>
-<div>options : NsepOptionsStruct</div></blockquote>
+<ul class="simple">
+<li>options : NsepOptionsStruct</li>
+</ul>
 </dd></dl>
 
 </div>
@@ -397,14 +516,14 @@ If a more simplified version is desired, ‘nsep’ can be used (see documentati
 <em class="property">class </em><code class="descclassname">FNFTpy.typesdef.</code><code class="descname">NsepOptionsStruct</code><a class="headerlink" href="#FNFTpy.typesdef.NsepOptionsStruct" title="Permalink to this definition">¶</a></dt>
 <dd><p>Ctypes options struct for interfacing fnft_nsep.</p>
 <p>Fields:</p>
-<blockquote>
-<div><p>localization</p>
-<p>filtering</p>
-<p>bounding_box</p>
-<p>max_evals</p>
-<p>discretization</p>
-<p>normalization_flag</p>
-</div></blockquote>
+<ul class="simple">
+<li>localization</li>
+<li>filtering</li>
+<li>bounding_box</li>
+<li>max_evals</li>
+<li>discretization</li>
+<li>normalization_flag</li>
+</ul>
 </dd></dl>
 
 </div>
@@ -425,64 +544,114 @@ Options can be set by passing optional arguments (see below).</p>
 <p>It converts all Python input into the C equivalent and returns the result from FNFT.
 If a more C-like interface is desired, the function ‘nsev_wrapper’ can be used (see documentation there).</p>
 <p>Arguments:</p>
-<blockquote>
-<div><p>q : numpy array holding the samples of the input field</p>
-<p>tvec: time vector</p>
-</div></blockquote>
+<ul class="simple">
+<li>q : numpy array holding the samples of the input field</li>
+<li>tvec: time vector</li>
+</ul>
 <p>Optional arguments:</p>
-<blockquote>
-<div><p>Xi1, Xi2 : min and max frequency for the continuous spectrum. default = -2,2</p>
-<p>M : number of values for the continuous spectrum to calculate default = 128</p>
-<p>K : maximum number of bound states to calculatem default = 128</p>
-<p>kappa : +/- 1 for focussing/defocussing nonlinearity, default = 1</p>
-<p>bsf : bound state filtering, default =2</p>
-<blockquote>
-<div>0=none
-1=basic
-2=full</div></blockquote>
-<p>bsl : bound state localization, default = 0</p>
-<blockquote>
-<div>0=fast eigenvalue
-1=Newton
-2=subsample and refine</div></blockquote>
-<p>niter : number of iterations for Newton bound state localization, default = 10</p>
-<p>Dsub : number of samples used for ‘subsampling and refine’-method, default = 0 (auto)</p>
-<p>dst : type of discrete spectrum, default = 2</p>
-<blockquote>
-<div>0=norming constants
-1=residues
-2=both</div></blockquote>
-<p>cst : type of continuous spectrum, default = 0</p>
-<blockquote>
-<div>0=reflection coefficient
-1=a and b
-2=both</div></blockquote>
-<p>dis : discretization, default = 3</p>
-<blockquote>
-<div>0=2split2modal
-1=2split2a
-2=2split4a
-3=2split4b
-4=BO</div></blockquote>
-<p>nf : normalization flag, default = 1</p>
-<blockquote>
-<div>0=off
-1=on</div></blockquote>
-</div></blockquote>
+<ul class="simple">
+<li>Xi1, Xi2 : min and max frequency for the continuous spectrum. default = -2,2</li>
+<li>M : number of values for the continuous spectrum to calculate default = 128</li>
+<li>K : maximum number of bound states to calculatem default = 128</li>
+<li>kappa : +/- 1 for focussing/defocussing nonlinearity, default = 1</li>
+<li><dl class="first docutils">
+<dt>bsf <span class="classifier-delimiter">:</span> <span class="classifier">bound state filtering, default = 2</span></dt>
+<dd><ul class="first last">
+<li>0 = none</li>
+<li>1 = basic</li>
+<li>2 = full</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>bsl <span class="classifier-delimiter">:</span> <span class="classifier">bound state localization, default = 2</span></dt>
+<dd><ul class="first last">
+<li>0 = fast eigenvalue</li>
+<li>1 = Newton</li>
+<li>2 = subsample and refine</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li>niter : number of iterations for Newton bound state location, default = 10</li>
+<li>Dsub : number of samples used for ‘subsampling and refine’-method, default = 0 (auto)</li>
+<li><dl class="first docutils">
+<dt>dst <span class="classifier-delimiter">:</span> <span class="classifier">type of discrete spectrum, default = 0</span></dt>
+<dd><ul class="first last">
+<li>0 = norming constants</li>
+<li>1 = residues</li>
+<li>2 = both</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>cst <span class="classifier-delimiter">:</span> <span class="classifier">type of continuous spectrum, default = 0</span></dt>
+<dd><ul class="first last">
+<li>0 = reflection coefficient</li>
+<li>1 = a and b</li>
+<li>2 = both</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>dis <span class="classifier-delimiter">:</span> <span class="classifier">discretization, default = 11</span></dt>
+<dd><ul class="first last">
+<li>0 = 2SPLIT2_MODAL</li>
+<li>1 = BO</li>
+<li>2 = 2SPLIT1A</li>
+<li>3 = 2SPLIT1B</li>
+<li>4 = 2SPLIT2A</li>
+<li>5 = 2SPLIT2B</li>
+<li>6 = 2SPLIT2S</li>
+<li>7 = 2SPLIT3A</li>
+<li>8 = 2SPLIT3B</li>
+<li>9 = 2SPLIT3S</li>
+<li>10 = 2SPLIT4A</li>
+<li>11 = 2SPLIT4B</li>
+<li>12 = 2SPLIT5A</li>
+<li>13 = 2SPLIT5B</li>
+<li>14 = 2SPLIT6A</li>
+<li>15 = 2SPLIT6B</li>
+<li>16 = 2SPLIT7A</li>
+<li>17 = 2SPLIT7B</li>
+<li>18 = 2SPLIT8A</li>
+<li>19 = 2SPLIT8B</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>nf <span class="classifier-delimiter">:</span> <span class="classifier">normalization flag, default =  1</span></dt>
+<dd><ul class="first last">
+<li>0 = off</li>
+<li>1 = on</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
 <p>Returns:</p>
-<blockquote>
-<div><p>rdict : dictionary holding the fields (depending on options)</p>
-<blockquote>
-<div><p>return_value : return value from FNFT</p>
-<p>bound_states_num : number of bound states found</p>
-<p>bound_states : array of bound states found</p>
-<p>disc_norm : discrete spectrum - norming constants</p>
-<p>disc_res : discrete spectrum - residues</p>
-<p>cont_ref : continuous spectrum - reflection coefficient</p>
-<p>cont_a : continuous spectrum - scattering coefficient a</p>
-<p>cont_b : continuous spectrum - scattering coefficient b</p>
-</div></blockquote>
-</div></blockquote>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>rdict <span class="classifier-delimiter">:</span> <span class="classifier">dictionary holding the fields (depending on options)</span></dt>
+<dd><ul class="first last">
+<li>return_value : return value from FNFT</li>
+<li>bound_states_num : number of bound states found</li>
+<li>bound_states : array of bound states found</li>
+<li>disc_norm : discrete spectrum - norming constants</li>
+<li>disc_res : discrete spectrum - residues</li>
+<li>cont_ref : continuous spectrum - reflection coefficient</li>
+<li>cont_a : continuous spectrum - scattering coefficient a</li>
+<li>cont_b : continuous spectrum - scattering coefficient b</li>
+<li>options : NsepOptionsStruct with the options used</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
 </dd></dl>
 
 </div>
@@ -496,30 +665,35 @@ If a more C-like interface is desired, the function ‘nsev_wrapper’ can be us
 It converts all Python input into the C equivalent and returns the result from FNFT.
 If a more simplified version is desired, ‘nsev’ can be used (see documentation there).</p>
 <p>Arguments:</p>
-<blockquote>
-<div><p>D : number of sample points</p>
-<p>q : numpy array holding the samples of the field to be analyzed</p>
-<p>T1, T2 : time positions of the first and the last sample</p>
-<p>Xi1, Xi2 : min and max frequency for the continuous spectrum</p>
-<p>M : number of values for the continuous spectrum to calculate</p>
-<p>K : maximum number of bound states to calculate</p>
-<p>kappa : +/- 1 for focussing/defocussing nonlinearity</p>
-<p>options : options for nsev as NsevOptionsStruct</p>
-</div></blockquote>
+<ul class="simple">
+<li>D : number of sample points</li>
+<li>q : numpy array holding the samples of the field to be analyzed</li>
+<li>T1, T2 : time positions of the first and the last sample</li>
+<li>Xi1, Xi2 : min and max frequency for the continuous spectrum</li>
+<li>M : number of values for the continuous spectrum to calculate</li>
+<li>K : maximum number of bound states to calculate</li>
+<li>kappa : +/- 1 for focussing/defocussing nonlinearity</li>
+<li>options : options for nsev as NsevOptionsStruct</li>
+</ul>
 <p>Returns:</p>
-<blockquote>
-<div><p>rdict : dictionary holding the fields (depending on options)</p>
-<blockquote>
-<div><p>return_value : return value from FNFT</p>
-<p>bound_states_num : number of bound states found</p>
-<p>bound_states : array of bound states found</p>
-<p>disc_norm : discrete spectrum - norming constants</p>
-<p>disc_res : discrete spectrum - residues</p>
-<p>cont_ref : continuous spectrum - reflection coefficient</p>
-<p>cont_a : continuous spectrum - scattering coefficient a</p>
-<p>cont_b : continuous spectrum - scattering coefficient b</p>
-</div></blockquote>
-</div></blockquote>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>rdict <span class="classifier-delimiter">:</span> <span class="classifier">dictionary holding the fields (depending on options)</span></dt>
+<dd><ul class="first last">
+<li>return_value : return value from FNFT</li>
+<li>bound_states_num : number of bound states found</li>
+<li>bound_states : array of bound states found</li>
+<li>disc_norm : discrete spectrum - norming constants</li>
+<li>disc_res : discrete spectrum - residues</li>
+<li>cont_ref : continuous spectrum - reflection coefficient</li>
+<li>cont_a : continuous spectrum - scattering coefficient a</li>
+<li>cont_b : continuous spectrum - scattering coefficient b</li>
+<li>options : NsepOptionsStruct with the options used</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
 </dd></dl>
 
 </div>
@@ -530,8 +704,9 @@ If a more simplified version is desired, ‘nsev’ can be used (see documentati
 <code class="descclassname">FNFTpy.options_handling.</code><code class="descname">fnft_nsev_default_opts_wrapper</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#FNFTpy.options_handling.fnft_nsev_default_opts_wrapper" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the default options for nsev directly from the FNFT C-library.</p>
 <p>Returns:</p>
-<blockquote>
-<div>options : NsevOptionsStruct with options for nsev_wrapper</div></blockquote>
+<ul class="simple">
+<li>options : NsevOptionsStruct with options for nsev_wrapper</li>
+</ul>
 </dd></dl>
 
 <dl class="function">
@@ -540,55 +715,101 @@ If a more simplified version is desired, ‘nsev’ can be used (see documentati
 <dd><p>Print options of a NsevOptionsStruct.</p>
 <p>When called without additional argument, the default options from FNFT are printed.</p>
 <p>Optional arguments:</p>
-<blockquote>
-<div>opts : NsevOptionsStruct, e.g. created by get_nsev_options()</div></blockquote>
+<ul class="simple">
+<li>opts : NsevOptionsStruct, e.g. created by get_nsev_options()</li>
+</ul>
 </dd></dl>
 
 <dl class="function">
 <dt id="FNFTpy.options_handling.get_nsev_options">
 <code class="descclassname">FNFTpy.options_handling.</code><code class="descname">get_nsev_options</code><span class="sig-paren">(</span><em>bsf=None</em>, <em>bsl=None</em>, <em>niter=None</em>, <em>Dsub=None</em>, <em>dst=None</em>, <em>cst=None</em>, <em>nf=None</em>, <em>dis=None</em><span class="sig-paren">)</span><a class="headerlink" href="#FNFTpy.options_handling.get_nsev_options" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get a NsevOptionsStruct for use with nsev_wrapper.</p>
-<blockquote>
-<div>When called without additional optional arguments, the default values from FNFT are used.</div></blockquote>
+<p>When called without additional optional arguments, the default values from FNFT are used.</p>
 <p>Optional arguments:</p>
-<blockquote>
-<div><p>bsf : bound state filtering, default = 2</p>
-<blockquote>
-<div>0=none
-1=basic
-2=full</div></blockquote>
-<p>bsl : bound state localization, default = 2</p>
-<blockquote>
-<div>0=fast eigenvalue
-1=Newton
-2=subsample and refine</div></blockquote>
-<p>niter : number of iterations for Newton bound state location, default = 10</p>
-<p>Dsub : number of samples used for ‘subsampling and refine’-method, default = 0 (auto)</p>
-<p>dst : type of discrete spectrum, default = 0</p>
-<blockquote>
-<div>0=norming constants
-1=residues
-2=both</div></blockquote>
-<p>cst : type of continuous spectrum, default = 0</p>
-<blockquote>
-<div>0=reflection coefficient
-1=a and b
-2=both</div></blockquote>
-<p>dis : discretization, default = 3</p>
-<blockquote>
-<div>0=2split2modal
-1=2split2a
-2=2split4a
-3=2split4b
-4=BO</div></blockquote>
-<p>nf : normalization flag, default =  1</p>
-<blockquote>
-<div>0=off
-1=on</div></blockquote>
-</div></blockquote>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>bsf <span class="classifier-delimiter">:</span> <span class="classifier">bound state filtering, default = 2</span></dt>
+<dd><ul class="first last">
+<li>0 = none</li>
+<li>1 = basic</li>
+<li>2 = full</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>bsl <span class="classifier-delimiter">:</span> <span class="classifier">bound state localization, default = 2</span></dt>
+<dd><ul class="first last">
+<li>0 = fast eigenvalue</li>
+<li>1 = Newton</li>
+<li>2 = subsample and refine</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li>niter : number of iterations for Newton bound state location, default = 10</li>
+<li>Dsub : number of samples used for ‘subsampling and refine’-method, default = 0 (auto)</li>
+<li><dl class="first docutils">
+<dt>dst <span class="classifier-delimiter">:</span> <span class="classifier">type of discrete spectrum, default = 0</span></dt>
+<dd><ul class="first last">
+<li>0 = norming constants</li>
+<li>1 = residues</li>
+<li>2 = both</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>cst <span class="classifier-delimiter">:</span> <span class="classifier">type of continuous spectrum, default = 0</span></dt>
+<dd><ul class="first last">
+<li>0 = reflection coefficient</li>
+<li>1 = a and b</li>
+<li>2 = both</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>dis <span class="classifier-delimiter">:</span> <span class="classifier">discretization, default = 11</span></dt>
+<dd><ul class="first last">
+<li>0 = 2SPLIT2_MODAL</li>
+<li>1 = BO</li>
+<li>2 = 2SPLIT1A</li>
+<li>3 = 2SPLIT1B</li>
+<li>4 = 2SPLIT2A</li>
+<li>5 = 2SPLIT2B</li>
+<li>6 = 2SPLIT2S</li>
+<li>7 = 2SPLIT3A</li>
+<li>8 = 2SPLIT3B</li>
+<li>9 = 2SPLIT3S</li>
+<li>10 = 2SPLIT4A</li>
+<li>11 = 2SPLIT4B</li>
+<li>12 = 2SPLIT5A</li>
+<li>13 = 2SPLIT5B</li>
+<li>14 = 2SPLIT6A</li>
+<li>15 = 2SPLIT6B</li>
+<li>16 = 2SPLIT7A</li>
+<li>17 = 2SPLIT7B</li>
+<li>18 = 2SPLIT8A</li>
+<li>19 = 2SPLIT8B</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>nf <span class="classifier-delimiter">:</span> <span class="classifier">normalization flag, default =  1</span></dt>
+<dd><ul class="first last">
+<li>0 = off</li>
+<li>1 = on</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
 <p>Returns:</p>
-<blockquote>
-<div>options : NsevOptionsStruct</div></blockquote>
+<ul class="simple">
+<li>options : NsevOptionsStruct</li>
+</ul>
 </dd></dl>
 
 </div>
@@ -599,16 +820,16 @@ If a more simplified version is desired, ‘nsev’ can be used (see documentati
 <em class="property">class </em><code class="descclassname">FNFTpy.typesdef.</code><code class="descname">NsevOptionsStruct</code><a class="headerlink" href="#FNFTpy.typesdef.NsevOptionsStruct" title="Permalink to this definition">¶</a></dt>
 <dd><p>Ctypes options struct for interfacing fnft_nsev.</p>
 <p>Fields:</p>
-<blockquote>
-<div><p>bound_state_filtering</p>
-<p>bound_state_localization</p>
-<p>Dsub</p>
-<p>niter</p>
-<p>discspec_type</p>
-<p>contspec_type</p>
-<p>normalization_flag</p>
-<p>discretization</p>
-</div></blockquote>
+<ul class="simple">
+<li>bound_state_filtering</li>
+<li>bound_state_localization</li>
+<li>Dsub</li>
+<li>niter</li>
+<li>discspec_type</li>
+<li>contspec_type</li>
+<li>normalization_flag</li>
+<li>discretization</li>
+</ul>
 </dd></dl>
 
 </div>
@@ -624,26 +845,46 @@ If a more simplified version is desired, ‘nsev’ can be used (see documentati
 <p>Return value is an array holding the position of the first and the last spectral
 sample to be used for nsev_inverse.</p>
 <p>Arguments:</p>
-<blockquote>
-<div><p>D : number of sample points for the time window</p>
-<p>T1, T2 : borders of the time window</p>
-<p>M : number of samples for the continuous spectrum</p>
-</div></blockquote>
+<ul class="simple">
+<li>D : number of sample points for the time window</li>
+<li>T1, T2 : borders of the time window</li>
+<li>M : number of samples for the continuous spectrum</li>
+</ul>
 <p>Optional Arguments:</p>
-<blockquote>
-<div><p>dis : nse discretization parameter, default = 4</p>
-<blockquote>
-<div>0=2split2modal
-1=2split2a
-2=2split4a
-3=2split4b
-4=BO</div></blockquote>
-</div></blockquote>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>dis <span class="classifier-delimiter">:</span> <span class="classifier">nse discretization parameter, default = 4</span></dt>
+<dd><ul class="first last">
+<li>0 = 2SPLIT2_MODAL</li>
+<li>1 = BO</li>
+<li>2 = 2SPLIT1A</li>
+<li>3 = 2SPLIT1B</li>
+<li>4 = 2SPLIT2A</li>
+<li>5 = 2SPLIT2B</li>
+<li>6 = 2SPLIT2S</li>
+<li>7 = 2SPLIT3A</li>
+<li>8 = 2SPLIT3B</li>
+<li>9 = 2SPLIT3S</li>
+<li>10 = 2SPLIT4A</li>
+<li>11 = 2SPLIT4B</li>
+<li>12 = 2SPLIT5A</li>
+<li>13 = 2SPLIT5B</li>
+<li>14 = 2SPLIT6A</li>
+<li>15 = 2SPLIT6B</li>
+<li>16 = 2SPLIT7A</li>
+<li>17 = 2SPLIT7B</li>
+<li>18 = 2SPLIT8A</li>
+<li>19 = 2SPLIT8B</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
 <p>Returns:</p>
-<blockquote>
-<div><p>rv : return value of the C-function</p>
-<p>xi : two-element C double vector containing XI borders</p>
-</div></blockquote>
+<ul class="simple">
+<li>rv : return value of the C-function</li>
+<li>xi : two-element C double vector containing XI borders</li>
+</ul>
 </dd></dl>
 
 </div>
@@ -663,40 +904,75 @@ If a more C-like interface is desired, the function ‘nsev_inverse_wrapper’ c
 <dd>use nsev_inverse_xi_wrapper to calculate xivec forom tvec !!!</dd>
 </dl>
 <p>Arguments:</p>
-<blockquote>
-<div><p>xivec: frequency vector</p>
-<p>tvec: time vection</p>
-<p>contspec: continuous spectrum (of xi)</p>
-<p>bound_states: array holding the bound states. Pass None if no bound states present.</p>
-<p>discspec: discrete spectrum. Pass None if no bound states present.</p>
-</div></blockquote>
+<ul class="simple">
+<li>xivec: frequency vector</li>
+<li>tvec: time vection</li>
+<li>contspec: continuous spectrum (of xi)</li>
+<li>bound_states: array holding the bound states. Pass None if no bound states present.</li>
+<li>discspec: discrete spectrum. Pass None if no bound states present.</li>
+</ul>
 <p>Optional arguments:</p>
-<blockquote>
-<div><p>dis : discretization, default = 4</p>
-<blockquote>
-<div>0=2split2modal
-1=2split2a
-2=2split4a
-3=2split4b
-4=BO</div></blockquote>
-<p>cst : type of continuous spectrum, default = 0</p>
-<blockquote>
-<div>0=Reflection coefficient
-1=b of xi
-2=b of tau</div></blockquote>
-<p>csim : inversion method for the continuous part, default = 0</p>
-<blockquote>
-<div>0=default
-1=Transfermatrix with reflection coefficients
-2=Transfermatrix with a,b from iteration
-3=seed potential</div></blockquote>
-<p>dst : type of discrete spectrum</p>
-<blockquote>
-<div>0 = norming constants
-1 = residues</div></blockquote>
-<p>max_iter : maximum number of iterations for iterative methods, default = 100</p>
-<p>osf : oversampling factor, default = 8</p>
-</div></blockquote>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>dis <span class="classifier-delimiter">:</span> <span class="classifier">discretization, default = 4</span></dt>
+<dd><ul class="first last">
+<li>0 = 2SPLIT2_MODAL</li>
+<li>1 = BO</li>
+<li>2 = 2SPLIT1A</li>
+<li>3 = 2SPLIT1B</li>
+<li>4 = 2SPLIT2A</li>
+<li>5 = 2SPLIT2B</li>
+<li>6 = 2SPLIT2S</li>
+<li>7 = 2SPLIT3A</li>
+<li>8 = 2SPLIT3B</li>
+<li>9 = 2SPLIT3S</li>
+<li>10 = 2SPLIT4A</li>
+<li>11 = 2SPLIT4B</li>
+<li>12 = 2SPLIT5A</li>
+<li>13 = 2SPLIT5B</li>
+<li>14 = 2SPLIT6A</li>
+<li>15 = 2SPLIT6B</li>
+<li>16 = 2SPLIT7A</li>
+<li>17 = 2SPLIT7B</li>
+<li>18 = 2SPLIT8A</li>
+<li>19 = 2SPLIT8B</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>cst <span class="classifier-delimiter">:</span> <span class="classifier">type of continuous spectrum, default = 0</span></dt>
+<dd><ul class="first last">
+<li>0 = Reflection coefficient</li>
+<li>1 = b of xi</li>
+<li>2 = b of tau</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>csim <span class="classifier-delimiter">:</span> <span class="classifier">inversion method for the continuous part, default = 0</span></dt>
+<dd><ul class="first last">
+<li>0 = default</li>
+<li>1 = Transfermatrix with reflection coefficients</li>
+<li>2 = Transfermatrix with a,b from iteration</li>
+<li>3 = seed potential</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>dst <span class="classifier-delimiter">:</span> <span class="classifier">type of discrete spectrum, default = 0</span></dt>
+<dd><ul class="first last">
+<li>0 = norming constants</li>
+<li>1 = residues</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li>max_iter : maximum number of iterations for iterative methods, default = 100</li>
+<li>osf : oversampling factor, default = 8</li>
+</ul>
 </dd></dl>
 
 </div>
@@ -710,30 +986,35 @@ If a more C-like interface is desired, the function ‘nsev_inverse_wrapper’ c
 It converts all Python input into the C equivalent and returns the result from FNFT.
 If a more simplified version is desired, ‘nsev_inverse’ can be used (see documentation there).</p>
 <p>Arguments:</p>
-<blockquote>
-<div><p>M : number of sample points for continuous spectrum</p>
-<p>contspec : numpy array holding the samples of the continuous spectrum</p>
-<dl class="docutils">
+<ul class="simple">
+<li>M : number of sample points for continuous spectrum</li>
+<li>contspec : numpy array holding the samples of the continuous spectrum</li>
+<li><dl class="first docutils">
 <dt>Xi1, Xi2 <span class="classifier-delimiter">:</span> <span class="classifier">frequencies defining the frequency range of the continuous spectrum.</span></dt>
 <dd>! Currently, the positions returned by nsev_inverse_xi_wrapper must be used !</dd>
 </dl>
-<p>K : number of bound states</p>
-<p>bound_states : bound states (can be None if K=0)</p>
-<p>normconst_or_residues : bound state spectral coefficients (can be None if K=0)</p>
-<p>D : number of samples for the output field</p>
-<p>T1, T2 : borders of the desired time window</p>
-<p>kappa : +1/-1 for focussing / defocussing NSE</p>
-<p>options : options for nsev_inverse as NsevInverseOptionsStruct</p>
-</div></blockquote>
+</li>
+<li>K : number of bound states</li>
+<li>bound_states : bound states (can be None if K=0)</li>
+<li>normconst_or_residues : bound state spectral coefficients (can be None if K=0)</li>
+<li>D : number of samples for the output field</li>
+<li>T1, T2 : borders of the desired time window</li>
+<li>kappa : +1/-1 for focussing / defocussing NSE</li>
+<li>options : options for nsev_inverse as NsevInverseOptionsStruct</li>
+</ul>
 <p>Returns:</p>
-<blockquote>
-<div><p>rdict : dictionary holding the fields (depending on options)</p>
-<blockquote>
-<div><p>return_value : return value from FNFT</p>
-<p>q : time field resulting from inverse transform</p>
-<p>options : options for nsev_inverse as NsevInverseOptionsStruct</p>
-</div></blockquote>
-</div></blockquote>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>rdict <span class="classifier-delimiter">:</span> <span class="classifier">dictionary holding the fields (depending on options)</span></dt>
+<dd><ul class="first last">
+<li>return_value : return value from FNFT</li>
+<li>q : time field resulting from inverse transform</li>
+<li>options : options for nsev_inverse as NsevInverseOptionsStruct</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
 </dd></dl>
 
 </div>
@@ -744,8 +1025,9 @@ If a more simplified version is desired, ‘nsev_inverse’ can be used (see doc
 <code class="descclassname">FNFTpy.options_handling.</code><code class="descname">fnft_nsev_inverse_default_opts_wrapper</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#FNFTpy.options_handling.fnft_nsev_inverse_default_opts_wrapper" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the default options for nsev_inverse directly from the FNFT C-library.</p>
 <p>Returns:</p>
-<blockquote>
-<div>options : NsevInverseOptionsStruct with options for nsev_inverse_wrapper</div></blockquote>
+<ul class="simple">
+<li>options : NsevInverseOptionsStruct with options for nsev_inverse_wrapper</li>
+</ul>
 </dd></dl>
 
 <dl class="function">
@@ -754,46 +1036,82 @@ If a more simplified version is desired, ‘nsev_inverse’ can be used (see doc
 <dd><p>Print options of a NsevInverseOptionsStruct for nsev_inverse.</p>
 <p>When called without additional argument, the default options from FNFT are printed.</p>
 <p>Optional arguments:</p>
-<blockquote>
-<div>opts : NsevInverseOptionsStruct, e.g. created by get_nsev_options()</div></blockquote>
+<ul class="simple">
+<li>opts : NsevInverseOptionsStruct, e.g. created by get_nsev_options()</li>
+</ul>
 </dd></dl>
 
 <dl class="function">
 <dt id="FNFTpy.options_handling.get_nsev_inverse_options">
 <code class="descclassname">FNFTpy.options_handling.</code><code class="descname">get_nsev_inverse_options</code><span class="sig-paren">(</span><em>dis=None</em>, <em>cst=None</em>, <em>csim=None</em>, <em>dst=None</em>, <em>max_iter=None</em>, <em>osf=None</em><span class="sig-paren">)</span><a class="headerlink" href="#FNFTpy.options_handling.get_nsev_inverse_options" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get a NsevInverseOptionsStruct for use with nsev_inverse_wrapper.</p>
-<blockquote>
-<div>When called without additional optional arguments, the default values from FNFT are used.</div></blockquote>
+<p>When called without additional optional arguments, the default values from FNFT are used.</p>
 <p>Optional arguments:</p>
-<blockquote>
-<div><p>dis : discretization, default = 4</p>
-<blockquote>
-<div>0=2split2modal
-1=2split2a
-2=2split4a
-3=2split4b
-4=BO</div></blockquote>
-<p>cst : type of continuous spectrum, default = 0</p>
-<blockquote>
-<div>0=Reflection coefficient
-1=b of xi
-2=b of tau</div></blockquote>
-<p>csim : inversion method for the continuous part, default = 0</p>
-<blockquote>
-<div>0=default
-1=Transfermatrix with reflection coefficients
-2=Transfermatrix with a,b from iteration
-3=seed potential</div></blockquote>
-<p>dst : type of discrete spectrum</p>
-<blockquote>
-<div>0 = norming constants
-1 = residues</div></blockquote>
-<p>max_iter : maximum number of iterations for iterative methods, default = 100</p>
-<p>osf : oversampling factor, default = 8</p>
-</div></blockquote>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>dis <span class="classifier-delimiter">:</span> <span class="classifier">discretization, default = 4</span></dt>
+<dd><ul class="first last">
+<li>0 = 2SPLIT2_MODAL</li>
+<li>1 = BO</li>
+<li>2 = 2SPLIT1A</li>
+<li>3 = 2SPLIT1B</li>
+<li>4 = 2SPLIT2A</li>
+<li>5 = 2SPLIT2B</li>
+<li>6 = 2SPLIT2S</li>
+<li>7 = 2SPLIT3A</li>
+<li>8 = 2SPLIT3B</li>
+<li>9 = 2SPLIT3S</li>
+<li>10 = 2SPLIT4A</li>
+<li>11 = 2SPLIT4B</li>
+<li>12 = 2SPLIT5A</li>
+<li>13 = 2SPLIT5B</li>
+<li>14 = 2SPLIT6A</li>
+<li>15 = 2SPLIT6B</li>
+<li>16 = 2SPLIT7A</li>
+<li>17 = 2SPLIT7B</li>
+<li>18 = 2SPLIT8A</li>
+<li>19 = 2SPLIT8B</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>cst <span class="classifier-delimiter">:</span> <span class="classifier">type of continuous spectrum, default = 0</span></dt>
+<dd><ul class="first last">
+<li>0 = Reflection coefficient</li>
+<li>1 = b of xi</li>
+<li>2 = b of tau</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>csim <span class="classifier-delimiter">:</span> <span class="classifier">inversion method for the continuous part, default = 0</span></dt>
+<dd><ul class="first last">
+<li>0 = default</li>
+<li>1 = Transfermatrix with reflection coefficients</li>
+<li>2 = Transfermatrix with a,b from iteration</li>
+<li>3 = seed potential</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>dst <span class="classifier-delimiter">:</span> <span class="classifier">type of discrete spectrum, default = 0</span></dt>
+<dd><ul class="first last">
+<li>0 = norming constants</li>
+<li>1 = residues</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li>max_iter : maximum number of iterations for iterative methods, default = 100</li>
+<li>osf : oversampling factor, default = 8</li>
+</ul>
 <p>Returns:</p>
-<blockquote>
-<div>options : NsevInverseOptionsStruct</div></blockquote>
+<ul class="simple">
+<li>options : NsevInverseOptionsStruct</li>
+</ul>
 </dd></dl>
 
 </div>
@@ -804,14 +1122,14 @@ If a more simplified version is desired, ‘nsev_inverse’ can be used (see doc
 <em class="property">class </em><code class="descclassname">FNFTpy.typesdef.</code><code class="descname">NsevInverseOptionsStruct</code><a class="headerlink" href="#FNFTpy.typesdef.NsevInverseOptionsStruct" title="Permalink to this definition">¶</a></dt>
 <dd><p>Ctypes options struct for interfacing fnft_nsev_inverse.</p>
 <p>Fields:</p>
-<blockquote>
-<div><p>discretization</p>
-<p>contspec_type</p>
-<p>contspec_inversion_method</p>
-<p>discspec_type</p>
-<p>max_iter</p>
-<p>oversampling_factor</p>
-</div></blockquote>
+<ul class="simple">
+<li>discretization</li>
+<li>contspec_type</li>
+<li>contspec_inversion_method</li>
+<li>discspec_type</li>
+<li>max_iter</li>
+<li>oversampling_factor</li>
+</ul>
 </dd></dl>
 
 </div>

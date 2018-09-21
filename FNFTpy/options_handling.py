@@ -41,7 +41,7 @@ def fnft_kdvv_default_opts_wrapper():
 
     Returns:
 
-        options : KdvvOptionsStruct with options for kdvv_wrapper
+    * options : KdvvOptionsStruct with options for kdvv_wrapper
 
     """
     fnft_clib = ctypes.CDLL(get_lib_path())
@@ -58,7 +58,7 @@ def print_kdvv_options(opts=None):
 
     Optional arguments:
 
-        opts : KdvvOptionsStruct, e.g. created by get_kdvv_options()
+    * opts : KdvvOptionsStruct, e.g. created by get_kdvv_options()
 
     """
     if opts is None:
@@ -73,30 +73,29 @@ def get_kdvv_options(dis=None):
 
     Optional arguments:
 
-        dis: discretization, default = 17
-
-            0 = 2split1a
-            1 = 2split1b
-            2 = 2split2a
-            3 = 2split2b
-            4 = 2split2s
-            5 = 2split3a
-            6 = 2split3b
-            7 = 2split3s
-            8 = 2split4a
-            9 = 2split4b
-            10 = 2split5a
-            11 = 2split5b
-            12 = 2split6a
-            13 = 2split6b
-            14 = 2split7a
-            15 = 2split7b
-            16 = 2split8a
-            17 = 2split8b
+    * dis: discretization, default = 17
+        * 0 = 2split1a
+        * 1 = 2split1b
+        * 2 = 2split2a
+        * 3 = 2split2b
+        * 4 = 2split2s
+        * 5 = 2split3a
+        * 6 = 2split3b
+        * 7 = 2split3s
+        * 8 = 2split4a
+        * 9 = 2split4b
+        * 10 = 2split5a
+        * 11 = 2split5b
+        * 12 = 2split6a
+        * 13 = 2split6b
+        * 14 = 2split7a
+        * 15 = 2split7b
+        * 16 = 2split8a
+        * 17 = 2split8b
 
     Returns:
 
-        options : KdvvOptionsStruct
+    * options : KdvvOptionsStruct
 
     """
     opts = fnft_kdvv_default_opts_wrapper()
@@ -114,7 +113,7 @@ def fnft_nsep_default_opts_wrapper():
 
     Returns:
 
-        options : NsepOptionsStruct for nsep_wrapper
+    * options : NsepOptionsStruct for nsep_wrapper
 
     """
     fnft_clib = ctypes.CDLL(get_lib_path())
@@ -131,7 +130,7 @@ def print_nsep_options(opts=None):
 
     Optional arguments:
 
-        opts : NsepOptionsStruc, e.g. created by get_nsep_options
+    * opts : NsepOptionsStruct, e.g. created by get_nsep_options
 
     """
     if opts is None:
@@ -146,38 +145,47 @@ def get_nsep_options(loc=None, filt=None, bb=None, maxev=None, dis=None, nf=None
 
     Optional arguments:
 
-        loc : localization of spectrum, default = 2
+    * loc : localization method for the spectrum, default = 2
+        * 0 = subsample and refine
+        * 1 = gridsearch
+        * 2 = mixed
 
-            0=subsample and refine
-            1=gridsearch
-            2=mixed
+    * filt : filtering of spectrum, default = 2
+        * 0 = none
+        * 1 = manual
+        * 2 = auto
 
-        filt : filtering of spectrum, default = 2
+    * bb: bounding box used for manual filtering, default = [-inf, inf, -inf, inf]
+    * maxev : maximum number of evaluations for root refinement, default = 20
+    * dis : discretization, default = 4
+        * 0 = 2SPLIT2_MODAL
+        * 1 = BO
+        * 2 = 2SPLIT1A
+        * 3 = 2SPLIT1B
+        * 4 = 2SPLIT2A
+        * 5 = 2SPLIT2B
+        * 6 = 2SPLIT2S
+        * 7 = 2SPLIT3A
+        * 8 = 2SPLIT3B
+        * 9 = 2SPLIT3S
+        * 10 = 2SPLIT4A
+        * 11 = 2SPLIT4B
+        * 12 = 2SPLIT5A
+        * 13 = 2SPLIT5B
+        * 14 = 2SPLIT6A
+        * 15 = 2SPLIT6B
+        * 16 = 2SPLIT7A
+        * 17 = 2SPLIT7B
+        * 18 = 2SPLIT8A
+        * 19 = 2SPLIT8B
 
-            0=none
-            1=manual
-            2=auto
-
-        bb : bounding box used for manual filtering, default = [-inf, inf, -inf, inf]
-
-        maxev : maximum number of evaluations for root refinement, default = 20
-
-        nf : normalization flag, default = 1
-
-            0=off
-            1=on
-
-        dis : discretization, default = 1
-
-            0=2split2modal
-            1=2split2a
-            2=2split4a
-            3=2split4b
-            4=BO
+    * nf : normalization flag, default=1
+        * 0 = off
+        * 1 = on
 
     Returns:
 
-        options : NsepOptionsStruct
+    * options : NsepOptionsStruct
 
     """
     opts = fnft_nsep_default_opts_wrapper()
@@ -209,7 +217,7 @@ def fnft_nsev_default_opts_wrapper():
 
     Returns:
 
-        options : NsevOptionsStruct with options for nsev_wrapper
+    * options : NsevOptionsStruct with options for nsev_wrapper
 
     """
 
@@ -225,10 +233,9 @@ def print_nsev_options(opts=None):
 
     When called without additional argument, the default options from FNFT are printed.
 
-
     Optional arguments:
 
-        opts : NsevOptionsStruct, e.g. created by get_nsev_options()
+    * opts : NsevOptionsStruct, e.g. created by get_nsev_options()
 
     """
 
@@ -240,54 +247,61 @@ def print_nsev_options(opts=None):
 def get_nsev_options(bsf=None, bsl=None, niter=None, Dsub=None, dst=None, cst=None, nf=None, dis=None):
     """Get a NsevOptionsStruct for use with nsev_wrapper.
 
-        When called without additional optional arguments, the default values from FNFT are used.
+    When called without additional optional arguments, the default values from FNFT are used.
 
     Optional arguments:
 
-        bsf : bound state filtering, default = 2
+    * bsf : bound state filtering, default = 2
+        * 0 = none
+        * 1 = basic
+        * 2 = full
 
-            0=none
-            1=basic
-            2=full
+    * bsl : bound state localization, default = 2
+        * 0 = fast eigenvalue
+        * 1 = Newton
+        * 2 = subsample and refine
 
-        bsl : bound state localization, default = 2
+    * niter : number of iterations for Newton bound state location, default = 10
+    * Dsub : number of samples used for 'subsampling and refine'-method, default = 0 (auto)
+    * dst : type of discrete spectrum, default = 0
+        * 0 = norming constants
+        * 1 = residues
+        * 2 = both
 
-            0=fast eigenvalue
-            1=Newton
-            2=subsample and refine
+    * cst : type of continuous spectrum, default = 0
+        * 0 = reflection coefficient
+        * 1 = a and b
+        * 2 = both
 
-        niter : number of iterations for Newton bound state location, default = 10
+    * dis : discretization, default = 11
+        * 0 = 2SPLIT2_MODAL
+        * 1 = BO
+        * 2 = 2SPLIT1A
+        * 3 = 2SPLIT1B
+        * 4 = 2SPLIT2A
+        * 5 = 2SPLIT2B
+        * 6 = 2SPLIT2S
+        * 7 = 2SPLIT3A
+        * 8 = 2SPLIT3B
+        * 9 = 2SPLIT3S
+        * 10 = 2SPLIT4A
+        * 11 = 2SPLIT4B
+        * 12 = 2SPLIT5A
+        * 13 = 2SPLIT5B
+        * 14 = 2SPLIT6A
+        * 15 = 2SPLIT6B
+        * 16 = 2SPLIT7A
+        * 17 = 2SPLIT7B
+        * 18 = 2SPLIT8A
+        * 19 = 2SPLIT8B
 
-        Dsub : number of samples used for 'subsampling and refine'-method, default = 0 (auto)
-
-        dst : type of discrete spectrum, default = 0
-
-            0=norming constants
-            1=residues
-            2=both
-
-        cst : type of continuous spectrum, default = 0
-
-            0=reflection coefficient
-            1=a and b
-            2=both
-
-        dis : discretization, default = 3
-
-            0=2split2modal
-            1=2split2a
-            2=2split4a
-            3=2split4b
-            4=BO
-
-        nf : normalization flag, default =  1
-
-            0=off
-            1=on
+    * nf : normalization flag, default =  1
+        * 0 = off
+        * 1 = on
 
     Returns:
 
-        options : NsevOptionsStruct
+    * options : NsevOptionsStruct
 
     """
     opts = fnft_nsev_default_opts_wrapper()
@@ -315,7 +329,7 @@ def fnft_nsev_inverse_default_opts_wrapper():
 
     Returns:
 
-        options : NsevInverseOptionsStruct with options for nsev_inverse_wrapper
+    * options : NsevInverseOptionsStruct with options for nsev_inverse_wrapper
 
     """
 
@@ -331,10 +345,9 @@ def print_nsev_inverse_options(opts=None):
 
     When called without additional argument, the default options from FNFT are printed.
 
-
     Optional arguments:
 
-        opts : NsevInverseOptionsStruct, e.g. created by get_nsev_options()
+    * opts : NsevInverseOptionsStruct, e.g. created by get_nsev_options()
     """
 
     if opts is None:
@@ -345,43 +358,53 @@ def print_nsev_inverse_options(opts=None):
 def get_nsev_inverse_options(dis=None, cst=None, csim=None, dst=None, max_iter=None, osf=None):
     """Get a NsevInverseOptionsStruct for use with nsev_inverse_wrapper.
 
-        When called without additional optional arguments, the default values from FNFT are used.
+    When called without additional optional arguments, the default values from FNFT are used.
 
     Optional arguments:
 
-        dis : discretization, default = 4
+    * dis : discretization, default = 4
+        * 0 = 2SPLIT2_MODAL
+        * 1 = BO
+        * 2 = 2SPLIT1A
+        * 3 = 2SPLIT1B
+        * 4 = 2SPLIT2A
+        * 5 = 2SPLIT2B
+        * 6 = 2SPLIT2S
+        * 7 = 2SPLIT3A
+        * 8 = 2SPLIT3B
+        * 9 = 2SPLIT3S
+        * 10 = 2SPLIT4A
+        * 11 = 2SPLIT4B
+        * 12 = 2SPLIT5A
+        * 13 = 2SPLIT5B
+        * 14 = 2SPLIT6A
+        * 15 = 2SPLIT6B
+        * 16 = 2SPLIT7A
+        * 17 = 2SPLIT7B
+        * 18 = 2SPLIT8A
+        * 19 = 2SPLIT8B
 
-            0=2split2modal
-            1=2split2a
-            2=2split4a
-            3=2split4b
-            4=BO
+    * cst : type of continuous spectrum, default = 0
+        * 0 = Reflection coefficient
+        * 1 = b of xi
+        * 2 = b of tau
 
-        cst : type of continuous spectrum, default = 0
+    * csim : inversion method for the continuous part, default = 0
+        * 0 = default
+        * 1 = Transfermatrix with reflection coefficients
+        * 2 = Transfermatrix with a,b from iteration
+        * 3 = seed potential
 
-            0=Reflection coefficient
-            1=b of xi
-            2=b of tau
+    *  dst : type of discrete spectrum, default = 0
+        * 0 = norming constants
+        * 1 = residues
 
-        csim : inversion method for the continuous part, default = 0
-
-            0=default
-            1=Transfermatrix with reflection coefficients
-            2=Transfermatrix with a,b from iteration
-            3=seed potential
-
-        dst : type of discrete spectrum
-
-            0 = norming constants
-            1 = residues
-
-        max_iter : maximum number of iterations for iterative methods, default = 100
-
-        osf : oversampling factor, default = 8
+    * max_iter : maximum number of iterations for iterative methods, default = 100
+    * osf : oversampling factor, default = 8
 
     Returns:
 
-        options : NsevInverseOptionsStruct
+    * options : NsevInverseOptionsStruct
 
     """
     opts = fnft_nsev_inverse_default_opts_wrapper()

@@ -48,48 +48,39 @@ def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None):
 
     Arguments:
 
-        u : numpy array holding the samples of the field to be analyzed
-
-        tvec : time vector
-
-        M : number of samples for the continuous spectrum to calculate,
-
+    * u : numpy array holding the samples of the field to be analyzed
+    * tvec : time vector
+    * M : number of samples for the continuous spectrum to calculate,
 
     Optional arguments:
 
-
-        Xi1, Xi2 : min and max frequency for the continuous spectrum, default = [-2,2]
-
-        dis : determines the discretization, default = 17
-
-            0 = 2split1a
-            1 = 2split1b
-            2 = 2split2a
-            3 = 2split2b
-            4 = 2split2s
-            5 = 2split3a
-            6 = 2split3b
-            7 = 2split3s
-            8 = 2split4a
-            9 = 2split4b
-            10 = 2split5a
-            11 = 2split5b
-            12 = 2split6a
-            13 = 2split6b
-            14 = 2split7a
-            15 = 2split7b
-            16 = 2split8a
-            17 = 2split8b
-
+    * Xi1, Xi2 : min and max frequency for the continuous spectrum, default = [-2,2]
+    * dis : determines the discretization, default = 17
+        * 0 = 2split1a
+        * 1 = 2split1b
+        * 2 = 2split2a
+        * 3 = 2split2b
+        * 4 = 2split2s
+        * 5 = 2split3a
+        * 6 = 2split3b
+        * 7 = 2split3s
+        * 8 = 2split4a
+        * 9 = 2split4b
+        * 10 = 2split5a
+        * 11 = 2split5b
+        * 12 = 2split6a
+        * 13 = 2split6b
+        * 14 = 2split7a
+        * 15 = 2split7b
+        * 16 = 2split8a
+        * 17 = 2split8b
 
     Returns:
 
-        rdict : dictionary holding the fields:
-
-            return_value : return value from FNFT
-
-            cont : continuous spectrum
-
+    * rdict : dictionary holding the fields:
+        * return_value : return value from FNFT
+        * cont : continuous spectrum
+        * options : KdvvOptionsStruct with options used
 
     """
 
@@ -110,34 +101,26 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
     It converts all Python input into the C equivalent and returns the result from FNFT.
     If a more simplified version is desired, 'kdvv' can be used (see documentation there).
 
-
-    Currently, only the contiuous spectrum is calculated.
+    Currently, only the continuous spectrum is calculated.
 
     Arguments:
 
-        D : number of samples
-
-        u : numpy array holding the samples of the field to be analyzed
-
-        T1, T2  : time positions of the first and the last sample
-
-        M : number of values for the continuous spectrum to calculate
-
-        Xi1, Xi2 : min and max frequency for the continuous spectrum
-
-        K : maximum number of bound states to calculate (no effect yet)
-
-        options : options for kdvv as KdvvOptionsStruct. Can be generated e.g. with 'get_kdvv_options()'
+    * D : number of samples
+    * u : numpy array holding the samples of the field to be analyzed
+    * T1, T2  : time positions of the first and the last sample
+    * M : number of values for the continuous spectrum to calculate
+    * Xi1, Xi2 : min and max frequency for the continuous spectrum
+    * K : maximum number of bound states to calculate (no effect yet)
+    * options : options for kdvv as KdvvOptionsStruct. Can be generated e.g. with 'get_kdvv_options()'
 
     Returns:
 
-        rdict : dictionary holding the fields:
-
-            return_value : return value from FNFT
-
-            cont : continuous spectrum
-
+    * rdict : dictionary holding the fields:
+        * return_value : return value from FNFT
+        * cont : continuous spectrum
+        * options : KdvvOptionsStruct with options used
     """
+
     fnft_clib = ctypes.CDLL(get_lib_path())
     clib_kdvv_func = fnft_clib.fnft_kdvv
     clib_kdvv_func.restype = ctypes_int

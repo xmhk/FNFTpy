@@ -48,48 +48,53 @@ def nsev_inverse(xivec, tvec, contspec, bound_states, discspec,
 
     Arguments:
 
-       xivec: frequency vector
-
-       tvec: time vection
-
-       contspec: continuous spectrum (of xi)
-
-       bound_states: array holding the bound states. Pass None if no bound states present.
-
-       discspec: discrete spectrum. Pass None if no bound states present.
-
+    * xivec: frequency vector
+    * tvec: time vection
+    * contspec: continuous spectrum (of xi)
+    * bound_states: array holding the bound states. Pass None if no bound states present.
+    * discspec: discrete spectrum. Pass None if no bound states present.
 
     Optional arguments:
 
-        dis : discretization, default = 4
+    * dis : discretization, default = 4
+        * 0 = 2SPLIT2_MODAL
+        * 1 = BO
+        * 2 = 2SPLIT1A
+        * 3 = 2SPLIT1B
+        * 4 = 2SPLIT2A
+        * 5 = 2SPLIT2B
+        * 6 = 2SPLIT2S
+        * 7 = 2SPLIT3A
+        * 8 = 2SPLIT3B
+        * 9 = 2SPLIT3S
+        * 10 = 2SPLIT4A
+        * 11 = 2SPLIT4B
+        * 12 = 2SPLIT5A
+        * 13 = 2SPLIT5B
+        * 14 = 2SPLIT6A
+        * 15 = 2SPLIT6B
+        * 16 = 2SPLIT7A
+        * 17 = 2SPLIT7B
+        * 18 = 2SPLIT8A
+        * 19 = 2SPLIT8B
 
-            0=2split2modal
-            1=2split2a
-            2=2split4a
-            3=2split4b
-            4=BO
+    * cst : type of continuous spectrum, default = 0
+        * 0 = Reflection coefficient
+        * 1 = b of xi
+        * 2 = b of tau
 
-        cst : type of continuous spectrum, default = 0
+    * csim : inversion method for the continuous part, default = 0
+        * 0 = default
+        * 1 = Transfermatrix with reflection coefficients
+        * 2 = Transfermatrix with a,b from iteration
+        * 3 = seed potential
 
-            0=Reflection coefficient
-            1=b of xi
-            2=b of tau
+    *  dst : type of discrete spectrum, default = 0
+        * 0 = norming constants
+        * 1 = residues
 
-        csim : inversion method for the continuous part, default = 0
-
-            0=default
-            1=Transfermatrix with reflection coefficients
-            2=Transfermatrix with a,b from iteration
-            3=seed potential
-
-        dst : type of discrete spectrum
-
-            0 = norming constants
-            1 = residues
-
-        max_iter : maximum number of iterations for iterative methods, default = 100
-
-        osf : oversampling factor, default = 8
+    * max_iter : maximum number of iterations for iterative methods, default = 100
+    * osf : oversampling factor, default = 8
 
     """
     M = len(xivec)
@@ -115,38 +120,24 @@ def nsev_inverse_wrapper(M, contspec, Xi1, Xi2, K, bound_states,
 
     Arguments:
 
-
-        M : number of sample points for continuous spectrum
-
-        contspec : numpy array holding the samples of the continuous spectrum
-
-        Xi1, Xi2  : frequencies defining the frequency range of the continuous spectrum.
+    * M : number of sample points for continuous spectrum
+    * contspec : numpy array holding the samples of the continuous spectrum
+    * Xi1, Xi2  : frequencies defining the frequency range of the continuous spectrum.
                     ! Currently, the positions returned by nsev_inverse_xi_wrapper must be used !
-
-
-        K : number of bound states
-
-        bound_states : bound states (can be None if K=0)
-
-        normconst_or_residues : bound state spectral coefficients (can be None if K=0)
-
-        D : number of samples for the output field
-
-        T1, T2 : borders of the desired time window
-
-        kappa : +1/-1 for focussing / defocussing NSE
-
-        options : options for nsev_inverse as NsevInverseOptionsStruct
+    * K : number of bound states
+    * bound_states : bound states (can be None if K=0)
+    * normconst_or_residues : bound state spectral coefficients (can be None if K=0)
+    * D : number of samples for the output field
+    * T1, T2 : borders of the desired time window
+    * kappa : +1/-1 for focussing / defocussing NSE
+    * options : options for nsev_inverse as NsevInverseOptionsStruct
 
     Returns:
 
-        rdict : dictionary holding the fields (depending on options)
-
-            return_value : return value from FNFT
-
-            q : time field resulting from inverse transform
-
-            options : options for nsev_inverse as NsevInverseOptionsStruct
+    * rdict : dictionary holding the fields (depending on options)
+        * return_value : return value from FNFT
+        * q : time field resulting from inverse transform
+        * options : options for nsev_inverse as NsevInverseOptionsStruct
     """
     fnft_clib = ctypes.CDLL(get_lib_path())
     clib_nsev_inverse_func = fnft_clib.fnft_nsev_inverse
@@ -225,30 +216,40 @@ def nsev_inverse_xi_wrapper(D, T1, T2, M, dis=None):
     Return value is an array holding the position of the first and the last spectral
     sample to be used for nsev_inverse.
 
-
     Arguments:
 
-        D : number of sample points for the time window
-
-        T1, T2 : borders of the time window
-
-        M : number of samples for the continuous spectrum
+    * D : number of sample points for the time window
+    * T1, T2 : borders of the time window
+    * M : number of samples for the continuous spectrum
 
     Optional Arguments:
 
-        dis : nse discretization parameter, default = 4
-
-            0=2split2modal
-            1=2split2a
-            2=2split4a
-            3=2split4b
-            4=BO
+    * dis : nse discretization parameter, default = 4
+        * 0 = 2SPLIT2_MODAL
+        * 1 = BO
+        * 2 = 2SPLIT1A
+        * 3 = 2SPLIT1B
+        * 4 = 2SPLIT2A
+        * 5 = 2SPLIT2B
+        * 6 = 2SPLIT2S
+        * 7 = 2SPLIT3A
+        * 8 = 2SPLIT3B
+        * 9 = 2SPLIT3S
+        * 10 = 2SPLIT4A
+        * 11 = 2SPLIT4B
+        * 12 = 2SPLIT5A
+        * 13 = 2SPLIT5B
+        * 14 = 2SPLIT6A
+        * 15 = 2SPLIT6B
+        * 16 = 2SPLIT7A
+        * 17 = 2SPLIT7B
+        * 18 = 2SPLIT8A
+        * 19 = 2SPLIT8B
 
     Returns:
 
-        rv : return value of the C-function
-
-        xi : two-element C double vector containing XI borders
+    * rv : return value of the C-function
+    * xi : two-element C double vector containing XI borders
 
     """
     fnft_clib = ctypes.CDLL(get_lib_path())

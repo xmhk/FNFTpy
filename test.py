@@ -45,12 +45,14 @@ from FNFTpy import *
 #kdvvexample()
 #nsepexample()
 #nsevexample()
-nsevinverseexample()
+#nsevinverseexample()
 
 
-nsevinverseexample2()
-#print_default_options()
+#nsevinverseexample2()
+print_default_options()
 
+tvec = np.linspace(-20,20,1024)
+feld = 1./np.cosh(tvec)
 
-
-
+#get_nsev_options(dis=22)
+#nsev(feld, tvec, dis=20)
