@@ -37,17 +37,17 @@ def print_default_options():
     """Print the default options for kdvv, nsep, nsev and nsev_inverse."""
 
     
-    kdvvopts = get_kdvv_options()
-    print("\n ----\n kdvv default options:\n %s \n\n"%repr(kdvvopts))
+    kdvvoptions = get_kdvv_options()
+    print("\n ----\n kdvv default options:\n %s \n\n"%repr(kdvvoptions))
 
-    nsepopts = get_nsep_options()
-    print("\n ----\n nsep default options:\n %s \n\n" % repr(nsepopts))
+    nsepoptions = get_nsep_options()
+    print("\n ----\n nsep default options:\n %s \n\n" % repr(nsepoptions))
 
-    nsevopts = get_nsev_options()
-    print("\n ----\n nsev default options:\n %s \n\n" % repr(nsevopts))
+    nsevoptions = get_nsev_options()
+    print("\n ----\n nsev default options:\n %s \n\n" % repr(nsevoptions))
 
-    nsevinverseopts = get_nsev_inverse_options()
-    print("\n ----\n nsev inverse default options:\n %s \n\n" % repr(nsevinverseopts))
+    nsevinverseoptions = get_nsev_inverse_options()
+    print("\n ----\n nsev inverse default options:\n %s \n\n" % repr(nsevinverseoptions))
 
 
 def kdvvexample():
@@ -201,7 +201,11 @@ def nsevinverseexample2():
 
     # call the function
     res = nsev_inverse(xivec, tvec, cont_b_ana, bound_states, disc_norming_const_ana, cst=1, dst=0)
+    print("\n----- options used ----")
+    print(res['options'])
+    print("\n------ results --------")
 
+    print("FNFT return value: %d (should be 0)" % res['return_value'])
     # compare result to analytic function
     print("\n\nnsev-inverse example: Satsuma-Yajima N=2.2")
     print("Difference analytic - numeric: sum((q_ana-q_num)**2) = %.2e  (should be approx 0) "%np.sum(np.abs(q-res['q'])**2))

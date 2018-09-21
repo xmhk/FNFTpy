@@ -22,7 +22,7 @@ nsep_wrapper - interact with FNFT library
 get, set and view options for nsep_wrapper
 ------------------------------------------
 
-.. autofunction:: FNFTpy.options_handling.fnft_nsep_default_opts_wrapper
+.. autofunction:: FNFTpy.options_handling.fnft_nsep_default_options_wrapper
 
 .. autofunction:: FNFTpy.options_handling.print_nsep_options
 

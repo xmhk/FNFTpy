@@ -262,8 +262,8 @@ def nsev_inverse_xi_wrapper(D, T1, T2, M, dis=None):
     nsev_M = ctypes_uint(M)
     nsev_Xi = np.zeros(2, dtype=numpy_double)
     if dis is None:
-        tmpopts = get_nsev_inverse_options()
-        dis = tmpopts.discretization
+        tmpoptions = get_nsev_inverse_options()
+        dis = tmpoptions.discretization
     nsev_dis = ctypes_int32(dis)
     clib_nsev_inverse_xi_func.argtypes = [
         type(nsev_D),  # D

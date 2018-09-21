@@ -36,7 +36,7 @@ from .typesdef import *
 # Get and view options for kdvv (Korteweg-de Vries equation, vanishing boundaries)
 #
 
-def fnft_kdvv_default_opts_wrapper():
+def fnft_kdvv_default_options_wrapper():
     """Get the default options for kdvv directly from the FNFT C-library.
 
     Returns:
@@ -51,19 +51,19 @@ def fnft_kdvv_default_opts_wrapper():
     return clib_func()
 
 
-def print_kdvv_options(opts=None):
+def print_kdvv_options(options=None):
     """Print options of a KdvvOptionsStruct.
 
     When called without additional argument, the default options from FNFT are printed.
 
     Optional arguments:
 
-    * opts : KdvvOptionsStruct, e.g. created by get_kdvv_options()
+    * options : KdvvOptionsStruct, e.g. created by get_kdvv_options()
 
     """
-    if opts is None:
-        opts = fnft_kdvv_default_opts_wrapper()
-    print(repr(opts))
+    if options is None:
+        options = fnft_kdvv_default_options_wrapper()
+    print(repr(options))
 
 
 def get_kdvv_options(dis=None):
@@ -98,17 +98,17 @@ def get_kdvv_options(dis=None):
     * options : KdvvOptionsStruct
 
     """
-    opts = fnft_kdvv_default_opts_wrapper()
+    options = fnft_kdvv_default_options_wrapper()
     if dis is not None:
-        opts.discretization = dis
-    return opts
+        options.discretization = dis
+    return options
 
 
 #
 #  Get and view options for nsep (Nonlinear Schroedinger equation, periodic boundaries)
 #
 
-def fnft_nsep_default_opts_wrapper():
+def fnft_nsep_default_options_wrapper():
     """Get the default options for nsep directly from the FNFT C-library.
 
     Returns:
@@ -123,19 +123,19 @@ def fnft_nsep_default_opts_wrapper():
     return clib_func()
 
 
-def print_nsep_options(opts=None):
+def print_nsep_options(options=None):
     """Print options of a NsepOptionsStruct.
 
     When called without additional arguments, the default options from FNFT are printed.
 
     Optional arguments:
 
-    * opts : NsepOptionsStruct, e.g. created by get_nsep_options
+    * options : NsepOptionsStruct, e.g. created by get_nsep_options
 
     """
-    if opts is None:
-        opts = fnft_nsep_default_opts_wrapper()
-    print(repr(opts))
+    if options is None:
+        options = fnft_nsep_default_options_wrapper()
+    print(repr(options))
 
 
 def get_nsep_options(loc=None, filt=None, bb=None, maxev=None, dis=None, nf=None):
@@ -188,23 +188,23 @@ def get_nsep_options(loc=None, filt=None, bb=None, maxev=None, dis=None, nf=None
     * options : NsepOptionsStruct
 
     """
-    opts = fnft_nsep_default_opts_wrapper()
+    options = fnft_nsep_default_options_wrapper()
     if loc is not None:
-        opts.localization = loc
+        options.localization = loc
     if filt is not None:
-        opts.filtering = filt
+        options.filtering = filt
     if nf is not None:
-        opts.normalization_flag = nf
+        options.normalization_flag = nf
     if dis is not None:
-        opts.discretization = dis
+        options.discretization = dis
     if bb is not None:
-        opts.bounding_box[0] = bb[0]
-        opts.bounding_box[1] = bb[1]
-        opts.bounding_box[2] = bb[2]
-        opts.bounding_box[3] = bb[3]
+        options.bounding_box[0] = bb[0]
+        options.bounding_box[1] = bb[1]
+        options.bounding_box[2] = bb[2]
+        options.bounding_box[3] = bb[3]
     if maxev is not None:
-        opts.max_evals = maxev
-    return opts
+        options.max_evals = maxev
+    return options
 
 
 #
@@ -212,7 +212,7 @@ def get_nsep_options(loc=None, filt=None, bb=None, maxev=None, dis=None, nf=None
 #
 
 
-def fnft_nsev_default_opts_wrapper():
+def fnft_nsev_default_options_wrapper():
     """Get the default options for nsev directly from the FNFT C-library.
 
     Returns:
@@ -228,20 +228,20 @@ def fnft_nsev_default_opts_wrapper():
     return clib_func()
 
 
-def print_nsev_options(opts=None):
+def print_nsev_options(options=None):
     """Print options of a NsevOptionsStruct.
 
     When called without additional argument, the default options from FNFT are printed.
 
     Optional arguments:
 
-    * opts : NsevOptionsStruct, e.g. created by get_nsev_options()
+    * options : NsevOptionsStruct, e.g. created by get_nsev_options()
 
     """
 
-    if opts is None:
-        opts = fnft_nsev_default_opts_wrapper()
-    print(repr(opts))
+    if options is None:
+        options = fnft_nsev_default_options_wrapper()
+    print(repr(options))
 
 
 def get_nsev_options(bsf=None, bsl=None, niter=None, Dsub=None, dst=None, cst=None, nf=None, dis=None):
@@ -304,27 +304,27 @@ def get_nsev_options(bsf=None, bsl=None, niter=None, Dsub=None, dst=None, cst=No
     * options : NsevOptionsStruct
 
     """
-    opts = fnft_nsev_default_opts_wrapper()
+    options = fnft_nsev_default_options_wrapper()
     if bsf is not None:
-        opts.bound_state_filtering = bsf
+        options.bound_state_filtering = bsf
     if bsl is not None:
-        opts.bound_state_localization = bsl
+        options.bound_state_localization = bsl
     if niter is not None:
-        opts.niter = niter
+        options.niter = niter
     if Dsub is not None:
-        opts.Dsub = Dsub
+        options.Dsub = Dsub
     if dst is not None:
-        opts.discspec_type = dst
+        options.discspec_type = dst
     if cst is not None:
-        opts.contspec_type = cst
+        options.contspec_type = cst
     if nf is not None:
-        opts.normalization_flag = nf
+        options.normalization_flag = nf
     if dis is not None:
-        opts.discretization = dis
-    return opts
+        options.discretization = dis
+    return options
 
 
-def fnft_nsev_inverse_default_opts_wrapper():
+def fnft_nsev_inverse_default_options_wrapper():
     """Get the default options for nsev_inverse directly from the FNFT C-library.
 
     Returns:
@@ -340,19 +340,19 @@ def fnft_nsev_inverse_default_opts_wrapper():
     return clib_func()
 
 
-def print_nsev_inverse_options(opts=None):
+def print_nsev_inverse_options(options=None):
     """Print options of a NsevInverseOptionsStruct for nsev_inverse.
 
     When called without additional argument, the default options from FNFT are printed.
 
     Optional arguments:
 
-    * opts : NsevInverseOptionsStruct, e.g. created by get_nsev_options()
+    * options : NsevInverseOptionsStruct, e.g. created by get_nsev_options()
     """
 
-    if opts is None:
-        opts = fnft_nsev_inverse_default_opts_wrapper()
-    print(repr(opts))
+    if options is None:
+        options = fnft_nsev_inverse_default_options_wrapper()
+    print(repr(options))
 
 
 def get_nsev_inverse_options(dis=None, cst=None, csim=None, dst=None, max_iter=None, osf=None):
@@ -407,20 +407,20 @@ def get_nsev_inverse_options(dis=None, cst=None, csim=None, dst=None, max_iter=N
     * options : NsevInverseOptionsStruct
 
     """
-    opts = fnft_nsev_inverse_default_opts_wrapper()
+    options = fnft_nsev_inverse_default_options_wrapper()
     if dis is not None:
-        opts.discretization = dis
+        options.discretization = dis
     if cst is not None:
-        opts.contspec_type = cst
+        options.contspec_type = cst
     if csim is not None:
-        opts.contspec_inversion_method = csim
+        options.contspec_inversion_method = csim
     if dst is not None:
-        opts.discspec_type = dst
+        options.discspec_type = dst
     if max_iter is not None:
-        opts.max_iter = max_iter
+        options.max_iter = max_iter
     if osf is not None:
-        opts.oversampling_factor = osf
-    return opts
+        options.oversampling_factor = osf
+    return options
 
 
 

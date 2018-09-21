@@ -26,7 +26,7 @@ nsev_inverse_wrapper - interact with FNFT library
 get, set and view options for nsev_inverse_wrapper
 --------------------------------------------------
 
-.. autofunction:: FNFTpy.options_handling.fnft_nsev_inverse_default_opts_wrapper
+.. autofunction:: FNFTpy.options_handling.fnft_nsev_inverse_default_options_wrapper
 
 .. autofunction:: FNFTpy.options_handling.print_nsev_inverse_options
 

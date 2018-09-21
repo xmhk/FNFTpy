@@ -10,7 +10,7 @@ visit FNFT's github page: [https://github.com/FastNFT](https://github.com/FastNF
 
 ## current state - access functions from FNFT version 0.2.0
 
-last update of FNFTpy: 20.09.2018
+last update of FNFTpy: 21.09.2018
 
 
 ### Korteweg-de-Fries equation with vanishing boundary conditions:
@@ -201,13 +201,12 @@ last update of FNFTpy: 20.09.2018
     
         Returns:
     
-            libstring : string holding library path
+        * libstring : string holding library path
     
         Example paths:
     
-            libstr = "C:/Libraries/local/libfnft.dll"  # example for windows
-            libstr = "C:\\Libraries\\local\\libfnft.dll" # windows - with backslash
-            libstr = "/usr/local/lib/libfnft.so"  # example for linux
+            * libstr = "C:/Libraries/local/libfnft.dll"  # example for windows            
+            * libstr = "/usr/local/lib/libfnft.so"  # example for linux
     
         """
         libstr = "/usr/local/lib/libfnft.so"  # example for linux

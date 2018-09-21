@@ -22,7 +22,7 @@ nsev_wrapper - interact with FNFT library
 get, set and view options for nsev_wrapper
 ------------------------------------------
 
-.. autofunction:: FNFTpy.options_handling.fnft_nsev_default_opts_wrapper
+.. autofunction:: FNFTpy.options_handling.fnft_nsev_default_options_wrapper
 
 .. autofunction:: FNFTpy.options_handling.print_nsev_options
 

@@ -22,7 +22,7 @@ kdvv_wrapper - interact with FNFT library
 get, set and view options for kdvv_wrapper
 ------------------------------------------
 
-.. autofunction:: FNFTpy.options_handling.fnft_kdvv_default_opts_wrapper
+.. autofunction:: FNFTpy.options_handling.fnft_kdvv_default_options_wrapper
 
 .. autofunction:: FNFTpy.options_handling.print_kdvv_options
 

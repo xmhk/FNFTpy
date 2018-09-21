@@ -30,29 +30,23 @@ Christoph Mahnke, 2018
 import numpy as np
 from FNFTpy import *
 
-# genereal info
-#print_fnft_version()
+# general info
+print_fnft_version()
 
 
 
 # detect some general errors
-#nsevtest()
-#kdvvtest()
-#nseptest()
+nsevtest()
+kdvvtest()
+nseptest()
 
 # mimic the example files
 
-#kdvvexample()
-#nsepexample()
-#nsevexample()
-#nsevinverseexample()
+kdvvexample()
+nsepexample()
+nsevexample()
+nsevinverseexample()
 
 
-#nsevinverseexample2()
+nsevinverseexample2()
 print_default_options()
-
-tvec = np.linspace(-20,20,1024)
-feld = 1./np.cosh(tvec)
-
-#get_nsev_options(dis=22)
-#nsev(feld, tvec, dis=20)
