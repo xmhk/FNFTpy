@@ -74,6 +74,7 @@ def get_kdvv_options(dis=None):
     Optional arguments:
 
     * dis: discretization, default = 17
+
         * 0 = 2split1a
         * 1 = 2split1b
         * 2 = 2split2a
@@ -146,11 +147,13 @@ def get_nsep_options(loc=None, filt=None, bb=None, maxev=None, dis=None, nf=None
     Optional arguments:
 
     * loc : localization method for the spectrum, default = 2
+
         * 0 = subsample and refine
         * 1 = gridsearch
         * 2 = mixed
 
     * filt : filtering of spectrum, default = 2
+
         * 0 = none
         * 1 = manual
         * 2 = auto
@@ -158,6 +161,7 @@ def get_nsep_options(loc=None, filt=None, bb=None, maxev=None, dis=None, nf=None
     * bb: bounding box used for manual filtering, default = [-inf, inf, -inf, inf]
     * maxev : maximum number of evaluations for root refinement, default = 20
     * dis : discretization, default = 4
+
         * 0 = 2SPLIT2_MODAL
         * 1 = BO
         * 2 = 2SPLIT1A
@@ -180,6 +184,7 @@ def get_nsep_options(loc=None, filt=None, bb=None, maxev=None, dis=None, nf=None
         * 19 = 2SPLIT8B
 
     * nf : normalization flag, default=1
+
         * 0 = off
         * 1 = on
 
@@ -252,11 +257,13 @@ def get_nsev_options(bsf=None, bsl=None, niter=None, Dsub=None, dst=None, cst=No
     Optional arguments:
 
     * bsf : bound state filtering, default = 2
+
         * 0 = none
         * 1 = basic
         * 2 = full
 
     * bsl : bound state localization, default = 2
+
         * 0 = fast eigenvalue
         * 1 = Newton
         * 2 = subsample and refine
@@ -264,16 +271,19 @@ def get_nsev_options(bsf=None, bsl=None, niter=None, Dsub=None, dst=None, cst=No
     * niter : number of iterations for Newton bound state location, default = 10
     * Dsub : number of samples used for 'subsampling and refine'-method, default = 0 (auto)
     * dst : type of discrete spectrum, default = 0
+
         * 0 = norming constants
         * 1 = residues
         * 2 = both
 
     * cst : type of continuous spectrum, default = 0
+
         * 0 = reflection coefficient
         * 1 = a and b
         * 2 = both
 
     * dis : discretization, default = 11
+
         * 0 = 2SPLIT2_MODAL
         * 1 = BO
         * 2 = 2SPLIT1A
@@ -296,6 +306,7 @@ def get_nsev_options(bsf=None, bsl=None, niter=None, Dsub=None, dst=None, cst=No
         * 19 = 2SPLIT8B
 
     * nf : normalization flag, default =  1
+
         * 0 = off
         * 1 = on
 
@@ -363,6 +374,7 @@ def get_nsev_inverse_options(dis=None, cst=None, csim=None, dst=None, max_iter=N
     Optional arguments:
 
     * dis : discretization, default = 4
+
         * 0 = 2SPLIT2_MODAL
         * 1 = BO
         * 2 = 2SPLIT1A
@@ -385,17 +397,20 @@ def get_nsev_inverse_options(dis=None, cst=None, csim=None, dst=None, max_iter=N
         * 19 = 2SPLIT8B
 
     * cst : type of continuous spectrum, default = 0
+
         * 0 = Reflection coefficient
         * 1 = b of xi
         * 2 = b of tau
 
     * csim : inversion method for the continuous part, default = 0
+
         * 0 = default
         * 1 = Transfermatrix with reflection coefficients
         * 2 = Transfermatrix with a,b from iteration
         * 3 = seed potential
 
     *  dst : type of discrete spectrum, default = 0
+
         * 0 = norming constants
         * 1 = residues
 

@@ -57,6 +57,7 @@ def nsev_inverse(xivec, tvec, contspec, bound_states, discspec,
     Optional arguments:
 
     * dis : discretization, default = 4
+
         * 0 = 2SPLIT2_MODAL
         * 1 = BO
         * 2 = 2SPLIT1A
@@ -79,17 +80,20 @@ def nsev_inverse(xivec, tvec, contspec, bound_states, discspec,
         * 19 = 2SPLIT8B
 
     * cst : type of continuous spectrum, default = 0
+
         * 0 = Reflection coefficient
         * 1 = b of xi
         * 2 = b of tau
 
     * csim : inversion method for the continuous part, default = 0
+
         * 0 = default
         * 1 = Transfermatrix with reflection coefficients
         * 2 = Transfermatrix with a,b from iteration
         * 3 = seed potential
 
     *  dst : type of discrete spectrum, default = 0
+
         * 0 = norming constants
         * 1 = residues
 
@@ -135,6 +139,7 @@ def nsev_inverse_wrapper(M, contspec, Xi1, Xi2, K, bound_states,
     Returns:
 
     * rdict : dictionary holding the fields (depending on options)
+
         * return_value : return value from FNFT
         * q : time field resulting from inverse transform
         * options : options for nsev_inverse as NsevInverseOptionsStruct
@@ -225,6 +230,7 @@ def nsev_inverse_xi_wrapper(D, T1, T2, M, dis=None):
     Optional Arguments:
 
     * dis : nse discretization parameter, default = 4
+
         * 0 = 2SPLIT2_MODAL
         * 1 = BO
         * 2 = 2SPLIT1A

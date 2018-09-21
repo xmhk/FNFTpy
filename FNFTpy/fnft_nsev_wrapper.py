@@ -59,11 +59,13 @@ def nsev(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=None,
     * K : maximum number of bound states to calculatem default = 128
     * kappa : +/- 1 for focussing/defocussing nonlinearity, default = 1
     * bsf : bound state filtering, default = 2
+
         * 0 = none
         * 1 = basic
         * 2 = full
 
     * bsl : bound state localization, default = 2
+
         * 0 = fast eigenvalue
         * 1 = Newton
         * 2 = subsample and refine
@@ -71,16 +73,19 @@ def nsev(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=None,
     * niter : number of iterations for Newton bound state location, default = 10
     * Dsub : number of samples used for 'subsampling and refine'-method, default = 0 (auto)
     * dst : type of discrete spectrum, default = 0
+
         * 0 = norming constants
         * 1 = residues
         * 2 = both
 
     * cst : type of continuous spectrum, default = 0
+
         * 0 = reflection coefficient
         * 1 = a and b
         * 2 = both
 
     * dis : discretization, default = 11
+
         * 0 = 2SPLIT2_MODAL
         * 1 = BO
         * 2 = 2SPLIT1A
@@ -103,12 +108,14 @@ def nsev(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=None,
         * 19 = 2SPLIT8B
 
     * nf : normalization flag, default =  1
+
         * 0 = off
         * 1 = on
 
     Returns:
 
     * rdict : dictionary holding the fields (depending on options)
+
         * return_value : return value from FNFT
         * bound_states_num : number of bound states found
         * bound_states : array of bound states found
@@ -151,6 +158,7 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
     Returns:
 
     * rdict : dictionary holding the fields (depending on options)
+
         * return_value : return value from FNFT
         * bound_states_num : number of bound states found
         * bound_states : array of bound states found

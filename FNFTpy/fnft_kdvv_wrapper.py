@@ -56,6 +56,7 @@ def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None):
 
     * Xi1, Xi2 : min and max frequency for the continuous spectrum, default = [-2,2]
     * dis : determines the discretization, default = 17
+
         * 0 = 2split1a
         * 1 = 2split1b
         * 2 = 2split2a
@@ -78,6 +79,7 @@ def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None):
     Returns:
 
     * rdict : dictionary holding the fields:
+
         * return_value : return value from FNFT
         * cont : continuous spectrum
         * options : KdvvOptionsStruct with options used
@@ -116,6 +118,7 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
     Returns:
 
     * rdict : dictionary holding the fields:
+
         * return_value : return value from FNFT
         * cont : continuous spectrum
         * options : KdvvOptionsStruct with options used

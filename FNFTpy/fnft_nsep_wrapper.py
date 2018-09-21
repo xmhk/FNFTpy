@@ -55,11 +55,13 @@ def nsep(q, T1, T2, kappa=1, loc=None, filt=None, bb=None,
 
     * kappa : +/- 1 for focussing/defocussing nonlinearity, default = 1
     * loc : localization method for the spectrum, default = 2
+
         * 0 = subsample and refine
         * 1 = gridsearch
         * 2 = mixed
 
     * filt : filtering of spectrum, default = 2
+
         * 0 = none
         * 1 = manual
         * 2 = auto
@@ -67,10 +69,12 @@ def nsep(q, T1, T2, kappa=1, loc=None, filt=None, bb=None,
     * bb: bounding box used for manual filtering, default = [-inf, inf, -inf, inf]
     * maxev : maximum number of evaluations for root refinement, default = 20
     * nf : normalization flag default = 1
+
         * 0 = off
         * 1 = on
 
     * dis : discretization, default = 4
+
         * 0 = 2SPLIT2_MODAL
         * 1 = BO
         * 2 = 2SPLIT1A
@@ -93,12 +97,14 @@ def nsep(q, T1, T2, kappa=1, loc=None, filt=None, bb=None,
         * 19 = 2SPLIT8B
 
     * nf : normalization flag, default=1
+
         * 0 = off
         * 1 = on
 
     Returns:
 
     * rdict : dictionary holding the fields (depending on options)
+
         * return_value : return value from FNFT
         * K : number of points in the main spectrum
         * main : main spectrum
@@ -132,6 +138,7 @@ def nsep_wrapper(D, q, T1, T2, kappa,
     Returns:
 
     * rdict : dictionary holding the fields (depending on options)
+
         * return_value : return value from FNFT
         * K : number of points in the main spectrum
         * main : main spectrum
