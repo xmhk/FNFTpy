@@ -237,5 +237,5 @@ def nsevtest():
     q = np.sin(2 * np.pi / 256 * xvec)
     res = nsev(q, xvec, Dsub=32)
     print(res['return_value'])
-    print(res['options'])
+    #print(res['options'])
 
