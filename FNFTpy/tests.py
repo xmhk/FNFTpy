@@ -147,26 +147,31 @@ def nsevinverseexample():
 
     # set values
     M = 2048
-    K = 0
+
     D = 1024
     tvec = np.linspace(-2, 2, D)
     T1 = tvec[0]
     T2 = tvec[-1]
     alpha = 2.0
-    beta = -0.55
+    beta = 0.55
+    gamma = np.sqrt( np.abs(alpha)**2 + np.abs(beta)**2)
     kappa = 1
-    bound_states = None
-    normconst_or_residues = None
 
     # get the frequency intervall suited for the given time vector
     rv, XI = nsev_inverse_xi_wrapper(D, T1, T2, M)
     Xi1 = XI[0]
     Xi2 = XI[1]
     xivec = XI[0] + np.arange(M) * (XI[1] - XI[0]) / (M - 1)
+
+    # set continuous spectrum
     contspec = alpha / (xivec - beta * 1.0j)
 
+    # set discrete spectrum
+    bound_states = np.array([1.0j * beta])
+    normconst_or_residues = np.array([-1.0j * alpha / (gamma + beta)])
+
     # call function
-    res = nsev_inverse(xivec, tvec, contspec, None, None)
+    res = nsev_inverse(xivec, tvec, contspec, bound_states, normconst_or_residues)
 
     # print results
     print("\n----- options used ----")

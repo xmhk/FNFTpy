@@ -10,7 +10,7 @@ visit FNFT's github page: [https://github.com/FastNFT](https://github.com/FastNF
 
 ## current state - access functions from FNFT version 0.2.1
 
-last update of FNFTpy: 28.09.2018
+last update of FNFTpy: 01.10.2018
 
 
 ### Korteweg-de-Fries equation with vanishing boundary conditions:
