@@ -2,6 +2,9 @@
 
 ## 0.2.1
 
+### 15.10.2017
+  * small changes in README
+
 ### 01.10.2018
   * updated nsev_inverse_example to mimic the C example
 
