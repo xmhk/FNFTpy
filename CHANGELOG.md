@@ -2,7 +2,12 @@
 
 ## 0.2.1
 
-### 15.10.2017
+### 02.11.2018
+  * NSEV: 
+    * options switch: dst=3 now allows skipping the calculation of the discrete spectrum
+    * options switch: cst=3 now allows skipping the calculation of the continuous spectrum
+
+### 15.10.2018
   * small changes in README
 
 ### 01.10.2018
