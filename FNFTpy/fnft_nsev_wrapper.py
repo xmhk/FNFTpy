@@ -194,21 +194,20 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
                                              ndim=1, flags='C')
     nsev_dstype = np.ctypeslib.ndpointer(dtype=numpy_complex,
                                              ndim=1, flags='C')
-    if options.discspec_type == 2:
+    if (options.discspec_type==0) or (options.discspec_type==1):
+        # norming consts OR residues
+        nsev_discspec = np.zeros(K, dtype=numpy_complex)
+        nsev_boundstates = np.zeros(K, dtype=numpy_complex)
+    elif options.discspec_type == 2:
         # norming consts AND res
         nsev_discspec = np.zeros(2 * K, dtype=numpy_complex)
         nsev_boundstates = np.zeros(K, dtype=numpy_complex)
-    elif options.discspec_type == 3:
-        # skip discrete spec -> pass NULL
+    else:
+        # 3 or any other option: skip discrete spec -> pass NULL
         nsev_discspec = nsev_nullptr
         nsev_boundstates = nsev_nullptr
         nsev_bstype = type(nsev_nullptr)
         nsev_dstype = type(nsev_nullptr)
-    else:
-        # norming consts OR residues
-        nsev_discspec = np.zeros(K, dtype=numpy_complex)
-        nsev_boundstates = np.zeros(K, dtype=numpy_complex)
-
     # continuous spectrum -> reflection coefficient and / or a,b    
     nsev_cstype = np.ctypeslib.ndpointer(dtype=numpy_complex,
                                ndim=1, flags='C')
