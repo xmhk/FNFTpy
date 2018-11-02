@@ -577,6 +577,7 @@ If a more C-like interface is desired, the function ‘nsev_wrapper’ can be us
 <li>0 = norming constants</li>
 <li>1 = residues</li>
 <li>2 = both</li>
+<li>3 = skip computing discrete spectrum</li>
 </ul>
 </div></blockquote>
 </li>
@@ -586,6 +587,7 @@ If a more C-like interface is desired, the function ‘nsev_wrapper’ can be us
 <li>0 = reflection coefficient</li>
 <li>1 = a and b</li>
 <li>2 = both</li>
+<li>3 = skip computing continuous spectrum</li>
 </ul>
 </div></blockquote>
 </li>
@@ -744,6 +746,7 @@ If a more simplified version is desired, ‘nsev’ can be used (see documentati
 <li>0 = norming constants</li>
 <li>1 = residues</li>
 <li>2 = both</li>
+<li>3 = skip computing discrete spectrum</li>
 </ul>
 </div></blockquote>
 </li>
@@ -753,6 +756,7 @@ If a more simplified version is desired, ‘nsev’ can be used (see documentati
 <li>0 = reflection coefficient</li>
 <li>1 = a and b</li>
 <li>2 = both</li>
+<li>3 = skip computing continuous spectrum</li>
 </ul>
 </div></blockquote>
 </li>
@@ -890,8 +894,8 @@ If a more C-like interface is desired, the function ‘nsev_inverse_wrapper’ c
 <p>Arguments:</p>
 <ul class="simple">
 <li>xivec: frequency vector</li>
-<li>tvec: time vection</li>
-<li>contspec: continuous spectrum (of xi)</li>
+<li>tvec: time vector</li>
+<li>contspec: continuous spectrum (of xi).  Pass None if for pure soliton state.</li>
 <li>bound_states: array holding the bound states. Pass None if no bound states present.</li>
 <li>discspec: discrete spectrum. Pass None if no bound states present.</li>
 </ul>
@@ -970,7 +974,7 @@ If a more simplified version is desired, ‘nsev_inverse’ can be used (see doc
 <p>Arguments:</p>
 <ul class="simple">
 <li>M : number of sample points for continuous spectrum</li>
-<li>contspec : numpy array holding the samples of the continuous spectrum</li>
+<li>contspec : numpy array holding the samples of the continuous spectrum (can be None if M=0)</li>
 <li><dl class="first docutils">
 <dt>Xi1, Xi2 <span class="classifier-delimiter">:</span> <span class="classifier">frequencies defining the frequency range of the continuous spectrum.</span></dt>
 <dd>! Currently, the positions returned by nsev_inverse_xi_wrapper must be used !</dd>

@@ -49,8 +49,8 @@ def nsev_inverse(xivec, tvec, contspec, bound_states, discspec,
     Arguments:
 
     * xivec: frequency vector
-    * tvec: time vection
-    * contspec: continuous spectrum (of xi)
+    * tvec: time vector
+    * contspec: continuous spectrum (of xi).  Pass None if for pure soliton state.
     * bound_states: array holding the bound states. Pass None if no bound states present.
     * discspec: discrete spectrum. Pass None if no bound states present.
 
@@ -107,6 +107,9 @@ def nsev_inverse(xivec, tvec, contspec, bound_states, discspec,
         K = len(bound_states)
     else:
         K = 0
+
+    if contspec is None:
+        M = 0
     options = get_nsev_inverse_options(dis, cst, csim, dst, max_iter, osf)
     rdict = nsev_inverse_wrapper(M, contspec, xivec[0], xivec[-1], K, bound_states, discspec, D, tvec[0], tvec[-1],
                                  kappa, options)
@@ -125,7 +128,7 @@ def nsev_inverse_wrapper(M, contspec, Xi1, Xi2, K, bound_states,
     Arguments:
 
     * M : number of sample points for continuous spectrum
-    * contspec : numpy array holding the samples of the continuous spectrum
+    * contspec : numpy array holding the samples of the continuous spectrum (can be None if M=0)
     * Xi1, Xi2  : frequencies defining the frequency range of the continuous spectrum.
                     ! Currently, the positions returned by nsev_inverse_xi_wrapper must be used !
     * K : number of bound states
