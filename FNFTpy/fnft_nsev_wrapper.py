@@ -189,7 +189,9 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
     nsev_Xi = np.zeros(2, dtype=numpy_double)
     nsev_Xi[0] = Xi1
     nsev_Xi[1] = Xi2
+    #
     # discrete spectrum -> reflection coefficient and / or residues
+    #
     nsev_bstype = np.ctypeslib.ndpointer(dtype=numpy_complex,
                                              ndim=1, flags='C')
     nsev_dstype = np.ctypeslib.ndpointer(dtype=numpy_complex,
@@ -208,8 +210,11 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
         nsev_boundstates = nsev_nullptr
         nsev_bstype = type(nsev_nullptr)
         nsev_dstype = type(nsev_nullptr)
-    # continuous spectrum -> reflection coefficient and / or a,b    
+    #
+    # continuous spectrum -> reflection coefficient and / or a,b
+    #
     nsev_cstype = np.ctypeslib.ndpointer(dtype=numpy_complex,
+
                                ndim=1, flags='C')
     if options.contspec_type == 0:
         # reflection coeff.
@@ -217,13 +222,14 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
     elif options.contspec_type == 1:
         # a and b
         nsev_cont = np.zeros(2 * M, dtype=numpy_complex)
-    elif options.contspec_type == 3:
-        # skip continuous spectrum -> pass NULL
-        nsev_cont = nsev_nullptr
-        nsev_cstype = type(nsev_nullptr)
-    else:
+    elif options.contspec_type ==2:
         # a and b AND reflection coeff.
         nsev_cont = np.zeros(3 * M, dtype=numpy_complex)
+    else:
+        # 3 or any other option: skip continuous spectrum -> pass NULL
+        nsev_cont = nsev_nullptr
+        nsev_cstype = type(nsev_nullptr)
+
     clib_nsev_func.argtypes = [
         type(nsev_D),  # D
         np.ctypeslib.ndpointer(dtype=numpy_complex,
@@ -258,7 +264,9 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
         'return_value': rv,
         'bound_states_num': K_new,
         'bound_states': nsev_boundstates[0:K_new]}
-
+    #
+    # depending on options: output of discrete spectrum
+    #
     if options.discspec_type == 0:
         # norming const
         rdict['disc_norm'] = nsev_discspec[0:K_new]
@@ -272,6 +280,9 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
     else:
         # no discrete spectrum calculated
         pass
+    #
+    # depending on options: output of continuous spectrum
+    #
     if options.contspec_type == 0:
         # refl. coeff
         rdict['cont_ref'] = nsev_cont[0:M]

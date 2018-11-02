@@ -244,3 +244,18 @@ def nsevtest():
     print(res['return_value'])
     #print(res['options'])
 
+
+def nsevoptionstest():
+    """check some options for dst and cst"""
+    tvec = np.linspace(-20,20, 1024)
+    q = 2.3 / np.cosh(tvec) + 0.0j
+    dstopts = [0,1,2,3,33,-1]
+    cstopts = [0,1,2,3, 33, -1]
+    keys = [ 'disc_norm', 'disc_res', 'cont_ref', 'cont_a', 'cont_b']
+    for dd in dstopts:
+        for cc in cstopts:
+            res = nsev(q, tvec, dst=dd, cst=cc)
+            print("\n\n------ d = %d    c  = %d   return_value = %d ------"%(dd,cc, res['return_value']))
+            for kk in keys:
+                bv = kk in res.keys()
+                print("Key exists ? ", kk,"  ", bv)
