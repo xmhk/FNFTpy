@@ -23,7 +23,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 Contributors:
 
-Christoph Mahnke, 2018
+Christoph Mahnke, Shrinivas Chimmalgi, 2018
 
 """
 
@@ -275,12 +275,14 @@ def get_nsev_options(bsf=None, bsl=None, niter=None, Dsub=None, dst=None, cst=No
         * 0 = norming constants
         * 1 = residues
         * 2 = both
+        * 3 = skip computing discrete spectrum
 
     * cst : type of continuous spectrum, default = 0
 
         * 0 = reflection coefficient
         * 1 = a and b
         * 2 = both
+        * 3 = skip computing continuous spectrum
 
     * dis : discretization, default = 11
 

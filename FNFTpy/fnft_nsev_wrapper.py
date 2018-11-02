@@ -23,7 +23,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 Contributors:
 
-Christoph Mahnke, 2018
+Christoph Mahnke, Shrinivas Chimmalgi 2018
 
 """
 
@@ -77,12 +77,14 @@ def nsev(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=None,
         * 0 = norming constants
         * 1 = residues
         * 2 = both
+        * 3 = skip computing discrete spectrum
 
     * cst : type of continuous spectrum, default = 0
 
         * 0 = reflection coefficient
         * 1 = a and b
         * 2 = both
+        * 3 = skip computing continuous spectrum
 
     * dis : discretization, default = 11
 
@@ -174,6 +176,7 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
     fnft_clib = ctypes.CDLL(get_lib_path())
     clib_nsev_func = fnft_clib.fnft_nsev
     clib_nsev_func.restype = ctypes_int
+    nsev_nullptr = ctypes.POINTER(ctypes.c_int)()
     nsev_D = ctypes_uint(D)
     nsev_M = ctypes_uint(M)
     nsev_K = ctypes_uint(K)
@@ -186,18 +189,41 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
     nsev_Xi = np.zeros(2, dtype=numpy_double)
     nsev_Xi[0] = Xi1
     nsev_Xi[1] = Xi2
-    nsev_boundstates = np.zeros(K, dtype=numpy_complex)
     # discrete spectrum -> reflection coefficient and / or residues
+    nsev_bstype = np.ctypeslib.ndpointer(dtype=numpy_complex,
+                                             ndim=1, flags='C')
+    nsev_dstype = np.ctypeslib.ndpointer(dtype=numpy_complex,
+                                             ndim=1, flags='C')
     if options.discspec_type == 2:
+        # norming consts AND res
         nsev_discspec = np.zeros(2 * K, dtype=numpy_complex)
+        nsev_boundstates = np.zeros(K, dtype=numpy_complex)
+    elif options.discspec_type == 3:
+        # skip discrete spec -> pass NULL
+        nsev_discspec = nsev_nullptr
+        nsev_boundstates = nsev_nullptr
+        nsev_bstype = type(nsev_nullptr)
+        nsev_dstype = type(nsev_nullptr)
     else:
+        # norming consts OR residues
         nsev_discspec = np.zeros(K, dtype=numpy_complex)
+        nsev_boundstates = np.zeros(K, dtype=numpy_complex)
+
     # continuous spectrum -> reflection coefficient and / or a,b    
+    nsev_cstype = np.ctypeslib.ndpointer(dtype=numpy_complex,
+                               ndim=1, flags='C')
     if options.contspec_type == 0:
+        # reflection coeff.
         nsev_cont = np.zeros(M, dtype=numpy_complex)
     elif options.contspec_type == 1:
+        # a and b
         nsev_cont = np.zeros(2 * M, dtype=numpy_complex)
+    elif options.contspec_type == 3:
+        # skip continuous spectrum -> pass NULL
+        nsev_cont = nsev_nullptr
+        nsev_cstype = type(nsev_nullptr)
     else:
+        # a and b AND reflection coeff.
         nsev_cont = np.zeros(3 * M, dtype=numpy_complex)
     clib_nsev_func.argtypes = [
         type(nsev_D),  # D
@@ -206,15 +232,12 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
         np.ctypeslib.ndpointer(dtype=ctypes_double,
                                ndim=1, flags='C'),  # t
         type(nsev_M),  # M
-        np.ctypeslib.ndpointer(dtype=numpy_complex,
-                               ndim=1, flags='C'),  # cont
+        nsev_cstype,  # cont
         np.ctypeslib.ndpointer(dtype=ctypes_double,
                                ndim=1, flags='C'),  # xi
         ctypes.POINTER(ctypes_uint),  # K_ptr
-        np.ctypeslib.ndpointer(dtype=numpy_complex,
-                               ndim=1, flags='C'),  # boundstates
-        np.ctypeslib.ndpointer(dtype=numpy_complex,
-                               ndim=1, flags='C'),  # normconst res
+        nsev_bstype,  # boundstates
+        nsev_dstype,  # normconst res
         type(nsev_kappa),  # kappa
         ctypes.POINTER(NsevOptionsStruct)]  # options ptr
 
@@ -238,24 +261,32 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
         'bound_states': nsev_boundstates[0:K_new]}
 
     if options.discspec_type == 0:
+        # norming const
         rdict['disc_norm'] = nsev_discspec[0:K_new]
     elif options.discspec_type == 1:
+        # residues
         rdict['disc_res'] = nsev_discspec[0:K_new]
     elif options.discspec_type == 2:
+        # norming const. AND residues
         rdict['disc_norm'] = nsev_discspec[0:K_new]
         rdict['disc_res'] = nsev_discspec[K_new:2 * K_new]
     else:
+        # no discrete spectrum calculated
         pass
     if options.contspec_type == 0:
+        # refl. coeff
         rdict['cont_ref'] = nsev_cont[0:M]
     elif options.contspec_type == 1:
+        # a and b
         rdict['cont_a'] = nsev_cont[0:M]
         rdict['cont_b'] = nsev_cont[M:2 * M]
     elif options.contspec_type == 2:
+        # refl. coeff AND a and b
         rdict['cont_ref'] = nsev_cont[0:M]
         rdict['cont_a'] = nsev_cont[M:2 * M]
         rdict['cont_b'] = nsev_cont[2 * M:3 * M]
     else:
+        # no cont. spectrum calculated
         pass
     rdict['options'] = repr(options)
     return rdict
