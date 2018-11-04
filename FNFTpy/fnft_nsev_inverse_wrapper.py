@@ -107,7 +107,6 @@ def nsev_inverse(xivec, tvec, contspec, bound_states, discspec,
         K = len(bound_states)
     else:
         K = 0
-
     if contspec is None:
         M = 0
     options = get_nsev_inverse_options(dis, cst, csim, dst, max_iter, osf)

@@ -53,7 +53,6 @@ def print_default_options():
 def kdvvexample():
     """Mimics the C example for calling fnft_kdvv."""
     print("\n\nkdvv example")
-
     # set values
     D = 256
     tvec = np.linspace(-1, 1, D)
@@ -63,10 +62,8 @@ def kdvvexample():
     Xi2 = 2
     M = 8
     Xivec = np.linspace(Xi1, Xi2, M)
-
     # call function
     res = kdvv(q, tvec, M, Xi1=Xi1, Xi2=Xi2)
-
     # print results
     print("\n----- options used ----")
     print(res['options'])
