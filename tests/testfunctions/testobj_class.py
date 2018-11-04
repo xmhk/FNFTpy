@@ -45,3 +45,12 @@ class Testobj():
 
     def run_test(self):
         pass
+
+    def test_value(self, value, shouldvalue):
+        return value == shouldvalue
+
+    def test_array_value(self, value, shouldvalue, eps=1e-10):
+        return np.sum(np.abs(value-shouldvalue)) < eps
+
+    def key_is_in_list(self, key, keylist):
+        return key in keylist

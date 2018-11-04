@@ -31,8 +31,9 @@ from testfunctions import kdvvexample, \
     nsepexample, nsevexample, nsevinverseexample, nsevinverseexample2
 
 TO = nsepexample(verbose=False)
-TO = kdvvexample(verbose=False)
-TO = nsevexample(verbose=False)
-T0 = nsevinverseexample(verbose=False)
-T0 = nsevinverseexample2(verbose=True)
-print(TO.res)
+TO.testconditions()
+#TO = kdvvexample(verbose=False)
+#TO = nsevexample(verbose=False)
+#T0 = nsevinverseexample(verbose=False)
+#T0 = nsevinverseexample2(verbose=True)
+#print(TO.res)

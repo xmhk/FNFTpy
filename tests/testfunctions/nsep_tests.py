@@ -58,3 +58,7 @@ class nsepexample(Testobj):
             self.print("%d :  %.6f  %.6fj" % (i, np.real(res['aux'][i]),
                                          np.imag(res['aux'][i])))
         self.res = res
+
+    def testconditions(self):
+        print(self.test_value(self.res['return_value'],0))
+        print(self.key_is_in_list('return_value', self.res.keys()))
