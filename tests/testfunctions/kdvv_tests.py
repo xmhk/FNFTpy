@@ -33,7 +33,7 @@ from FNFTpy import kdvv
 
 class kdvvexample(Testobj):
     """Mimics the C example for calling fnft_kdvv."""
-    def run_test(self):
+    def example_code(self):
         self.print("\n\nkdvv example")
         # set values
         D = 256
@@ -55,4 +55,16 @@ class kdvvexample(Testobj):
         for i in range(len(res['cont'])):
             self.print("%d : Xi=%.4f   %.6f  %.6fj" % (i, Xivec[i],
                   np.real(res['cont'][i]), np.imag(res['cont'][i])))
-        self.res = res
+        self.res =res
+
+    def testconditions(self):
+        self.infostr = "Mimic kdvv C example."
+        shouldberes = {'cont': np.array([
+            0.15329981+0.12203649j,  0.24385425+0.09606438j,
+            0.12418466-0.00838456j, -0.46324501+0.20526334j,
+            -0.46324501-0.20526334j,  0.12418466+0.00838456j,
+            0.24385425-0.09606438j,  0.15329981-0.12203649j])}
+        self.single_test(self.test_value, self.res['return_value'], 0, "FNFT return value")
+        self.single_test(self.test_array_value, self.res['cont'], shouldberes['cont'], "continuous spectrum")
+
+

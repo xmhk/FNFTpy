@@ -33,7 +33,7 @@ import numpy as np
 
 class nsevinverseexample(Testobj):
     """Mimics the C example for calling fnft_nsev_inverse."""
-    def run_test(self):
+    def example_code(self):
 
         self.print("\nnsev inverse example")
 
@@ -76,12 +76,39 @@ class nsevinverseexample(Testobj):
             self.print("  %d : q(t=%.5f) = %.5e + %.5e j " % (i, tvec[i],
                                                          np.real(res['q'][i]),
                                                          np.imag(res['q'][i])))
-        self.res = res
+        res['Xi'] = np.array([Xi1,Xi2])
+        self.res =res
+    def testconditions(self):
+        self.infostr = "Mimic nsev_inverse C example."
+        shouldberes = {
+            'qsamprange':[0,-1,40],
+            'qsamp':
+               np.array([-8.51156134e-07-2.59723802e-03j,-8.51152031e-07-5.05389982e-03j,
+                        -8.51152828e-07-9.77009846e-03j, -8.51153739e-07-1.88124421e-02j,
+                        -8.51154704e-07-3.61352219e-02j, -8.51155662e-07-6.93026882e-02j,
+                         -8.51156430e-07-1.32772848e-01j, -8.51156724e-07-2.54100125e-01j,
+                         -8.51156012e-07-4.85242920e-01j, -8.51152998e-07-9.20351895e-01j,
+                         -8.51144440e-07-1.70480071e+00j, -8.51123774e-07-2.91920894e+00j,
+                         -8.51093260e-07-4.03290079e+00j, -8.51159989e-07-2.42570391e-03j,
+                         -8.51157880e-07-5.62308393e-04j, -8.51156117e-07-4.40370675e-04j,
+                         -8.51154654e-07-3.63745902e-04j, -8.51153407e-07-3.03868218e-04j,
+                         -8.51152359e-07-2.54859627e-04j, -8.51151499e-07-2.14146911e-04j,
+                         -8.51150765e-07-1.80118348e-04j, -8.51150137e-07-1.51591858e-04j,
+                         -8.51149618e-07-1.27638782e-04j, -8.51149196e-07-1.07506128e-04j,
+                         -8.51148829e-07-9.05737153e-05j, -8.51148517e-07-7.63264783e-05j]),
+            'Xi':np.array([-401.33884499, 401.73116058])
+                       }
+        self.single_test(self.test_value, self.res['return_value'], 0, "FNFT return value")
+        self.single_test(self.test_array_value,
+                         self.res['q'][shouldberes['qsamprange'][0]:shouldberes['qsamprange'][1]:shouldberes['qsamprange'][2]],
+                         shouldberes['qsamp'],"q values")
+        self.single_test(self.test_array_value, self.res['Xi'], shouldberes['Xi'], 'Xi')
+
 
 
 class nsevinverseexample2(Testobj):
     """nsev_inverse_example: create a N=2.2 Satsuma-Yajima pulse from nonlinear spectrum."""
-    def run_test(self):
+    def example_code(self):
         D = 1024
         M = 2*D
         Tmax = 15

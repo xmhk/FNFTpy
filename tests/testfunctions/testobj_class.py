@@ -26,7 +26,7 @@ Contributors:
 Christoph Mahnke, 2018
 
 """
-
+import numpy as np
 
 class Testobj():
     """Run some sample code, store and print results."""
@@ -34,7 +34,12 @@ class Testobj():
         self.logstr = ""
         self.verbose = verbose
         self.res = None
-        self.run_test()
+        self.example_code()
+        self.tests_total = 0
+        self.tests_failed = 0
+        self.testlog=[]
+        self.infostr=""
+        self.testconditions()
 
     def print(self, s):
         if len(self.logstr)>0:
@@ -43,14 +48,28 @@ class Testobj():
             print(s)
         self.logstr += s
 
-    def run_test(self):
+    def print_test_result(self):
+        print("---- test: %s ----"%self.infostr)
+        print("\n passed?")
+        for resitem in self.testlog:
+            print("  %r   %s"%(resitem[1],resitem[0]))
+        print("\n %d / %d passed"%(self.tests_total-self.tests_failed,self.tests_total))
+    def example_code(self):
         pass
+
+    def single_test(self, func, arg1, arg2, infostring):
+        self.tests_total+=1
+        retv = func(arg1, arg2)
+        if not retv:
+            self.tests_failed+=1
+        self.testlog.append([infostring, retv])
 
     def test_value(self, value, shouldvalue):
         return value == shouldvalue
 
     def test_array_value(self, value, shouldvalue, eps=1e-10):
-        return np.sum(np.abs(value-shouldvalue)) < eps
+        #print(np.sum(np.abs(value-shouldvalue)**2))
+        return np.sum(np.abs(value-shouldvalue)**2) < eps
 
     def key_is_in_list(self, key, keylist):
         return key in keylist

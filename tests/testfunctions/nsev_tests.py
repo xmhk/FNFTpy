@@ -32,7 +32,7 @@ from FNFTpy import nsev
 import numpy as np
 
 class nsevexample(Testobj):
-    def run_test(self):
+    def example_code(self):
         """Mimics the C example for calling fnft_nsev."""
         self.print("\n\nnsev example")
 
@@ -63,7 +63,27 @@ class nsevexample(Testobj):
         for i in range(len(res['bound_states'])):
             self.print("%d : %.6f  %.6fj with norming const %.6f  %.6fj" % (i, np.real(res['bound_states'][i]),
                                                                        np.imag(res['bound_states'][i]),
-                                                                            np.real(res['disc_norm'][i]),
-                                                                            np.imag(res['disc_norm'][i])))
+                                                                       np.real(res['disc_norm'][i]),
+                                                                       np.imag(res['disc_norm'][i])))
         self.res = res
+
+    def testconditions(self):
+        self.infostr="Mimic nsev C example."
+        shouldberes = {'bound_states_num': 1,
+                       'bound_states': np.array([2.13821177e-50+1.57422601j]),
+                       'disc_norm': np.array([-1.-2.56747175e-50j]),
+                       'cont_ref': np.array([
+                           -0.10538565-0.42577137j, -0.78378026-1.04297186j,
+                            -1.09090439-1.33957378j, -1.16918546-0.48325228j,
+                            -1.16918546+0.48325228j, -1.09090439+1.33957378j,
+                            -0.78378026+1.04297186j, -0.10538565+0.42577137j]),
+                       }
+        self.single_test(self.test_value, self.res['return_value'], 0, "FNFT return value")
+        self.single_test(self.test_value, self.res['bound_states_num'], 1, "number of bound states")
+        self.single_test(self.test_array_value, self.res['bound_states'], shouldberes['bound_states'], "bound states")
+        self.single_test(self.test_array_value, self.res['disc_norm'], shouldberes['disc_norm'], 'norming consts')
+        self.single_test(self.test_array_value, self.res['cont_ref'], shouldberes['cont_ref'],'cont. reflection coeff.')
+
+
+
 
