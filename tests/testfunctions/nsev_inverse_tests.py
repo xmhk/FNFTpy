@@ -80,7 +80,7 @@ class nsevinverseexample(Testobj):
         self.res =res
     def testconditions(self):
         self.infostr = "Mimic nsev_inverse C example."
-        shouldberes = {
+        expected = {
             'qsamprange':[0,-1,40],
             'qsamp':
                np.array([-8.51156134e-07-2.59723802e-03j,-8.51152031e-07-5.05389982e-03j,
@@ -100,9 +100,9 @@ class nsevinverseexample(Testobj):
                        }
         self.single_test(self.test_value, self.res['return_value'], 0, "FNFT return value")
         self.single_test(self.test_array_value,
-                         self.res['q'][shouldberes['qsamprange'][0]:shouldberes['qsamprange'][1]:shouldberes['qsamprange'][2]],
-                         shouldberes['qsamp'],"q values")
-        self.single_test(self.test_array_value, self.res['Xi'], shouldberes['Xi'], 'Xi')
+                         self.res['q'][expected['qsamprange'][0]:expected['qsamprange'][1]:expected['qsamprange'][2]],
+                         expected['qsamp'],"q values")
+        self.single_test(self.test_array_value, self.res['Xi'], expected['Xi'], 'Xi')
 
 
 
@@ -133,6 +133,31 @@ class nsevinverseexample2(Testobj):
 
         self.print("FNFT return value: %d (should be 0)" % res['return_value'])
         # compare result to analytic function
-        self.print("\n\nnsev-inverse example: Satsuma-Yajima N=2.2")
+        self.print("nsev-inverse example: Satsuma-Yajima N=2.2")
         self.print("Difference analytic - numeric: sum((q_ana-q_num)**2) = %.2e  (should be approx 0) "%np.sum(np.abs(q-res['q'])**2))
         self.res = res
+
+    def testconditions(self):
+        self.infostr = "nsev_inverse_example: create a N=2.2 Satsuma-Yajima pulse."
+        expected = {
+            'qsamprange':[0,-1,40],
+            'qsamp': np.array(
+                [1.34230102e-06 - 5.04465255e-15j, 4.34817385e-06 - 6.31865362e-15j,
+                 1.40574450e-05 - 3.14973971e-15j, 4.54326063e-05 - 2.19330861e-15j,
+                 1.46827533e-04 - 1.55620563e-15j, 4.74508381e-04 - 2.66429125e-16j,
+                 1.53348456e-03 + 2.32701341e-16j, 4.95580127e-03 + 2.84806416e-16j,
+                 1.60155854e-02 + 3.90817711e-16j, 5.17513079e-02 + 1.71484418e-15j,
+                 1.67026494e-01 + 4.65750576e-15j, 5.32522012e-01 + 7.39474890e-15j,
+                 1.50907411e+00 + 3.81190249e-15j, 2.13338526e+00 + 5.18397891e-15j,
+                 1.00280857e+00 + 6.77405341e-15j, 3.26530063e-01 + 4.90563790e-15j,
+                 1.01548385e-01 + 1.62058722e-15j, 3.14376794e-02 + 1.95891048e-16j,
+                 9.72830255e-03 + 2.30171230e-16j, 3.01026309e-03 + 5.24089935e-16j,
+                 9.31471124e-04 + 4.39924210e-16j, 2.88226276e-04 - 6.56173293e-16j,
+                 8.91859214e-05 - 1.96145018e-15j, 2.75963271e-05 - 2.67063774e-15j,
+                 8.53801078e-06 - 4.81025786e-15j, 2.63963808e-06 - 7.13301617e-15j]
+            )}
+        self.single_test(self.test_value, self.res['return_value'], 0, "FNFT return value")
+        self.single_test(self.test_array_value,
+                         self.res['q'][
+                         expected['qsamprange'][0]:expected['qsamprange'][1]:expected['qsamprange'][2]],
+                         expected['qsamp'], "q values")

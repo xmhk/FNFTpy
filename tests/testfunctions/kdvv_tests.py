@@ -59,12 +59,12 @@ class kdvvexample(Testobj):
 
     def testconditions(self):
         self.infostr = "Mimic kdvv C example."
-        shouldberes = {'cont': np.array([
+        expected = {'cont': np.array([
             0.15329981+0.12203649j,  0.24385425+0.09606438j,
             0.12418466-0.00838456j, -0.46324501+0.20526334j,
             -0.46324501-0.20526334j,  0.12418466+0.00838456j,
             0.24385425-0.09606438j,  0.15329981-0.12203649j])}
         self.single_test(self.test_value, self.res['return_value'], 0, "FNFT return value")
-        self.single_test(self.test_array_value, self.res['cont'], shouldberes['cont'], "continuous spectrum")
+        self.single_test(self.test_array_value, self.res['cont'], expected['cont'], "continuous spectrum")
 
 

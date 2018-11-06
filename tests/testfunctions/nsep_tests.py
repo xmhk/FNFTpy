@@ -61,7 +61,7 @@ class nsepexample(Testobj):
 
     def testconditions(self):
         self.infostr = "Mimic nsep C example."
-        shouldberes = {
+        expected = {
                       'K': 11,
                       'main': np.array([-0.99999999-8.65909473e-01j, -0.99999999-8.65909475e-01j,
                                      -0.99999999+8.65909475e-01j, -0.99999999+8.65909474e-01j,
@@ -81,7 +81,7 @@ class nsepexample(Testobj):
         # to sample data
         self.single_test(self.test_array_value,
                          np.sort_complex(np.around(self.res['main'],8)),
-                         np.sort_complex(shouldberes['main']), "main spectrum")
+                         np.sort_complex(expected['main']), "main spectrum")
         self.single_test(self.test_array_value,
                          np.sort_complex(np.around(self.res['aux'],8)),
-                         np.sort_complex(shouldberes['aux']), "auxiliary spectrum")
+                         np.sort_complex(expected['aux']), "auxiliary spectrum")

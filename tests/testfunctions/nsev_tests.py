@@ -69,7 +69,7 @@ class nsevexample(Testobj):
 
     def testconditions(self):
         self.infostr="Mimic nsev C example."
-        shouldberes = {'bound_states_num': 1,
+        expected = {'bound_states_num': 1,
                        'bound_states': np.array([2.13821177e-50+1.57422601j]),
                        'disc_norm': np.array([-1.-2.56747175e-50j]),
                        'cont_ref': np.array([
@@ -80,9 +80,9 @@ class nsevexample(Testobj):
                        }
         self.single_test(self.test_value, self.res['return_value'], 0, "FNFT return value")
         self.single_test(self.test_value, self.res['bound_states_num'], 1, "number of bound states")
-        self.single_test(self.test_array_value, self.res['bound_states'], shouldberes['bound_states'], "bound states")
-        self.single_test(self.test_array_value, self.res['disc_norm'], shouldberes['disc_norm'], 'norming consts')
-        self.single_test(self.test_array_value, self.res['cont_ref'], shouldberes['cont_ref'],'cont. reflection coeff.')
+        self.single_test(self.test_array_value, self.res['bound_states'], expected['bound_states'], "bound states")
+        self.single_test(self.test_array_value, self.res['disc_norm'], expected['disc_norm'], 'norming consts')
+        self.single_test(self.test_array_value, self.res['cont_ref'], expected['cont_ref'],'cont. reflection coeff.')
 
 
 

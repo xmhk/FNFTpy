@@ -32,16 +32,17 @@ from testfunctions import kdvvexample, \
 
 TO = nsepexample(verbose=False)
 #TO.testconditions()
-#TO.print_test_result()
+TO.print_test_result()
 #TO = kdvvexample(verbose=False)
 #print(TO.res)
 
-TO = nsevinverseexample(verbose=False)
+#TO = nsevinverseexample(verbose=False)
+TO = nsevinverseexample2(verbose=False)
 
 #TO = nsevexample(verbose=False)
 TO.print_test_result()
 
-#print(TO.res['Xi'])
+
 #T0 = nsevinverseexample(verbose=False)
 #T0 = nsevinverseexample2(verbose=True)
 #print(TO.res)

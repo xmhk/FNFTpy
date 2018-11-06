@@ -64,12 +64,12 @@ class Testobj():
             self.tests_failed+=1
         self.testlog.append([infostring, retv])
 
-    def test_value(self, value, shouldvalue):
-        return value == shouldvalue
+    def test_value(self, value, expectedval):
+        return value == expectedval
 
-    def test_array_value(self, value, shouldvalue, eps=1e-10):
-        #print(np.sum(np.abs(value-shouldvalue)**2))
-        return np.sum(np.abs(value-shouldvalue)**2) < eps
+    def test_array_value(self, value, expectedval, eps=1e-10):
+        #print(np.sum(np.abs(value-expectedval)**2))
+        return np.sum(np.abs(value-expectedval)**2) < eps
 
     def key_is_in_list(self, key, keylist):
         return key in keylist
