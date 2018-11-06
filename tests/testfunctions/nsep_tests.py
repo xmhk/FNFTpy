@@ -59,7 +59,7 @@ class nsepexample(Testobj):
                                          np.imag(res['aux'][i])))
         self.res = res
 
-    def testconditions(self):
+    def run_tests(self):
         self.infostr = "Mimic nsep C example."
         expected = {
                       'K': 11,
@@ -74,14 +74,14 @@ class nsepexample(Testobj):
                                     -0.99993896+1.87820258e-08j,  0.11814625+2.82216353e-07j,
                                      0.73222476+1.12819764e-08j,  1.29151798+6.35545312e-08j,
                                     1.82871124+8.88012865e-08j])}
-        self.single_test(self.test_value, self.res['return_value'], 0, "FNFT return value")
-        self.single_test(self.test_value, self.res['K'], 11, "K")
-        self.single_test(self.test_value, self.res['M'], 7,"M")
+        self.single_test(self.check_value, self.res['return_value'], 0, "FNFT return value")
+        self.single_test(self.check_value, self.res['K'], 11, "K")
+        self.single_test(self.check_value, self.res['M'], 7,"M")
         # as the order of spectra is not clear, we round to 8 digits, sort and compare
         # to sample data
-        self.single_test(self.test_array_value,
+        self.single_test(self.check_array,
                          np.sort_complex(np.around(self.res['main'],8)),
                          np.sort_complex(expected['main']), "main spectrum")
-        self.single_test(self.test_array_value,
+        self.single_test(self.check_array,
                          np.sort_complex(np.around(self.res['aux'],8)),
                          np.sort_complex(expected['aux']), "auxiliary spectrum")

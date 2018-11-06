@@ -31,5 +31,5 @@ Christoph Mahnke, 2018
 from .testobj_class import Testobj
 from .kdvv_tests import kdvvexample
 from .nsep_tests import nsepexample
-from .nsev_tests import nsevexample
+from .nsev_tests import nsevexample, nsev_test_options
 from .nsev_inverse_tests import nsevinverseexample, nsevinverseexample2

@@ -78,7 +78,7 @@ class nsevinverseexample(Testobj):
                                                          np.imag(res['q'][i])))
         res['Xi'] = np.array([Xi1,Xi2])
         self.res =res
-    def testconditions(self):
+    def run_tests(self):
         self.infostr = "Mimic nsev_inverse C example."
         expected = {
             'qsamprange':[0,-1,40],
@@ -98,11 +98,11 @@ class nsevinverseexample(Testobj):
                          -8.51148829e-07-9.05737153e-05j, -8.51148517e-07-7.63264783e-05j]),
             'Xi':np.array([-401.33884499, 401.73116058])
                        }
-        self.single_test(self.test_value, self.res['return_value'], 0, "FNFT return value")
-        self.single_test(self.test_array_value,
+        self.single_test(self.check_value, self.res['return_value'], 0, "FNFT return value")
+        self.single_test(self.check_array,
                          self.res['q'][expected['qsamprange'][0]:expected['qsamprange'][1]:expected['qsamprange'][2]],
                          expected['qsamp'],"q values")
-        self.single_test(self.test_array_value, self.res['Xi'], expected['Xi'], 'Xi')
+        self.single_test(self.check_array, self.res['Xi'], expected['Xi'], 'Xi')
 
 
 
@@ -137,7 +137,7 @@ class nsevinverseexample2(Testobj):
         self.print("Difference analytic - numeric: sum((q_ana-q_num)**2) = %.2e  (should be approx 0) "%np.sum(np.abs(q-res['q'])**2))
         self.res = res
 
-    def testconditions(self):
+    def run_tests(self):
         self.infostr = "nsev_inverse_example: create a N=2.2 Satsuma-Yajima pulse."
         expected = {
             'qsamprange':[0,-1,40],
@@ -156,8 +156,8 @@ class nsevinverseexample2(Testobj):
                  8.91859214e-05 - 1.96145018e-15j, 2.75963271e-05 - 2.67063774e-15j,
                  8.53801078e-06 - 4.81025786e-15j, 2.63963808e-06 - 7.13301617e-15j]
             )}
-        self.single_test(self.test_value, self.res['return_value'], 0, "FNFT return value")
-        self.single_test(self.test_array_value,
+        self.single_test(self.check_value, self.res['return_value'], 0, "FNFT return value")
+        self.single_test(self.check_array,
                          self.res['q'][
                          expected['qsamprange'][0]:expected['qsamprange'][1]:expected['qsamprange'][2]],
                          expected['qsamp'], "q values")

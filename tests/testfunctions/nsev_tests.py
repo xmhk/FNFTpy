@@ -67,7 +67,7 @@ class nsevexample(Testobj):
                                                                        np.imag(res['disc_norm'][i])))
         self.res = res
 
-    def testconditions(self):
+    def run_tests(self):
         self.infostr="Mimic nsev C example."
         expected = {'bound_states_num': 1,
                        'bound_states': np.array([2.13821177e-50+1.57422601j]),
@@ -78,12 +78,65 @@ class nsevexample(Testobj):
                             -1.16918546+0.48325228j, -1.09090439+1.33957378j,
                             -0.78378026+1.04297186j, -0.10538565+0.42577137j]),
                        }
-        self.single_test(self.test_value, self.res['return_value'], 0, "FNFT return value")
-        self.single_test(self.test_value, self.res['bound_states_num'], 1, "number of bound states")
-        self.single_test(self.test_array_value, self.res['bound_states'], expected['bound_states'], "bound states")
-        self.single_test(self.test_array_value, self.res['disc_norm'], expected['disc_norm'], 'norming consts')
-        self.single_test(self.test_array_value, self.res['cont_ref'], expected['cont_ref'],'cont. reflection coeff.')
+        self.single_test(self.check_value, self.res['return_value'], 0, "FNFT return value")
+        self.single_test(self.check_value, self.res['bound_states_num'], 1, "number of bound states")
+        self.single_test(self.check_array, self.res['bound_states'], expected['bound_states'], "bound states")
+        self.single_test(self.check_array, self.res['disc_norm'], expected['disc_norm'], "norming consts")
+        self.single_test(self.check_array, self.res['cont_ref'], expected['cont_ref'], "cont. reflection coeff.")
 
+
+
+class nsev_test_options(Testobj):
+    """Check whether the switches dst and cst work for nsev."""
+    def example_code(self):
+        # set values
+        D = 256
+        tvec = np.linspace(-1, 1, D)
+        q = np.zeros(len(tvec), dtype=np.complex128)
+        q[:] = 2.3 / np.cosh(tvec)
+        M = 8
+        Xi1 = -2
+        Xi2 = 2
+        self.res={}
+        # different switches for discrete spectrum type
+        for dst in [-1, 0, 1, 2, 3]:
+            tmpres = nsev(q, tvec, dst=dst, )
+            self.res['dst=%d'%dst] = np.array([tmpres['return_value']==0,
+                    'disc_res' in tmpres.keys(),
+                    'disc_norm' in tmpres.keys()])
+        # different switches for continuous spectrum type
+        for cst in [-1, 0, 1, 2, 3]:
+            tmpres = nsev(q, tvec, cst=cst, )
+            self.res['cst=%d'%cst] = np.array([
+                tmpres['return_value'] == 0,
+               'cont_ref' in tmpres.keys(),
+               'cont_a' in tmpres.keys(),
+               'cont_b' in tmpres.keys()])
+        # calulate neither discrete nor continuous spectrum
+        tmpres = nsev(q, tvec, dst=3, cst=3)
+        self.res['dst=3cst=3'] = np.array([tmpres['return_value']==0,
+                                           'disc_res' in tmpres.keys(),
+                                           'disc_norm' in tmpres.keys(),
+                                           'cont_ref' in tmpres.keys(),
+                                           'cont_a' in tmpres.keys(),
+                                           'cont_b' in tmpres.keys()
+                                           ])
+
+    def run_tests(self):
+        self.infostr="checks for dst and cst switches"
+        expected = {'dst=-1': np.array([ True, False, False]),
+                    'dst=0': np.array([ True, False,  True]),
+                    'dst=1': np.array([ True,  True, False]),
+                    'dst=2': np.array([ True,  True,  True]),
+                    'dst=3': np.array([ True, False, False]),
+                    'cst=-1': np.array([ True, False, False, False]),
+                    'cst=0': np.array([ True,  True, False, False]),
+                    'cst=1': np.array([ True, False,  True,  True]),
+                    'cst=2': np.array([ True,  True,  True,  True]),
+                    'cst=3': np.array([ True, False, False, False]),
+                    'dst=3cst=3': np.array([ True, False, False, False, False, False])}
+        for k in expected.keys():
+            self.single_test(self.check_boolarray, self.res[k], expected[k], "check option: %s"%k)
 
 
 
