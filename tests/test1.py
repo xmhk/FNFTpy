@@ -27,24 +27,27 @@ Christoph Mahnke, 2018
 
 """
 
-from testfunctions import kdvvexample, \
-    nsepexample, nsevexample, nsevinverseexample, nsevinverseexample2, nsev_test_options
 
-TO = nsepexample(verbose=False)
-#TO.run_tests()
-#TO.print_test_result()
-#TO = kdvvexample(verbose=False)
-#print(TO.res)
 
-#TO = nsevinverseexample(verbose=False)
-#TO = nsevinverseexample2(verbose=False)
+from fnftpy_testutils import *
+from examples import *
+from testfunctions import *
 
-#TO = nsevexample(verbose=False)
-#TO.print_test_result()
 
-T = nsev_test_options()
+T = FnftpyTest(nsep_example, nsep_example_test)
 T.print_test_result(brief=True)
 
-#T0 = nsevinverseexample(verbose=False)
-#T0 = nsevinverseexample2(verbose=True)
-#print(TO.res)
+T2 = FnftpyTest(kdvv_example, kdvv_example_test)
+T2.print_test_result(brief=True)
+
+T3 = FnftpyTest(nsev_example, nsev_example_test)
+T3.print_test_result(brief=True)
+
+T4 = FnftpyTest(nsev_dstcst_variation, nsev_dstcst_variation_test)
+T4.print_test_result(brief=True)
+
+T5 = FnftpyTest(nsev_inverse_example, nsev_inverse_example_test)
+T5.print_test_result(brief=True)
+
+T6 = FnftpyTest(nsev_inverse_example2, nsev_inverse_example2_test)
+T6.print_test_result(brief=True)

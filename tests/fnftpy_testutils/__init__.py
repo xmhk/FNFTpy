@@ -1,3 +1,5 @@
+
+
 """
 This file is part of FNFTpy.
 FNFTpy provides wrapper functions to interact with FNFT,
@@ -28,28 +30,29 @@ Christoph Mahnke, 2018
 """
 import numpy as np
 
-class Testobj():
+from .external import HiddenPrints
+
+
+class FnftpyTest():
     """Run some sample code, store and print results."""
-    def __init__(self, verbose=False):
-        self.logstr = ""
-        self.verbose = verbose
-        self.res = None
-        self.example_code()
+    def __init__(self, f_example_code, f_test, verbose=False):
+        #self.logstr = ""
+        #self.verbose = verbose
+        self.testlog = []
         self.tests_total = 0
         self.tests_failed = 0
-        self.testlog=[]
-        self.infostr=""
-        self.run_tests()
-
-    def print(self, s):
-        if len(self.logstr)>0:
-            self.logstr+="\n"
-        if self.verbose:
-            print(s)
-        self.logstr += s
+        if not verbose:
+            with HiddenPrints():
+                self.res = f_example_code()
+        else:
+            self.res = f_example_code()
+        tmp = f_test(self.res)
+        self.testlog = tmp.testlog
+        self.tests_failed = tmp.tests_failed
+        self.tests_total = tmp.tests_total
 
     def print_test_result(self, brief=False):
-        print(".. %s"%self.infostr)
+        #print(".. %s"%self.infostr)
         if not brief:
             print("\n passed?")
             for resitem in self.testlog:
@@ -57,30 +60,5 @@ class Testobj():
             print("\n")
         print("%d / %d passed"%(self.tests_total-self.tests_failed,self.tests_total))
 
-    def example_code(self):
-        # should be overwritten in derived test object
-        pass
 
-    def run_tests(self):
-        # should be overwritten in derived test object
-        pass
 
-    def single_test(self, func, arg1, arg2, infostring):
-        self.tests_total+=1
-        retv = func(arg1, arg2)
-        if not retv:
-            self.tests_failed+=1
-        self.testlog.append([infostring, retv])
-
-    def check_value(self, value, expectedval):
-        return value == expectedval
-
-    def check_array(self, value, expectedval, eps=1e-10):
-        #print(np.sum(np.abs(value-expectedval)**2))
-        return np.sum(np.abs(value-expectedval)**2) < eps
-
-    def check_boolarray(self, value, expectedval):
-        return (value==expectedval).all()
-
-    #def check_item_in_list(self, key, keylist):
-    #    return key in keylist
