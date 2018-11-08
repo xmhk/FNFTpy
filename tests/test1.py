@@ -29,7 +29,7 @@ Christoph Mahnke, 2018
 
 
 
-from fnftpy_testutils import *
+#from fnftpy_testutils import *
 from examples import *
 from testfunctions import *
 
@@ -50,4 +50,4 @@ T5 = FnftpyTest(nsev_inverse_example, nsev_inverse_example_test)
 T5.print_test_result(brief=True)
 
 T6 = FnftpyTest(nsev_inverse_example2, nsev_inverse_example2_test)
-T6.print_test_result(brief=True)
+T6.print_test_result(brief=False)

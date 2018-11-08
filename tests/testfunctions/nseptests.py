@@ -1,8 +1,10 @@
-from .richtigbenennen import Richtigbenennen
+from .fnftpy_testutils import Richtigbenennen
+
+#from tests.testfunctions.fnftpy_testutils.richtigbenennen import Richtigbenennen
 import numpy as np
 def nsep_example_test(res):
-    infostr = "Mimic nsep C example."
-    tmp = Richtigbenennen()
+    infostr = "nsep (resemble C example)"
+    tmp = Richtigbenennen(infostr=infostr)
     expected = {
         'K': 11,
         'main': np.array([-0.99999999 - 8.65909473e-01j, -0.99999999 - 8.65909475e-01j,

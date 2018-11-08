@@ -1,10 +1,10 @@
-from .richtigbenennen import Richtigbenennen
+#from tests.testfunctions.fnftpy_testutils.richtigbenennen import Richtigbenennen
+from .fnftpy_testutils import Richtigbenennen
 import numpy as np
 
-
 def nsev_inverse_example_test(res):
-    infostr = "Mimic nsev_inverse C example."
-    tmp = Richtigbenennen()
+    infostr = "nsev_inverse (resemble C example)"
+    tmp = Richtigbenennen(infostr=infostr)
     expected = {
         'qsamprange':[0,-1,40],
         'qsamp':
@@ -31,8 +31,8 @@ def nsev_inverse_example_test(res):
     return tmp
 
 def nsev_inverse_example2_test(res):
-    infostr = "nsev_inverse_example: create a N=2.2 Satsuma-Yajima pulse."
-    tmp = Richtigbenennen()
+    infostr = "nsev_inverse 2: create a N=2.2 Satsuma-Yajima pulse."
+    tmp = Richtigbenennen(infostr=infostr)
     expected = {
         'qsamprange': [0, -1, 40],
         'qsamp': np.array(

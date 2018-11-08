@@ -30,35 +30,5 @@ Christoph Mahnke, 2018
 """
 import numpy as np
 
-from .external import HiddenPrints
-
-
-class FnftpyTest():
-    """Run some sample code, store and print results."""
-    def __init__(self, f_example_code, f_test, verbose=False):
-        #self.logstr = ""
-        #self.verbose = verbose
-        self.testlog = []
-        self.tests_total = 0
-        self.tests_failed = 0
-        if not verbose:
-            with HiddenPrints():
-                self.res = f_example_code()
-        else:
-            self.res = f_example_code()
-        tmp = f_test(self.res)
-        self.testlog = tmp.testlog
-        self.tests_failed = tmp.tests_failed
-        self.tests_total = tmp.tests_total
-
-    def print_test_result(self, brief=False):
-        #print(".. %s"%self.infostr)
-        if not brief:
-            print("\n passed?")
-            for resitem in self.testlog:
-                print("  %r   %s"%(resitem[1],resitem[0]))
-            print("\n")
-        print("%d / %d passed"%(self.tests_total-self.tests_failed,self.tests_total))
-
-
+from .richtigbenennen import FnftpyTest, Richtigbenennen
 

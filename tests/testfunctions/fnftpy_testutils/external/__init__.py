@@ -1,5 +1,8 @@
 import sys, os
 
+#
+# https://meta.stackexchange.com/questions/272956/a-new-code-license-the-mit-this-time-with-attribution-required?cb=1
+#
 
 
 class HiddenPrints:
