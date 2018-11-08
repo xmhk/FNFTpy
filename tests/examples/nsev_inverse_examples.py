@@ -33,7 +33,7 @@ import numpy as np
 
 
 def nsev_inverse_example():
-
+    """Mimics the C example for calling fnft_nsev_inverse."""
     print("\nnsev inverse example")
 
     # set values
