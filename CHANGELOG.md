@@ -4,6 +4,8 @@
 
 ### 08.11.2018
   * fix check_return_code output warning
+  * re-structuring of nsev_inverse_wrapper decision tree (bound states given? contspec given?). 
+    Should show no effect on existing code and prevents Python crash when none of both is given (FNFT will return 7 and q all zeros in that case).
 
 ### 02.11.2018
   * nsev, nsev_wrapper: 
