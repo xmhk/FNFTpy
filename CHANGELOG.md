@@ -2,6 +2,9 @@
 
 ## 0.2.1
 
+### 08.11.2018
+  * fix check_return_code output warning
+
 ### 02.11.2018
   * nsev, nsev_wrapper: 
     * options switch: dst=3 now allows skipping the calculation of the discrete spectrum

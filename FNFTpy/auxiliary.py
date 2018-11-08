@@ -135,4 +135,5 @@ def check_return_code(rv):
     if rv == 0:
         pass
     else:
-        warn("An error occured when calling FNFT: error code %d"%rv )
+        wstring = "An error occured when calling FNFT: error code %d"%rv
+        warn(wstring)
