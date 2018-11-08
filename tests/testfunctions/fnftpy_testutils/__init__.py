@@ -28,5 +28,5 @@ Christoph Mahnke, 2018
 """
 
 
-from .testandaccount import FnftpyTest, TestAndAccount
+from .testutils import FnftpyTest, TestAndAccount
 
