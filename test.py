@@ -48,7 +48,7 @@ nsevexample()
 nsevinverseexample()
 
 # some option tests
-nsevoptionstest()
+#nsevoptionstest()
 
 nsevinverseexample2()
 print_default_options()

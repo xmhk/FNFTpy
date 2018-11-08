@@ -103,12 +103,12 @@ def nsev_inverse(xivec, tvec, contspec, bound_states, discspec,
     """
     M = len(xivec)
     D = len(tvec)
-    if bound_states is not None:
+    if (bound_states is not None) and (discspec is not None):  # no bound states
         K = len(bound_states)
     else:
         K = 0
 
-    if contspec is None:
+    if contspec is None: # no continuous spectrum
         M = 0
     options = get_nsev_inverse_options(dis, cst, csim, dst, max_iter, osf)
     rdict = nsev_inverse_wrapper(M, contspec, xivec[0], xivec[-1], K, bound_states, discspec, D, tvec[0], tvec[-1],
@@ -156,40 +156,29 @@ def nsev_inverse_wrapper(M, contspec, Xi1, Xi2, K, bound_states,
     nsev_Xi[0] = Xi1
     nsev_Xi[1] = Xi2
     nsev_K = ctypes_uint(K)
-    if (K > 0 and M!=0):  # at least one bound state present
-        nsev_contspec = np.zeros(M, dtype=numpy_complex)
-        nsev_contspec[:] = contspec[:]
+
+    if K>0:  # at least one bound states
         nsev_boundstates = np.zeros(K, dtype=numpy_complex)
         nsev_boundstates[:] = bound_states[:]
         nsev_discspec = np.zeros(K, dtype=numpy_complex)
         nsev_discspec[:] = normconst_or_residues[:]
-        nsev_bstype = np.ctypeslib.ndpointer(dtype=numpy_complex,
-                                             ndim=1, flags='C')
         nsev_dstype = np.ctypeslib.ndpointer(dtype=numpy_complex,
                                              ndim=1, flags='C')
-        nsev_cstype = np.ctypeslib.ndpointer(dtype=numpy_complex,
-                               ndim=1, flags='C')  # contspec
-    elif (K > 0 and M == 0):  # no continuous spectrum
-        nsev_contspec = nsev_nullptr
-        nsev_boundstates = np.zeros(K, dtype=numpy_complex)
-        nsev_boundstates[:] = bound_states[:]
-        nsev_discspec = np.zeros(K, dtype=numpy_complex)
-        nsev_discspec[:] = normconst_or_residues[:]
         nsev_bstype = np.ctypeslib.ndpointer(dtype=numpy_complex,
                                              ndim=1, flags='C')
-        nsev_dstype = np.ctypeslib.ndpointer(dtype=numpy_complex,
-                                             ndim=1, flags='C')
-        nsev_cstype = type(nsev_nullptr)
-    else:  # no bound states
-        nsev_contspec = np.zeros(M, dtype=numpy_complex)
-        nsev_contspec[:] = contspec[:]
-        nsev_cstype = np.ctypeslib.ndpointer(dtype=numpy_complex,
-                               ndim=1, flags='C')  # contspec
+    else:
         nsev_boundstates = nsev_nullptr
         nsev_discspec = nsev_nullptr
         nsev_bstype = type(nsev_nullptr)
         nsev_dstype = type(nsev_nullptr)
-
+    if M>0: # continuous spectrum
+        nsev_contspec = np.zeros(M, dtype=numpy_complex)
+        nsev_contspec[:] = contspec[:]
+        nsev_cstype = np.ctypeslib.ndpointer(dtype=numpy_complex,
+                                             ndim=1, flags='C')  # contspec
+    else:
+        nsev_contspec = nsev_nullptr
+        nsev_cstype = type(nsev_nullptr)
     nsev_D = ctypes_uint(D)
     nsev_T = np.zeros(2, dtype=numpy_double)
     nsev_T[0] = T1
