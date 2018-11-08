@@ -70,16 +70,14 @@ def nsev_inverse_input_variation():
     bound_states = np.array([0.7j, 1.7j])
     disc_norming_const_ana = [1.0, -1.0]
     cont_b_ana = 0.587783 / np.cosh(xivec * np.pi) * np.exp(1.0j * np.pi)
-
-    # call the function
-    #discrete only
     res = {}
+    # check behavior with different input parameters
     res['both'] = nsev_inverse(xivec, tvec, cont_b_ana, bound_states, disc_norming_const_ana, cst=1, dst=0)
     res['disc'] = nsev_inverse(xivec, tvec, None, bound_states, disc_norming_const_ana, cst=1, dst=0)
     res['cont1'] = nsev_inverse(xivec, tvec, cont_b_ana, None, disc_norming_const_ana, cst=1, dst=0)
     res['cont2'] = nsev_inverse(xivec, tvec, cont_b_ana, bound_states, None, cst=1, dst=0)
     res['cont3'] = nsev_inverse(xivec, tvec, cont_b_ana, None, None, cst=1, dst=0)
-    #res['none'] = nsev_inverse(xivec, tvec, None, None, None, cst=1, dst=0)
+    res['none'] = nsev_inverse(xivec, tvec, None, None, None, cst=1, dst=0)
     return res
 
 def nsev_inverse_input_variation_test(res):
@@ -111,6 +109,7 @@ def nsev_inverse_input_variation_test(res):
              7.51076324e-07 + 6.32640626e-16j]),
         'q_none' : np.array([[0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j,
                 0.+0.j, 0.+0.j, 0.+0.j]])}
+
     tmp.single_test(tmp.check_value, res['both']['return_value'],0, "input both - return value")
     tmp.single_test(tmp.check_array,
                      res['both']['q'][
@@ -136,9 +135,9 @@ def nsev_inverse_input_variation_test(res):
                      res['cont3']['q'][
                      expected['qsamprange'][0]:expected['qsamprange'][1]:expected['qsamprange'][2]],
                      expected['q_cont'], "input cont only (3) - q values")
-    #tmp.single_test(tmp.check_value, res['none']['return_value'], 7, "input none - return value=7?")
-    #tmp.single_test(tmp.check_array,
-    #                 res['none']['q'][
-    #                 expected['qsamprange'][0]:expected['qsamprange'][1]:expected['qsamprange'][2]],
-    #                 expected['q_none'], "input none - q=0?")
+    tmp.single_test(tmp.check_value, res['none']['return_value'], 7, "input none - return value=7?")
+    tmp.single_test(tmp.check_array,
+                     res['none']['q'][
+                     expected['qsamprange'][0]:expected['qsamprange'][1]:expected['qsamprange'][2]],
+                     expected['q_none'], "input none - q=0?")
     return tmp

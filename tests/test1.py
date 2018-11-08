@@ -50,8 +50,8 @@ T5 = FnftpyTest(nsev_inverse_example, nsev_inverse_example_test)
 T5.print_test_result(brief=True)
 
 T6 = FnftpyTest(nsev_inverse_example2, nsev_inverse_example2_test)
-T6.print_test_result(brief=False)
+T6.print_test_result(brief=True)
 
 
 T7 = FnftpyTest(nsev_inverse_input_variation, nsev_inverse_input_variation_test)
-T7.print_test_result(brief=True)
+T7.print_test_result(brief=False)
