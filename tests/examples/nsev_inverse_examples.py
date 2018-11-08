@@ -38,7 +38,6 @@ def nsev_inverse_example():
 
     # set values
     M = 2048
-
     D = 1024
     tvec = np.linspace(-2, 2, D)
     T1 = tvec[0]

@@ -28,8 +28,6 @@ Christoph Mahnke, 2018
 """
 
 
-
-#from fnftpy_testutils import *
 from examples import *
 from testfunctions import *
 
@@ -52,6 +50,5 @@ T5.print_test_result(brief=True)
 T6 = FnftpyTest(nsev_inverse_example2, nsev_inverse_example2_test)
 T6.print_test_result(brief=True)
 
-
 T7 = FnftpyTest(nsev_inverse_input_variation, nsev_inverse_input_variation_test)
-T7.print_test_result(brief=False)
+T7.print_test_result(brief=True)
