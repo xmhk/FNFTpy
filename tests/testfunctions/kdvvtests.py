@@ -1,6 +1,4 @@
 from .fnftpy_testutils import Richtigbenennen
-
-#from tests.testfunctions.fnftpy_testutils.richtigbenennen import Richtigbenennen
 import numpy as np
 
 def kdvv_example_test(res):

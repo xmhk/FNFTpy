@@ -1,7 +1,6 @@
 from .fnftpy_testutils import Richtigbenennen
-
-#from tests.testfunctions.fnftpy_testutils.richtigbenennen import Richtigbenennen
 import numpy as np
+
 def nsep_example_test(res):
     infostr = "nsep (resemble C example)"
     tmp = Richtigbenennen(infostr=infostr)
