@@ -29,12 +29,12 @@ Christoph Mahnke, 2018
 
 
 from FNFTpy import nsev_inverse, nsev_inverse_xi_wrapper
-from .fnftpy_testutils import Richtigbenennen
+from .fnftpy_testutils import TestAndAccount
 import numpy as np
 
 def nsev_inverse_example_test(res):
     infostr = "nsev_inverse (resemble C example)"
-    tmp = Richtigbenennen(infostr=infostr)
+    tmp = TestAndAccount(infostr=infostr)
     expected = {
         'qsamprange':[0,-1,40],
         'qsamp':
@@ -62,7 +62,7 @@ def nsev_inverse_example_test(res):
 
 def nsev_inverse_example2_test(res):
     infostr = "nsev_inverse 2: create a N=2.2 Satsuma-Yajima pulse."
-    tmp = Richtigbenennen(infostr=infostr)
+    tmp = TestAndAccount(infostr=infostr)
     expected = {
         'qsamprange': [0, -1, 40],
         'qsamp': np.array(
@@ -112,7 +112,7 @@ def nsev_inverse_input_variation():
 
 def nsev_inverse_input_variation_test(res):
     infostr = "nsev_inverse input variation"
-    tmp = Richtigbenennen(infostr=infostr)
+    tmp = TestAndAccount(infostr=infostr)
     expected = {
         'qsamprange': [0, -1, 40],
         'q_both': np.array(

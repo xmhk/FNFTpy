@@ -28,14 +28,14 @@ Christoph Mahnke, 2018
 """
 
 
-from .fnftpy_testutils import Richtigbenennen
+from .fnftpy_testutils import TestAndAccount
 
 import numpy as np
 from FNFTpy import nsev
 
 def nsev_example_test(res):
     infostr = "nsev example (resemble C example)"
-    tmp = Richtigbenennen(infostr=infostr)
+    tmp = TestAndAccount(infostr=infostr)
     expected = {'bound_states_num': 1,
                 'bound_states': np.array([2.13821177e-50 + 1.57422601j]),
                 'disc_norm': np.array([-1. - 2.56747175e-50j]),
@@ -88,7 +88,7 @@ def nsev_dstcst_variation():
 
 def nsev_dstcst_variation_test(res):
     infostr="nsev: checks for dst and cst switches"
-    tmp = Richtigbenennen(infostr=infostr)
+    tmp = TestAndAccount(infostr=infostr)
     expected = {'dst=-1': np.array([ True, False, False]),
                 'dst=0': np.array([ True, False,  True]),
                 'dst=1': np.array([ True,  True, False]),

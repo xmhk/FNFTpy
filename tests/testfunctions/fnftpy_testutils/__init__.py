@@ -1,5 +1,3 @@
-
-
 """
 This file is part of FNFTpy.
 FNFTpy provides wrapper functions to interact with FNFT,
@@ -28,7 +26,7 @@ Contributors:
 Christoph Mahnke, 2018
 
 """
-import numpy as np
 
-from .richtigbenennen import FnftpyTest, Richtigbenennen
+
+from .testandaccount import FnftpyTest, TestAndAccount
 

@@ -27,12 +27,12 @@ Christoph Mahnke, 2018
 
 """
 
-from .fnftpy_testutils import Richtigbenennen
+from .fnftpy_testutils import TestAndAccount
 import numpy as np
 
 def kdvv_example_test(res):
     infostr="kdvv (resemble C example)"
-    tmp = Richtigbenennen(infostr=infostr)
+    tmp = TestAndAccount(infostr=infostr)
 
     expected = {'cont': np.array([
         0.15329981+0.12203649j,  0.24385425+0.09606438j,
