@@ -89,7 +89,6 @@ def nsev_inverse_example2_test(res):
 
 
 def nsev_inverse_input_variation():
-    #from FNFTpy import nsev_inverse_xi_wrapper, nsev_inverse
     D = 512
     M = 2 * D
     Tmax = 15

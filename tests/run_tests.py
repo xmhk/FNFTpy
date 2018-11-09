@@ -32,31 +32,24 @@ from examples import *
 from testfunctions import *
 
 
-T1 = FnftpyTest(nsep_example, nsep_example_test)
-T1.print_test_result(brief=True)
-
-T2 = FnftpyTest(kdvv_example, kdvv_example_test)
-T2.print_test_result(brief=True)
-
+T1 = FnftpyTest(kdvv_example, kdvv_example_test)
+T2 = FnftpyTest(nsep_example, nsep_example_test)
 T3 = FnftpyTest(nsev_example, nsev_example_test)
-T3.print_test_result(brief=True)
-
 T4 = FnftpyTest(nsev_dstcst_variation, nsev_dstcst_variation_test)
-T4.print_test_result(brief=True)
-
 T5 = FnftpyTest(nsev_inverse_example, nsev_inverse_example_test)
-T5.print_test_result(brief=True)
-
 T6 = FnftpyTest(nsev_inverse_example2, nsev_inverse_example2_test)
-T6.print_test_result(brief=True)
-
 T7 = FnftpyTest(nsev_inverse_input_variation, nsev_inverse_input_variation_test)
-T7.print_test_result(brief=True)
+
 
 totalnum = 0
 failednum = 0
+
+printTR=True
+brief=False
+
 for T in [T1, T2, T3, T4, T5, T6, T7]:
     totalnum += T.tests_total
     failednum += T.tests_failed
-
+    if printTR:
+        T.print_test_result(brief=brief)
 print("\n\n Passed: %d / %d"%(totalnum-failednum, totalnum))

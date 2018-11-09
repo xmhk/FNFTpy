@@ -30,10 +30,20 @@ import numpy as np
 from .external import HiddenPrints
 
 class FnftpyTest():
-    """Run some sample code, store and print results."""
+    """Run some sample code, perform tests and store/print the results.
+
+    Arguments:
+
+        * f_example_code : function handle of example function.
+                           It must return a single variable holding the
+                           relevant data from the example run.
+
+        * f_test : suitable test function. It must take a single variable
+                   as input and must return a instance of the TestAndAccount
+                   object.
+
+    """
     def __init__(self, f_example_code, f_test, verbose=False):
-        #self.logstr = ""
-        #self.verbose = verbose
         self.infostr = ""
         self.testlog = []
         self.tests_total = 0
@@ -62,13 +72,17 @@ class FnftpyTest():
 
 
 class TestAndAccount():
+    """Helper object to perform simple tests, and account failed/success/total.
+
+    """
     def __init__(self, infostr=""):
         self.tests_total = 0
         self.tests_failed = 0
         self.testlog = []
-        self.infostr=infostr
+        self.infostr = infostr
 
     def single_test(self, func, infostring, *args, **kwargs):
+        """Test whether some function returns True or False"""
         self.tests_total+=1
         retv = func(*args, **kwargs)
         if not retv:
@@ -76,11 +90,13 @@ class TestAndAccount():
         self.testlog.append([infostring, retv])
 
     def check_value(self, value, expectedval):
+        """Test single value = expectedval."""
         return value == expectedval
 
     def check_array(self, value, expectedval, eps=1e-10):
-        # print(np.sum(np.abs(value-expectedval)**2))
+        """Test array == expectedarray  (norm < eps)"""
         return np.sum(np.abs(value - expectedval) ** 2) < eps
 
     def check_boolarray(self, value, expectedval):
+        """Test boolean array == expected"""
         return (value == expectedval).all()
