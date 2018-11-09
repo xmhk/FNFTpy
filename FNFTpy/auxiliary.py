@@ -33,7 +33,7 @@ from .typesdef import *
 def get_lib_path():
     """Return the path of the FNFT file.
 
-    Here you can set the location of the compiled library for FNFT.
+    Edit this function to set the location of the compiled library for FNFT.
     See example strings below.
 
     Returns:
@@ -46,7 +46,6 @@ def get_lib_path():
         * libstr = "/usr/local/lib/libfnft.so"  # example for linux
 
     """
-    #libstr = "/usr/local/lib/libfnft.so.0.2.1"
     libstr = "/usr/local/lib/libfnft.so.0.2.1"
     return libstr
 

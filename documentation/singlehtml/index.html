@@ -57,6 +57,28 @@ along with this program. If not, see &lt;<a class="reference external" href="htt
 </div>
 <span id="document-aux"></span><div class="section" id="auxiliary-functions">
 <h2>Auxiliary functions<a class="headerlink" href="#auxiliary-functions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="set-destination-of-fnft-libary">
+<h3>set destination of FNFT libary<a class="headerlink" href="#set-destination-of-fnft-libary" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="FNFTpy.get_lib_path">
+<code class="descclassname">FNFTpy.</code><code class="descname">get_lib_path</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#FNFTpy.get_lib_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the path of the FNFT file.</p>
+<p>Edit this function to set the location of the compiled library for FNFT.
+See example strings below.</p>
+<p>Returns:</p>
+<ul class="simple">
+<li>libstring : string holding library path</li>
+</ul>
+<p>Example paths:</p>
+<blockquote>
+<div><ul class="simple">
+<li>libstr = “C:/Libraries/local/libfnft.dll”  # example for windows</li>
+<li>libstr = “/usr/local/lib/libfnft.so”  # example for linux</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+</div>
 <div class="section" id="get-and-print-fnft-version">
 <h3>get and print FNFT version<a class="headerlink" href="#get-and-print-fnft-version" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
@@ -1117,45 +1139,6 @@ If a more simplified version is desired, ‘nsev_inverse’ can be used (see doc
 
 </div>
 </div>
-<span id="document-examples"></span><div class="section" id="example-functions">
-<h2>example functions<a class="headerlink" href="#example-functions" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="FNFTpy.tests.print_default_options">
-<code class="descclassname">FNFTpy.tests.</code><code class="descname">print_default_options</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#FNFTpy.tests.print_default_options" title="Permalink to this definition">¶</a></dt>
-<dd><p>Print the default options for kdvv, nsep, nsev and nsev_inverse.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="FNFTpy.tests.kdvvexample">
-<code class="descclassname">FNFTpy.tests.</code><code class="descname">kdvvexample</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#FNFTpy.tests.kdvvexample" title="Permalink to this definition">¶</a></dt>
-<dd><p>Mimics the C example for calling fnft_kdvv.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="FNFTpy.tests.nsepexample">
-<code class="descclassname">FNFTpy.tests.</code><code class="descname">nsepexample</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#FNFTpy.tests.nsepexample" title="Permalink to this definition">¶</a></dt>
-<dd><p>Mimics the C example for calling fnft_nsep.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="FNFTpy.tests.nsevexample">
-<code class="descclassname">FNFTpy.tests.</code><code class="descname">nsevexample</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#FNFTpy.tests.nsevexample" title="Permalink to this definition">¶</a></dt>
-<dd><p>Mimics the C example for calling fnft_nsev.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="FNFTpy.tests.nsevinverseexample">
-<code class="descclassname">FNFTpy.tests.</code><code class="descname">nsevinverseexample</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#FNFTpy.tests.nsevinverseexample" title="Permalink to this definition">¶</a></dt>
-<dd><p>Mimics the C example for calling fnft_nsev_inverse.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="FNFTpy.tests.nsevinverseexample2">
-<code class="descclassname">FNFTpy.tests.</code><code class="descname">nsevinverseexample2</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#FNFTpy.tests.nsevinverseexample2" title="Permalink to this definition">¶</a></dt>
-<dd><p>nsev_inverse_example: create a N=2.2 Satsuma-Yajima pulse from nonlinear spectrum.</p>
-</dd></dl>
-
-</div>
 </div>
 </div>
 
@@ -1170,6 +1153,7 @@ If a more simplified version is desired, ‘nsev_inverse’ can be used (see doc
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="index.html#document-moduleinfo">Module overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="index.html#document-aux">Auxiliary functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#set-destination-of-fnft-libary">set destination of FNFT libary</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#get-and-print-fnft-version">get and print FNFT version</a></li>
 </ul>
 </li>
@@ -1202,7 +1186,6 @@ If a more simplified version is desired, ‘nsev_inverse’ can be used (see doc
 <li class="toctree-l2"><a class="reference internal" href="index.html#options-nsevinverseoptionsstruct">options NsevInverseOptionsStruct</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="index.html#document-examples">example functions</a></li>
 </ul>
 
         </div>

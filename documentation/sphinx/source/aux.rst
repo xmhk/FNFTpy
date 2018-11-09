@@ -4,6 +4,11 @@
  Auxiliary functions
 ====================
 
+set destination of FNFT libary
+------------------------------
+
+.. autofunction:: FNFTpy.get_lib_path
+
 
 get and print FNFT version
 --------------------------
