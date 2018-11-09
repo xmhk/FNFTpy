@@ -38,4 +38,3 @@ from .fnft_nsev_inverse_wrapper import nsev_inverse_xi_wrapper, nsev_inverse_wra
 from .typesdef import *
 from .options_handling import *
 
-from .tests import *
