@@ -1,5 +1,6 @@
 import sys, os
 
+
 class HiddenPrints:
     """Allows to temporarily hide sdtout messages, e.g. from print.
 
