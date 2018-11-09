@@ -53,11 +53,11 @@ def nsev_inverse_example_test(res):
                      -8.51148829e-07-9.05737153e-05j, -8.51148517e-07-7.63264783e-05j]),
         'Xi':np.array([-401.33884499, 401.73116058])
                    }
-    tmp.single_test(tmp.check_value, res['return_value'], 0, "FNFT return value")
-    tmp.single_test(tmp.check_array,
+    tmp.single_test(tmp.check_value, "FNFT return value", res['return_value'], 0)
+    tmp.single_test(tmp.check_array,"q values" ,
                      res['q'][expected['qsamprange'][0]:expected['qsamprange'][1]:expected['qsamprange'][2]],
-                     expected['qsamp'],"q values")
-    tmp.single_test(tmp.check_array, res['Xi'], expected['Xi'], 'Xi')
+                     expected['qsamp'])
+    tmp.single_test(tmp.check_array, 'Xi', res['Xi'], expected['Xi'])
     return tmp
 
 def nsev_inverse_example2_test(res):
@@ -80,11 +80,11 @@ def nsev_inverse_example2_test(res):
              8.91859214e-05 - 1.96145018e-15j, 2.75963271e-05 - 2.67063774e-15j,
              8.53801078e-06 - 4.81025786e-15j, 2.63963808e-06 - 7.13301617e-15j]
         )}
-    tmp.single_test(tmp.check_value, res['return_value'], 0, "FNFT return value")
-    tmp.single_test(tmp.check_array,
+    tmp.single_test(tmp.check_value, "FNFT return value", res['return_value'], 0)
+    tmp.single_test(tmp.check_array, "q values",
                      res['q'][
                      expected['qsamprange'][0]:expected['qsamprange'][1]:expected['qsamprange'][2]],
-                     expected['qsamp'], "q values")
+                     expected['qsamp'])
     return tmp
 
 
@@ -140,34 +140,34 @@ def nsev_inverse_input_variation_test(res):
         'q_none' : np.array([[0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j,
                 0.+0.j, 0.+0.j, 0.+0.j]])}
 
-    tmp.single_test(tmp.check_value, res['both']['return_value'],0, "input both - return value")
-    tmp.single_test(tmp.check_array,
+    tmp.single_test(tmp.check_value, "input both - return value", res['both']['return_value'],0)
+    tmp.single_test(tmp.check_array, "input both - q values",
                      res['both']['q'][
                      expected['qsamprange'][0]:expected['qsamprange'][1]:expected['qsamprange'][2]],
-                     expected['q_both'], "input both - q values")
-    tmp.single_test(tmp.check_value, res['disc']['return_value'], 0, "input disc only - return value")
-    tmp.single_test(tmp.check_array,
+                     expected['q_both'])
+    tmp.single_test(tmp.check_value, "input disc only - return value", res['disc']['return_value'], 0)
+    tmp.single_test(tmp.check_array, "input disc only - q values",
                      res['disc']['q'][
                      expected['qsamprange'][0]:expected['qsamprange'][1]:expected['qsamprange'][2]],
-                     expected['q_disc'], "input disc only - q values")
-    tmp.single_test(tmp.check_value, res['cont1']['return_value'], 0, "input cont only (1) - return value")
-    tmp.single_test(tmp.check_array,
+                     expected['q_disc'])
+    tmp.single_test(tmp.check_value, "input cont only (1) - return value", res['cont1']['return_value'], 0)
+    tmp.single_test(tmp.check_array, "input cont only (1) - q values",
                      res['cont1']['q'][
                      expected['qsamprange'][0]:expected['qsamprange'][1]:expected['qsamprange'][2]],
-                     expected['q_cont'], "input cont only (1) - q values")
-    tmp.single_test(tmp.check_value, res['cont2']['return_value'], 0, "input cont only (2) - return value")
-    tmp.single_test(tmp.check_array,
+                     expected['q_cont'])
+    tmp.single_test(tmp.check_value, "input cont only (2) - return value", res['cont2']['return_value'], 0)
+    tmp.single_test(tmp.check_array, "input cont only (2) - q values",
                      res['cont2']['q'][
                      expected['qsamprange'][0]:expected['qsamprange'][1]:expected['qsamprange'][2]],
-                     expected['q_cont'], "input cont only (2) - q values")
-    tmp.single_test(tmp.check_value, res['cont3']['return_value'], 0, "input cont only (3) - return value")
-    tmp.single_test(tmp.check_array,
+                     expected['q_cont'])
+    tmp.single_test(tmp.check_value, "input cont only (3) - return value", res['cont3']['return_value'], 0)
+    tmp.single_test(tmp.check_array, "input cont only (3) - q values",
                      res['cont3']['q'][
                      expected['qsamprange'][0]:expected['qsamprange'][1]:expected['qsamprange'][2]],
-                     expected['q_cont'], "input cont only (3) - q values")
-    tmp.single_test(tmp.check_value, res['none']['return_value'], 7, "input none - return value=7?")
-    tmp.single_test(tmp.check_array,
+                     expected['q_cont'])
+    tmp.single_test(tmp.check_value, "input none - return value=7?", res['none']['return_value'], 7)
+    tmp.single_test(tmp.check_array, "input none - q=0?",
                      res['none']['q'][
                      expected['qsamprange'][0]:expected['qsamprange'][1]:expected['qsamprange'][2]],
-                     expected['q_none'], "input none - q=0?")
+                     expected['q_none'])
     return tmp

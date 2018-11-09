@@ -39,6 +39,7 @@ def kdvv_example_test(res):
         0.12418466-0.00838456j, -0.46324501+0.20526334j,
         -0.46324501-0.20526334j,  0.12418466+0.00838456j,
         0.24385425-0.09606438j,  0.15329981-0.12203649j])}
-    tmp.single_test(tmp.check_value, res['return_value'], 0, "FNFT return value")
-    tmp.single_test(tmp.check_array, res['cont'], expected['cont'], "continuous spectrum")
+
+    tmp.single_test(tmp.check_value, "FNFT return value", res['return_value'], 0)
+    tmp.single_test(tmp.check_array, "continuous spectrum", res['cont'], expected['cont'])
     return tmp

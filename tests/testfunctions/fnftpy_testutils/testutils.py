@@ -68,9 +68,9 @@ class TestAndAccount():
         self.testlog = []
         self.infostr=infostr
 
-    def single_test(self, func, arg1, arg2, infostring):
+    def single_test(self, func, infostring, *args, **kwargs):
         self.tests_total+=1
-        retv = func(arg1, arg2)
+        retv = func(*args, **kwargs)
         if not retv:
             self.tests_failed+=1
         self.testlog.append([infostring, retv])

@@ -46,15 +46,15 @@ def nsep_example_test(res):
                          -0.99993896 + 1.87820258e-08j, 0.11814625 + 2.82216353e-07j,
                          0.73222476 + 1.12819764e-08j, 1.29151798 + 6.35545312e-08j,
                          1.82871124 + 8.88012865e-08j])}
-    tmp.single_test(tmp.check_value, res['return_value'], 0, "FNFT return value")
-    tmp.single_test(tmp.check_value, res['K'], 11, "K")
-    tmp.single_test(tmp.check_value, res['M'], 7, "M")
+    tmp.single_test(tmp.check_value, "FNFT return value", res['return_value'], 0)
+    tmp.single_test(tmp.check_value, "K", res['K'], 11)
+    tmp.single_test(tmp.check_value, "M", res['M'], 7)
     # as the order of spectra is not clear, we round to 8 digits, sort and compare
     # to sample data
-    tmp.single_test(tmp.check_array,
+    tmp.single_test(tmp.check_array, "main spectrum",
                      np.sort_complex(np.around(res['main'], 8)),
-                     np.sort_complex(expected['main']), "main spectrum")
-    tmp.single_test(tmp.check_array,
+                     np.sort_complex(expected['main']))
+    tmp.single_test(tmp.check_array, "auxiliary spectrum",
                      np.sort_complex(np.around(res['aux'], 8)),
-                     np.sort_complex(expected['aux']), "auxiliary spectrum")
+                     np.sort_complex(expected['aux']))
     return tmp

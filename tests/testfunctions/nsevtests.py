@@ -45,11 +45,11 @@ def nsev_example_test(res):
                     -1.16918546 + 0.48325228j, -1.09090439 + 1.33957378j,
                     -0.78378026 + 1.04297186j, -0.10538565 + 0.42577137j]),
                 }
-    tmp.single_test(tmp.check_value, res['return_value'], 0, "FNFT return value")
-    tmp.single_test(tmp.check_value, res['bound_states_num'], 1, "number of bound states")
-    tmp.single_test(tmp.check_array, res['bound_states'], expected['bound_states'], "bound states")
-    tmp.single_test(tmp.check_array, res['disc_norm'], expected['disc_norm'], "norming consts")
-    tmp.single_test(tmp.check_array, res['cont_ref'], expected['cont_ref'], "cont. reflection coeff.")
+    tmp.single_test(tmp.check_value, "FNFT return value", res['return_value'], 0)
+    tmp.single_test(tmp.check_value, "number of bound states", res['bound_states_num'], 1)
+    tmp.single_test(tmp.check_array, "bound states", res['bound_states'], expected['bound_states'])
+    tmp.single_test(tmp.check_array, "norming consts", res['disc_norm'], expected['disc_norm'])
+    tmp.single_test(tmp.check_array, "cont. reflection coeff.", res['cont_ref'], expected['cont_ref'])
     return tmp
 
 
@@ -101,5 +101,5 @@ def nsev_dstcst_variation_test(res):
                 'cst=3': np.array([ True, False, False, False]),
                 'dst=3cst=3': np.array([ True, False, False, False, False, False])}
     for k in expected.keys():
-        tmp.single_test(tmp.check_boolarray, res[k], expected[k], "check option: %s"%k)
+        tmp.single_test(tmp.check_boolarray, "check option: %s"%k, res[k], expected[k])
     return tmp
