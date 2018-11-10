@@ -112,10 +112,6 @@ class NsevDstCstInputTest(unittest.TestCase):
                     'cst=2': np.array([True, True, True, True]),
                     'cst=3': np.array([True, False, False, False]),
                     'dst=3cst=3': np.array([True, False, False, False, False, False])}
-        rv = True
-        invalidkeys = "failed dst/cst options: "
         for k in expected.keys():
-            if not check_boolarray(self.res[k], expected[k]):
-                rv = False
-                invalidkeys += ", %s" % k
-        self.assertTrue(rv, invalidkeys)
+            with self.subTest(key = k):
+                self.assertTrue(check_boolarray(self.res[k], expected[k]), "unexpected output")
