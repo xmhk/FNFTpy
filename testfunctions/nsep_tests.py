@@ -67,5 +67,5 @@ class NsepExampleTest(unittest.TestCase):
                              1.8286518 + 1.74944489e-08j])
         self.assertTrue(check_array(
             np.sort_complex(np.around(self.res['main'], 8)),
-            np.sort_complex(expected)
+            np.sort_complex(expected), eps=1e-8
         ), "main spectrum not as expected")
