@@ -45,7 +45,20 @@ numpy_double = np.double  # FNFT_REAL for Arrays (C-double)
 #
 # option structs for interfacing C
 #
-class KdvvOptionsStruct(ctypes.Structure):
+class GenericOptionsStruct(ctypes.Structure):
+    def __repr__(self):
+        s = ""
+        for f in self._fields_:
+            s+="%s : %s, "%(repr(f[0]), repr(self.__getattribute__(f[0])))
+        return s[0:-2] #-2: drop the last comma
+
+    def __str__(self):
+        s = ""
+        for f in self._fields_:
+            s+="%s : %s\n"%(repr(f[0]), repr(self.__getattribute__(f[0])))
+        return s
+
+class KdvvOptionsStruct(GenericOptionsStruct):
     """Ctypes options struct for interfacing fnft_kdvv.
 
     Fields:
@@ -56,12 +69,9 @@ class KdvvOptionsStruct(ctypes.Structure):
     _fields_ = [
         ("discretization", ctypes_int)]
 
-    def __repr__(self):
-        s = "  discretization : dis " + repr(self.discretization)
-        return s
 
 
-class NsepOptionsStruct(ctypes.Structure):
+class NsepOptionsStruct(GenericOptionsStruct):
     """Ctypes options struct for interfacing fnft_nsep.
 
     Fields:
@@ -84,18 +94,30 @@ class NsepOptionsStruct(ctypes.Structure):
         ("normalization_flag", ctypes_int32)]
 
     def __repr__(self):
-        s = "  localization                  : loc   " + repr(self.localization)
-        s += "\n   filtering                     : filt  " + repr(self.filtering)
-        s += "\n   bounding box                  : bb    " + repr(self.bounding_box[0]) + " " \
+        s = "'localization' : " + repr(self.localization)
+        s += ", 'filtering : " + repr(self.filtering)
+        s += ", 'bounding box' : [" + repr(self.bounding_box[0]) + " " \
              + repr(self.bounding_box[1]) + " " + repr(self.bounding_box[2]) + " " \
-             + repr(self.bounding_box[3])
-        s += "\n   maximum number of evaluations : maxev " + repr(self.max_evals)
-        s += "\n   discretization                : dis   " + repr(self.discretization)
-        s += "\n   normalization flag            : nf    " + repr(self.normalization_flag)
+             + repr(self.bounding_box[3])+"]"
+        s += ", 'max_evals' : " + repr(self.max_evals)
+        s += ", 'discretization' : " + repr(self.discretization)
+        s += ", 'normalization_flag' : " + repr(self.normalization_flag)
+        return s
+
+    def __str__(self):
+        s = "'localization' : " + repr(self.localization)
+        s += "\n'filtering' : " + repr(self.filtering)
+        s += "\n'bounding box' : [" + repr(self.bounding_box[0]) + " " \
+             + repr(self.bounding_box[1]) + " " + repr(self.bounding_box[2]) + " " \
+             + repr(self.bounding_box[3])+"]"
+        s += "\n'max_evals : maxev " + repr(self.max_evals)
+        s += "\n'discretization' : " + repr(self.discretization)
+        s += "\n'normalization_flag' : " + repr(self.normalization_flag)+"\n"
         return s
 
 
-class NsevOptionsStruct(ctypes.Structure):
+
+class NsevOptionsStruct(GenericOptionsStruct):
     """Ctypes options struct for interfacing fnft_nsev.
 
     Fields:
@@ -121,19 +143,8 @@ class NsevOptionsStruct(ctypes.Structure):
         ("normalization_flag", ctypes_int32),
         ("discretization", ctypes_int)]
 
-    def __repr__(self):
-        s = "   bound state filtering    : bsf " + repr(self.bound_state_filtering)
-        s += "\n   bound state localization : bsl " + repr(self.bound_state_localization)
-        s += "\n   number of iteratons      : niter " + repr(self.niter)
-        s += "\n   samples for subsampling  : Dsub " + repr(self.Dsub)
-        s += "\n   discrete spectrum type   : dst " + repr(self.discspec_type)
-        s += "\n   continuous spectrum type : cst " + repr(self.contspec_type)
-        s += "\n   discretization           : dis " + repr(self.discretization)
-        s += "\n   normalization flag       : nf " + repr(self.normalization_flag)
-        return s
 
-
-class NsevInverseOptionsStruct(ctypes.Structure):
+class NsevInverseOptionsStruct(GenericOptionsStruct):
     """Ctypes options struct for interfacing fnft_nsev_inverse.
 
     Fields:
@@ -155,13 +166,6 @@ class NsevInverseOptionsStruct(ctypes.Structure):
         ("oversampling_factor", ctypes_uint)]
 
 
-    def __repr__(self):
-        s = "  discretization               : dis " + repr(self.discretization)
-        s += "\n  contspec_type                : cst " + repr(self.contspec_type)
-        s += "\n  contspec_inversion_method    : csim " + repr(self.contspec_inversion_method)
-        s += "\n  discspec_type                : dst " + repr(self.discspec_type)
-        s += "\n  maximum number of iterations : max_iter " + repr(self.max_iter)
-        s += "\n  oversampling factor          : osf " + repr(self.oversampling_factor)
-        return s
+
 
 

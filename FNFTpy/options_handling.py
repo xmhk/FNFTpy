@@ -63,7 +63,8 @@ def print_kdvv_options(options=None):
     """
     if options is None:
         options = fnft_kdvv_default_options_wrapper()
-    print(repr(options))
+    print("kdvv options:")
+    print(options)
 
 
 def get_kdvv_options(dis=None):
@@ -136,7 +137,9 @@ def print_nsep_options(options=None):
     """
     if options is None:
         options = fnft_nsep_default_options_wrapper()
-    print(repr(options))
+    print("nsep options:")
+    print(options)
+
 
 
 def get_nsep_options(loc=None, filt=None, bb=None, maxev=None, dis=None, nf=None):
@@ -246,7 +249,9 @@ def print_nsev_options(options=None):
 
     if options is None:
         options = fnft_nsev_default_options_wrapper()
-    print(repr(options))
+    print("nsev options:")
+    print(options)
+
 
 
 def get_nsev_options(bsf=None, bsl=None, niter=None, Dsub=None, dst=None, cst=None, nf=None, dis=None):
@@ -365,7 +370,9 @@ def print_nsev_inverse_options(options=None):
 
     if options is None:
         options = fnft_nsev_inverse_default_options_wrapper()
-    print(repr(options))
+    print("nsev_inverse options:")
+    print(options)
+
 
 
 def get_nsev_inverse_options(dis=None, cst=None, csim=None, dst=None, max_iter=None, osf=None):
