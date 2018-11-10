@@ -39,13 +39,13 @@ class KdvvExampleTest(unittest.TestCase):
     def setUp(self):
         self.res = kdvv_example()
 
-    def test_return_value(self):
-        self.assertEqual(self.res['return_value'], 0, "kdvv return value")
-
-    def test_contspec(self):
+    def test_kdvv_example(self):
+        with self.subTest('check kdvv return value'):
+            self.assertEqual(self.res['return_value'], 0, "kdvv return value")
         expected = {'cont': np.array([
             0.15329981 + 0.12203649j, 0.24385425 + 0.09606438j,
             0.12418466 - 0.00838456j, -0.46324501 + 0.20526334j,
             -0.46324501 - 0.20526334j, 0.12418466 + 0.00838456j,
             0.24385425 - 0.09606438j, 0.15329981 - 0.12203649j])}
-        self.assertTrue(check_array(self.res['cont'], expected['cont']), 'contspec as expected')
+        with self.subTest('check contspec'):
+            self.assertTrue(check_array(self.res['cont'], expected['cont']), 'contspec as expected')
