@@ -38,34 +38,31 @@ class NsepExampleTest(unittest.TestCase):
 
     def setUp(self):
         self.res = nsep_example()
+        self.expected = {'aux': np.array([-0.99999999 - 8.65909474e-01j, -0.99999999 + 8.65909474e-01j,
+                                          -0.99993896 + 1.87820258e-08j, 0.11814625 + 2.82216353e-07j,
+                                          0.73222476 + 1.12819764e-08j, 1.29151798 + 6.35545312e-08j,
+                                          1.82871124 + 8.88012865e-08j]),
+                         'main': np.array([-0.99999999 - 8.65909473e-01j, -0.99999999 - 8.65909475e-01j,
+                                           -0.99999999 + 8.65909475e-01j, -0.99999999 + 8.65909474e-01j,
+                                           -0.99999999 - 9.99899604e-01j, -0.99999999 + 9.99899604e-01j,
+                                           0.1180403 + 6.56652320e-08j, 1.2914677 + 1.11864992e-08j,
+                                           -0.99977766 - 6.49652790e-06j, 0.73224594 - 1.84219275e-09j,
+                                           1.8286518 + 1.74944489e-08j])}
 
-    def test_return_value(self):
-        self.assertEqual(self.res['return_value'], 0, "nsep return value not 0")
-
-    def test_M_value(self):
-        self.assertEqual(self.res['M'], 7, "M not 7")
-
-    def test_aux_spec_value(self):
-        expected = np.array([-0.99999999 - 8.65909474e-01j, -0.99999999 + 8.65909474e-01j,
-                             -0.99993896 + 1.87820258e-08j, 0.11814625 + 2.82216353e-07j,
-                             0.73222476 + 1.12819764e-08j, 1.29151798 + 6.35545312e-08j,
-                             1.82871124 + 8.88012865e-08j])
-        self.assertTrue(check_array(
-            np.sort_complex(np.around(self.res['aux'], 8)),
-            np.sort_complex(expected)
-        ), "aux spectrum not as expected")
-
-    def test_K_value(self):
-        self.assertEqual(self.res['K'], 11, "K not 11")
-
-    def test_main_spec_value(self):
-        expected = np.array([-0.99999999 - 8.65909473e-01j, -0.99999999 - 8.65909475e-01j,
-                             -0.99999999 + 8.65909475e-01j, -0.99999999 + 8.65909474e-01j,
-                             -0.99999999 - 9.99899604e-01j, -0.99999999 + 9.99899604e-01j,
-                             0.1180403 + 6.56652320e-08j, 1.2914677 + 1.11864992e-08j,
-                             -0.99977766 - 6.49652790e-06j, 0.73224594 - 1.84219275e-09j,
-                             1.8286518 + 1.74944489e-08j])
-        self.assertTrue(check_array(
-            np.sort_complex(np.around(self.res['main'], 8)),
-            np.sort_complex(expected), eps=1e-8
-        ), "main spectrum not as expected")
+    def test_nsep_example(self):
+        with self.subTest('check FNFT nsep return value'):
+            self.assertEqual(self.res['return_value'], 0, "FNFT nsep return value")
+        with self.subTest('check M value'):
+            self.assertEqual(self.res['M'], 7, "M not 7")
+        with self.subTest('check aux spectrum value'):
+            self.assertTrue(check_array(
+                np.sort_complex(np.around(self.res['aux'], 8)),
+                np.sort_complex(self.expected['aux'])
+            ), "aux spectrum not as expected")
+        with self.subTest('check K value'):
+            self.assertEqual(self.res['K'], 11, "K not 11")
+        with self.subTest('check main spectrum value'):
+            self.assertTrue(check_array(
+                np.sort_complex(np.around(self.res['main'], 8)),
+                np.sort_complex(self.expected['main']), eps=1e-8
+            ), "main spectrum not as expected")

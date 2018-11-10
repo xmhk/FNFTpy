@@ -40,8 +40,8 @@ class KdvvExampleTest(unittest.TestCase):
         self.res = kdvv_example()
 
     def test_kdvv_example(self):
-        with self.subTest('check kdvv return value'):
-            self.assertEqual(self.res['return_value'], 0, "kdvv return value")
+        with self.subTest('check FNFT kdvv return value'):
+            self.assertEqual(self.res['return_value'], 0, "FNFT kdvv return value")
         expected = {'cont': np.array([
             0.15329981 + 0.12203649j, 0.24385425 + 0.09606438j,
             0.12418466 - 0.00838456j, -0.46324501 + 0.20526334j,
