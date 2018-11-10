@@ -91,7 +91,7 @@ class NsevInverseExample2(unittest.TestCase):
 
 
 class NsevInverseInputVariation(unittest.TestCase):
-    """Testcase for various input examples for nsev_inverse"""
+    """Testcase for various input examples (discrete spec / contspec / None) for nsev_inverse"""
 
     def setUp(self):
         D = 512
