@@ -39,31 +39,28 @@ class NsevExampleTest(unittest.TestCase):
 
     def setUp(self):
         self.res = nsev_example()
+        self.expected = {'bound_states': np.array([2.13821177e-50 + 1.57422601j]),
+                         'disc_norm': np.array([-1. - 2.56747175e-50j]),
+                         'cont_ref': np.array([
+                             -0.10538565 - 0.42577137j, -0.78378026 - 1.04297186j,
+                             -1.09090439 - 1.33957378j, -1.16918546 - 0.48325228j,
+                             -1.16918546 + 0.48325228j, -1.09090439 + 1.33957378j,
+                             -0.78378026 + 1.04297186j, -0.10538565 + 0.42577137j])}
 
-    def test_return_value(self):
-        self.assertEqual(self.res['return_value'], 0, "nsev return value not 0")
-
-    def test_bound_states_num_value(self):
-        self.assertEqual(self.res['bound_states_num'], 1, "bound_states_num_not_1")
-
-    def test_bound_states_value(self):
-        expected = np.array([2.13821177e-50 + 1.57422601j])
-        self.assertTrue(check_array(self.res['bound_states'], expected),
-                        "bound_states value not as expected")
-
-    def test_disc_norm_value(self):
-        expected = np.array([-1. - 2.56747175e-50j])
-        self.assertTrue(check_array(self.res['disc_norm'], expected),
-                        "disc_norm value not as expected")
-
-    def test_cont_ref_value(self):
-        expected = np.array([
-            -0.10538565 - 0.42577137j, -0.78378026 - 1.04297186j,
-            -1.09090439 - 1.33957378j, -1.16918546 - 0.48325228j,
-            -1.16918546 + 0.48325228j, -1.09090439 + 1.33957378j,
-            -0.78378026 + 1.04297186j, -0.10538565 + 0.42577137j])
-        self.assertTrue(check_array(self.res['cont_ref'], expected),
-                        "cont_ref value not as expected")
+    def test_nsev_example(self):
+        with self.subTest('check FNFT nsev return value'):
+            self.assertEqual(self.res['return_value'], 0, "FNFT nsev return value not 0")
+        with self.subTest('bound states number'):
+            self.assertEqual(self.res['bound_states_num'], 1, "bound_states_num not 1")
+        with self.subTest('bound states value'):
+            self.assertTrue(check_array(self.res['bound_states'], self.expected['bound_states']),
+                            "bound_states value not as expected")
+        with self.subTest('disc_norm value'):
+            self.assertTrue(check_array(self.res['disc_norm'], self.expected['disc_norm']),
+                            "disc_norm value not as expected")
+        with self.subTest('cont_ref value'):
+            self.assertTrue(check_array(self.res['cont_ref'], self.expected['cont_ref']),
+                            "cont_ref value not as expected")
 
 
 class NsevDstCstInputTest(unittest.TestCase):
@@ -113,5 +110,5 @@ class NsevDstCstInputTest(unittest.TestCase):
                     'cst=3': np.array([True, False, False, False]),
                     'dst=3cst=3': np.array([True, False, False, False, False, False])}
         for k in expected.keys():
-            with self.subTest(key = k):
+            with self.subTest(key=k):
                 self.assertTrue(check_boolarray(self.res[k], expected[k]), "unexpected output")
