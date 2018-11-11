@@ -46,17 +46,25 @@ numpy_double = np.double  # FNFT_REAL for Arrays (C-double)
 # option structs for interfacing C
 #
 class GenericOptionsStruct(ctypes.Structure):
+    """return options as string, separated by commata"""
     def __repr__(self):
-        """return options as string, separated by commata"""
+        dummy = (ctypes_double * 4)(0,0,0,0)  # 4 item C array as reference
         s = ""
         for f in self._fields_:
-            s+="%s : %s, "%(repr(f[0]), repr(self.__getattribute__(f[0])))
+            if f[1]==type(dummy):   # C-array is present
+                tmps = "%s : ["%repr(f[0])
+                for arritem in self.__getattribute__(f[0]):
+                    tmps+=repr(arritem)+" "
+                s+=tmps+"], "
+            else:  # standard case
+                s += "%s : %s, " % (repr(f[0]), repr(self.__getattribute__(f[0])))
         return s[0:-2] #-2: drop the last comma
 
     def __str__(self):
         """return options as string, separated by newlines"""
         s = self.__repr__().replace(',','\n')
         return s
+
 
 
 class KdvvOptionsStruct(GenericOptionsStruct):
@@ -93,17 +101,6 @@ class NsepOptionsStruct(GenericOptionsStruct):
         ("max_evals", ctypes_uint),
         ("discretization", ctypes_int),
         ("normalization_flag", ctypes_int32)]
-
-    def __repr__(self):
-        s = "'localization' : " + repr(self.localization)
-        s += ", 'filtering : " + repr(self.filtering)
-        s += ", 'bounding box' : [" + repr(self.bounding_box[0]) + " " \
-             + repr(self.bounding_box[1]) + " " + repr(self.bounding_box[2]) + " " \
-             + repr(self.bounding_box[3])+"]"
-        s += ", 'max_evals' : " + repr(self.max_evals)
-        s += ", 'discretization' : " + repr(self.discretization)
-        s += ", 'normalization_flag' : " + repr(self.normalization_flag)
-        return s
 
 
 
