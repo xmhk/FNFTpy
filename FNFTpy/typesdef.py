@@ -51,12 +51,15 @@ class GenericOptionsStruct(ctypes.Structure):
         dummy = (ctypes_double * 4)(0,0,0,0)  # 4 item C array as reference
         s = ""
         for f in self._fields_:
-            if f[1]==type(dummy):   # C-array is present
+            # ctype arrays don't have a readable repr of their contents ...
+            # so they have to be handled differently
+            if f[1]==type(dummy):
                 tmps = "%s : ["%repr(f[0])
                 for arritem in self.__getattribute__(f[0]):
                     tmps+=repr(arritem)+" "
                 s+=tmps+"], "
-            else:  # standard case
+            # standard case: c int / uint 
+            else:
                 s += "%s : %s, " % (repr(f[0]), repr(self.__getattribute__(f[0])))
         return s[0:-2] #-2: drop the last comma
 
