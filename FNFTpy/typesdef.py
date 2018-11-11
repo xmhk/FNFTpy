@@ -58,7 +58,7 @@ class GenericOptionsStruct(ctypes.Structure):
                 for arritem in self.__getattribute__(f[0]):
                     tmps+=repr(arritem)+" "
                 s+=tmps+"], "
-            # standard case: c int / uint 
+            # standard case: c int / uint
             else:
                 s += "%s : %s, " % (repr(f[0]), repr(self.__getattribute__(f[0])))
         return s[0:-2] #-2: drop the last comma

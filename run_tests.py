@@ -28,10 +28,12 @@ Christoph Mahnke, 2018
 """
 
 import unittest
-from testfunctions import  KdvvExampleTest, NsepExampleTest, NsevExampleTest,\
-    NsevDstCstInputTest, NsevInverseExample, NsevInverseExample2,\
-    NsevInverseInputVariation
+from testfunctions import KdvvExampleTest, NsepExampleTest, NsevExampleTest, \
+    NsevDstCstInputTest, NsevInverseExample, NsevInverseExample2, \
+    NsevInverseInputVariation, FnftpyOptionsTest
 from FNFTpy import print_fnft_version
+
+options_suite = unittest.TestLoader().loadTestsFromTestCase(FnftpyOptionsTest)
 
 kdvv_suite = unittest.TestLoader().loadTestsFromTestCase(KdvvExampleTest)
 
@@ -44,13 +46,14 @@ nsev_inverse_suite1 = unittest.TestLoader().loadTestsFromTestCase(NsevInverseExa
 nsev_inverse_suite2 = unittest.TestLoader().loadTestsFromTestCase(NsevInverseExample2)
 nsev_inverse_suite3 = unittest.TestLoader().loadTestsFromTestCase(NsevInverseInputVariation)
 
-suite = unittest.TestSuite([kdvv_suite, 
+suite = unittest.TestSuite([options_suite,
+                            kdvv_suite,
                             nsep_suite,
-                            nsev_suite1,nsev_suite2,
+                            nsev_suite1, nsev_suite2,
                             nsev_inverse_suite1,
                             nsev_inverse_suite2,
                             nsev_inverse_suite3])
 
 print_fnft_version()
 print("\n\nthe FNFT error is intended: just to check that it is catched without crashing ...\n\n")
-t1 = unittest.TextTestRunner(buffer=True).run(suite)
+t1 = unittest.TextTestRunner(buffer=True, verbosity=1).run(suite)
