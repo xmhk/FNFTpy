@@ -47,16 +47,17 @@ numpy_double = np.double  # FNFT_REAL for Arrays (C-double)
 #
 class GenericOptionsStruct(ctypes.Structure):
     def __repr__(self):
+        """return options as string, separated by commata"""
         s = ""
         for f in self._fields_:
             s+="%s : %s, "%(repr(f[0]), repr(self.__getattribute__(f[0])))
         return s[0:-2] #-2: drop the last comma
 
     def __str__(self):
-        s = ""
-        for f in self._fields_:
-            s+="%s : %s\n"%(repr(f[0]), repr(self.__getattribute__(f[0])))
+        """return options as string, separated by newlines"""
+        s = self.__repr__().replace(',','\n')
         return s
+
 
 class KdvvOptionsStruct(GenericOptionsStruct):
     """Ctypes options struct for interfacing fnft_kdvv.
@@ -102,17 +103,6 @@ class NsepOptionsStruct(GenericOptionsStruct):
         s += ", 'max_evals' : " + repr(self.max_evals)
         s += ", 'discretization' : " + repr(self.discretization)
         s += ", 'normalization_flag' : " + repr(self.normalization_flag)
-        return s
-
-    def __str__(self):
-        s = "'localization' : " + repr(self.localization)
-        s += "\n'filtering' : " + repr(self.filtering)
-        s += "\n'bounding box' : [" + repr(self.bounding_box[0]) + " " \
-             + repr(self.bounding_box[1]) + " " + repr(self.bounding_box[2]) + " " \
-             + repr(self.bounding_box[3])+"]"
-        s += "\n'max_evals : maxev " + repr(self.max_evals)
-        s += "\n'discretization' : " + repr(self.discretization)
-        s += "\n'normalization_flag' : " + repr(self.normalization_flag)+"\n"
         return s
 
 
