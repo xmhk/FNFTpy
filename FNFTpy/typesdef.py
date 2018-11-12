@@ -40,8 +40,12 @@ ctypes_int = ctypes.c_int  # plain c integer, e.g. union elements
 ctypes_double = ctypes.c_double  # FNFT_REAL
 numpy_complex = np.complex128  # FNFT_COMPLEX for Arrays (C-double)
 numpy_double = np.double  # FNFT_REAL for Arrays (C-double)
+numpy_complex_arr_ptr = np.ctypeslib.ndpointer(dtype=numpy_complex,
+                               ndim=1, flags='C') # pointer for C complex arrays
+numpy_double_arr_ptr = np.ctypeslib.ndpointer(dtype=ctypes_double,
+                               ndim=1, flags='C') # pointer for C double arrays
 
-
+ctypes_nullptr = ctypes.POINTER(ctypes.c_int)()
 #
 # option structs for interfacing C
 #

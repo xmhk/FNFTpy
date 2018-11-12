@@ -143,21 +143,16 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
     # kdvv_boundstates = np.zeros(k,dtype=numpy_complex)
     # discrete spectrum -> will stay empty until implemented
     # kdvv_discspec = np.zeros(k,dtype=numpy_complex)
-    kdvv_nullptr = ctypes.POINTER(ctypes.c_int)()
     clib_kdvv_func.argtypes = [
         type(kdvv_D),  # D
-        np.ctypeslib.ndpointer(dtype=numpy_complex,
-                               ndim=1, flags='C'),  # u
-        np.ctypeslib.ndpointer(dtype=ctypes_double,
-                               ndim=1, flags='C'),  # t
+        numpy_complex_arr_ptr,  # u
+        numpy_double_arr_ptr,  # t
         type(kdvv_M),  # M
-        np.ctypeslib.ndpointer(dtype=numpy_complex,
-                               ndim=1, flags='C'),  # cont
-        np.ctypeslib.ndpointer(dtype=ctypes_double,
-                               ndim=1, flags='C'),  # Xi
-        type(kdvv_nullptr),  # K_ptr
-        type(kdvv_nullptr),  # boundstates
-        type(kdvv_nullptr),  # normconsts res
+        numpy_complex_arr_ptr,  # cont
+        numpy_double_arr_ptr,  # Xi
+        type(ctypes_nullptr),  # K_ptr
+        type(ctypes_nullptr),  # boundstates
+        type(ctypes_nullptr),  # normconsts res
         ctypes.POINTER(KdvvOptionsStruct)]  # options ptr
     rv = clib_kdvv_func(
         kdvv_D,
@@ -166,9 +161,9 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
         kdvv_M,
         kdvv_cont,
         kdvv_Xi,
-        kdvv_nullptr,
-        kdvv_nullptr,
-        kdvv_nullptr,
+        ctypes_nullptr,
+        ctypes_nullptr,
+        ctypes_nullptr,
         ctypes.byref(options))
     check_return_code(rv)
     rdict = {'return_value': rv, 'cont': kdvv_cont, 'options':repr(options)}

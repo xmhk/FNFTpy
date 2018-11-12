@@ -161,21 +161,17 @@ def nsep_wrapper(D, q, T1, T2, kappa,
     nsep_main_spec = np.zeros(nsep_K.value, dtype=numpy_complex)
     nsep_M = ctypes_uint(2 * nsep_D.value)
     nsep_aux_spec = np.zeros(nsep_M.value, dtype=numpy_complex)
-    nsep_sheet_indices = ctypes.POINTER(ctypes.c_int)()  # null_pointer
+    nsep_sheet_indices = ctypes_nullptr
     nsep_kappa = ctypes_int(kappa)
 
     clib_nsep_func.argtypes = [
         type(nsep_D),  # D
-        np.ctypeslib.ndpointer(dtype=numpy_complex,
-                               ndim=1, flags='C'),  # q
-        np.ctypeslib.ndpointer(dtype=ctypes_double,
-                               ndim=1, flags='C'),  # t
+        numpy_complex_arr_ptr,  # q
+        numpy_double_arr_ptr,  # t
         ctypes.POINTER(ctypes_uint),  # K_ptr
-        np.ctypeslib.ndpointer(dtype=numpy_complex,
-                               ndim=1, flags='C'),  # main_spec
+        numpy_complex_arr_ptr,  # main_spec
         ctypes.POINTER(ctypes_uint),  # M_ptr
-        np.ctypeslib.ndpointer(dtype=numpy_complex,
-                               ndim=1, flags='C'),  # aux_spec
+        numpy_complex_arr_ptr,  # aux_spec
         type(nsep_sheet_indices),  # sheet indices
         type(nsep_kappa),  # kappa
         ctypes.POINTER(NsepOptionsStruct)]  # options ptr

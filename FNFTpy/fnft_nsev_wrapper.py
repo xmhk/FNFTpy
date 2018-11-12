@@ -176,7 +176,6 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
     fnft_clib = ctypes.CDLL(get_lib_path())
     clib_nsev_func = fnft_clib.fnft_nsev
     clib_nsev_func.restype = ctypes_int
-    nsev_nullptr = ctypes.POINTER(ctypes.c_int)()
     nsev_D = ctypes_uint(D)
     nsev_M = ctypes_uint(M)
     nsev_K = ctypes_uint(K)
@@ -192,10 +191,8 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
     #
     # discrete spectrum -> reflection coefficient and / or residues
     #
-    nsev_bstype = np.ctypeslib.ndpointer(dtype=numpy_complex,
-                                             ndim=1, flags='C')
-    nsev_dstype = np.ctypeslib.ndpointer(dtype=numpy_complex,
-                                             ndim=1, flags='C')
+    nsev_bstype = numpy_complex_arr_ptr
+    nsev_dstype = numpy_complex_arr_ptr
     if (options.discspec_type==0) or (options.discspec_type==1):
         # norming consts OR residues
         nsev_discspec = np.zeros(K, dtype=numpy_complex)
@@ -206,10 +203,10 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
         nsev_boundstates = np.zeros(K, dtype=numpy_complex)
     else:
         # 3 or any other option: skip discrete spec -> pass NULL
-        nsev_discspec = nsev_nullptr
-        nsev_boundstates = nsev_nullptr
-        nsev_bstype = type(nsev_nullptr)
-        nsev_dstype = type(nsev_nullptr)
+        nsev_discspec = ctypes_nullptr
+        nsev_boundstates = ctypes_nullptr
+        nsev_bstype = type(ctypes_nullptr)
+        nsev_dstype = type(ctypes_nullptr)
     #
     # continuous spectrum -> reflection coefficient and / or a,b
     #
@@ -227,19 +224,16 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
         nsev_cont = np.zeros(3 * M, dtype=numpy_complex)
     else:
         # 3 or any other option: skip continuous spectrum -> pass NULL
-        nsev_cont = nsev_nullptr
-        nsev_cstype = type(nsev_nullptr)
+        nsev_cont = ctypes_nullptr
+        nsev_cstype = type(ctypes_nullptr)
 
     clib_nsev_func.argtypes = [
         type(nsev_D),  # D
-        np.ctypeslib.ndpointer(dtype=numpy_complex,
-                               ndim=1, flags='C'),  # q
-        np.ctypeslib.ndpointer(dtype=ctypes_double,
-                               ndim=1, flags='C'),  # t
+        numpy_complex_arr_ptr,  # q
+        numpy_double_arr_ptr,  # t
         type(nsev_M),  # M
         nsev_cstype,  # cont
-        np.ctypeslib.ndpointer(dtype=ctypes_double,
-                               ndim=1, flags='C'),  # xi
+        numpy_double_arr_ptr,  # xi
         ctypes.POINTER(ctypes_uint),  # K_ptr
         nsev_bstype,  # boundstates
         nsev_dstype,  # normconst res
