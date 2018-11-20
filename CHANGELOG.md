@@ -2,6 +2,11 @@
 
 ## 0.2.1
 
+### 20.11.2018
+  * moved example functions into separate folder
+  * added testfunctions to test basic interaction with FNFT
+  * refactoring according to PEP8
+
 ### 08.11.2018
   * fix check_return_code output warning
   * re-structuring of nsev_inverse_wrapper decision tree (bound states given? contspec given?). 

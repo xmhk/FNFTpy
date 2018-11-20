@@ -10,7 +10,7 @@ visit FNFT's github page: [https://github.com/FastNFT](https://github.com/FastNF
 
 ## current state - access functions from FNFT version 0.2.1
 
-last update of FNFTpy: 08.11.2018
+last update of FNFTpy: 20.11.2018
 
 for changes see [Changelog](CHANGELOG.md)
 
