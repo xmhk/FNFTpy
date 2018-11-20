@@ -6,6 +6,7 @@
   * moved example functions into separate folder
   * added testfunctions to test basic interaction with FNFT
   * refactoring according to PEP8
+  * option structs now have unified __repr__ and __print__ functions
 
 ### 08.11.2018
   * fix check_return_code output warning
