@@ -33,7 +33,7 @@ from .options_handling import get_nsev_inverse_options
 
 
 def nsev_inverse(xivec, tvec, contspec, bound_states, discspec,
-                  dis=None, cst=None, csim=None, dst=None, max_iter=None, osf=None, kappa=1):
+                 dis=None, cst=None, csim=None, dst=None, max_iter=None, osf=None, kappa=1):
     """Calculate the  Inverse Nonlinear Fourier Transform for the Nonlinear Schroedinger equation with vanishing boundaries.
 
     This function is intended to be 'clutter-free', which means it automatically calculates some variables
@@ -108,7 +108,7 @@ def nsev_inverse(xivec, tvec, contspec, bound_states, discspec,
     else:
         K = 0
 
-    if contspec is None: # no continuous spectrum
+    if contspec is None:  # no continuous spectrum
         M = 0
     options = get_nsev_inverse_options(dis, cst, csim, dst, max_iter, osf)
     rdict = nsev_inverse_wrapper(M, contspec, xivec[0], xivec[-1], K, bound_states, discspec, D, tvec[0], tvec[-1],
@@ -156,7 +156,7 @@ def nsev_inverse_wrapper(M, contspec, Xi1, Xi2, K, bound_states,
     nsev_Xi[1] = Xi2
     nsev_K = ctypes_uint(K)
 
-    if K>0:  # at least one bound states
+    if K > 0:  # at least one bound states
         nsev_boundstates = np.zeros(K, dtype=numpy_complex)
         nsev_boundstates[:] = bound_states[:]
         nsev_discspec = np.zeros(K, dtype=numpy_complex)
@@ -168,10 +168,10 @@ def nsev_inverse_wrapper(M, contspec, Xi1, Xi2, K, bound_states,
         nsev_discspec = ctypes_nullptr
         nsev_bstype = type(ctypes_nullptr)
         nsev_dstype = type(ctypes_nullptr)
-    if M>0: # continuous spectrum
+    if M > 0:  # continuous spectrum
         nsev_contspec = np.zeros(M, dtype=numpy_complex)
         nsev_contspec[:] = contspec[:]
-        nsev_cstype = numpy_complex_arr_ptr # contspec
+        nsev_cstype = numpy_complex_arr_ptr  # contspec
     else:
         nsev_contspec = ctypes_nullptr
         nsev_cstype = type(ctypes_nullptr)
@@ -185,7 +185,7 @@ def nsev_inverse_wrapper(M, contspec, Xi1, Xi2, K, bound_states,
         type(nsev_M),
         nsev_cstype,  # contspec type
         numpy_double_arr_ptr,  # xi
-        type(nsev_K),  
+        type(nsev_K),
         nsev_bstype,  # boundstates type
         nsev_dstype,  # normconstants or residues type
         type(nsev_D),

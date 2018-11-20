@@ -29,6 +29,7 @@ Christoph Mahnke, 2018
 
 import numpy as np
 
+
 def check_array(value, expectedval, eps=1e-10):
     """Test array == expectedarray  (norm < eps)"""
     return np.sum(np.abs(value - expectedval) ** 2) < eps

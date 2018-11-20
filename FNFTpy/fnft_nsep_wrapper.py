@@ -27,7 +27,6 @@ Christoph Mahnke, 2018
 
 """
 
-
 from .typesdef import *
 from .auxiliary import get_lib_path, check_return_code
 from .options_handling import print_nsep_options, get_nsep_options
@@ -194,5 +193,5 @@ def nsep_wrapper(D, q, T1, T2, kappa,
         'main': nsep_main_spec[0:nsep_K.value],
         'M': nsep_M.value,
         'aux': nsep_aux_spec[0:nsep_M.value],
-        'options' : repr(options)}
+        'options': repr(options)}
     return rdict

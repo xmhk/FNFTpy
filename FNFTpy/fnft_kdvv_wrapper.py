@@ -27,9 +27,8 @@ Christoph Mahnke, 2018
 
 """
 
-
 from .typesdef import *
-from .options_handling import get_kdvv_options, print_kdvv_options
+from .options_handling import get_kdvv_options
 from .auxiliary import get_lib_path, check_return_code
 
 
@@ -166,5 +165,5 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
         ctypes_nullptr,
         ctypes.byref(options))
     check_return_code(rv)
-    rdict = {'return_value': rv, 'cont': kdvv_cont, 'options':repr(options)}
+    rdict = {'return_value': rv, 'cont': kdvv_cont, 'options': repr(options)}
     return rdict

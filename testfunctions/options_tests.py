@@ -40,11 +40,14 @@ class FnftpyOptionsTest(unittest.TestCase):
         self.expected = {
             'kdvv': [KdvvOptionsStruct, get_kdvv_options, "'discretization' : 17"],
             'nsep': [NsepOptionsStruct, get_nsep_options,
-                     "'localization' : 2, 'filtering' : 2, 'bounding_box' : [-inf inf -inf inf ], 'max_evals' : 20, 'discretization' : 4, 'normalization_flag' : 1"],
+                     "'localization' : 2, 'filtering' : 2, 'bounding_box' : [-inf inf -inf inf ], 'max_evals' : 20," \
+                     + " 'discretization' : 4, 'normalization_flag' : 1"],
             'nsev': [NsevOptionsStruct, get_nsev_options,
-                     "'bound_state_filtering' : 2, 'bound_state_localization' : 2, 'niter' : 10, 'Dsub' : 0, 'discspec_type' : 0, 'contspec_type' : 0, 'normalization_flag' : 1, 'discretization' : 11"],
+                     "'bound_state_filtering' : 2, 'bound_state_localization' : 2, 'niter' : 10, 'Dsub' : 0, " \
+                     + "'discspec_type' : 0, 'contspec_type' : 0, 'normalization_flag' : 1, 'discretization' : 11"],
             'nsev_inverse': [NsevInverseOptionsStruct, get_nsev_inverse_options,
-                             "'discretization' : 4, 'contspec_type' : 0, 'contspec_inversion_method' : 0, 'discspec_type' : 0, 'max_iter' : 100, 'oversampling_factor' : 8"]
+                             "'discretization' : 4, 'contspec_type' : 0, 'contspec_inversion_method' : 0, " \
+                             + "'discspec_type' : 0, 'max_iter' : 100, 'oversampling_factor' : 8"]
         }
 
     def test_get_options_type(self):

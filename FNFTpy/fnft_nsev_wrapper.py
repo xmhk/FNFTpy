@@ -27,10 +27,9 @@ Christoph Mahnke, Shrinivas Chimmalgi 2018
 
 """
 
-
 from .typesdef import *
 from .auxiliary import get_lib_path, check_return_code
-from .options_handling import print_nsev_options, get_nsev_options
+from .options_handling import get_nsev_options
 
 
 def nsev(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=None,
@@ -193,7 +192,7 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
     #
     nsev_bstype = numpy_complex_arr_ptr
     nsev_dstype = numpy_complex_arr_ptr
-    if (options.discspec_type==0) or (options.discspec_type==1):
+    if (options.discspec_type == 0) or (options.discspec_type == 1):
         # norming consts OR residues
         nsev_discspec = np.zeros(K, dtype=numpy_complex)
         nsev_boundstates = np.zeros(K, dtype=numpy_complex)
@@ -212,14 +211,14 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
     #
     nsev_cstype = np.ctypeslib.ndpointer(dtype=numpy_complex,
 
-                               ndim=1, flags='C')
+                                         ndim=1, flags='C')
     if options.contspec_type == 0:
         # reflection coeff.
         nsev_cont = np.zeros(M, dtype=numpy_complex)
     elif options.contspec_type == 1:
         # a and b
         nsev_cont = np.zeros(2 * M, dtype=numpy_complex)
-    elif options.contspec_type ==2:
+    elif options.contspec_type == 2:
         # a and b AND reflection coeff.
         nsev_cont = np.zeros(3 * M, dtype=numpy_complex)
     else:

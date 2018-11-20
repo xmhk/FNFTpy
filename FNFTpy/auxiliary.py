@@ -124,6 +124,7 @@ def check_value(val, vmin, vmax, vtype=int):
     if not (vmin <= val <= vmax):
         raise ValueError("Value Error: variable out of range")
 
+
 def check_return_code(rv):
     """Check the return code of a library call. Give warning if Code is not 0.
 
@@ -135,5 +136,5 @@ def check_return_code(rv):
     if rv == 0:
         pass
     else:
-        wstring = "An error occured when calling FNFT: error code %d"%rv
+        wstring = "An error occured when calling FNFT: error code %d" % rv
         warn(wstring)

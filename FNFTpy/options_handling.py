@@ -27,7 +27,6 @@ Christoph Mahnke, Shrinivas Chimmalgi, 2018
 
 """
 
-
 from .auxiliary import get_lib_path
 from .typesdef import *
 
@@ -141,7 +140,6 @@ def print_nsep_options(options=None):
     print(options)
 
 
-
 def get_nsep_options(loc=None, filt=None, bb=None, maxev=None, dis=None, nf=None):
     """Get a NsepOptionsStruct struct for use with nsep_wrapper.
 
@@ -251,7 +249,6 @@ def print_nsev_options(options=None):
         options = fnft_nsev_default_options_wrapper()
     print("nsev options:")
     print(options)
-
 
 
 def get_nsev_options(bsf=None, bsl=None, niter=None, Dsub=None, dst=None, cst=None, nf=None, dis=None):
@@ -374,7 +371,6 @@ def print_nsev_inverse_options(options=None):
     print(options)
 
 
-
 def get_nsev_inverse_options(dis=None, cst=None, csim=None, dst=None, max_iter=None, osf=None):
     """Get a NsevInverseOptionsStruct for use with nsev_inverse_wrapper.
 
@@ -445,7 +441,3 @@ def get_nsev_inverse_options(dis=None, cst=None, csim=None, dst=None, max_iter=N
     if osf is not None:
         options.oversampling_factor = osf
     return options
-
-
-
-

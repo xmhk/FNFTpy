@@ -27,7 +27,6 @@ Christoph Mahnke, 2018
 
 """
 
-
 import ctypes
 import numpy as np
 
@@ -41,37 +40,39 @@ ctypes_double = ctypes.c_double  # FNFT_REAL
 numpy_complex = np.complex128  # FNFT_COMPLEX for Arrays (C-double)
 numpy_double = np.double  # FNFT_REAL for Arrays (C-double)
 numpy_complex_arr_ptr = np.ctypeslib.ndpointer(dtype=numpy_complex,
-                               ndim=1, flags='C') # pointer for C complex arrays
+                                               ndim=1, flags='C')  # pointer for C complex arrays
 numpy_double_arr_ptr = np.ctypeslib.ndpointer(dtype=ctypes_double,
-                               ndim=1, flags='C') # pointer for C double arrays
+                                              ndim=1, flags='C')  # pointer for C double arrays
 
 ctypes_nullptr = ctypes.POINTER(ctypes.c_int)()
+
+
 #
 # option structs for interfacing C
 #
 class GenericOptionsStruct(ctypes.Structure):
     """return options as string, separated by commata"""
+
     def __repr__(self):
-        dummy = (ctypes_double * 4)(0,0,0,0)  # 4 item C array as reference
+        dummy = (ctypes_double * 4)(0, 0, 0, 0)  # 4 item C array as reference
         s = ""
         for f in self._fields_:
             # ctype arrays don't have a readable repr of their contents ...
             # so they have to be handled differently
-            if f[1]==type(dummy):
-                tmps = "%s : ["%repr(f[0])
+            if f[1] == type(dummy):
+                tmps = "%s : [" % repr(f[0])
                 for arritem in self.__getattribute__(f[0]):
-                    tmps+=repr(arritem)+" "
-                s+=tmps+"], "
+                    tmps += repr(arritem) + " "
+                s += tmps + "], "
             # standard case: c int / uint
             else:
                 s += "%s : %s, " % (repr(f[0]), repr(self.__getattribute__(f[0])))
-        return s[0:-2] #-2: drop the last comma
+        return s[0:-2]  # -2: drop the last comma
 
     def __str__(self):
         """return options as string, separated by newlines"""
-        s = self.__repr__().replace(',','\n')
+        s = self.__repr__().replace(',', '\n')
         return s
-
 
 
 class KdvvOptionsStruct(GenericOptionsStruct):
@@ -84,7 +85,6 @@ class KdvvOptionsStruct(GenericOptionsStruct):
     """
     _fields_ = [
         ("discretization", ctypes_int)]
-
 
 
 class NsepOptionsStruct(GenericOptionsStruct):
@@ -108,7 +108,6 @@ class NsepOptionsStruct(GenericOptionsStruct):
         ("max_evals", ctypes_uint),
         ("discretization", ctypes_int),
         ("normalization_flag", ctypes_int32)]
-
 
 
 class NsevOptionsStruct(GenericOptionsStruct):
@@ -158,8 +157,3 @@ class NsevInverseOptionsStruct(GenericOptionsStruct):
         ("discspec_type", ctypes_int),
         ("max_iter", ctypes_uint),
         ("oversampling_factor", ctypes_uint)]
-
-
-
-
-
