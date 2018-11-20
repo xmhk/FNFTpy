@@ -190,8 +190,8 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
     #
     # discrete spectrum -> reflection coefficient and / or residues
     #
-    nsev_bstype = numpy_complex_arr_ptr
-    nsev_dstype = numpy_complex_arr_ptr
+    nsev_bound_states_type = numpy_complex_arr_ptr
+    nsev_disc_spec_type = numpy_complex_arr_ptr
     if (options.discspec_type == 0) or (options.discspec_type == 1):
         # norming consts OR residues
         nsev_discspec = np.zeros(K, dtype=numpy_complex)
@@ -204,14 +204,13 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
         # 3 or any other option: skip discrete spec -> pass NULL
         nsev_discspec = ctypes_nullptr
         nsev_boundstates = ctypes_nullptr
-        nsev_bstype = type(ctypes_nullptr)
-        nsev_dstype = type(ctypes_nullptr)
+        nsev_bound_states_type = type(ctypes_nullptr)
+        nsev_disc_spec_type = type(ctypes_nullptr)
     #
     # continuous spectrum -> reflection coefficient and / or a,b
     #
-    nsev_cstype = np.ctypeslib.ndpointer(dtype=numpy_complex,
-
-                                         ndim=1, flags='C')
+    nsev_cont_spec_type = np.ctypeslib.ndpointer(dtype=numpy_complex,
+                                                 ndim=1, flags='C')
     if options.contspec_type == 0:
         # reflection coeff.
         nsev_cont = np.zeros(M, dtype=numpy_complex)
@@ -224,18 +223,18 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
     else:
         # 3 or any other option: skip continuous spectrum -> pass NULL
         nsev_cont = ctypes_nullptr
-        nsev_cstype = type(ctypes_nullptr)
+        nsev_cont_spec_type = type(ctypes_nullptr)
 
     clib_nsev_func.argtypes = [
         type(nsev_D),  # D
         numpy_complex_arr_ptr,  # q
         numpy_double_arr_ptr,  # t
         type(nsev_M),  # M
-        nsev_cstype,  # cont
+        nsev_cont_spec_type,  # cont
         numpy_double_arr_ptr,  # xi
         ctypes.POINTER(ctypes_uint),  # K_ptr
-        nsev_bstype,  # boundstates
-        nsev_dstype,  # normconst res
+        nsev_bound_states_type,  # boundstates
+        nsev_disc_spec_type,  # normconst res
         type(nsev_kappa),  # kappa
         ctypes.POINTER(NsevOptionsStruct)]  # options ptr
 
