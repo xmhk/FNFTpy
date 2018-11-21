@@ -5,6 +5,7 @@
 ### 21.11.2018
   * small changes in documentation
   * small changes in examples shown in README
+  
 ### 20.11.2018
   * moved example functions into separate folder
   * added testfunctions to test basic interaction with FNFT
