@@ -10,7 +10,7 @@ visit FNFT's github page: [https://github.com/FastNFT](https://github.com/FastNF
 
 ## current state - access functions from FNFT version 0.2.1
 
-last update of FNFTpy: 20.11.2018
+last update of FNFTpy: 21.11.2018
 
 for changes see [Changelog](CHANGELOG.md)
 
@@ -22,7 +22,7 @@ for changes see [Changelog](CHANGELOG.md)
     * minimal example:
         ```
         import numpy as np
-        from FNFTpy import kdvv, print_kdvv_options
+        from FNFTpy import kdvv
         print("\n\nkdvv example")
     
         # set values
@@ -64,7 +64,7 @@ for changes see [Changelog](CHANGELOG.md)
     * minimal example:
       ```
       import numpy as np
-      from FNFTpy import nsep, print_nsep_options
+      from FNFTpy import nsep
       
       # set values
       D = 256
@@ -104,7 +104,7 @@ for changes see [Changelog](CHANGELOG.md)
     * minimal example:
         ```
         import numpy as np
-        from FNFTpy import nsev, print_nsev_options
+        from FNFTpy import nsev
     
         # set values
         D = 256
