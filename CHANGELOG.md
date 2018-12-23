@@ -1,5 +1,11 @@
 ## changelog
 
+## 0.2.2
+
+### 23.12.2018
+
+  * checked compliance with FNFT 0.2.2: no changes in code
+
 ## 0.2.1
 
 ### 21.11.2018
