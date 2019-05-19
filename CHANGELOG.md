@@ -2,6 +2,9 @@
 
 ## 0.2.1
 
+## 19.05.2019
+  * in dev: numerical value of nsep test output changed slightly - adapted test
+
 ### 21.11.2018
   * small changes in documentation
   * small changes in examples shown in README

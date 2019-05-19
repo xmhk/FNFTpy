@@ -52,7 +52,8 @@ suite = unittest.TestSuite([options_suite,
                             nsev_suite1, nsev_suite2,
                             nsev_inverse_suite1,
                             nsev_inverse_suite2,
-                            nsev_inverse_suite3])
+                            nsev_inverse_suite3
+     ])
 
 print_fnft_version()
 print("\n\nthe FNFT error is intended: just to check that it is catched without crashing ...\n\n")
