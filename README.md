@@ -185,7 +185,12 @@ for changes see [Changelog](CHANGELOG.md)
  
 # Setup
 
- * Add FNFTpy folder to your Python path.
+ * From within the project root folder
+     ```
+     pip install .     # Install system wide
+     pip install -e .  # Install in editable/development mode
+     ```
+
  * Of course, you need a compiled version of the FNFT C-library. See the
   [documentation for FNFT](https://github.com/FastNFT/FNFT) on how to build 
    the library on your device. 
