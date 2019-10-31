@@ -2,6 +2,12 @@
 
 ## 0.2.2
 
+
+### 31.10.2019
+
+  * introduced setup.py for installation with pip
+
+
 ### 23.12.2018
 
   * checked compliance with FNFT 0.2.2: no changes in code

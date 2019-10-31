@@ -10,7 +10,7 @@ visit FNFT's github page: [https://github.com/FastNFT](https://github.com/FastNF
 
 ## current state - access functions from FNFT version 0.2.2
 
-last update of FNFTpy: 23.12.2018
+last update of FNFTpy: 31.10.2019
 
 for changes see [Changelog](CHANGELOG.md)
 
@@ -184,8 +184,15 @@ for changes see [Changelog](CHANGELOG.md)
  * additional Python module: NumPy (python-numpy)  
  
 # Setup
+ * you may install FNFTpy locally using **pip**:
+    * From within the project root folder
+     ```
+     pip install .     # Install system wide
+     pip install -e .  # Install in editable/development mode
+     ```
 
- * Add FNFTpy folder to your Python path.
+ * **alternatively**, you may add the FNFTpy folder to your Python path.
+
  * Of course, you need a compiled version of the FNFT C-library. See the
   [documentation for FNFT](https://github.com/FastNFT/FNFT) on how to build 
    the library on your device. 
