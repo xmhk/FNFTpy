@@ -235,3 +235,4 @@ FNFTpy is provided under the terms of the [GNU General Public License, version 2
 
     * Christoph Mahnke (chmhnk_at_googlemail_dot_com)
     * Shrinivas Chimmalgi
+    * Simone Gaiarin / simgunz [https://github.com/simgunz]
