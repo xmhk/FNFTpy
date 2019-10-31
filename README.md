@@ -185,7 +185,7 @@ for changes see [Changelog](CHANGELOG.md)
  
 # Setup
  * you may install FNFTpy locally using **pip**:
-    * From within the project root folder
+   From within the project root folder run
      ```
      pip install .     # Install system wide
      pip install -e .  # Install in editable/development mode
