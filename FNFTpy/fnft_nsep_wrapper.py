@@ -33,7 +33,7 @@ from .options_handling import print_nsep_options, get_nsep_options
 
 
 def nsep(q, T1, T2, kappa=1, loc=None, filt=None, bb=None,
-         maxev=None, dis=None, nf=None):
+         maxev=None, dis=None, nf=None,  floq_range=None, ppspine=None, dsub=None, tol=None):
     """Calculate the Nonlinear Fourier Transform for the Nonlinear Schroedinger equation with periodic boundaries.
 
     This function is intended to be 'convenient', which means it
@@ -100,6 +100,14 @@ def nsep(q, T1, T2, kappa=1, loc=None, filt=None, bb=None,
         * 0 = off
         * 1 = on
 
+    * floq_range : Floquet Range
+
+    * ppspin : points per spine
+
+    * dsub : DSUB
+
+    * tol : Tolerance
+
     Returns:
 
     * rdict : dictionary holding the fields (depending on options)
@@ -113,7 +121,8 @@ def nsep(q, T1, T2, kappa=1, loc=None, filt=None, bb=None,
 
         """
     D = len(q)
-    options = get_nsep_options(loc=loc, filt=filt, bb=bb, maxev=maxev, dis=dis, nf=nf)
+    options = get_nsep_options(loc=loc, filt=filt, bb=bb, maxev=maxev, dis=dis, nf=nf,
+                               floq_range=floq_range, ppspine=ppspline, dsub=dsub, tol=tol)
     return nsep_wrapper(D, q, T1, T2,
                         kappa, options)
 

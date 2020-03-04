@@ -140,7 +140,7 @@ def print_nsep_options(options=None):
     print(options)
 
 
-def get_nsep_options(loc=None, filt=None, bb=None, maxev=None, dis=None, nf=None):
+def get_nsep_options(loc=None, filt=None, bb=None, maxev=None, dis=None, nf=None, floq_range=None, ppspine=None, dsub=None, tol=None):
     """Get a NsepOptionsStruct struct for use with nsep_wrapper.
 
     When called without additional optional argument, the default values from FNFT are used.
@@ -189,6 +189,14 @@ def get_nsep_options(loc=None, filt=None, bb=None, maxev=None, dis=None, nf=None
         * 0 = off
         * 1 = on
 
+    * floq_range : Floquet Range
+
+    * ppspin : points per spine
+
+    * dsub : DSUB
+
+    * tol : Tolerance
+
     Returns:
 
     * options : NsepOptionsStruct
@@ -210,6 +218,15 @@ def get_nsep_options(loc=None, filt=None, bb=None, maxev=None, dis=None, nf=None
         options.bounding_box[3] = bb[3]
     if maxev is not None:
         options.max_evals = maxev
+    if floq_range is not None:
+        options.floquet_range[0] = floq_range[0]
+        options.floquet_range[1] = floq_range[1]
+    if ppspine is not None:
+        options.ppspline = ppspline
+    if dsub is not None:
+        options.dsub = dsub
+    if tol is not None:
+        options.tol = tol
     return options
 
 

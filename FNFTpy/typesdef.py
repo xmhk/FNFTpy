@@ -54,12 +54,13 @@ class GenericOptionsStruct(ctypes.Structure):
     """return options as string, separated by commata"""
 
     def __repr__(self):
-        dummy = (ctypes_double * 4)(0, 0, 0, 0)  # 4 item C array as reference
+        dummy4 = (ctypes_double * 4)(0, 0, 0, 0)  # 4 item C array as reference
+        dummy2 = (ctypes_double * 2)(0, 0)  # 4 item C array as reference
         s = ""
         for f in self._fields_:
             # ctype arrays don't have a readable repr of their contents ...
             # so they have to be handled differently
-            if f[1] == type(dummy):
+            if (f[1] == type(dummy4)) or (f[1] == type(dummy2)):
                 tmps = "%s : [" % repr(f[0])
                 for arritem in self.__getattribute__(f[0]):
                     tmps += repr(arritem) + " "
@@ -107,11 +108,11 @@ class NsepOptionsStruct(GenericOptionsStruct):
         ("bounding_box", ctypes_double * 4),
         ("max_evals", ctypes_uint),
         ("discretization", ctypes_int),
-        ("normalization_flag", ctypes_int32),
-        ("floquet_range", ctypes_double * 2),
+        ("normalization_flag", ctypes_int),
+        ("floquet_range" , ctypes_double * 2),
         ("points_per_spine", ctypes_uint),
         ("Dsub", ctypes_uint),
-        ("tol", ctypes_double),
+        ("tol", ctypes_double)
         ]
 
 class NsevOptionsStruct(GenericOptionsStruct):
