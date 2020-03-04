@@ -107,8 +107,12 @@ class NsepOptionsStruct(GenericOptionsStruct):
         ("bounding_box", ctypes_double * 4),
         ("max_evals", ctypes_uint),
         ("discretization", ctypes_int),
-        ("normalization_flag", ctypes_int32)]
-
+        ("normalization_flag", ctypes_int32),
+        ("floquet_range", ctypes_double * 2),
+        ("points_per_spine", ctypes_uint),
+        ("Dsub", ctypes_uint),
+        ("tol", ctypes_double),
+        ]
 
 class NsevOptionsStruct(GenericOptionsStruct):
     """Ctypes options struct for interfacing fnft_nsev.
