@@ -46,8 +46,7 @@ def get_lib_path():
         * libstr = "/usr/local/lib/libfnft.so"  # example for linux
 
     """
-    #libstr = "/usr/local/lib/libfnft.so.0.2.2-dev-nsep"
-    libstr = '/home/ch/Downloads/FNFT/lib/libfnft.so.0.2.2-dev'
+    libstr = "/usr/local/lib/libfnft.so.0.2.2-dev"
     return libstr
 
 

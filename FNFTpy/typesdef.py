@@ -100,6 +100,10 @@ class NsepOptionsStruct(GenericOptionsStruct):
     * max_evals
     * discretization
     * normalization_flag
+    * floquet_range
+    * points_per_spine
+    * dsub
+    * tolerance
 
 
     """

@@ -21,7 +21,7 @@ sys.path.insert(0, os.path.abspath('../../../'))
 # -- Project information -----------------------------------------------------
 
 project = 'FNFTpy'
-copyright = '2018, Christoph Mahnke'
+copyright = '2018-2020, Christoph Mahnke'
 author = 'Christoph Mahnke'
 
 # The short X.Y version

@@ -23,7 +23,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 Contributors:
 
-Christoph Mahnke, 2018, 2019
+Christoph Mahnke, 2018-2020
 
 """
 
@@ -100,13 +100,13 @@ def nsep(q, T1, T2, kappa=1, loc=None, filt=None, bb=None,
         * 0 = off
         * 1 = on
 
-    * floq_range : Floquet Range
+    * floq_range : array of two reals defining Floquet range, default = [-1, 1]
 
-    * ppspin : points per spine
+    * ppspin : points per spine: defining the grid between interval set by floq_range
 
-    * dsub : DSUB
+    * dsub : approximate number of samples for SUBSAMPLE AND REFINE  localization
 
-    * tol : Tolerance
+    * tol : Tolerance, default = -1
 
     Returns:
 

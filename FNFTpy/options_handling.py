@@ -23,7 +23,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 Contributors:
 
-Christoph Mahnke, Shrinivas Chimmalgi, 2018, 2019
+Christoph Mahnke, Shrinivas Chimmalgi, 2018-2020
 
 """
 
@@ -189,13 +189,13 @@ def get_nsep_options(loc=None, filt=None, bb=None, maxev=None, dis=None, nf=None
         * 0 = off
         * 1 = on
 
-    * floq_range : Floquet Range
+    * floq_range : array of two reals defining Floquet range, default = [-1, 1]
 
-    * ppspin : points per spine
+    * ppspine : points per spine: defining the grid between interval set by floq_range
 
-    * dsub : DSUB
+    * dsub : approximate number of samples for SUBSAMPLE AND REFINE  localization
 
-    * tol : Tolerance
+    * tol : Tolerance, default = -1
 
     Returns:
 
@@ -222,9 +222,9 @@ def get_nsep_options(loc=None, filt=None, bb=None, maxev=None, dis=None, nf=None
         options.floquet_range[0] = floq_range[0]
         options.floquet_range[1] = floq_range[1]
     if ppspine is not None:
-        options.ppspline = ppspline
+        options.points_per_spine = ppspine
     if dsub is not None:
-        options.dsub = dsub
+        options.Dsub = dsub
     if tol is not None:
         options.tol = tol
     return options

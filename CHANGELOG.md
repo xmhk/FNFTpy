@@ -2,6 +2,8 @@
 
 ## 0.2.2
 
+### 05.03.2020
+   * adapted small changes in NSEP options/API from FNFT
 
 ### 31.10.2019
 
