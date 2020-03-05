@@ -54,6 +54,7 @@ class GenericOptionsStruct(ctypes.Structure):
     """return options as string, separated by commata"""
 
     def __repr__(self):
+        # make dummy c arrays: each array of a certain length is a different type
         dummy4 = (ctypes_double * 4)(0, 0, 0, 0)  # 4 item C array as reference
         dummy2 = (ctypes_double * 2)(0, 0)  # 4 item C array as reference
         s = ""

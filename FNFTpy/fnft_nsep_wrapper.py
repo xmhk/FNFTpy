@@ -122,7 +122,7 @@ def nsep(q, T1, T2, kappa=1, loc=None, filt=None, bb=None,
         """
     D = len(q)
     options = get_nsep_options(loc=loc, filt=filt, bb=bb, maxev=maxev, dis=dis, nf=nf,
-                               floq_range=floq_range, ppspine=ppspline, dsub=dsub, tol=tol)
+                               floq_range=floq_range, ppspine=ppspine, dsub=dsub, tol=tol)
     return nsep_wrapper(D, q, T1, T2,
                         kappa, options)
 
