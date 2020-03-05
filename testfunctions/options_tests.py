@@ -39,7 +39,8 @@ class FnftpyOptionsTest(unittest.TestCase):
     def setUp(self):
         # remark: third element of lists are one singe string each (print(repr(opts))). They may look confusing
         self.expected = dict(kdvv=[KdvvOptionsStruct, get_kdvv_options, "'discretization' : 17"],
-                             nsep=[NsepOptionsStruct, get_nsep_options,
+                             nsep=[NsepOptionsStruct, get_nsep_options, "'localization' : 2, 'filtering' : 2, 'bounding_box' : [-inf inf -inf inf ], 'max_evals' : 20, 'discretization' : 4, 'normalization_flag' : 1, 'floquet_range' : [-1.0 1.0 ], 'points_per_spine' : 2, 'Dsub' : 0, 'tol' : -1.0"
+
                                     ],
 
                              nsev=[NsevOptionsStruct, get_nsev_options,
