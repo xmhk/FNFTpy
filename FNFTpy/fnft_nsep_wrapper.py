@@ -108,7 +108,7 @@ def nsep(q, T1, T2, kappa=1, loc=None, filt=None, bb=None,
 
     * tol : Tolerance, for root search refinement. Can be either positibe number or (default =) -1 (automatically)
 
-    
+
     Returns:
 
     * rdict : dictionary holding the fields (depending on options)
