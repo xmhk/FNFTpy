@@ -1,5 +1,10 @@
 ## changelog
 
+## 0.3.0
+### 07.03.2020
+    * checked compatibility with FNFT 0.3.0
+    * merge development into master
+
 ## 0.2.2
 
 ### 05.03.2020
