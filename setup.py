@@ -35,7 +35,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="FNFTpy",
-    version="0.2.2",
+    version="0.3.0",
     author="Christoph Mahnke",
     author_email="",
     description=("A python wrapper for FNFT, a C library to calculate the "
