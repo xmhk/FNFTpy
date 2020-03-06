@@ -193,9 +193,9 @@ def get_nsep_options(loc=None, filt=None, bb=None, maxev=None, dis=None, nf=None
 
     * ppspine : points per spine: defining the grid between interval set by floq_range
 
-    * dsub : approximate number of samples for SUBSAMPLE AND REFINE  localization
+    * dsub : approximate number of samples for 'subsample and refine' localization
 
-    * tol : Tolerance, for root search refinement. Can be either positibe number or (default =) -1 (automatically)
+    * tol : Tolerance, for root search refinement. Can be either positibe number or (default =-1 (=auto))
 
     Returns:
 
