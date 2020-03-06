@@ -195,7 +195,7 @@ def get_nsep_options(loc=None, filt=None, bb=None, maxev=None, dis=None, nf=None
 
     * dsub : approximate number of samples for SUBSAMPLE AND REFINE  localization
 
-    * tol : Tolerance, default = -1
+    * tol : Tolerance, for root search refinement. Can be either positibe number or (default =) -1 (automatically)
 
     Returns:
 
