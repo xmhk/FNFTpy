@@ -23,7 +23,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 Contributors:
 
-Christoph Mahnke, 2018
+Christoph Mahnke, 2018-2020
 
 """
 
@@ -56,5 +56,5 @@ suite = unittest.TestSuite([options_suite,
      ])
 
 print_fnft_version()
-print("\n\nthe FNFT error is intended: just to check that it is catched without crashing ...\n\n")
+print("\n\nthe FNFT error ('FNFT Error: Sanity check failed (Neither contspec nor discspec provided.)') is intended: just to check that it is catched without crashing ...\n\n")
 t1 = unittest.TextTestRunner(buffer=True, verbosity=1).run(suite)
