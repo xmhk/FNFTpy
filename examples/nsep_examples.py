@@ -34,12 +34,11 @@ def nsep_example():
     """Mimics the C example for calling fnft_nsep."""
     print("\n\nnsep example")
     # set values
-    D = 256
-    dt = 2 * np.pi / D
-    tvec = np.arange(D) * dt
+    D = 257
+    tvec = np.linspace(0, 2*np.pi, D)
     q = np.exp(2.0j * tvec)
     # call function
-    res = nsep(q, 0, 2 * np.pi, bb=[-2, 2, -2, 2], filt=1)
+    res = nsep(q, 0, 2 * np.pi, bb=[-2, 2, -2, 2], filt=1, kappa=1)
     # print results
     print("\n----- options used ----")
     print(res['options'])

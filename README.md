@@ -65,16 +65,13 @@ for changes see [Changelog](CHANGELOG.md)
       ```
       import numpy as np
       from FNFTpy import nsep
-      
+      print("\n\nnsep example")
       # set values
-      D = 256
-      dt = 2 * np.pi / D
-      tvec = np.arange(D) * dt
+      D = 257
+      tvec = np.linspace(0, 2*np.pi, D)
       q = np.exp(2.0j * tvec)
- 
       # call function
-      res = nsep(q, 0, 2 * np.pi, bb=[-2, 2, -2, 2], filt=1)
-
+      res = nsep(q, 0, 2 * np.pi, bb=[-2, 2, -2, 2], filt=1, kappa=1)
       # print results
       print("\n----- options used ----")
       print(res['options'])
@@ -84,11 +81,12 @@ for changes see [Changelog](CHANGELOG.md)
       print('main spectrum')
       for i in range(res['K']):
           print("%d :  %.6f  %.6fj" % (i, np.real(res['main'][i]),
-                                       np.imag(res['main'][i])))
+                                            np.imag(res['main'][i])))
       print('auxiliary spectrum')
       for i in range(res['M']):
-          print("%d :  %.6f  %.6fj" % (i, np.real(res['aux'][i]), 
-                                       np.imag(res['aux'][i])))
+          print("%d :  %.6f  %.6fj" % (i, np.real(res['aux'][i]),
+                                            np.imag(res['aux'][i])))
+
        ```
    * for full description call ```help(nsep)```
   * Function **nsep_wrapper**:
