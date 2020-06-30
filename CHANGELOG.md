@@ -1,6 +1,10 @@
 ## changelog
 
 ## 0.3.0
+
+### 29.06.2020
+    * nsep: D parameter must be odd now, changed example and test
+
 ### 07.03.2020
     * checked compatibility with FNFT 0.3.0
     * merge development into master
