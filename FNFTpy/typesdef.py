@@ -144,7 +144,8 @@ class NsevOptionsStruct(GenericOptionsStruct):
         ("discspec_type", ctypes_int),
         ("contspec_type", ctypes_int),
         ("normalization_flag", ctypes_int32),
-        ("discretization", ctypes_int)]
+        ("discretization", ctypes_int),
+        ("richardson_extrapolation_flag", ctypes_int)]
 
 
 class NsevInverseOptionsStruct(GenericOptionsStruct):

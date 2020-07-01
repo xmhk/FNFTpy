@@ -183,6 +183,8 @@ def get_nsep_options(loc=None, filt=None, bb=None, maxev=None, dis=None, nf=None
         * 17 = 2SPLIT7B
         * 18 = 2SPLIT8A
         * 19 = 2SPLIT8B
+        * 20 = 4SPLIT4A
+        * 21 = 4SPLIT4B
 
     * nf : normalization flag, default=1
 
@@ -202,6 +204,15 @@ def get_nsep_options(loc=None, filt=None, bb=None, maxev=None, dis=None, nf=None
     * options : NsepOptionsStruct
 
     """
+
+    # discretizations not yet available
+    # *22 = CF4_2
+    # *23 = CF4_3
+    # *24 = CF5_3
+    # *25 = CF6_4
+    # *26 = ES4
+    # *27 = TES4
+    #
     options = fnft_nsep_default_options_wrapper()
     if loc is not None:
         options.localization = loc
@@ -268,7 +279,7 @@ def print_nsev_options(options=None):
     print(options)
 
 
-def get_nsev_options(bsf=None, bsl=None, niter=None, Dsub=None, dst=None, cst=None, nf=None, dis=None):
+def get_nsev_options(bsf=None, bsl=None, niter=None, Dsub=None, dst=None, cst=None, nf=None, dis=None, rnf=None):
     """Get a NsevOptionsStruct for use with nsev_wrapper.
 
     When called without additional optional arguments, the default values from FNFT are used.
@@ -331,6 +342,8 @@ def get_nsev_options(bsf=None, bsl=None, niter=None, Dsub=None, dst=None, cst=No
         * 0 = off
         * 1 = on
 
+    * rnf : richardson normalization flag, default = 0
+
     Returns:
 
     * options : NsevOptionsStruct
@@ -353,6 +366,8 @@ def get_nsev_options(bsf=None, bsl=None, niter=None, Dsub=None, dst=None, cst=No
         options.normalization_flag = nf
     if dis is not None:
         options.discretization = dis
+    if rnf is not None:
+        options.richardson_normalization_flag = rnf
     return options
 
 
