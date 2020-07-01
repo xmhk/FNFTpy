@@ -279,7 +279,7 @@ def print_nsev_options(options=None):
     print(options)
 
 
-def get_nsev_options(bsf=None, bsl=None, niter=None, Dsub=None, dst=None, cst=None, nf=None, dis=None, rnf=None):
+def get_nsev_options(bsf=None, bsl=None, niter=None, Dsub=None, dst=None, cst=None, nf=None, dis=None, ref=None):
     """Get a NsevOptionsStruct for use with nsev_wrapper.
 
     When called without additional optional arguments, the default values from FNFT are used.
@@ -342,7 +342,10 @@ def get_nsev_options(bsf=None, bsl=None, niter=None, Dsub=None, dst=None, cst=No
         * 0 = off
         * 1 = on
 
-    * rnf : richardson normalization flag, default = 0
+    * ref : richardson extrapolation flag, default = 0
+
+        * 0 = off
+        * 1 = on
 
     Returns:
 
@@ -366,8 +369,8 @@ def get_nsev_options(bsf=None, bsl=None, niter=None, Dsub=None, dst=None, cst=No
         options.normalization_flag = nf
     if dis is not None:
         options.discretization = dis
-    if rnf is not None:
-        options.richardson_normalization_flag = rnf
+    if ref is not None:
+        options.richardson_extrapolation_flag = ref
     return options
 
 

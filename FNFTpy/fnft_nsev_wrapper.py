@@ -33,7 +33,7 @@ from .options_handling import get_nsev_options
 
 
 def nsev(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=None,
-         bsl=None, niter=None, Dsub=None, dst=None, cst=None, nf=None, dis=None):
+         bsl=None, niter=None, Dsub=None, dst=None, cst=None, nf=None, dis=None, ref=None):
     """Calculate the Nonlinear Fourier Transform for the Nonlinear Schroedinger equation with vanishing boundaries.
 
     This function is intended to be 'convenient', which means it
@@ -113,6 +113,11 @@ def nsev(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=None,
         * 0 = off
         * 1 = on
 
+    * ref : richardson extrapolation flag, default = 0
+
+        * 0 = off
+        * 1 = on
+
     Returns:
 
     * rdict : dictionary holding the fields (depending on options)
@@ -125,13 +130,13 @@ def nsev(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=None,
         * cont_ref : continuous spectrum - reflection coefficient
         * cont_a : continuous spectrum - scattering coefficient a
         * cont_b : continuous spectrum - scattering coefficient b
-        * options : NsepOptionsStruct with the options used
+        * options : NsevOptionsStruct with the options used
 
     """
     D = len(q)
     T1 = np.min(tvec)
     T2 = np.max(tvec)
-    options = get_nsev_options(bsf=bsf, bsl=bsl, niter=niter, Dsub=Dsub, dst=dst, cst=cst, nf=nf, dis=dis)
+    options = get_nsev_options(bsf=bsf, bsl=bsl, niter=niter, Dsub=Dsub, dst=dst, cst=cst, nf=nf, dis=dis, ref=ref)
     return nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
                         M, K, kappa, options)
 

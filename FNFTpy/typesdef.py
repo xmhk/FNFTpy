@@ -133,6 +133,7 @@ class NsevOptionsStruct(GenericOptionsStruct):
     * contspec_type
     * normalization_flag
     * discretization
+    * richardson_extrapolation_flag
 
 
         """
