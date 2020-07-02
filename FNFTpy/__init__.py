@@ -33,6 +33,7 @@ from .auxiliary import get_lib_path, get_fnft_version, print_fnft_version
 from .fnft_kdvv_wrapper import kdvv_wrapper, kdvv
 from .fnft_nsep_wrapper import nsep_wrapper, nsep
 from .fnft_nsev_wrapper import nsev_wrapper, nsev
+from .fnft_nsev_slow_wrapper import nsev_slow_wrapper, nsev_slow
 from .fnft_nsev_inverse_wrapper import nsev_inverse_xi_wrapper, nsev_inverse_wrapper, nsev_inverse
 
 from .typesdef import *

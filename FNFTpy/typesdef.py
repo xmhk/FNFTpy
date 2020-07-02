@@ -170,7 +170,7 @@ class NsevSlowOptionsStruct(GenericOptionsStruct):
         ("discspec_type", ctypes_int),
         ("contspec_type", ctypes_int),
         ("discretization", ctypes_int),
-        ("richardson_extrapolation_flag", ctypes_int)]
+        ("richardson_extrapolation_flag", ctypes_uint)]
 
 
 class NsevInverseOptionsStruct(GenericOptionsStruct):
