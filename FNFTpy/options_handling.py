@@ -374,6 +374,126 @@ def get_nsev_options(bsf=None, bsl=None, niter=None, Dsub=None, dst=None, cst=No
     return options
 
 
+
+def fnft_nsev_slow_default_options_wrapper():
+    """Get the default options for nsev_slow directly from the FNFT C-library.
+
+    Returns:
+
+    * options : NsevSlowOptionsStruct with options for nsev_slow_wrapper
+
+    """
+    fnft_clib = ctypes.CDLL(get_lib_path())
+    clib_func = fnft_clib.fnft_nsev_slow_default_opts
+    clib_func.restype = NsevSlowOptionsStruct
+    clib_func.argtpes = []
+    return clib_func()
+
+
+def print_nsev_slow_options(options=None):
+    """Print options of a NsevSlowOptionsStruct.
+
+    When called without additional argument, the default options from FNFT are printed.
+
+    Optional arguments:
+
+    * options : NsevSlowOptionsStruct, e.g. created by get_nsev_slow_options()
+
+    """
+
+    if options is None:
+        options = fnft_nsev_slow_default_options_wrapper()
+    print("nsev_slow options:")
+    print(options)
+
+
+def get_nsev_slow_options(bsf=None, bsl=None, niter=None,
+                          dst=None, cst=None, dis=None,
+                          ref=None):
+    """Get a NsevSlowOptionsStruct for use with nsev_slow_wrapper.
+
+      When called without additional optional arguments, the default values from FNFT are used.
+
+      Optional arguments:
+
+      * bsf : bound state filtering, default = 2
+
+          * 0 = none
+          * 1 = basic
+          * 2 = full
+
+      * bsl : bound state localization, default = 2
+
+          * 0 = fast eigenvalue
+          * 1 = Newton
+          * 2 = subsample and refine
+
+      * niter : number of iterations for Newton bound state location, default = 10
+      * dst : type of discrete spectrum, default = 0
+
+          * 0 = norming constants
+          * 1 = residues
+          * 2 = both
+          * 3 = skip computing discrete spectrum
+
+      * cst : type of continuous spectrum, default = 0
+
+          * 0 = reflection coefficient
+          * 1 = a and b
+          * 2 = both
+          * 3 = skip computing continuous spectrum
+
+      * dis : discretization, default = 11
+
+          * 0 = 2SPLIT2_MODAL
+          * 1 = BO
+          * 2 = 2SPLIT1A
+          * 3 = 2SPLIT1B
+          * 4 = 2SPLIT2A
+          * 5 = 2SPLIT2B
+          * 6 = 2SPLIT2S
+          * 7 = 2SPLIT3A
+          * 8 = 2SPLIT3B
+          * 9 = 2SPLIT3S
+          * 10 = 2SPLIT4A
+          * 11 = 2SPLIT4B
+          * 12 = 2SPLIT5A
+          * 13 = 2SPLIT5B
+          * 14 = 2SPLIT6A
+          * 15 = 2SPLIT6B
+          * 16 = 2SPLIT7A
+          * 17 = 2SPLIT7B
+          * 18 = 2SPLIT8A
+          * 19 = 2SPLIT8B
+
+      * ref : richardson extrapolation flag, default = 0
+
+          * 0 = off
+          * 1 = on
+
+      Returns:
+
+      * options : NsevSlowOptionsStruct
+    """
+    options = fnft_nsev_slow_default_options_wrapper()
+    if bsf is not None:
+        options.bound_state_filtering = bsf
+    if bsl is not None:
+        options.bound_state_localization = bsl
+    if niter is not None:
+        options.niter = niter
+    if dst is not None:
+        options.discspec_type = dst
+    if cst is not None:
+        options.contspec_type = cst
+    if dis is not None:
+        options.discretization = dis
+    if ref is not None:
+        options.richardson_extrapolation_flag = ref
+    return options
+
+
+
 def fnft_nsev_inverse_default_options_wrapper():
     """Get the default options for nsev_inverse directly from the FNFT C-library.
 
