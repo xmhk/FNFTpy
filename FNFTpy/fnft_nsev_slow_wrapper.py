@@ -130,8 +130,8 @@ def nsev_slow(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=None,
     D = len(q)
     T1 = np.min(tvec)
     T2 = np.max(tvec)
-    options = get_nsev_options(bsf=bsf, bsl=bsl, niter=niter, Dsub=Dsub, dst=dst, cst=cst, nf=nf, dis=dis, ref=ref)
-    return nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
+    options = get_nsev_slow_options(bsf=bsf, bsl=bsl, niter=niter, dst=dst, cst=cst, dis=dis, ref=ref)
+    return nsev_slow_wrapper(D, q, T1, T2, Xi1, Xi2,
                         M, K, kappa, options)
 
 
@@ -152,7 +152,7 @@ def nsev_slow_wrapper(D, q, T1, T2, Xi1, Xi2,
     * M : number of values for the continuous spectrum to calculate
     * K : maximum number of bound states to calculate
     * kappa : +/- 1 for focussing/defocussing nonlinearity
-    * options : options for nsev as NsevOptionsStruct
+    * options : options for nsev_slow as NsevSlowOptionsStruct
 
 
     Returns:
