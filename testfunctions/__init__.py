@@ -30,6 +30,7 @@ Christoph Mahnke, 2018
 from .kdvv_tests import KdvvExampleTest
 from .nsep_tests import NsepExampleTest
 from .nsev_tests import NsevExampleTest, NsevDstCstInputTest
+from .nsev_slow_tests import NsevSlowExampleTest
 from .nsev_inverse_tests import NsevInverseExample, NsevInverseExample2, NsevInverseInputVariation
 from .options_tests import FnftpyOptionsTest
 
