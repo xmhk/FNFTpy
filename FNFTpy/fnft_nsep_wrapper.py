@@ -33,7 +33,7 @@ from .options_handling import print_nsep_options, get_nsep_options
 
 
 def nsep(q, T1, T2, kappa=1, loc=None, filt=None, bb=None,
-         maxev=None, dis=None, nf=None,  floq_range=None, ppspine=None, dsub=None, tol=None):
+         maxev=None, dis=None, nf=None, floq_range=None, ppspine=None, dsub=None, tol=None, phase_shift = 0.0):
     """Calculate the Nonlinear Fourier Transform for the Nonlinear Schroedinger equation with periodic boundaries.
 
     This function is intended to be 'convenient', which means it
@@ -108,6 +108,7 @@ def nsep(q, T1, T2, kappa=1, loc=None, filt=None, bb=None,
 
     * tol : Tolerance, for root search refinement. Can be either positibe number or (default =-1 (=auto))
 
+    * phase_shift :  change of the phase over one quasi-period, arg(q(t+(T2-T1)/q(t)) (default=0)
 
     Returns:
 
@@ -124,11 +125,11 @@ def nsep(q, T1, T2, kappa=1, loc=None, filt=None, bb=None,
     D = len(q)
     options = get_nsep_options(loc=loc, filt=filt, bb=bb, maxev=maxev, dis=dis, nf=nf,
                                floq_range=floq_range, ppspine=ppspine, dsub=dsub, tol=tol)
-    return nsep_wrapper(D, q, T1, T2,
+    return nsep_wrapper(D, q, T1, T2, phase_shift,
                         kappa, options)
 
 
-def nsep_wrapper(D, q, T1, T2, kappa,
+def nsep_wrapper(D, q, T1, T2, phase_shift, kappa,
                  options):
     """Calculate the Nonlinear Fourier Transform for the Nonlinear Schroedinger equation with periodic boundaries.
 
@@ -141,6 +142,7 @@ def nsep_wrapper(D, q, T1, T2, kappa,
     * D : number of sample points
     * q : numpy array holding the samples of the input field
     * T1, T2  : time positions of the first and the (D+1) sample
+    * phase_shift : change of the phase over one quasi-period, arg(q(t+(T2-T1)/q(t))
     * kappa   : +/- 1 for focussing/defocussing nonlinearity
     * options : options for nsep as NsepOptionsStruct. Can be generated e.g. with 'get_nsep_options()'
 
@@ -166,6 +168,7 @@ def nsep_wrapper(D, q, T1, T2, kappa,
     nsep_T = np.zeros(2, dtype=numpy_double)
     nsep_T[0] = T1
     nsep_T[1] = T2
+    nsep_phase_shift = ctypes_double(phase_shift)
     nsep_K = ctypes_uint(4 * nsep_D.value)
     nsep_main_spec = np.zeros(nsep_K.value, dtype=numpy_complex)
     nsep_M = ctypes_uint(2 * nsep_D.value)
@@ -177,6 +180,7 @@ def nsep_wrapper(D, q, T1, T2, kappa,
         type(nsep_D),  # D
         numpy_complex_arr_ptr,  # q
         numpy_double_arr_ptr,  # t
+        type(nsep_phase_shift), # phase_shift
         ctypes.POINTER(ctypes_uint),  # K_ptr
         numpy_complex_arr_ptr,  # main_spec
         ctypes.POINTER(ctypes_uint),  # M_ptr
@@ -189,6 +193,7 @@ def nsep_wrapper(D, q, T1, T2, kappa,
         nsep_D,
         nsep_q,
         nsep_T,
+        nsep_phase_shift,
         nsep_K,
         nsep_main_spec,
         nsep_M,
