@@ -24,5 +24,8 @@ Welcome to FNFTpy's documentation!
    
    nsev.rst
 
+   nsev_slow.rst
+
+   
    nsev_inverse.rst
 
