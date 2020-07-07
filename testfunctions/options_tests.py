@@ -47,9 +47,9 @@ class FnftpyOptionsTest(unittest.TestCase):
                                             "'bound_state_filtering' : 2, 'bound_state_localization' : 2, 'niter' : 10, 'Dsub' : 0, " \
                                             + "'discspec_type' : 0, 'contspec_type' : 0, 'normalization_flag' : 1, 'discretization' : 11,"\
                                             + " 'richardson_extrapolation_flag' : 0"],
-                             nsev_slow=[NsevSlowOptionsStruct, get_nsev_slow_options,
-                                        "'bound_state_filtering' : 2, 'bound_state_localization' : 1, 'niter' : 10, 'discspec_type' : 0, "\
-                                        +"'contspec_type' : 0, 'discretization' : 1, 'richardson_extrapolation_flag' : 0"],
+                             #nsev_slow=[NsevSlowOptionsStruct, get_nsev_slow_options,
+                             #           "'bound_state_filtering' : 2, 'bound_state_localization' : 1, 'niter' : 10, 'discspec_type' : 0, "\
+                             #           +"'contspec_type' : 0, 'discretization' : 1, 'richardson_extrapolation_flag' : 0"],
                              nsev_inverse=[NsevInverseOptionsStruct, get_nsev_inverse_options,
                                            "'discretization' : 4, 'contspec_type' : 0, 'contspec_inversion_method' : 0, " \
                                            + "'discspec_type' : 0, 'max_iter' : 100, 'oversampling_factor' : 8"])

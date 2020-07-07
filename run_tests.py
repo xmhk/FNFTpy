@@ -29,7 +29,7 @@ Christoph Mahnke, 2018-2020
 
 import unittest
 from testfunctions import KdvvExampleTest, NsepExampleTest, NsevExampleTest, \
-    NsevDstCstInputTest, NsevSlowExampleTest,NsevInverseExample, NsevInverseExample2, \
+    NsevDstCstInputTest,NsevInverseExample, NsevInverseExample2, \
     NsevInverseInputVariation, FnftpyOptionsTest
 from FNFTpy import print_fnft_version
 
@@ -42,7 +42,7 @@ nsep_suite = unittest.TestLoader().loadTestsFromTestCase(NsepExampleTest)
 nsev_suite1 = unittest.TestLoader().loadTestsFromTestCase(NsevExampleTest)
 nsev_suite2 = unittest.TestLoader().loadTestsFromTestCase(NsevDstCstInputTest)
 
-nsev_slow_suite = unittest.TestLoader().loadTestsFromTestCase(NsevSlowExampleTest)
+#nsev_slow_suite = unittest.TestLoader().loadTestsFromTestCase(NsevSlowExampleTest)
 
 nsev_inverse_suite1 = unittest.TestLoader().loadTestsFromTestCase(NsevInverseExample)
 nsev_inverse_suite2 = unittest.TestLoader().loadTestsFromTestCase(NsevInverseExample2)
@@ -52,7 +52,7 @@ suite = unittest.TestSuite([options_suite,
                             kdvv_suite,
                             nsep_suite,
                             nsev_suite1, nsev_suite2,
-                            nsev_slow_suite,
+                            #nsev_slow_suite,
                             nsev_inverse_suite1,
                             nsev_inverse_suite2,
                             nsev_inverse_suite3
