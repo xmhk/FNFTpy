@@ -28,7 +28,7 @@ Christoph Mahnke, 2018
 """
 
 from FNFTpy import KdvvOptionsStruct, NsepOptionsStruct, NsevInverseOptionsStruct, NsevOptionsStruct, NsevSlowOptionsStruct, \
-    get_kdvv_options, get_nsep_options, get_nsev_options, get_nsev_slow_options, get_nsev_inverse_options
+    get_kdvv_options, get_nsep_options, get_nsev_options, get_nsev_inverse_options
 
 import unittest
 
