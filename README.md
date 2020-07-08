@@ -8,9 +8,9 @@ For general information, source files and installation of FNFT,
 visit FNFT's github page: [https://github.com/FastNFT](https://github.com/FastNFT)
 
 
-## current state - access functions from FNFT version 0.3.0
+## current state - access functions from FNFT version 0.4.0
 
-last update of FNFTpy: 07.03.2020
+last update of FNFTpy: 08.07.2020
 
 for changes see [Changelog](CHANGELOG.md)
 
