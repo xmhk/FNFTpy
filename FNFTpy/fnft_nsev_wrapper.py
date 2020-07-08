@@ -87,26 +87,34 @@ def nsev(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=None,
 
     * dis : discretization, default = 11
 
-        * 0 = 2SPLIT2_MODAL
-        * 1 = BO
-        * 2 = 2SPLIT1A
-        * 3 = 2SPLIT1B
-        * 4 = 2SPLIT2A
-        * 5 = 2SPLIT2B
-        * 6 = 2SPLIT2S
-        * 7 = 2SPLIT3A
-        * 8 = 2SPLIT3B
-        * 9 = 2SPLIT3S
-        * 10 = 2SPLIT4A
-        * 11 = 2SPLIT4B
-        * 12 = 2SPLIT5A
-        * 13 = 2SPLIT5B
-        * 14 = 2SPLIT6A
-        * 15 = 2SPLIT6B
-        * 16 = 2SPLIT7A
-        * 17 = 2SPLIT7B
-        * 18 = 2SPLIT8A
-        * 19 = 2SPLIT8B
+         * 0 = 2SPLIT2_MODAL
+         * 1 = BO
+         * 2 = 2SPLIT1A
+         * 3 = 2SPLIT1B
+         * 4 = 2SPLIT2A
+         * 5 = 2SPLIT2B
+         * 6 = 2SPLIT2S
+         * 7 = 2SPLIT3A
+         * 8 = 2SPLIT3B
+         * 9 = 2SPLIT3S
+         * 10 = 2SPLIT4A
+         * 11 = 2SPLIT4B
+         * 12 = 2SPLIT5A
+         * 13 = 2SPLIT5B
+         * 14 = 2SPLIT6A
+         * 15 = 2SPLIT6B
+         * 16 = 2SPLIT7A
+         * 17 = 2SPLIT7B
+         * 18 = 2SPLIT8A
+         * 19 = 2SPLIT8B
+         * 20 = 4SPLIT4A
+         * 21 = 4SPLIT4B
+         * 22 = CF4_2
+         * 23 = CF4_3
+         * 24 = CF5_3
+         * 25 = CF6_4
+         * 26 = ES4
+         * 27 = TES4
 
     * nf : normalization flag, default =  1
 
