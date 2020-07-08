@@ -1,9 +1,11 @@
 ## changelog
 
-## 0.3.0
+## 0.4.0
 
-### 29.06.2020
-    * nsep: D parameter must be odd now, changed example and test
+## 08.07.2020 checked for compatibility with FNFT 0.40
+* kdvv: updated available discretizations in documentation
+
+## 0.3.0
 
 ### 07.03.2020
     * checked compatibility with FNFT 0.3.0
