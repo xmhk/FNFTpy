@@ -3,7 +3,11 @@
 ## 0.4.0
 
 ## 08.07.2020 checked for compatibility with FNFT 0.40
-* kdvv: updated available discretizations in documentation
+* kdvv: updated available discretizations in documentation, phase_shift option available
+* nsep: updated available discretizations in documentation
+* nsev: updated available discretizations in documentation, richardson extrapolation flag available
+* nsev_inverse: updated available discretization in documentation
+
 
 ## 0.3.0
 

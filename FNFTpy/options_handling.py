@@ -427,7 +427,7 @@ def get_nsev_inverse_options(dis=None, cst=None, csim=None, dst=None, max_iter=N
 
     * dis : discretization, default = 4
 
-           * 0 = 2SPLIT2_MODAL
+         * 0 = 2SPLIT2_MODAL
          * 1 = BO
          * 2 = 2SPLIT1A
          * 3 = 2SPLIT1B

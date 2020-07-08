@@ -24,5 +24,5 @@ Welcome to FNFTpy's documentation!
    
    nsev.rst
 
-   nsev__inverse.rst
+   nsev_inverse.rst
 
