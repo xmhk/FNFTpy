@@ -12,7 +12,7 @@ documentation/latex/*.log
 documentation/latex/*.out
 documentation/latex/*.ist
 documentation/latex/*.idx
-
+*.xdy
 documentation/latex/*.sty
 documentation/latex/*.tex
 documentation/latex/*.cls
