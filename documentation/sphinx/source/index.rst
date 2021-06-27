@@ -16,7 +16,7 @@ Welcome to FNFTpy's documentation!
 
    moduleinfo.rst
 
-   aux.rst
+   faux.rst
 
    kdvv.rst
    
