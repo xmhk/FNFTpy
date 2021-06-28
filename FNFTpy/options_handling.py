@@ -27,7 +27,7 @@ Christoph Mahnke, Shrinivas Chimmalgi, 2018-2020
 
 """
 
-from .auxiliary import get_lib_path
+from .auxiliary import get_lib_path, get_winmode_param
 from .typesdef import *
 
 
@@ -43,7 +43,7 @@ def fnft_kdvv_default_options_wrapper():
     * options : KdvvOptionsStruct with options for kdvv_wrapper
 
     """
-    fnft_clib = ctypes.CDLL(get_lib_path(), winmode=0)
+    fnft_clib = ctypes.CDLL(get_lib_path(), winmode = get_winmode_param())
     clib_func = fnft_clib.fnft_kdvv_default_opts
     clib_func.restype = KdvvOptionsStruct
     clib_func.argtpes = []
@@ -124,7 +124,7 @@ def fnft_nsep_default_options_wrapper():
     * options : NsepOptionsStruct for nsep_wrapper
 
     """
-    fnft_clib = ctypes.CDLL(get_lib_path(), winmode=0)
+    fnft_clib = ctypes.CDLL(get_lib_path(), winmode = get_winmode_param())
     clib_func = fnft_clib.fnft_nsep_default_opts
     clib_func.restype = NsepOptionsStruct
     clib_func.argtpes = []
@@ -260,7 +260,7 @@ def fnft_nsev_default_options_wrapper():
 
     """
 
-    fnft_clib = ctypes.CDLL(get_lib_path(), winmode=0)
+    fnft_clib = ctypes.CDLL(get_lib_path(), winmode = get_winmode_param())
     clib_func = fnft_clib.fnft_nsev_default_opts
     clib_func.restype = NsevOptionsStruct
     clib_func.argtpes = []
@@ -395,7 +395,7 @@ def fnft_nsev_inverse_default_options_wrapper():
 
     """
 
-    fnft_clib = ctypes.CDLL(get_lib_path(), winmode=0)
+    fnft_clib = ctypes.CDLL(get_lib_path(), winmode = get_winmode_param())
     clib_func = fnft_clib.fnft_nsev_inverse_default_opts
     clib_func.restype = NsevInverseOptionsStruct
     clib_func.argtpes = []

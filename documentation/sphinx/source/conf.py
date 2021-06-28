@@ -21,13 +21,13 @@ sys.path.insert(0, os.path.abspath('../../../'))
 # -- Project information -----------------------------------------------------
 
 project = 'FNFTpy'
-copyright = '2018-2020, Christoph Mahnke'
+copyright = '2018-2021, Christoph Mahnke'
 author = 'Christoph Mahnke'
 
 # The short X.Y version
 version = '0.4'
 # The full version, including alpha/beta/rc tags
-release = '0.4.0'
+release = '0.4.1'
 
 
 # -- General configuration ---------------------------------------------------

@@ -51,6 +51,22 @@ def get_lib_path():
 
     return libstr
 
+def get_winmode_param():
+    """
+    This function is used to allow module-wide change of the winmode parameter used by
+    ctypes.CDLL function.
+
+    Background: since Python 3.8 there is a change to the CDLL function. Due to some hazzle in the
+    Windows library locations, it may be difficult to address libraries by full path.
+    The standard parameter is 'None'.
+    Some users report import does work when it is set to 0.
+
+    Returns:
+        winmode parameter : 0    (change manually to either None or some int if you experience problems)
+    """
+    #return None
+    return 0
+
 
 def get_fnft_version():
     """

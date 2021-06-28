@@ -28,7 +28,7 @@ Christoph Mahnke, 2018-2020
 """
 
 from .typesdef import *
-from .auxiliary import get_lib_path, check_return_code
+from .auxiliary import get_lib_path, check_return_code, get_winmode_param
 from .options_handling import print_nsep_options, get_nsep_options
 
 
@@ -167,7 +167,7 @@ def nsep_wrapper(D, q, T1, T2, phase_shift, kappa,
 
     """
 
-    fnft_clib = ctypes.CDLL(get_lib_path(), winmode=0)
+    fnft_clib = ctypes.CDLL(get_lib_path(), winmode = get_winmode_param())
     clib_nsep_func = fnft_clib.fnft_nsep
     clib_nsep_func.restype = ctypes_int
     nsep_D = ctypes_uint(D)

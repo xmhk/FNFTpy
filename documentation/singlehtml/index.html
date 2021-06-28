@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>FNFTpy 0.4.0 documentation</title>
+    <title>FNFTpy 0.4.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/classic.css" />
     
@@ -21,8 +21,8 @@
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
-        <li class="nav-item nav-item-0"><a href="#">FNFTpy 0.4.0 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">FNFTpy 0.4.0 documentation</a></li> 
+        <li class="nav-item nav-item-0"><a href="#">FNFTpy 0.4.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">FNFTpy 0.4.1 documentation</a></li> 
       </ul>
     </div>  
 
@@ -76,6 +76,24 @@ See example strings below.</p>
 <li><p>libstr = “/usr/local/lib/libfnft.so”  # example for linux</p></li>
 </ul>
 </div></blockquote>
+</dd></dl>
+
+</section>
+<section id="get-winmode-parameter-windows-only">
+<h3>get winmode parameter (Windows only)<a class="headerlink" href="#get-winmode-parameter-windows-only" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="FNFTpy.get_winmode_param">
+<span class="sig-prename descclassname"><span class="pre">FNFTpy.</span></span><span class="sig-name descname"><span class="pre">get_winmode_param</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#FNFTpy.get_winmode_param" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is used to allow module-wide change of the winmode parameter used by
+ctypes.CDLL function.</p>
+<p>Background: since Python 3.8 there is a change to the CDLL function. Due to some hazzle in the
+Windows library locations, it may be difficult to address libraries by full path.
+The standard parameter is ‘None’.
+Some users report import does work when it is set to 0.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>winmode parameter : 0    (change manually to either None or some int if you experience problems)</p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
@@ -1245,6 +1263,7 @@ If a more simplified version is desired, ‘nsev_inverse’ can be used (see doc
 <li class="toctree-l1"><a class="reference internal" href="index.html#document-moduleinfo">Module overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="index.html#document-faux">Auxiliary functions</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="index.html#set-destination-of-fnft-libary">set destination of FNFT libary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#get-winmode-parameter-windows-only">get winmode parameter (Windows only)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#get-and-print-fnft-version">get and print FNFT version</a></li>
 </ul>
 </li>
@@ -1286,12 +1305,12 @@ If a more simplified version is desired, ‘nsev_inverse’ can be used (see doc
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
-        <li class="nav-item nav-item-0"><a href="#">FNFTpy 0.4.0 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">FNFTpy 0.4.0 documentation</a></li> 
+        <li class="nav-item nav-item-0"><a href="#">FNFTpy 0.4.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">FNFTpy 0.4.1 documentation</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2018-2020, Christoph Mahnke.
+        &#169; Copyright 2018-2021, Christoph Mahnke.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.2.
     </div>
   </body>

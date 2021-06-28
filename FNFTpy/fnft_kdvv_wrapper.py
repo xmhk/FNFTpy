@@ -29,7 +29,7 @@ Christoph Mahnke, 2018, 2019
 
 from .typesdef import *
 from .options_handling import get_kdvv_options
-from .auxiliary import get_lib_path, check_return_code
+from .auxiliary import get_lib_path, check_return_code, get_winmode_param
 
 
 def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None):
@@ -129,7 +129,7 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
         * options : KdvvOptionsStruct with options used
     """
 
-    fnft_clib = ctypes.CDLL(get_lib_path(), winmode=0)
+    fnft_clib = ctypes.CDLL(get_lib_path(), winmode = get_winmode_param())
     clib_kdvv_func = fnft_clib.fnft_kdvv
     clib_kdvv_func.restype = ctypes_int
     kdvv_D = ctypes_uint(D)

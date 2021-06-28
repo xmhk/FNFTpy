@@ -1,9 +1,14 @@
 ## changelog
 
-## 0.4.0
+## 0.4.1
 
-### 27.06.2021
--
+### 28.06.2021
+- changed the way how ctypes.CDLL is called.
+- Some users (WIN) had problems to load the libfnft.dll file although the proper path was given in _get_lib_path.
+  The (somewhat bad) solution introduced is to pass an `winmode=` argument to the CDLL call. It showed that passing '0'
+  fixes the bug, so I introduced the function `get_winmode_param()` in `auxiliary.py` which as a standard returns 0.
+  If you encounter problems, try setting the return value of this function e.g. to 'None'.
+
 
 ### 08.07.2020 checked for compatibility with FNFT 0.40
 - kdvv: updated available discretizations in documentation, phase_shift option available
