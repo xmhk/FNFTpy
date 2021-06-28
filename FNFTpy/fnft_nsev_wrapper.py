@@ -185,7 +185,7 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
 
     """
 
-    fnft_clib = ctypes.CDLL(get_lib_path())
+    fnft_clib = ctypes.CDLL(get_lib_path(), winmode=0)
     clib_nsev_func = fnft_clib.fnft_nsev
     clib_nsev_func.restype = ctypes_int
     nsev_D = ctypes_uint(D)

@@ -167,7 +167,7 @@ def nsep_wrapper(D, q, T1, T2, phase_shift, kappa,
 
     """
 
-    fnft_clib = ctypes.CDLL(get_lib_path())
+    fnft_clib = ctypes.CDLL(get_lib_path(), winmode=0)
     clib_nsep_func = fnft_clib.fnft_nsep
     clib_nsep_func.restype = ctypes_int
     nsep_D = ctypes_uint(D)

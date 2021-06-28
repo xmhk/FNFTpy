@@ -129,7 +129,7 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
         * options : KdvvOptionsStruct with options used
     """
 
-    fnft_clib = ctypes.CDLL(get_lib_path())
+    fnft_clib = ctypes.CDLL(get_lib_path(), winmode=0)
     clib_kdvv_func = fnft_clib.fnft_kdvv
     clib_kdvv_func.restype = ctypes_int
     kdvv_D = ctypes_uint(D)
