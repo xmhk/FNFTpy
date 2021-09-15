@@ -112,7 +112,7 @@ def get_kdvv_options(dis=None, bsf=None, niter=None, dst=None, cst=None, nf=None
         * 0 = norming constants
         * 1 = residues
         * 2 = both
-        * 3 = skip computing discrete spectrum   TODO : implement
+        * 3 = skip computing discrete spectrum
 
    * cst : type of continuous spectrum, default = 0
         * 0 = reflection coefficient
