@@ -86,7 +86,7 @@ def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None):
     * rdict : dictionary holding the fields:
 
         * return_value : return value from FNFT
-        * cont_ref : continuous spectrum (reflection) 
+        * cont_ref : continuous spectrum (reflection)
         * options : KdvvOptionsStruct with options used
 
     """
