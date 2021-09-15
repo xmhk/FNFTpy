@@ -51,7 +51,7 @@ def kdvv_example():
     print("\n------ results --------")
     print("FNFT return value: %d (should be 0)" % res['return_value'])
     print("continuous spectrum: ")
-    for i in range(len(res['cont'])):
+    for i in range(len(res['cont_ref'])):
         print("%d : Xi=%.4f   %.6f  %.6fj" % (i, Xivec[i],
-              np.real(res['cont'][i]), np.imag(res['cont'][i])))
+              np.real(res['cont_ref'][i]), np.imag(res['cont_ref'][i])))
     return res

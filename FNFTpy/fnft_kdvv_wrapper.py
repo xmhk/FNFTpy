@@ -86,7 +86,7 @@ def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None):
     * rdict : dictionary holding the fields:
 
         * return_value : return value from FNFT
-        * cont : continuous spectrum
+        * cont_ref : continuous spectrum (reflection)
         * options : KdvvOptionsStruct with options used
 
     """
@@ -125,7 +125,7 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
     * rdict : dictionary holding the fields:
 
         * return_value : return value from FNFT
-        * cont : continuous spectrum
+        * cont_ref : continuous spectrum: reflection
         * options : KdvvOptionsStruct with options used
     """
 
@@ -166,24 +166,24 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
         kdvv_bound_states_type = type(ctypes_nullptr)
         kdvv_disc_spec_type = type(ctypes_nullptr)
 
-        #
-        # continuous spectrum -> reflection coefficient and / or a,b
-        #
-        kdvv_cont_spec_type = numpy_complex_arr_ptr
-        if options.contspec_type == 0:
-            # reflection coeff.
-            print(kdvv_M.value)
-            kdvv_cont = np.zeros(kdvv_M.value, dtype=numpy_complex)
-        elif options.contspec_type == 1:
-            # a and b
-            kdvv_cont = np.zeros(2 * kdvv_M.value, dtype=numpy_complex)
-        elif options.contspec_type == 2:
-            # a and b AND reflection coeff.
-            kdvv_cont = np.zeros(3 * kdvv_M.value, dtype=numpy_complex)
-        else:
-            # 3 or any other option: skip continuous spectrum -> pass NULL
-            kdvv_cont = ctypes_nullptr
-            kdvv_cont_spec_type = type(ctypes_nullptr)
+    #
+    # continuous spectrum -> reflection coefficient and / or a,b
+    #
+    kdvv_cont_spec_type = numpy_complex_arr_ptr
+    if options.contspec_type == 0:
+        # reflection coeff.
+        print(kdvv_M.value)
+        kdvv_cont = np.zeros(kdvv_M.value, dtype=numpy_complex)
+    elif options.contspec_type == 1:
+        # a and b
+        kdvv_cont = np.zeros(2 * kdvv_M.value, dtype=numpy_complex)
+    elif options.contspec_type == 2:
+        # a and b AND reflection coeff.
+        kdvv_cont = np.zeros(3 * kdvv_M.value, dtype=numpy_complex)
+    else:
+        # 3 or any other option: skip continuous spectrum -> pass NULL
+        kdvv_cont = ctypes_nullptr
+        kdvv_cont_spec_type = type(ctypes_nullptr)
 
     clib_kdvv_func.argtypes = [
         type(kdvv_D),  # D
