@@ -166,12 +166,31 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
         kdvv_bound_states_type = type(ctypes_nullptr)
         kdvv_disc_spec_type = type(ctypes_nullptr)
 
+        #
+        # continuous spectrum -> reflection coefficient and / or a,b
+        #
+        kdvv_cont_spec_type = numpy_complex_arr_ptr
+        if options.contspec_type == 0:
+            # reflection coeff.
+            print(kdvv_M.value)
+            kdvv_cont = np.zeros(kdvv_M.value, dtype=numpy_complex)
+        elif options.contspec_type == 1:
+            # a and b
+            kdvv_cont = np.zeros(2 * kdvv_M.value, dtype=numpy_complex)
+        elif options.contspec_type == 2:
+            # a and b AND reflection coeff.
+            kdvv_cont = np.zeros(3 * kdvv_M.value, dtype=numpy_complex)
+        else:
+            # 3 or any other option: skip continuous spectrum -> pass NULL
+            kdvv_cont = ctypes_nullptr
+            kdvv_cont_spec_type = type(ctypes_nullptr)
+
     clib_kdvv_func.argtypes = [
         type(kdvv_D),  # D
         numpy_complex_arr_ptr,  # u
         numpy_double_arr_ptr,  # t
         type(kdvv_M),  # M
-        numpy_complex_arr_ptr,  # cont
+        kdvv_cont_spec_type,  # cont
         numpy_double_arr_ptr,  # Xi
         ctypes.POINTER(ctypes_uint),  # K_ptr
         kdvv_bound_states_type,#numpy_complex_arr_ptr,  # boundstates
@@ -210,6 +229,24 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
         rdict['disc_res'] = kdvv_discspec[K_new:2 * K_new]
     else:
         # no discrete spectrum calculated
+        pass
+    #
+    # depending on options: output of continuous spectrum
+    #
+    if options.contspec_type == 0:
+        # refl. coeff
+        rdict['cont_ref'] = kdvv_cont[0:M]
+    elif options.contspec_type == 1:
+        # a and b
+        rdict['cont_a'] = kdvv_cont[0:M]
+        rdict['cont_b'] = kdvv_cont[M:2 * M]
+    elif options.contspec_type == 2:
+        # refl. coeff AND a and b
+        rdict['cont_ref'] = kdvv_cont[0:M]
+        rdict['cont_a'] = kdvv_cont[M:2 * M]
+        rdict['cont_b'] = kdvv_cont[2 * M:3 * M]
+    else:
+        # no cont. spectrum calculated
         pass
 
              #'K':kdvv_k.value, 'boundstates': kdvv_boundstates[0:kdvv_k.value],
