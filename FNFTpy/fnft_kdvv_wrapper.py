@@ -143,11 +143,13 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
     kdvv_Xi = np.zeros(2, dtype=numpy_double)
     kdvv_Xi[0] = Xi1
     kdvv_Xi[1] = Xi2
-    # kdvv_k = ctypes_uint(k)
-    # bound states -> will stay empty until implemented
-    # kdvv_boundstates = np.zeros(k,dtype=numpy_complex)
+    k =12  # todo
+
+    kdvv_k = ctypes_uint(k)
+    # bound states -> will stay empty until implemented  # todo: find out length depending on options
+    kdvv_boundstates = np.zeros(k,dtype=numpy_complex)
     # discrete spectrum -> will stay empty until implemented
-    # kdvv_discspec = np.zeros(k,dtype=numpy_complex)
+    kdvv_discspec = np.zeros(k,dtype=numpy_complex)
     clib_kdvv_func.argtypes = [
         type(kdvv_D),  # D
         numpy_complex_arr_ptr,  # u
@@ -155,9 +157,9 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
         type(kdvv_M),  # M
         numpy_complex_arr_ptr,  # cont
         numpy_double_arr_ptr,  # Xi
-        type(ctypes_nullptr),  # K_ptr
-        type(ctypes_nullptr),  # boundstates
-        type(ctypes_nullptr),  # normconsts res
+        ctypes.POINTER(ctypes_uint),  # K_ptr
+        numpy_complex_arr_ptr,  # boundstates
+        numpy_complex_arr_ptr,  # normconsts res
         ctypes.POINTER(KdvvOptionsStruct)]  # options ptr
     rv = clib_kdvv_func(
         kdvv_D,
@@ -166,10 +168,14 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
         kdvv_M,
         kdvv_cont,
         kdvv_Xi,
-        ctypes_nullptr,
-        ctypes_nullptr,
-        ctypes_nullptr,
+        kdvv_k,
+        kdvv_boundstates,
+        kdvv_discspec,
         ctypes.byref(options))
     check_return_code(rv)
-    rdict = {'return_value': rv, 'cont': kdvv_cont, 'options': repr(options)}
+    print(type(int(kdvv_k.value))) # TODO needs to be cleaned, cases?
+    rdict = {'return_value': rv, 'cont': kdvv_cont, 'options': repr(options),
+             \
+             'K':kdvv_k.value, 'boundstates': kdvv_boundstates[0:kdvv_k.value],
+             'discspec':kdvv_discspec}  #TODO sort this
     return rdict
