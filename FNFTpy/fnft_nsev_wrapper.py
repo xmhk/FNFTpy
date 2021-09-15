@@ -223,8 +223,7 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
     # continuous spectrum -> reflection coefficient and / or a,b
     #
     nsev_cont_spec_type = numpy_complex_arr_ptr
-                          #np.ctypeslib.ndpointer(dtype=numpy_complex,
-                          #                       ndim=1, flags='C')
+
     if options.contspec_type == 0:
         # reflection coeff.
         nsev_cont = np.zeros(M, dtype=numpy_complex)
