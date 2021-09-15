@@ -96,13 +96,6 @@ class KdvvOptionsStruct(GenericOptionsStruct):
         ("discretization", ctypes_int),
         ("richardson_extrapolation_flag", ctypes_uint)] #check: uint
 
-   #fnft_kdvv_bsloc_t bound_state_localization;
-    #FNFT_UINT niter;
-    #fnft_kdvv_dstype_t discspec_type;
-    #fnft_kdvv_cstype_t contspec_type;
-    #FNFT_INT normalization_flag;
-    #fnft_kdv_discretization_t discretization;
-    #FNFT_UINT richardson_extrapolation_flag;
 
 class NsepOptionsStruct(GenericOptionsStruct):
     """Ctypes options struct for interfacing fnft_nsep.

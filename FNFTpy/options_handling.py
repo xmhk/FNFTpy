@@ -66,7 +66,8 @@ def print_kdvv_options(options=None):
     print(options)
 
 
-def get_kdvv_options(dis=None):
+def get_kdvv_options(dis=None, bsf=None, niter=None, dst=None, cst=None, nf=None,
+                     ref=None):
     """Get an KdvvOptionsStruct struct for use with kdvv_wrapper.
 
     When called without additional optional arguments, the default values from FNFT are used.
@@ -75,7 +76,7 @@ def get_kdvv_options(dis=None):
 
     * dis: discretization, default = 17  (for details see FNFT documentation)
 
-         * 0 = 2SPLIT1A
+         * 0 = 2SPLIT1A TODO: update
          * 1 = 2SPLIT1B
          * 2 = 2SPLIT2A
          * 3 = 2SPLIT2B
@@ -101,6 +102,32 @@ def get_kdvv_options(dis=None):
          * 23 = CF5_3
          * 24 = CF6_4
 
+    * bsf: bound state filtering, default=1
+        * 0 = NEWTON,
+        * 1 = GRIDSEARCH_AND_REFINE
+
+    * niter : number of iterations for Newton bound state location, default = 10
+
+    * dst : type of discrete spectrum, default = 0
+        * 0 = norming constants
+        * 1 = residues
+        * 2 = both
+        * 3 = skip computing discrete spectrum   TODO : implement
+
+   * cst : type of continuous spectrum, default = 0
+        * 0 = reflection coefficient
+        * 1 = a and b
+        * 2 = both
+        * 3 = skip computing continuous spectrum TODO: implement
+
+   * nf : normalization flag, default =  1
+       * 0 = off
+       * 1 = on
+
+   * ref : richardson extrapolation flag, default = 0
+        * 0 = off
+        * 1 = on
+
     Returns:
 
     * options : KdvvOptionsStruct
@@ -109,6 +136,18 @@ def get_kdvv_options(dis=None):
     options = fnft_kdvv_default_options_wrapper()
     if dis is not None:
         options.discretization = dis
+    if bsf is not None:
+        options.bound_state_filtering = bsf
+    if niter is not None:
+        options.niter = niter
+    if dst is not None:
+        options.discspec_type = dst
+    if cst is not None:
+        options.contspec_type = cst
+    if nf is not None:
+        options.normalization_flag = nf
+    if ref is not None:
+        options.richardson_extrapolation_flag = ref
     return options
 
 
