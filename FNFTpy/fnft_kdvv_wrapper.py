@@ -117,7 +117,7 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
     * T1, T2  : time positions of the first and the last sample
     * M : number of values for the continuous spectrum to calculate
     * Xi1, Xi2 : min and max frequency for the continuous spectrum
-    * K : maximum number of bound states to calculate (no effect yet)
+    * K : maximum number of bound states to calculate (no effect yet) TODO change
     * options : options for kdvv as KdvvOptionsStruct. Can be generated e.g. with 'get_kdvv_options()'
 
     Returns:
@@ -144,22 +144,57 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
     kdvv_Xi[0] = Xi1
     kdvv_Xi[1] = Xi2
     k =12  # todo
+    K = 12
+    kdvv_K = ctypes_uint(k)
 
-    kdvv_k = ctypes_uint(k)
-    # bound states -> will stay empty until implemented  # todo: find out length depending on options
-    kdvv_boundstates = np.zeros(k,dtype=numpy_complex)
-    # discrete spectrum -> will stay empty until implemented
-    kdvv_discspec = np.zeros(k,dtype=numpy_complex)
+    #
+    # discrete spectrum -> reflection coefficient and / or residues
+    #
+    kdvv_bound_states_type = numpy_complex_arr_ptr
+    kdvv_disc_spec_type = numpy_complex_arr_ptr
+    if (options.discspec_type == 0) or (options.discspec_type == 1):
+        # norming consts OR residues
+        kdvv_discspec = np.zeros(K, dtype=numpy_complex)
+        kdvv_boundstates = np.zeros(K, dtype=numpy_complex)
+    elif options.discspec_type == 2:
+        # norming consts AND res
+        kdvv_discspec = np.zeros(2 * K, dtype=numpy_complex)
+        kdvv_boundstates = np.zeros(K, dtype=numpy_complex)
+    else: #no discrete spectrum
+        kdvv_discspec = ctypes_nullptr
+        kdvv_boundstates = ctypes_nullptr
+        kdvv_bound_states_type = type(ctypes_nullptr)
+        kdvv_disc_spec_type = type(ctypes_nullptr)
+
+        #
+        # continuous spectrum -> reflection coefficient and / or a,b
+        #
+        kdvv_cont_spec_type = numpy_complex_arr_ptr
+        if options.contspec_type == 0:
+            # reflection coeff.
+            print(kdvv_M.value)
+            kdvv_cont = np.zeros(kdvv_M.value, dtype=numpy_complex)
+        elif options.contspec_type == 1:
+            # a and b
+            kdvv_cont = np.zeros(2 * kdvv_M.value, dtype=numpy_complex)
+        elif options.contspec_type == 2:
+            # a and b AND reflection coeff.
+            kdvv_cont = np.zeros(3 * kdvv_M.value, dtype=numpy_complex)
+        else:
+            # 3 or any other option: skip continuous spectrum -> pass NULL
+            kdvv_cont = ctypes_nullptr
+            kdvv_cont_spec_type = type(ctypes_nullptr)
+
     clib_kdvv_func.argtypes = [
         type(kdvv_D),  # D
         numpy_complex_arr_ptr,  # u
         numpy_double_arr_ptr,  # t
         type(kdvv_M),  # M
-        numpy_complex_arr_ptr,  # cont
+        kdvv_cont_spec_type,  # cont
         numpy_double_arr_ptr,  # Xi
         ctypes.POINTER(ctypes_uint),  # K_ptr
-        numpy_complex_arr_ptr,  # boundstates
-        numpy_complex_arr_ptr,  # normconsts res
+        kdvv_bound_states_type,#numpy_complex_arr_ptr,  # boundstates
+        kdvv_disc_spec_type,  # normconsts res
         ctypes.POINTER(KdvvOptionsStruct)]  # options ptr
     rv = clib_kdvv_func(
         kdvv_D,
@@ -168,14 +203,53 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
         kdvv_M,
         kdvv_cont,
         kdvv_Xi,
-        kdvv_k,
+        kdvv_K,
         kdvv_boundstates,
         kdvv_discspec,
         ctypes.byref(options))
     check_return_code(rv)
-    print(type(int(kdvv_k.value))) # TODO needs to be cleaned, cases?
-    rdict = {'return_value': rv, 'cont': kdvv_cont, 'options': repr(options),
-             \
-             'K':kdvv_k.value, 'boundstates': kdvv_boundstates[0:kdvv_k.value],
-             'discspec':kdvv_discspec}  #TODO sort this
+    K_new = kdvv_K.value  #number of bound states found
+    #print(type(int(kdvv_k.value))) # TODO needs to be cleaned, cases?
+    rdict = {'return_value': rv,
+             'bound_states_num': K_new,
+             'bound_states': kdvv_boundstates[0:K_new],
+             'options': repr(options)}
+    #
+    # depending on options: output of discrete spectrum
+    #
+    if options.discspec_type == 0:
+        # norming const
+        rdict['disc_norm'] = kdvv_discspec[0:K_new]
+    elif options.discspec_type == 1:
+        # residues
+        rdict['disc_res'] = kdvv_discspec[0:K_new]
+    elif options.discspec_type == 2:
+        # norming const. AND residues
+        rdict['disc_norm'] = kdvv_discspec[0:K_new]
+        rdict['disc_res'] = kdvv_discspec[K_new:2 * K_new]
+    else:
+        # no discrete spectrum calculated
+        pass
+    #
+    # depending on options: output of continuous spectrum
+    #
+    if options.contspec_type == 0:
+        # refl. coeff
+        rdict['cont_ref'] = kdvv_cont[0:M]
+    elif options.contspec_type == 1:
+        # a and b
+        rdict['cont_a'] = kdvv_cont[0:M]
+        rdict['cont_b'] = kdvv_cont[M:2 * M]
+    elif options.contspec_type == 2:
+        # refl. coeff AND a and b
+        rdict['cont_ref'] = kdvv_cont[0:M]
+        rdict['cont_a'] = kdvv_cont[M:2 * M]
+        rdict['cont_b'] = kdvv_cont[2 * M:3 * M]
+    else:
+        # no cont. spectrum calculated
+        pass
+
+             #'K':kdvv_k.value, 'boundstates': kdvv_boundstates[0:kdvv_k.value],
+             #'discspec':kdvv_discspec}  #TODO sort this
+    #'cont': kdvv_cont,
     return rdict
