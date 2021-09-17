@@ -32,15 +32,14 @@ from .options_handling import get_kdvv_options
 from .auxiliary import get_lib_path, check_return_code, get_winmode_param
 
 
-def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None):
+def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None, bsf=None, niter=None, dst=None, cst=None, nf=None,
+                     ref=None):
     """Calculate the Nonlinear Fourier Transform for the Korteweg-de Vries equation with vanishing boundaries.
 
     This function is intended to be 'convenient', which means it
     automatically calculates some variables needed to call the
     C-library and uses some default options.
     Own options can be set by passing optional arguments (see below).
-
-    Currently, only the continuous spectrum is calculated.
 
     It converts all Python input into the C equivalent and returns the result from FNFT.
     If a more C-like interface is desired, the function 'kdvv_wrapper' can be used (see documentation there).
@@ -54,7 +53,8 @@ def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None):
     Optional arguments:
 
     * Xi1, Xi2 : min and max frequency for the continuous spectrum, default = [-2,2]
-    * dis: discretization, default = 17  (for details see FNFT documentation)
+
+    * dis: discretization, default = 17  (for details see FNFT documentation)  TODO update
 
          * 0 = 2SPLIT1A
          * 1 = 2SPLIT1B
@@ -81,13 +81,49 @@ def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None):
          * 22 = CF4_3
          * 23 = CF5_3
          * 24 = CF6_4
+
+
+    * bsf: bound state filtering, default=1
+        * 0 = NEWTON,
+        * 1 = GRIDSEARCH_AND_REFINE
+
+    * niter : number of iterations for Newton bound state location, default = 10
+
+    * dst : type of discrete spectrum, default = 0
+        * 0 = norming constants
+        * 1 = residues
+        * 2 = both
+        * 3 = skip computing discrete spectrum
+
+   * cst : type of continuous spectrum, default = 0
+        * 0 = reflection coefficient
+        * 1 = a and b
+        * 2 = both
+        * 3 = skip computing continuous spectrum TODO: implement
+
+   * nf : normalization flag, default =  1
+       * 0 = off
+       * 1 = on
+
+   * ref : richardson extrapolation flag, default = 0
+        * 0 = off
+        * 1 = on
+
+
     Returns:
 
-    * rdict : dictionary holding the fields:
+   * rdict : dictionary holding the fields:
 
-        * return_value : return value from FNFT
-        * cont_ref : continuous spectrum (reflection)
-        * options : KdvvOptionsStruct with options used
+       * return_value : return value from FNFT
+       * cont_ref : continuous spectrum (reflection)
+       * bound_states_num : number of bound states found
+       * bound_states : array of bound states found
+       * disc_norm : discrete spectrum - norming constants
+       * disc_res : discrete spectrum - residues
+       * cont_ref : continuous spectrum - reflection coefficient
+       * cont_a : continuous spectrum - scattering coefficient a
+       * cont_b : continuous spectrum - scattering coefficient b
+       * options : KdvvOptionsStruct with options used
 
     """
 
@@ -95,7 +131,8 @@ def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None):
     K = 0  # not yet implemented
     T1 = np.min(tvec)
     T2 = np.max(tvec)
-    options = get_kdvv_options(dis=dis)
+    options = get_kdvv_options(dis=dis, bsf=bsf, niter=niter, dst=dst, cst=cst, nf=nf,
+                     ref=ref)
     return kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
                         K, options)
 
@@ -107,8 +144,6 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
     This function's interface mimics the behavior of the function 'fnft_kdvv' of FNFT.
     It converts all Python input into the C equivalent and returns the result from FNFT.
     If a more simplified version is desired, 'kdvv' can be used (see documentation there).
-
-    Currently, only the continuous spectrum is calculated.
 
     Arguments:
 
@@ -125,7 +160,14 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
     * rdict : dictionary holding the fields:
 
         * return_value : return value from FNFT
-        * cont_ref : continuous spectrum: reflection
+        * cont_ref : continuous spectrum (reflection)
+        * bound_states_num : number of bound states found
+        * bound_states : array of bound states found
+        * disc_norm : discrete spectrum - norming constants
+        * disc_res : discrete spectrum - residues
+        * cont_ref : continuous spectrum - reflection coefficient
+        * cont_a : continuous spectrum - scattering coefficient a
+        * cont_b : continuous spectrum - scattering coefficient b
         * options : KdvvOptionsStruct with options used
     """
 
