@@ -153,7 +153,7 @@ def get_kdvv_options(bsl=None, dis=None, bsf=None, niter=None, dst=None, cst=Non
         * 0 = reflection coefficient
         * 1 = a and b
         * 2 = both
-        * 3 = skip computing continuous spectrum 
+        * 3 = skip computing continuous spectrum
 
    * nf : normalization flag, default =  1
        * 0 = off
