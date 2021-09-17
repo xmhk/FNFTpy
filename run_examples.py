@@ -30,9 +30,9 @@ Christoph Mahnke, 2018
 
 from examples import *
 
-kdvv_example()
+res = kdvv_example()
 
-
+"""
 input("Press enter for next example")
 
 nsep_example()
@@ -48,3 +48,4 @@ nsev_inverse_example()
 input("Press enter for next example")
 
 nsev_inverse_example2()
+"""

@@ -32,7 +32,7 @@ from .options_handling import get_kdvv_options
 from .auxiliary import get_lib_path, check_return_code, get_winmode_param
 
 
-def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None, bsl=None, niter=None, dst=None, cst=None, nf=None,
+def kdvv(u, tvec, K=128, M=128, Xi1=-2, Xi2=2, dis=None, bsl=None, niter=None, dst=None, cst=None, nf=None,
          ref=None, bound_state_guesses=None):
     """Calculate the Nonlinear Fourier Transform for the Korteweg-de Vries equation with vanishing boundaries.
 
@@ -50,6 +50,8 @@ def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None, bsl=None, niter=None, dst=None
     * tvec : time vector
 
     Optional arguments:
+
+    * K : number of bound states expected, default = 128
 
     * M : number of samples for the continuous spectrum to calculate, default = 128
 
@@ -165,17 +167,16 @@ def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None, bsl=None, niter=None, dst=None
     """
 
     D = len(u)
-    K = 0  # not yet implemented
     T1 = np.min(tvec)
     T2 = np.max(tvec)
     options = get_kdvv_options(dis=dis, bsl=bsl, niter=niter, dst=dst, cst=cst, nf=nf,
                                ref=ref)
-    return kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
-                        K, options, bound_state_guesses=bound_state_guesses)
+    return kdvv_wrapper(D, u, T1, T2, K, M, Xi1, Xi2,
+                        options, bound_state_guesses=bound_state_guesses)
 
 
-def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
-                 K, options, bound_state_guesses=None):
+def kdvv_wrapper(D, u, T1, T2, K, M, Xi1, Xi2,
+                 options, bound_state_guesses=None):
     """Calculate the Nonlinear Fourier Transform for the Korteweg-de Vries equation with vanishing boundaries.
 
     This function's interface mimics the behavior of the function 'fnft_kdvv' of FNFT.
@@ -187,9 +188,9 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
     * D : number of samples
     * u : numpy array holding the samples of the field to be analyzed
     * T1, T2  : time positions of the first and the last sample
+    * K : maximum number of bound states to calculate
     * M : number of values for the continuous spectrum to calculate
     * Xi1, Xi2 : min and max frequency for the continuous spectrum
-    * K : maximum number of bound states to calculate
     * options : options for kdvv as KdvvOptionsStruct. Can be generated e.g. with 'get_kdvv_options()'
 
     Optional Arguments:
