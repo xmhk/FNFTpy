@@ -43,7 +43,7 @@ def fnft_kdvv_default_options_wrapper():
     * options : KdvvOptionsStruct with options for kdvv_wrapper
 
     """
-    fnft_clib = ctypes.CDLL(get_lib_path(), winmode = get_winmode_param())
+    fnft_clib = ctypes.CDLL(get_lib_path(), winmode=get_winmode_param())
     clib_func = fnft_clib.fnft_kdvv_default_opts
     clib_func.restype = KdvvOptionsStruct
     clib_func.argtpes = []
@@ -66,7 +66,7 @@ def print_kdvv_options(options=None):
     print(options)
 
 
-def get_kdvv_options(bsl=None, dis=None, bsf=None, niter=None, dst=None, cst=None, nf=None,
+def get_kdvv_options(bsl=None, dis=None, niter=None, dst=None, cst=None, nf=None,
                      ref=None):
     """Get an KdvvOptionsStruct struct for use with kdvv_wrapper.
 
@@ -137,10 +137,6 @@ def get_kdvv_options(bsl=None, dis=None, bsf=None, niter=None, dst=None, cst=Non
         * NEWTON,
         * GRIDSEARCH_AND_REFINE
 
-    * bsf: bound state filtering, default=1
-        * 0 = NEWTON,
-        * 1 = GRIDSEARCH_AND_REFINE
-
     * niter : number of iterations for Newton bound state location, default = 10
 
     * dst : type of discrete spectrum, default = 0
@@ -149,17 +145,17 @@ def get_kdvv_options(bsl=None, dis=None, bsf=None, niter=None, dst=None, cst=Non
         * 2 = both
         * 3 = skip computing discrete spectrum
 
-   * cst : type of continuous spectrum, default = 0
+    * cst : type of continuous spectrum, default = 0
         * 0 = reflection coefficient
         * 1 = a and b
         * 2 = both
         * 3 = skip computing continuous spectrum
 
-   * nf : normalization flag, default =  1
+    * nf : normalization flag, default =  1
        * 0 = off
        * 1 = on
 
-   * ref : richardson extrapolation flag, default = 0
+    * ref : richardson extrapolation flag, default = 0
         * 0 = off
         * 1 = on
 
@@ -171,8 +167,6 @@ def get_kdvv_options(bsl=None, dis=None, bsf=None, niter=None, dst=None, cst=Non
     options = fnft_kdvv_default_options_wrapper()
     if dis is not None:
         options.discretization = dis
-    if bsf is not None:
-        options.bound_state_filtering = bsf
     if bsl is not None:
         options.bound_state_localization = bsl
     if niter is not None:
@@ -200,7 +194,7 @@ def fnft_nsep_default_options_wrapper():
     * options : NsepOptionsStruct for nsep_wrapper
 
     """
-    fnft_clib = ctypes.CDLL(get_lib_path(), winmode = get_winmode_param())
+    fnft_clib = ctypes.CDLL(get_lib_path(), winmode=get_winmode_param())
     clib_func = fnft_clib.fnft_nsep_default_opts
     clib_func.restype = NsepOptionsStruct
     clib_func.argtpes = []
@@ -223,7 +217,8 @@ def print_nsep_options(options=None):
     print(options)
 
 
-def get_nsep_options(loc=None, filt=None, bb=None, maxev=None, dis=None, nf=None, floq_range=None, ppspine=None, dsub=None, tol=None):
+def get_nsep_options(loc=None, filt=None, bb=None, maxev=None, dis=None, nf=None, floq_range=None, ppspine=None,
+                     dsub=None, tol=None):
     """Get a NsepOptionsStruct struct for use with nsep_wrapper.
 
     When called without additional optional argument, the default values from FNFT are used.
@@ -336,7 +331,7 @@ def fnft_nsev_default_options_wrapper():
 
     """
 
-    fnft_clib = ctypes.CDLL(get_lib_path(), winmode = get_winmode_param())
+    fnft_clib = ctypes.CDLL(get_lib_path(), winmode=get_winmode_param())
     clib_func = fnft_clib.fnft_nsev_default_opts
     clib_func.restype = NsevOptionsStruct
     clib_func.argtpes = []
@@ -462,6 +457,7 @@ def get_nsev_options(bsf=None, bsl=None, niter=None, Dsub=None, dst=None, cst=No
         options.richardson_extrapolation_flag = ref
     return options
 
+
 def fnft_nsev_inverse_default_options_wrapper():
     """Get the default options for nsev_inverse directly from the FNFT C-library.
 
@@ -471,7 +467,7 @@ def fnft_nsev_inverse_default_options_wrapper():
 
     """
 
-    fnft_clib = ctypes.CDLL(get_lib_path(), winmode = get_winmode_param())
+    fnft_clib = ctypes.CDLL(get_lib_path(), winmode=get_winmode_param())
     clib_func = fnft_clib.fnft_nsev_inverse_default_opts
     clib_func.restype = NsevInverseOptionsStruct
     clib_func.argtpes = []

@@ -32,8 +32,8 @@ from .options_handling import get_kdvv_options
 from .auxiliary import get_lib_path, check_return_code, get_winmode_param
 
 
-def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None, bsl=None, bsf=None, niter=None, dst=None, cst=None, nf=None,
-                     ref=None, bound_state_guesses=None):
+def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None, bsl=None, niter=None, dst=None, cst=None, nf=None,
+         ref=None, bound_state_guesses=None):
     """Calculate the Nonlinear Fourier Transform for the Korteweg-de Vries equation with vanishing boundaries.
 
     This function is intended to be 'convenient', which means it
@@ -118,10 +118,6 @@ def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None, bsl=None, bsf=None, niter=None
         * NEWTON,
         * GRIDSEARCH_AND_REFINE
 
-    * bsf: bound state filtering, default=1
-        * 0 = NEWTON,
-        * 1 = GRIDSEARCH_AND_REFINE
-
     * niter : number of iterations for Newton bound state location, default = 10
 
     * dst : type of discrete spectrum, default = 0
@@ -166,8 +162,8 @@ def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None, bsl=None, bsf=None, niter=None
     K = 0  # not yet implemented
     T1 = np.min(tvec)
     T2 = np.max(tvec)
-    options = get_kdvv_options(dis=dis, bsl=bsl, bsf=bsf, niter=niter, dst=dst, cst=cst, nf=nf,
-                     ref=ref)
+    options = get_kdvv_options(dis=dis, bsl=bsl, niter=niter, dst=dst, cst=cst, nf=nf,
+                               ref=ref)
     return kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
                         K, options, bound_state_guesses=bound_state_guesses)
 
@@ -210,7 +206,7 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
         * cont_b : continuous spectrum - scattering coefficient b
         * options : KdvvOptionsStruct with options used
     """
-    fnft_clib = ctypes.CDLL(get_lib_path(), winmode = get_winmode_param())
+    fnft_clib = ctypes.CDLL(get_lib_path(), winmode=get_winmode_param())
     clib_kdvv_func = fnft_clib.fnft_kdvv
     clib_kdvv_func.restype = ctypes_int
     kdvv_D = ctypes_uint(D)
@@ -239,7 +235,7 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
         # norming consts AND res
         kdvv_discspec = np.zeros(2 * K, dtype=numpy_complex)
         kdvv_boundstates = np.zeros(K, dtype=numpy_complex)
-    else: #no discrete spectrum
+    else:  # no discrete spectrum
         kdvv_discspec = ctypes_nullptr
         kdvv_boundstates = ctypes_nullptr
         kdvv_bound_states_type = type(ctypes_nullptr)
@@ -257,7 +253,6 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
                 while (ii < K - 1) and (ii < len(bsg_copy) - 1) and (ii < len(kdvv_boundstates) - 1):
                     ii = ii + 1
                     kdvv_boundstates[ii] = bsg_copy[ii]
-
 
     #
     # continuous spectrum -> reflection coefficient and / or a,b
@@ -285,7 +280,7 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
         kdvv_cont_spec_type,  # cont
         numpy_double_arr_ptr,  # Xi
         ctypes.POINTER(ctypes_uint),  # K_ptr
-        kdvv_bound_states_type,#numpy_complex_arr_ptr,  # boundstates
+        kdvv_bound_states_type,  # numpy_complex_arr_ptr,  # boundstates
         kdvv_disc_spec_type,  # normconsts res
         ctypes.POINTER(KdvvOptionsStruct)]  # options ptr
     rv = clib_kdvv_func(
@@ -300,7 +295,7 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
         kdvv_discspec,
         ctypes.byref(options))
     check_return_code(rv)
-    K_new = kdvv_K.value  #number of bound states found
+    K_new = kdvv_K.value  # number of bound states found
     # print(type(int(kdvv_k.value))) # TODO needs to be cleaned, cases?
     rdict = {'return_value': rv,
              'bound_states_num': K_new,
