@@ -74,7 +74,7 @@ def get_kdvv_options(bsl=None, dis=None, niter=None, dst=None, cst=None, nf=None
 
     Optional arguments:
 
-    * dis: discretization, default = 39  (for details see FNFT documentation)
+    * dis : discretization, default = 39  (for details see FNFT documentation)
 
          * 0 = 2SPLIT2_MODAL_VANILLA
          * 1 = BO_VANILLA
@@ -133,29 +133,34 @@ def get_kdvv_options(bsl=None, dis=None, niter=None, dst=None, cst=None, nf=None
          * 54 = ES4
          * 55 = TES4
 
-    * bsl: bound state localization, default=1
+    * bsl : bound state localization, default=1
+
         * NEWTON,
         * GRIDSEARCH_AND_REFINE
 
     * niter : number of iterations for Newton bound state location, default = 10
 
     * dst : type of discrete spectrum, default = 0
+
         * 0 = norming constants
         * 1 = residues
         * 2 = both
         * 3 = skip computing discrete spectrum
 
     * cst : type of continuous spectrum, default = 0
+
         * 0 = reflection coefficient
         * 1 = a and b
         * 2 = both
         * 3 = skip computing continuous spectrum
 
     * nf : normalization flag, default =  1
-       * 0 = off
-       * 1 = on
+
+        * 0 = off
+        * 1 = on
 
     * ref : richardson extrapolation flag, default = 0
+
         * 0 = off
         * 1 = on
 

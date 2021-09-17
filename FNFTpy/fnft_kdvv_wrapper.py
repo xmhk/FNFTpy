@@ -55,7 +55,7 @@ def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None, bsl=None, niter=None, dst=None
 
     * Xi1, Xi2 : min and max frequency for the continuous spectrum, default = [-2,2]
 
-    * dis: discretization, default = 39  (for details see FNFT documentation)
+    * dis : discretization, default = 39  (for details see FNFT documentation)
 
          * 0 = 2SPLIT2_MODAL_VANILLA
          * 1 = BO_VANILLA
@@ -114,32 +114,38 @@ def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None, bsl=None, niter=None, dst=None
          * 54 = ES4
          * 55 = TES4
 
-    * bsl: bound state localization, default=1
+    * bsl : bound state localization, default=1
+
         * NEWTON,
         * GRIDSEARCH_AND_REFINE
 
     * niter : number of iterations for Newton bound state location, default = 10
 
     * dst : type of discrete spectrum, default = 0
+
         * 0 = norming constants
         * 1 = residues
         * 2 = both
         * 3 = skip computing discrete spectrum
 
-   * cst : type of continuous spectrum, default = 0
+    * cst : type of continuous spectrum, default = 0
+
         * 0 = reflection coefficient
         * 1 = a and b
         * 2 = both
-        * 3 = skip computing continuous spectrum TODO: implement
+        * 3 = skip computing continuous spectrum
 
-   * nf : normalization flag, default =  1
-       * 0 = off
-       * 1 = on
+    * nf : normalization flag, default =  1
 
-   * ref : richardson extrapolation flag, default = 0
         * 0 = off
         * 1 = on
 
+    * ref : richardson extrapolation flag, default = 0
+
+        * 0 = off
+        * 1 = on
+
+    * bound_state_guesses : initial guesses for bound states, only effective if bsl=0, default=None
 
     Returns:
 
@@ -188,7 +194,7 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
 
     Optional Arguments:
 
-    * bound_state_guesses: list or array of bound state guesses, only effective if bsl==1 (Newton
+    * bound_state_guesses : list or array of bound state guesses, only effective if bsl==1 (Newton
                          bound state location is activated). Default = None
 
     Returns:
