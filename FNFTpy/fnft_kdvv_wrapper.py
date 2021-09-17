@@ -32,7 +32,7 @@ from .options_handling import get_kdvv_options
 from .auxiliary import get_lib_path, check_return_code, get_winmode_param
 
 
-def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None, bsf=None, niter=None, dst=None, cst=None, nf=None,
+def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None, bsl=None, bsf=None, niter=None, dst=None, cst=None, nf=None,
                      ref=None):
     """Calculate the Nonlinear Fourier Transform for the Korteweg-de Vries equation with vanishing boundaries.
 
@@ -83,6 +83,9 @@ def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None, bsf=None, niter=None, dst=None
          * 23 = CF5_3
          * 24 = CF6_4
 
+    * bsl: bound state localization, default=1
+        * NEWTON,
+        * GRIDSEARCH_AND_REFINE
 
     * bsf: bound state filtering, default=1
         * 0 = NEWTON,
@@ -132,14 +135,14 @@ def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None, bsf=None, niter=None, dst=None
     K = 0  # not yet implemented
     T1 = np.min(tvec)
     T2 = np.max(tvec)
-    options = get_kdvv_options(dis=dis, bsf=bsf, niter=niter, dst=dst, cst=cst, nf=nf,
+    options = get_kdvv_options(dis=dis, bsl=bsl, bsf=bsf, niter=niter, dst=dst, cst=cst, nf=nf,
                      ref=ref)
     return kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
                         K, options)
 
 
 def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
-                 K, options):
+                 K, options, bound_state_guesses=None):
     """Calculate the Nonlinear Fourier Transform for the Korteweg-de Vries equation with vanishing boundaries.
 
     This function's interface mimics the behavior of the function 'fnft_kdvv' of FNFT.
@@ -155,6 +158,11 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
     * Xi1, Xi2 : min and max frequency for the continuous spectrum
     * K : maximum number of bound states to calculate
     * options : options for kdvv as KdvvOptionsStruct. Can be generated e.g. with 'get_kdvv_options()'
+
+    Optional Arguments:
+
+    * bound_state_guesses: list or array of bound state guesses, only effective if bsl==1 (Newton
+                         bound state location is activated). Default = None
 
     Returns:
 
@@ -208,6 +216,20 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
         kdvv_boundstates = ctypes_nullptr
         kdvv_bound_states_type = type(ctypes_nullptr)
         kdvv_disc_spec_type = type(ctypes_nullptr)
+
+    #
+    # for Newton refinement: use guesses, if provided.
+    #
+    if options.bound_state_localization == 1:
+        if bound_state_guesses is not None:
+            bsg_copy = np.array(bound_state_guesses, dtype=np.complex128)
+            if len(bsg_copy) > 0:
+                ii = -1
+                # copy as many of the guesses to bound state array
+                while (ii < K - 1) and (ii < len(bsg_copy) - 1) and (ii < len(kdvv_boundstates) - 1):
+                    ii = ii + 1
+                    kdvv_boundstates[ii] = bsg_copy[ii]
+
 
     #
     # continuous spectrum -> reflection coefficient and / or a,b

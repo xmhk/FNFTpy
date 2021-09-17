@@ -141,6 +141,8 @@ def get_kdvv_options(bsl=None, dis=None, bsf=None, niter=None, dst=None, cst=Non
         options.discretization = dis
     if bsf is not None:
         options.bound_state_filtering = bsf
+    if bsl is not None:
+        options.bound_state_localization = bsl
     if niter is not None:
         options.niter = niter
     if dst is not None:
