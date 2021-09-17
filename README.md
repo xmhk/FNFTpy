@@ -13,7 +13,7 @@ visit FNFT's github page: [https://github.com/FastNFT](https://github.com/FastNF
 for changes and latest updates see [Changelog](CHANGELOG.md)
 
 
-### Korteweg-de-Fries equation with vanishing boundary conditions:
+### Korteweg-de-Vries equation with vanishing boundary conditions:
   * Currently, the continuous spectrum can be calculated.
   * Function **kdvv**: 
     * easy-to-use Python function, options can be passed as optional arguments 
