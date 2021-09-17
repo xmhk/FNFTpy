@@ -48,9 +48,10 @@ def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None, bsf=None, niter=None, dst=None
 
     * u : numpy array holding the samples of the field to be analyzed
     * tvec : time vector
-    * M : number of samples for the continuous spectrum to calculate,
 
     Optional arguments:
+
+    * M : number of samples for the continuous spectrum to calculate, default = 128
 
     * Xi1, Xi2 : min and max frequency for the continuous spectrum, default = [-2,2]
 
@@ -152,7 +153,7 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
     * T1, T2  : time positions of the first and the last sample
     * M : number of values for the continuous spectrum to calculate
     * Xi1, Xi2 : min and max frequency for the continuous spectrum
-    * K : maximum number of bound states to calculate (no effect yet) TODO change
+    * K : maximum number of bound states to calculate
     * options : options for kdvv as KdvvOptionsStruct. Can be generated e.g. with 'get_kdvv_options()'
 
     Returns:
