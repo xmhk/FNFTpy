@@ -23,7 +23,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 Contributors:
 
-Christoph Mahnke, Shrinivas Chimmalgi 2018, 2019
+Christoph Mahnke, Shrinivas Chimmalgi 2018-2021
 
 """
 
@@ -67,7 +67,7 @@ def nsev(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=None,
     * bsl : bound state localization, default = 2
 
         * 0 = fast eigenvalue
-        * 1 = Newton
+        * 1 = Newton (in this case you should provide bound_state_guesses, see below)
         * 2 = subsample and refine
 
     * niter : number of iterations for Newton bound state location, default = 10
@@ -176,7 +176,8 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
 
     Optional Arguments:
 
-    * bound_state_guesses: list or array of bound state guesses, only effective if bsl==1 (Newton
+    * bound_state_guesses: list or array of bound state guesses, only effective if
+                         options.bound_state_localization == 1  (Newton
                          bound state location is activated). Default = None
 
     Returns:
