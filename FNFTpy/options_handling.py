@@ -66,7 +66,7 @@ def print_kdvv_options(options=None):
     print(options)
 
 
-def get_kdvv_options(dis=None, bsf=None, niter=None, dst=None, cst=None, nf=None,
+def get_kdvv_options(bsl=None, dis=None, bsf=None, niter=None, dst=None, cst=None, nf=None,
                      ref=None):
     """Get an KdvvOptionsStruct struct for use with kdvv_wrapper.
 
@@ -101,6 +101,9 @@ def get_kdvv_options(dis=None, bsf=None, niter=None, dst=None, cst=None, nf=None
          * 22 = CF4_3
          * 23 = CF5_3
          * 24 = CF6_4
+    * bsl: bound state localization, default=1
+        * NEWTON,
+        * GRIDSEARCH_AND_REFINE
 
     * bsf: bound state filtering, default=1
         * 0 = NEWTON,
