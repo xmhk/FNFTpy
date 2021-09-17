@@ -290,8 +290,4 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
     else:
         # no cont. spectrum calculated
         pass
-
-             #'K':kdvv_k.value, 'boundstates': kdvv_boundstates[0:kdvv_k.value],
-             #'discspec':kdvv_discspec}  #TODO sort this
-    #'cont': kdvv_cont,
     return rdict
