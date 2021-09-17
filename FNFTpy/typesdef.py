@@ -82,8 +82,13 @@ class KdvvOptionsStruct(GenericOptionsStruct):
 
     Fields:
 
-    * discretization
-
+        * bound_state_localization
+        * niter", ctypes_uint
+        * discspec_type
+        * contspec_type
+        * normalization_flag
+        * discretization
+        * richardson_extrapolation_flag
     """
 
     _fields_ = [
