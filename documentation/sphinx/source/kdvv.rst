@@ -1,7 +1,7 @@
 
 
 ===========================
- Korteweg-de-Fries equation
+ Korteweg-de-Vries equation
 ===========================
 
 kdvv - calculate the Nonlinear Fourier Transform

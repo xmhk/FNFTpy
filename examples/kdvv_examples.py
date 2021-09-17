@@ -63,5 +63,4 @@ def kdvv_example(dis=None, bsl=None, niter=None, dst=None, cst=None, nf=None,
         np.real(res['bound_states'][0]), np.imag(res['bound_states'][0]), np.real(res['disc_norm'][0]),
         np.imag(res['disc_norm'][0]),
     ))
-
     return res
