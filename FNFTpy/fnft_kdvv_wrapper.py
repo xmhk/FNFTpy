@@ -33,7 +33,7 @@ from .auxiliary import get_lib_path, check_return_code, get_winmode_param
 
 
 def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None, bsl=None, bsf=None, niter=None, dst=None, cst=None, nf=None,
-                     ref=None):
+                     ref=None, bound_state_guesses=None):
     """Calculate the Nonlinear Fourier Transform for the Korteweg-de Vries equation with vanishing boundaries.
 
     This function is intended to be 'convenient', which means it
@@ -138,7 +138,7 @@ def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None, bsl=None, bsf=None, niter=None
     options = get_kdvv_options(dis=dis, bsl=bsl, bsf=bsf, niter=niter, dst=dst, cst=cst, nf=nf,
                      ref=ref)
     return kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
-                        K, options)
+                        K, options, bound_state_guesses=bound_state_guesses)
 
 
 def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
@@ -179,7 +179,6 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
         * cont_b : continuous spectrum - scattering coefficient b
         * options : KdvvOptionsStruct with options used
     """
-
     fnft_clib = ctypes.CDLL(get_lib_path(), winmode = get_winmode_param())
     clib_kdvv_func = fnft_clib.fnft_kdvv
     clib_kdvv_func.restype = ctypes_int
@@ -194,9 +193,7 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
     kdvv_Xi = np.zeros(2, dtype=numpy_double)
     kdvv_Xi[0] = Xi1
     kdvv_Xi[1] = Xi2
-    k =12  # todo
-    K = 12
-    kdvv_K = ctypes_uint(k)
+    kdvv_K = ctypes_uint(K)
 
     #
     # discrete spectrum -> reflection coefficient and / or residues
@@ -220,7 +217,7 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
     #
     # for Newton refinement: use guesses, if provided.
     #
-    if options.bound_state_localization == 1:
+    if options.bound_state_localization == 0:
         if bound_state_guesses is not None:
             bsg_copy = np.array(bound_state_guesses, dtype=np.complex128)
             if len(bsg_copy) > 0:
@@ -237,7 +234,6 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
     kdvv_cont_spec_type = numpy_complex_arr_ptr
     if options.contspec_type == 0:
         # reflection coeff.
-        print(kdvv_M.value)
         kdvv_cont = np.zeros(kdvv_M.value, dtype=numpy_complex)
     elif options.contspec_type == 1:
         # a and b
@@ -274,7 +270,7 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
         ctypes.byref(options))
     check_return_code(rv)
     K_new = kdvv_K.value  #number of bound states found
-    #print(type(int(kdvv_k.value))) # TODO needs to be cleaned, cases?
+    # print(type(int(kdvv_k.value))) # TODO needs to be cleaned, cases?
     rdict = {'return_value': rv,
              'bound_states_num': K_new,
              'bound_states': kdvv_boundstates[0:K_new],
