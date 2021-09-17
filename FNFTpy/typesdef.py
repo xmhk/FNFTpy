@@ -85,7 +85,6 @@ class KdvvOptionsStruct(GenericOptionsStruct):
     * discretization
 
     """
-    # note: 2021-09-14 check types
 
     _fields_ = [
         ("bound_state_localization", ctypes_int),
