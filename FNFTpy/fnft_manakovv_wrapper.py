@@ -131,7 +131,22 @@ def manakovv_wrapper(D, q1, q2, T1, T2, Xi1, Xi2, M, K, kappa, options  ):
         'return_value': rv,
         'bound_states_num': K_new,
         'bound_states': manakovv_boundstates[0:K_new]}
-
+    #
+    # depending on options: output of discrete spectrum
+    #
+    if options.discspec_type == 0:
+        # norming const
+        rdict['disc_norm'] = manakovv_discspec[0:K_new]
+    elif options.discspec_type == 1:
+        # residues
+        rdict['disc_res'] = manakovv_discspec[0:K_new]
+    elif options.discspec_type == 2:
+        # norming const. AND residues
+        rdict['disc_norm'] = manakovv_discspec[0:K_new]
+        rdict['disc_res'] = manakovv_discspec[K_new:2 * K_new]
+    else:
+        # no discrete spectrum calculated
+        pass
     #
     # depending on options: output of continuous spectrum
     #
