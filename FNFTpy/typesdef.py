@@ -82,21 +82,29 @@ class ManakovvOptionsStruct(GenericOptionsStruct):
 
     Fields:
 
-    * discretization
+        * bound_state_filtering
+        * bound_state_localization
+        * niter
+        * Dsub
+        * discspec_type
+        * contspec_type
+        * normalization_flag
+        * discretization
+        * richardson_extrapolation_flag
 
+    * discretization
     """
-    # note: 2021-09-14 check types
 
     _fields_ = [
         ("bound_state_filtering", ctypes_int),
         ("bound_state_localization", ctypes_int),
-        ("niter", ctypes_uint), #check uint
+        ("niter", ctypes_uint),  # check uint
         ("Dsub", ctypes_uint),  # check uint
         ("discspec_type", ctypes_int),
         ("contspec_type", ctypes_int),
-        ("normalization_flag", ctypes_int), #check int
+        ("normalization_flag", ctypes_int),  # check int
         ("discretization", ctypes_int),
-        ("richardson_extrapolation_flag", ctypes_uint)] #check: uint
+        ("richardson_extrapolation_flag", ctypes_uint)]  # check: uint
 
 
 class KdvvOptionsStruct(GenericOptionsStruct):
