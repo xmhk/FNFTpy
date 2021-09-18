@@ -23,7 +23,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 Contributors:
 
-Christoph Mahnke, 2018
+Christoph Mahnke, 2018-2021
 
 """
 
@@ -61,6 +61,27 @@ class NsevExampleTest(unittest.TestCase):
         with self.subTest('cont_ref value'):
             self.assertTrue(check_array(self.res['cont_ref'], self.expected['cont_ref']),
                             "cont_ref value not as expected")
+
+
+class NsevExampleTest_bound_state_guesses(unittest.TestCase):
+    """Testcase for nsev_example, check whether works with provided bound_states."""
+
+    def setUp(self):
+        self.res = nsev_example(verbose=False, dst=2, cst=4, bsl=1, bound_state_guesses=[0.01 + 0.1j, 1j],
+                                amplitude_scale=1.2)
+        self.expected = {'bound_states': np.array([-1.97215226e-29 + 0.21057155j, 0.00000000e+00 + 2.02789446j]),
+                         'disc_norm': np.array([1. + 7.8106363e-30j, -1. - 0.0000000e+00j]),
+                         }
+
+    def test_nsev_example(self):
+        with self.subTest('check FNFT nsev return value'):
+            self.assertEqual(self.res['return_value'], 0, "FNFT nsev return value not 0")
+        with self.subTest('bound states value'):
+            self.assertTrue(check_array(self.res['bound_states'], self.expected['bound_states']),
+                            "provide guesses: bound_states value not as expected")
+        with self.subTest('disc_norm value'):
+            self.assertTrue(check_array(self.res['disc_norm'], self.expected['disc_norm']),
+                            "provide guesses: disc_norm value not as expected")
 
 
 class NsevDstCstInputTest(unittest.TestCase):

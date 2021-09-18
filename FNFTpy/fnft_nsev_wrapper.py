@@ -233,7 +233,7 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
     #
     # for Newton refinement: use guesses, if provided.
     #
-    if options.bound_state_localization == 1:   # newton refinement, provide guesses
+    if options.bound_state_localization == 1:
         if bound_state_guesses is not None :
             bsg_copy = np.array(bound_state_guesses, dtype=np.complex128)
             if len(bsg_copy)>0:
@@ -242,7 +242,6 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
                 while (ii< K-1) and (ii<len(bsg_copy)-1) and (ii<len(nsev_boundstates)-1):
                     ii = ii+1
                     nsev_boundstates[ii] = bsg_copy[ii]
-        pass
     #
     # continuous spectrum -> reflection coefficient and / or a,b
     #

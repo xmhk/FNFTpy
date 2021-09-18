@@ -104,19 +104,23 @@ class KdvvOptionsStruct(GenericOptionsStruct):
 
     Fields:
 
-    * discretization
-
+        * bound_state_localization
+        * niter
+        * discspec_type
+        * contspec_type
+        * normalization_flag
+        * discretization
+        * richardson_extrapolation_flag
     """
-    # note: 2021-09-14 check types
 
     _fields_ = [
         ("bound_state_localization", ctypes_int),
-        ("niter", ctypes_uint), #check uint
+        ("niter", ctypes_uint),  # check uint
         ("discspec_type", ctypes_int),
         ("contspec_type", ctypes_int),
-        ("normalization_flag", ctypes_int), #check int
+        ("normalization_flag", ctypes_int),  # check int
         ("discretization", ctypes_int),
-        ("richardson_extrapolation_flag", ctypes_uint)] #check: uint
+        ("richardson_extrapolation_flag", ctypes_uint)]  # check: uint
 
 
 class NsepOptionsStruct(GenericOptionsStruct):
@@ -144,11 +148,12 @@ class NsepOptionsStruct(GenericOptionsStruct):
         ("max_evals", ctypes_uint),
         ("discretization", ctypes_int),
         ("normalization_flag", ctypes_int),
-        ("floquet_range" , ctypes_double * 2),
+        ("floquet_range", ctypes_double * 2),
         ("points_per_spine", ctypes_uint),
         ("Dsub", ctypes_uint),
         ("tol", ctypes_double)
-        ]
+    ]
+
 
 class NsevOptionsStruct(GenericOptionsStruct):
     """Ctypes options struct for interfacing fnft_nsev.
@@ -177,6 +182,7 @@ class NsevOptionsStruct(GenericOptionsStruct):
         ("normalization_flag", ctypes_int32),
         ("discretization", ctypes_int),
         ("richardson_extrapolation_flag", ctypes_int)]
+
 
 class NsevSlowOptionsStruct(GenericOptionsStruct):
     """Ctypes options struct for interfacing fnft_nsev_slow.

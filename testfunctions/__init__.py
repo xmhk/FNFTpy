@@ -23,13 +23,13 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 Contributors:
 
-Christoph Mahnke, 2018
+Christoph Mahnke, 2018-2021
 
 """
 
-from .kdvv_tests import KdvvExampleTest
+from .kdvv_tests import KdvvExampleTest, KdvvExampleTest_provide_bound_states
+from .nsev_tests import NsevExampleTest, NsevDstCstInputTest, NsevExampleTest_bound_state_guesses
 from .nsep_tests import NsepExampleTest
-from .nsev_tests import NsevExampleTest, NsevDstCstInputTest
 from .nsev_inverse_tests import NsevInverseExample, NsevInverseExample2, NsevInverseInputVariation
 from .options_tests import FnftpyOptionsTest
 

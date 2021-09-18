@@ -13,7 +13,7 @@ visit FNFT's github page: [https://github.com/FastNFT](https://github.com/FastNF
 for changes and latest updates see [Changelog](CHANGELOG.md)
 
 
-### Korteweg-de-Fries equation with vanishing boundary conditions:
+### Korteweg-de-Vries equation with vanishing boundary conditions:
   * Currently, the continuous spectrum can be calculated.
   * Function **kdvv**: 
     * easy-to-use Python function, options can be passed as optional arguments 
@@ -21,32 +21,32 @@ for changes and latest updates see [Changelog](CHANGELOG.md)
         ```
         import numpy as np
         from FNFTpy import kdvv
-        print("\n\nkdvv example")
-    
-        # set values
         D = 256
         tvec = np.linspace(-1, 1, D)
         q = np.zeros(D, dtype=np.complex128)
         q[:] = 2.0 + 0.0j
         Xi1 = -2
         Xi2 = 2
-        M = 8
+        M = 8  # points for continuous spectrum
+        K = 8  # number of expected bound states
         Xivec = np.linspace(Xi1, Xi2, M)
-    
-        # call function
-        res = kdvv(q, tvec, M, Xi1=Xi1, Xi2=Xi2)
-    
-        # print results
+        res = kdvv(q, tvec, K, M, Xi1=Xi1, Xi2=Xi2)
         print("\n----- options used ----")
         print(res['options'])
         print("\n------ results --------")
         print("FNFT return value: %d (should be 0)" % res['return_value'])
         print("continuous spectrum: ")
-        for i in range(len(res['cont'])):
-            print("%d : Xi=%.4f   %.6f  %.6fj" % (i, Xivec[i],
-                  np.real(res['cont'][i]), np.imag(res['cont'][i])))
-        ```
-    * for full description call ```help(kdvv)```
+        for i in range(len(res['cont_ref'])):
+            print("%d : Xi=%.3f   %.3e + %.3ej"%(i,
+                    Xivec[i], np.real(res['cont_ref'][i]), 
+                    np.imag(res['cont_ref'][i])))
+        print("discrete spectrum")
+        for i in range(res['bound_states_num']):
+            print("%d : bound state  %.3e + %.3ej with norming const %.3e + %.3ej"% (i,
+                      np.real(res['bound_states'][i]),np.imag(res['bound_states'][i]),
+                      np.real(res['disc_norm'][i]),np.imag(res['disc_norm'][i])))
+          ```
+      * for full description call ```help(kdvv)```
       
       
   * function **kdvv_wrapper**:

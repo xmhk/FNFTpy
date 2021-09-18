@@ -30,8 +30,7 @@ Christoph Mahnke, 2018
 
 from examples import *
 
-kdvv_example()
-
+res = kdvv_example()
 
 input("Press enter for next example")
 
