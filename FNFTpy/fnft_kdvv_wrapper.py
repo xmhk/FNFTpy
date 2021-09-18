@@ -149,6 +149,8 @@ def kdvv(u, tvec, K=128, M=128, Xi1=-2, Xi2=2, dis=None, bsl=None, niter=None, d
 
     * bound_state_guesses : initial guesses for bound states, only effective if bsl=0, default=None
 
+                            Please note: up to now, the guesses have to be purely imaginary
+
     Returns:
 
    * rdict : dictionary holding the fields:
@@ -197,6 +199,8 @@ def kdvv_wrapper(D, u, T1, T2, K, M, Xi1, Xi2,
 
     * bound_state_guesses : list or array of bound state guesses, only effective if bsl==1 (Newton
                          bound state location is activated). Default = None
+
+                         Please note: up to now, the guesses have to be purely imaginary
 
     Returns:
 
