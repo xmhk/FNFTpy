@@ -221,10 +221,40 @@ def print_manakovv_options(options=None):
     print(options)
 
 
-def get_manakovv_options(dis=None):
+def get_manakovv_options(dis=None, bsf=None, bsl=None, Dsub=None, niter=None, dst=None,
+                         cst=None, nf=None, ref=None):
+    """
+    TODO write docstring
+    :param dis:
+    :param bsf:
+    :param bsl:
+    :param Dsub:
+    :param niter:
+    :param dst:
+    :param cst:
+    :param nf:
+    :param ref:
+    :return:
+    """
     options = fnft_manakovv_default_options_wrapper()
     if dis is not None:
         options.discretization = dis
+    if bsf is not None:
+        options.bound_state_filtering = bsf
+    if bsl is not None:
+        options.bound_state_localization = bsl
+    if Dsub is not None:
+        options.Dsub = Dsub
+    if niter is not None:
+        options.niter = niter
+    if dst is not None:
+        options.discspec_type = dst
+    if cst is not None:
+        options.contspec_type = cst
+    if nf is not None:
+        options.normalization_flag = nf
+    if ref is not None:
+        options.richardson_extrapolation_flag = ref
     return options
 
 
