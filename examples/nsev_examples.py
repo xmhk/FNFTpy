@@ -32,7 +32,7 @@ import numpy as np
 
 
 def nsev_example(bsf=None, bsl=None, niter=None, Dsub=None, dst=None, cst=None, nf=None, dis=None, ref=None,
-                 bound_state_guesses=None,  amplitude_scale=1.0, verbose=True):
+                 bound_state_guesses=None, amplitude_scale=1.0, verbose=True):
     """Mimics the C example for calling fnft_nsev."""
     if verbose:
         print("\n\nnsev example")
