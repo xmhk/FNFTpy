@@ -49,38 +49,6 @@ def fnft_kdvv_default_options_wrapper():
     clib_func.argtpes = []
     return clib_func()
 
-def fnft_manakovv_options_wrapper():
-    """
-    WRITE DOCSTRING
-
-    :return:
-    """
-    fnft_clib = ctypes.CDLL(get_lib_path(), winmode=get_winmode_param())
-    clib_func = fnft_clib.fnft_manakovv_default_opts
-    clib_func.restype = ManakovvOptionsStruct
-    clib_func.argtpes = []
-    return clib_func()
-
-def print_manakovv_options(options=None):
-    """Print options of a Manakovv.
-
-    When called without additional argument, the default options from FNFT are printed.
-
-    Optional arguments:
-
-    * options : ManakovvOptionsStruct, e.g. created by get_manakovv_options()
-
-    """
-    if options is None:
-        options = fnft_manakovv_options_wrapper()
-    print("manakovv options:")
-    print(options)
-
-def get_manakovv_options(dis=None):
-    options = fnft_manakovv_options_wrapper()
-    if dis is not None:
-        options.discretization = dis
-    return options
 
 def print_kdvv_options(options=None):
     """Print options of a KdvvOptionsStruct.
@@ -216,6 +184,47 @@ def get_kdvv_options(bsl=None, dis=None, niter=None, dst=None, cst=None, nf=None
         options.normalization_flag = nf
     if ref is not None:
         options.richardson_extrapolation_flag = ref
+    return options
+
+
+#
+#  Get and view options for manakovv (Manakov equation)
+#
+
+
+def fnft_manakovv_default_options_wrapper():
+    """
+    WRITE DOCSTRING
+
+    :return:
+    """
+    fnft_clib = ctypes.CDLL(get_lib_path(), winmode=get_winmode_param())
+    clib_func = fnft_clib.fnft_manakovv_default_opts
+    clib_func.restype = ManakovvOptionsStruct
+    clib_func.argtpes = []
+    return clib_func()
+
+
+def print_manakovv_options(options=None):
+    """Print options of a Manakovv.
+
+    When called without additional argument, the default options from FNFT are printed.
+
+    Optional arguments:
+
+    * options : ManakovvOptionsStruct, e.g. created by get_manakovv_options()
+
+    """
+    if options is None:
+        options = fnft_manakovv_default_options_wrapper()
+    print("manakovv options:")
+    print(options)
+
+
+def get_manakovv_options(dis=None):
+    options = fnft_manakovv_default_options_wrapper()
+    if dis is not None:
+        options.discretization = dis
     return options
 
 
