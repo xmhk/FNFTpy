@@ -27,7 +27,7 @@ Christoph Mahnke, 2018
 
 """
 
-from .kdvv_tests import KdvvExampleTest
+from .kdvv_tests import KdvvExampleTest, KdvvExampleTest_provide_bound_states
 from .nsep_tests import NsepExampleTest
 from .nsev_tests import NsevExampleTest, NsevDstCstInputTest
 from .nsev_inverse_tests import NsevInverseExample, NsevInverseExample2, NsevInverseInputVariation

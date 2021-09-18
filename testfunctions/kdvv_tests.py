@@ -74,3 +74,27 @@ class KdvvExampleTest(unittest.TestCase):
             self.assertTrue(check_array(self.res['cont_a'], expected['cont_a']), 'contspec (a) as expected')
         with self.subTest('cont_b'):
             self.assertTrue(check_array(self.res['cont_b'], expected['cont_b']), 'contspec (b) as expected')
+
+
+class KdvvExampleTest_provide_bound_states(unittest.TestCase):
+    """Testcase for kdvv_example, NEWTON + bound states provided"""
+
+    def setUp(self):
+        self.res = kdvv_example(dst=1, cst=3, bsl=0, verbose=False, amplitude_scale=1.3,
+                                bound_state_guesses=[0.1j, 1.j], K=2)
+        self.res2 = kdvv_example(dst=1, cst=3, bsl=0, verbose=False, amplitude_scale=1.3,
+                                 bound_state_guesses=[0.1j, 0.01 + 1.j],
+                                 K=2)  # should fail, no real part for guesses (yet)
+
+    def test_kdvv_example_bound_states_provided(self):
+        with self.subTest('check FNFT kdvv return value'):
+            self.assertEqual(self.res['return_value'], 0, "FNFT kdvv return value")
+        expected = {'bound_states': np.array([0. + 0.07454561j, 0. + 1.30818689j])
+                    }
+        with self.subTest('check bound state results with valid guesses'):
+            self.assertTrue(check_array(self.res['bound_states'], expected['bound_states']), 'bound_states as expected')
+        with self.subTest('check bound state results with valid guesses'):
+            self.assertTrue(check_array(self.res['bound_states'], expected['bound_states']), 'bound_states as expected')
+
+        self.assertEqual(self.res2['return_value'], 2,
+                         "FNFT kdvv return value -- should be 2 if real part of guesses is not zero")

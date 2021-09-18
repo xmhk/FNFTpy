@@ -28,21 +28,23 @@ Christoph Mahnke, 2018-2020
 """
 
 import unittest
-from testfunctions import KdvvExampleTest, NsepExampleTest, NsevExampleTest, \
-    NsevDstCstInputTest,NsevInverseExample, NsevInverseExample2, \
+from testfunctions import KdvvExampleTest, KdvvExampleTest_provide_bound_states, \
+    NsepExampleTest, NsevExampleTest, \
+    NsevDstCstInputTest, NsevInverseExample, NsevInverseExample2, \
     NsevInverseInputVariation, FnftpyOptionsTest
 from FNFTpy import print_fnft_version
 
 options_suite = unittest.TestLoader().loadTestsFromTestCase(FnftpyOptionsTest)
 
 kdvv_suite = unittest.TestLoader().loadTestsFromTestCase(KdvvExampleTest)
+kdvv_newton_bound_suite = unittest.TestLoader().loadTestsFromTestCase(KdvvExampleTest_provide_bound_states)
 
 nsep_suite = unittest.TestLoader().loadTestsFromTestCase(NsepExampleTest)
 
 nsev_suite1 = unittest.TestLoader().loadTestsFromTestCase(NsevExampleTest)
 nsev_suite2 = unittest.TestLoader().loadTestsFromTestCase(NsevDstCstInputTest)
 
-#nsev_slow_suite = unittest.TestLoader().loadTestsFromTestCase(NsevSlowExampleTest)
+# nsev_slow_suite = unittest.TestLoader().loadTestsFromTestCase(NsevSlowExampleTest)
 
 nsev_inverse_suite1 = unittest.TestLoader().loadTestsFromTestCase(NsevInverseExample)
 nsev_inverse_suite2 = unittest.TestLoader().loadTestsFromTestCase(NsevInverseExample2)
@@ -50,14 +52,16 @@ nsev_inverse_suite3 = unittest.TestLoader().loadTestsFromTestCase(NsevInverseInp
 
 suite = unittest.TestSuite([options_suite,
                             kdvv_suite,
+                            kdvv_newton_bound_suite,
                             nsep_suite,
                             nsev_suite1, nsev_suite2,
-                            #nsev_slow_suite,
+                            # nsev_slow_suite,
                             nsev_inverse_suite1,
                             nsev_inverse_suite2,
                             nsev_inverse_suite3
-     ])
+                            ])
 
 print_fnft_version()
-print("\n\nthe FNFT error ('FNFT Error: Sanity check failed (Neither contspec nor discspec provided.)') is intended: just to check that it is catched without crashing ...\n\n")
-t1 = unittest.TextTestRunner(buffer=True, verbosity=5   ).run(suite)
+print(
+    "\n Note: some output for 'FNFT errors' are intended. This is to check whether errors are catched\n\n")
+t1 = unittest.TextTestRunner(buffer=True, verbosity=5).run(suite)
