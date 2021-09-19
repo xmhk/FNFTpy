@@ -33,6 +33,39 @@ from .auxiliary import get_lib_path, check_return_code, get_winmode_param
 from .options_handling import get_manakovv_options
 
 
+def manakovv(q1, q2, tvec, Xi1=-1.75, Xi2=2, M=128, K=128, kappa=1, bsf=None,
+         bsl=None, niter=None, Dsub=None, dst=None, cst=None, nf=None, dis=None, ref=None,
+         ):
+    """
+    TODO write Documentation
+    :param q1:
+    :param q2:
+    :param tvec:
+    :param Xi1:
+    :param Xi2:
+    :param M:
+    :param K:
+    :param kappa:
+    :param bsf:
+    :param bsl:
+    :param niter:
+    :param Dsub:
+    :param dst:
+    :param cst:
+    :param nf:
+    :param dis:
+    :param ref:
+    :return:
+    """
+
+    D = len(q1)
+    if len(q1) != len(q2):
+        print("Warning: q1 and q2 should be of same length.")
+    T1 = np.min(tvec)
+    T2 = np.max(tvec)
+    options = get_manakovv_options(bsf=bsf, bsl=bsl, niter=niter, Dsub=Dsub, dst=dst, cst=cst, nf=nf, dis=dis, ref=ref)
+    return manakovv_wrapper(D, q1, q2, T1, T2, Xi1, Xi2,
+                        M, K, kappa, options)
 
 
 def manakovv_wrapper(D, q1, q2, T1, T2, Xi1, Xi2, M, K, kappa, options  ):
@@ -166,5 +199,5 @@ def manakovv_wrapper(D, q1, q2, T1, T2, Xi1, Xi2, M, K, kappa, options  ):
         rdict['cont_a'] = manakovv_cont[2*M:3*M]
         rdict['cont_b1'] = manakovv_cont[3*M:4*M]
         rdict['cont_b2'] = manakovv_cont[4*M::]
-
+    rdict['options'] = repr(options)
     return rdict
