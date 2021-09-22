@@ -232,7 +232,7 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
     #
     # for Newton refinement: use guesses, if provided.
     #
-    if options.bound_state_localization == 1:
+    if options.bound_state_localization == fnft_nsev_bsloc.NEWTON:
         if bound_state_guesses is not None :
             bsg_copy = np.array(bound_state_guesses, dtype=np.complex128)
             if len(bsg_copy)>0:

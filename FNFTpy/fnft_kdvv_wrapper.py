@@ -238,11 +238,11 @@ def kdvv_wrapper(D, u, T1, T2, K, M, Xi1, Xi2,
     #
     kdvv_bound_states_type = numpy_complex_arr_ptr
     kdvv_disc_spec_type = numpy_complex_arr_ptr
-    if (options.discspec_type == 0) or (options.discspec_type == 1):
-        # norming consts OR residues
+    if (options.discspec_type == fnft_kdvv_dstype.NORMING_CONSTANTS) \
+            or (options.discspec_type == fnft_kdvv_dstype.RESIDUES):
         kdvv_discspec = np.zeros(K, dtype=numpy_complex)
         kdvv_boundstates = np.zeros(K, dtype=numpy_complex)
-    elif options.discspec_type == 2:
+    elif options.discspec_type == fnft_kdvv_dstype.BOTH:
         # norming consts AND res
         kdvv_discspec = np.zeros(2 * K, dtype=numpy_complex)
         kdvv_boundstates = np.zeros(K, dtype=numpy_complex)
@@ -255,7 +255,7 @@ def kdvv_wrapper(D, u, T1, T2, K, M, Xi1, Xi2,
     #
     # for Newton refinement: use guesses, if provided.
     #
-    if options.bound_state_localization == 0:
+    if options.bound_state_localization == fnft_kdvv_bsloc.NEWTON:
         if bound_state_guesses is not None:
             bsg_copy = np.array(bound_state_guesses, dtype=np.complex128)
             if len(bsg_copy) > 0:
@@ -269,14 +269,11 @@ def kdvv_wrapper(D, u, T1, T2, K, M, Xi1, Xi2,
     # continuous spectrum -> reflection coefficient and / or a,b
     #
     kdvv_cont_spec_type = numpy_complex_arr_ptr
-    if options.contspec_type == 0:
-        # reflection coeff.
+    if options.contspec_type == fnft_kdvv_cstype.REFLECTION_COEFFICIENT:
         kdvv_cont = np.zeros(kdvv_M.value, dtype=numpy_complex)
-    elif options.contspec_type == 1:
-        # a and b
+    elif options.contspec_type == fnft_kdvv_cstype.AB:
         kdvv_cont = np.zeros(2 * kdvv_M.value, dtype=numpy_complex)
-    elif options.contspec_type == 2:
-        # a and b AND reflection coeff.
+    elif options.contspec_type == fnft_kdvv_cstype.BOTH:
         kdvv_cont = np.zeros(3 * kdvv_M.value, dtype=numpy_complex)
     else:
         # 3 or any other option: skip continuous spectrum -> pass NULL
@@ -315,14 +312,11 @@ def kdvv_wrapper(D, u, T1, T2, K, M, Xi1, Xi2,
     #
     # depending on options: output of discrete spectrum
     #
-    if options.discspec_type == 0:
-        # norming const
+    if options.discspec_type == fnft_kdvv_dstype.NORMING_CONSTANTS:
         rdict['disc_norm'] = kdvv_discspec[0:K_new]
-    elif options.discspec_type == 1:
-        # residues
+    elif options.discspec_type == fnft_kdvv_dstype.RESIDUES:
         rdict['disc_res'] = kdvv_discspec[0:K_new]
-    elif options.discspec_type == 2:
-        # norming const. AND residues
+    elif options.discspec_type == fnft_kdvv_dstype.BOTH:
         rdict['disc_norm'] = kdvv_discspec[0:K_new]
         rdict['disc_res'] = kdvv_discspec[K_new:2 * K_new]
     else:
@@ -331,15 +325,12 @@ def kdvv_wrapper(D, u, T1, T2, K, M, Xi1, Xi2,
     #
     # depending on options: output of continuous spectrum
     #
-    if options.contspec_type == 0:
-        # refl. coeff
+    if options.contspec_type == fnft_kdvv_cstype.REFLECTION_COEFFICIENT:
         rdict['cont_ref'] = kdvv_cont[0:M]
-    elif options.contspec_type == 1:
-        # a and b
+    elif options.contspec_type == fnft_kdvv_cstype.AB:
         rdict['cont_a'] = kdvv_cont[0:M]
         rdict['cont_b'] = kdvv_cont[M:2 * M]
-    elif options.contspec_type == 2:
-        # refl. coeff AND a and b
+    elif options.contspec_type == fnft_kdvv_cstype.BOTH:
         rdict['cont_ref'] = kdvv_cont[0:M]
         rdict['cont_a'] = kdvv_cont[M:2 * M]
         rdict['cont_b'] = kdvv_cont[2 * M:3 * M]
