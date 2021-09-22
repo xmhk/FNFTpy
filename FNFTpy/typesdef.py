@@ -270,5 +270,17 @@ class fnft_kdvv_cstype(IntEnum):
     AB = 1
     BOTH = 2
 
+class fnft_manakovv_dstype(IntEnum):
+    NORMING_CONSTANTS = 0
+    RESIDUES = 1
+    BOTH = 2
+
+class fnft_manakovv_cstype(IntEnum):
+    REFLECTION_COEFFICIENT = 0
+    AB = 1
+    BOTH = 2
+
+
+
 
 
