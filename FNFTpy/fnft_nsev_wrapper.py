@@ -216,12 +216,11 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
     #
     nsev_bound_states_type = numpy_complex_arr_ptr
     nsev_disc_spec_type = numpy_complex_arr_ptr
-    if (options.discspec_type == 0) or (options.discspec_type == 1):
-        # norming consts OR residues
+    if (options.discspec_type == fnft_nsev_dstype.NORMING_CONSTANTS)\
+            or (options.discspec_type == fnft_nsev_dstype.RESIDUES):
         nsev_discspec = np.zeros(K, dtype=numpy_complex)
         nsev_boundstates = np.zeros(K, dtype=numpy_complex)
-    elif options.discspec_type == 2:
-        # norming consts AND res
+    elif options.discspec_type == fnft_nsev_dstype.BOTH:
         nsev_discspec = np.zeros(2 * K, dtype=numpy_complex)
         nsev_boundstates = np.zeros(K, dtype=numpy_complex)
     else:
@@ -247,14 +246,11 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
     #
     nsev_cont_spec_type = numpy_complex_arr_ptr
 
-    if options.contspec_type == 0:
-        # reflection coeff.
+    if options.contspec_type == fnft_nsev_cstype.REFLECTION_COEFFICIENT:
         nsev_cont = np.zeros(M, dtype=numpy_complex)
-    elif options.contspec_type == 1:
-        # a and b
+    elif options.contspec_type == fnft_nsev_cstype.AB:
         nsev_cont = np.zeros(2 * M, dtype=numpy_complex)
-    elif options.contspec_type == 2:
-        # a and b AND reflection coeff.
+    elif options.contspec_type == fnft_nsev_cstype.BOTH:
         nsev_cont = np.zeros(3 * M, dtype=numpy_complex)
     else:
         # 3 or any other option: skip continuous spectrum -> pass NULL
@@ -295,14 +291,11 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
     #
     # depending on options: output of discrete spectrum
     #
-    if options.discspec_type == 0:
-        # norming const
+    if options.discspec_type == fnft_nsev_dstype.NORMING_CONSTANTS:
         rdict['disc_norm'] = nsev_discspec[0:K_new]
-    elif options.discspec_type == 1:
-        # residues
+    elif options.discspec_type == fnft_nsev_dstype.RESIDUES:
         rdict['disc_res'] = nsev_discspec[0:K_new]
-    elif options.discspec_type == 2:
-        # norming const. AND residues
+    elif options.discspec_type == fnft_nsev_dstype.BOTH:
         rdict['disc_norm'] = nsev_discspec[0:K_new]
         rdict['disc_res'] = nsev_discspec[K_new:2 * K_new]
     else:
@@ -311,14 +304,14 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
     #
     # depending on options: output of continuous spectrum
     #
-    if options.contspec_type == 0:
+    if options.contspec_type == fnft_nsev_cstype.REFLECTION_COEFFICIENT:
         # refl. coeff
         rdict['cont_ref'] = nsev_cont[0:M]
-    elif options.contspec_type == 1:
+    elif options.contspec_type == fnft_nsev_cstype.AB:
         # a and b
         rdict['cont_a'] = nsev_cont[0:M]
         rdict['cont_b'] = nsev_cont[M:2 * M]
-    elif options.contspec_type == 2:
+    elif options.contspec_type == fnft_nsev_cstype.BOTH:
         # refl. coeff AND a and b
         rdict['cont_ref'] = nsev_cont[0:M]
         rdict['cont_a'] = nsev_cont[M:2 * M]

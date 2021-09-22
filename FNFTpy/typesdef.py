@@ -29,6 +29,7 @@ Christoph Mahnke, 2018-2020
 
 import ctypes
 import numpy as np
+from enum import IntEnum
 
 #
 # data types for interfacing C
@@ -207,3 +208,15 @@ class NsevInverseOptionsStruct(GenericOptionsStruct):
         ("discspec_type", ctypes_int),
         ("max_iter", ctypes_uint),
         ("oversampling_factor", ctypes_uint)]
+
+
+### python enums
+class fnft_nsev_dstype(IntEnum):
+    NORMING_CONSTANTS = 0
+    RESIDUES = 1
+    BOTH = 2
+
+class fnft_nsev_cstype(IntEnum):
+    REFLECTION_COEFFICIENT = 0
+    AB = 1
+    BOTH = 2
