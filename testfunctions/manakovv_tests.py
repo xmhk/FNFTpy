@@ -67,7 +67,7 @@ class ManakovvExampleTest(unittest.TestCase):
 
         }
         with self.subTest('check no of bound states'):
-            self.assertEqual(self.res['bound_states_num'], 14, "number of bound states")
+            self.assertEqual(self.res['bound_states_num'], 14, "number of bound states not as expected")
         with self.subTest('check contspec 1'):
             self.assertTrue(check_array(self.res['cont_ref1'], expected['cont_ref1']),
                             'contspec (reflection 1) not as expected')
