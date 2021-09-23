@@ -62,18 +62,18 @@ class KdvvExampleTest(unittest.TestCase):
         with self.subTest('check no of bound states'):
             self.assertEqual(self.res['bound_states_num'], 1, "number of bound states")
         with self.subTest('bound_states'):
-            self.assertTrue(check_array(self.res['bound_states'], expected['bound_states']), 'bound_states as expected')
+            self.assertTrue(check_array(self.res['bound_states'], expected['bound_states']), 'bound_states not as expected')
         with self.subTest('disc_norm'):
-            self.assertTrue(check_array(self.res['disc_norm'], expected['disc_norm']), 'disc norm as expected')
+            self.assertTrue(check_array(self.res['disc_norm'], expected['disc_norm']), 'disc norm not as expected')
         with self.subTest('disc_res'):
-            self.assertTrue(check_array(self.res['disc_res'], expected['disc_res']), 'disc res as expected')
+            self.assertTrue(check_array(self.res['disc_res'], expected['disc_res']), 'disc res not as expected')
         with self.subTest('check contspec'):
             self.assertTrue(check_array(self.res['cont_ref'], expected['cont_ref']),
-                            'contspec (reflection) as expected')
+                            'contspec (reflection) not as expected')
         with self.subTest('cont_a'):
-            self.assertTrue(check_array(self.res['cont_a'], expected['cont_a']), 'contspec (a) as expected')
+            self.assertTrue(check_array(self.res['cont_a'], expected['cont_a']), 'contspec (a) not as expected')
         with self.subTest('cont_b'):
-            self.assertTrue(check_array(self.res['cont_b'], expected['cont_b']), 'contspec (b) as expected')
+            self.assertTrue(check_array(self.res['cont_b'], expected['cont_b']), 'contspec (b) not as expected')
 
 
 class KdvvExampleTest_provide_bound_states(unittest.TestCase):
@@ -92,9 +92,9 @@ class KdvvExampleTest_provide_bound_states(unittest.TestCase):
         expected = {'bound_states': np.array([0. + 0.07454561j, 0. + 1.30818689j])
                     }
         with self.subTest('check bound state results with valid guesses'):
-            self.assertTrue(check_array(self.res['bound_states'], expected['bound_states']), 'bound_states as expected')
+            self.assertTrue(check_array(self.res['bound_states'], expected['bound_states']), 'bound_states not as expected')
         with self.subTest('check bound state results with valid guesses'):
-            self.assertTrue(check_array(self.res['bound_states'], expected['bound_states']), 'bound_states as expected')
+            self.assertTrue(check_array(self.res['bound_states'], expected['bound_states']), 'bound_states not as expected')
 
         self.assertEqual(self.res2['return_value'], 2,
                          "FNFT kdvv return value -- should be 2 if real part of guesses is not zero")
