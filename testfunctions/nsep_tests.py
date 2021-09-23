@@ -58,9 +58,7 @@ class NsepExampleTest(unittest.TestCase):
                              0.732225 + 1.1282e-08j,
                              1.29152 + 6.35545e-08j,
                              1.82871 + 8.88013e-08j,
-
-                         ])
-
+                             ])
                          }
 
     def test_nsep_example(self):
