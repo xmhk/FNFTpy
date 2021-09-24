@@ -23,7 +23,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 Contributors:
 
-Christoph Mahnke, 2018 - 2020
+Christoph Mahnke, 2018 - 2021
 
 """
 
