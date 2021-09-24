@@ -59,83 +59,83 @@ def kdvv(u, tvec, K=128, M=128, Xi1=-2, Xi2=2, dis=None, bsl=None, niter=None, d
 
     * dis : discretization, default = 39  (for details see FNFT documentation)
 
-         * 0 = 2SPLIT2_MODAL_VANILLA
-         * 1 = BO_VANILLA
-         * 2 = 2SPLIT1A_VANILLA
-         * 3 = 2SPLIT1B_VANILLA
-         * 4 = 2SPLIT2A_VANILLA
-         * 5 = 2SPLIT2B_VANILLA
-         * 6 = 2SPLIT2S_VANILLA
-         * 7 = 2SPLIT3A_VANILLA
-         * 8 = 2SPLIT3B_VANILLA
-         * 9 = 2SPLIT3S_VANILLA
-         * 10 = 2SPLIT4A_VANILLA
-         * 11 = 2SPLIT4B_VANILLA
-         * 12 = 2SPLIT5A_VANILLA
-         * 13 = 2SPLIT5B_VANILLA
-         * 14 = 2SPLIT6A_VANILLA
-         * 15 = 2SPLIT6B_VANILLA
-         * 16 = 2SPLIT7A_VANILLA
-         * 17 = 2SPLIT7B_VANILLA
-         * 18 = 2SPLIT8A_VANILLA
-         * 19 = 2SPLIT8B_VANILLA
-         * 20 = 4SPLIT4A_VANILLA
-         * 21 = 4SPLIT4B_VANILLA
-         * 22 = CF4_2_VANILLA
-         * 23 = CF4_3_VANILLA
-         * 24 = CF5_3_VANILLA
-         * 25 = CF6_4_VANILLA
-         * 26 = ES4_VANILLA
-         * 27 = TES4_VANILLA
-         * 28 = 2SPLIT2_MODAL
-         * 29 = BO
-         * 30 = 2SPLIT1A
-         * 31 = 2SPLIT1B
-         * 32 = 2SPLIT2A
-         * 33 = 2SPLIT2B
-         * 34 = 2SPLIT2S
-         * 35 = 2SPLIT3A
-         * 36 = 2SPLIT3B
-         * 37 = 2SPLIT3S
-         * 38 = 2SPLIT4A
-         * 39 = 2SPLIT4B
-         * 40 = 2SPLIT5A
-         * 41 = 2SPLIT5B
-         * 42 = 2SPLIT6A
-         * 43 = 2SPLIT6B
-         * 44 = 2SPLIT7A
-         * 45 = 2SPLIT7B
-         * 46 = 2SPLIT8A
-         * 47 = 2SPLIT8B
-         * 48 = 4SPLIT4A
-         * 49 = 4SPLIT4B
-         * 50 = CF4_2
-         * 51 = CF4_3
-         * 52 = CF5_3
-         * 53 = CF6_4
-         * 54 = ES4
-         * 55 = TES4
+        - 0 = 2SPLIT2_MODAL_VANILLA
+        - 1 = BO_VANILLA
+        - 2 = 2SPLIT1A_VANILLA
+        - 3 = 2SPLIT1B_VANILLA
+        - 4 = 2SPLIT2A_VANILLA
+        - 5 = 2SPLIT2B_VANILLA
+        - 6 = 2SPLIT2S_VANILLA
+        - 7 = 2SPLIT3A_VANILLA
+        - 8 = 2SPLIT3B_VANILLA
+        - 9 = 2SPLIT3S_VANILLA
+        - 10 = 2SPLIT4A_VANILLA
+        - 11 = 2SPLIT4B_VANILLA
+        - 12 = 2SPLIT5A_VANILLA
+        - 13 = 2SPLIT5B_VANILLA
+        - 14 = 2SPLIT6A_VANILLA
+        - 15 = 2SPLIT6B_VANILLA
+        - 16 = 2SPLIT7A_VANILLA
+        - 17 = 2SPLIT7B_VANILLA
+        - 18 = 2SPLIT8A_VANILLA
+        - 19 = 2SPLIT8B_VANILLA
+        - 20 = 4SPLIT4A_VANILLA
+        - 21 = 4SPLIT4B_VANILLA
+        - 22 = CF4_2_VANILLA
+        - 23 = CF4_3_VANILLA
+        - 24 = CF5_3_VANILLA
+        - 25 = CF6_4_VANILLA
+        - 26 = ES4_VANILLA
+        - 27 = TES4_VANILLA
+        - 28 = 2SPLIT2_MODAL
+        - 29 = BO
+        - 30 = 2SPLIT1A
+        - 31 = 2SPLIT1B
+        - 32 = 2SPLIT2A
+        - 33 = 2SPLIT2B
+        - 34 = 2SPLIT2S
+        - 35 = 2SPLIT3A
+        - 36 = 2SPLIT3B
+        - 37 = 2SPLIT3S
+        - 38 = 2SPLIT4A
+        - 39 = 2SPLIT4B
+        - 40 = 2SPLIT5A
+        - 41 = 2SPLIT5B
+        - 42 = 2SPLIT6A
+        - 43 = 2SPLIT6B
+        - 44 = 2SPLIT7A
+        - 45 = 2SPLIT7B
+        - 46 = 2SPLIT8A
+        - 47 = 2SPLIT8B
+        - 48 = 4SPLIT4A
+        - 49 = 4SPLIT4B
+        - 50 = CF4_2
+        - 51 = CF4_3
+        - 52 = CF5_3
+        - 53 = CF6_4
+        - 54 = ES4
+        - 55 = TES4
 
     * bsl : bound state localization, default=1
 
-        * NEWTON,
-        * GRIDSEARCH_AND_REFINE
+        - 0 = NEWTON
+        - 1 = GRIDSEARCH_AND_REFINE
 
     * niter : number of iterations for Newton bound state location, default = 10
 
     * dst : type of discrete spectrum, default = 0
 
-        * 0 = norming constants
-        * 1 = residues
-        * 2 = both
-        * 3 = skip computing discrete spectrum
+        - 0 = NORMING_CONSTANTS
+        - 1 = RESIDUES
+        - 2 = BOTH
+        - 3 = skip computing discrete spectrum
 
     * cst : type of continuous spectrum, default = 0
 
-        * 0 = reflection coefficient
-        * 1 = a and b
-        * 2 = both
-        * 3 = skip computing continuous spectrum
+        - 0 = REFLECTION_COEFFICIENT
+        - 1 = AB
+        - 2 = BOTH
+        - 3 = skip computing continuous spectrum
 
     * nf : normalization flag, default =  1
 
@@ -193,12 +193,12 @@ def kdvv_wrapper(D, u, T1, T2, K, M, Xi1, Xi2,
     * K : maximum number of bound states to calculate
     * M : number of values for the continuous spectrum to calculate
     * Xi1, Xi2 : min and max frequency for the continuous spectrum
-    * options : options for kdvv as KdvvOptionsStruct. Can be generated e.g. with 'get_kdvv_options()'
+    * options: options for kdvv as KdvvOptionsStruct. Can be generated e.g. with 'get_kdvv_options()'
 
     Optional Arguments:
 
-    * bound_state_guesses : list or array of bound state guesses, only effective if bsl==1 (Newton
-                         bound state location is activated). Default = None
+    * bound_state_guesses : lost or array of bound state guesses, only effective if bsl==1 (Newton
+                         bound state localization) is activated. Default = None
 
                          Please note: up to now, the guesses have to be purely imaginary
 

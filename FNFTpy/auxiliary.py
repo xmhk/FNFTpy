@@ -46,9 +46,7 @@ def get_lib_path():
         * libstr = "/usr/local/lib/libfnft.so"  # example for linux
 
     """
-    #libstr = "/usr/local/lib/libfnft.so.0.4.1"
-    libstr = "/home/ch/Downloads/manakov/FNFT/lib/libfnft.so.0.4.1"
-    #libstr = "/home/ch/Downloads/FNFT/lib/libfnft.so.0.4.1"
+    libstr = "/home/ch/Downloads/FNFT/lib/libfnft.so.0.4.1"
     return libstr
 
 def get_winmode_param():

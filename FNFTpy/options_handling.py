@@ -23,7 +23,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 Contributors:
 
-Christoph Mahnke, Shrinivas Chimmalgi, 2018-2020
+Christoph Mahnke, Shrinivas Chimmalgi, 2018-2021
 
 """
 
@@ -66,7 +66,7 @@ def print_kdvv_options(options=None):
     print(options)
 
 
-def get_kdvv_options(bsl=None, dis=None, niter=None, dst=None, cst=None, nf=None,
+def get_kdvv_options(dis=None, bsl=None, niter=None, dst=None, cst=None, nf=None,
                      ref=None):
 
     """Get an KdvvOptionsStruct struct for use with kdvv_wrapper.
@@ -77,83 +77,83 @@ def get_kdvv_options(bsl=None, dis=None, niter=None, dst=None, cst=None, nf=None
 
     * dis : discretization, default = 39  (for details see FNFT documentation)
 
-         * 0 = 2SPLIT2_MODAL_VANILLA
-         * 1 = BO_VANILLA
-         * 2 = 2SPLIT1A_VANILLA
-         * 3 = 2SPLIT1B_VANILLA
-         * 4 = 2SPLIT2A_VANILLA
-         * 5 = 2SPLIT2B_VANILLA
-         * 6 = 2SPLIT2S_VANILLA
-         * 7 = 2SPLIT3A_VANILLA
-         * 8 = 2SPLIT3B_VANILLA
-         * 9 = 2SPLIT3S_VANILLA
-         * 10 = 2SPLIT4A_VANILLA
-         * 11 = 2SPLIT4B_VANILLA
-         * 12 = 2SPLIT5A_VANILLA
-         * 13 = 2SPLIT5B_VANILLA
-         * 14 = 2SPLIT6A_VANILLA
-         * 15 = 2SPLIT6B_VANILLA
-         * 16 = 2SPLIT7A_VANILLA
-         * 17 = 2SPLIT7B_VANILLA
-         * 18 = 2SPLIT8A_VANILLA
-         * 19 = 2SPLIT8B_VANILLA
-         * 20 = 4SPLIT4A_VANILLA
-         * 21 = 4SPLIT4B_VANILLA
-         * 22 = CF4_2_VANILLA
-         * 23 = CF4_3_VANILLA
-         * 24 = CF5_3_VANILLA
-         * 25 = CF6_4_VANILLA
-         * 26 = ES4_VANILLA
-         * 27 = TES4_VANILLA
-         * 28 = 2SPLIT2_MODAL
-         * 29 = BO
-         * 30 = 2SPLIT1A
-         * 31 = 2SPLIT1B
-         * 32 = 2SPLIT2A
-         * 33 = 2SPLIT2B
-         * 34 = 2SPLIT2S
-         * 35 = 2SPLIT3A
-         * 36 = 2SPLIT3B
-         * 37 = 2SPLIT3S
-         * 38 = 2SPLIT4A
-         * 39 = 2SPLIT4B
-         * 40 = 2SPLIT5A
-         * 41 = 2SPLIT5B
-         * 42 = 2SPLIT6A
-         * 43 = 2SPLIT6B
-         * 44 = 2SPLIT7A
-         * 45 = 2SPLIT7B
-         * 46 = 2SPLIT8A
-         * 47 = 2SPLIT8B
-         * 48 = 4SPLIT4A
-         * 49 = 4SPLIT4B
-         * 50 = CF4_2
-         * 51 = CF4_3
-         * 52 = CF5_3
-         * 53 = CF6_4
-         * 54 = ES4
-         * 55 = TES4
+        - 0 = 2SPLIT2_MODAL_VANILLA
+        - 1 = BO_VANILLA
+        - 2 = 2SPLIT1A_VANILLA
+        - 3 = 2SPLIT1B_VANILLA
+        - 4 = 2SPLIT2A_VANILLA
+        - 5 = 2SPLIT2B_VANILLA
+        - 6 = 2SPLIT2S_VANILLA
+        - 7 = 2SPLIT3A_VANILLA
+        - 8 = 2SPLIT3B_VANILLA
+        - 9 = 2SPLIT3S_VANILLA
+        - 10 = 2SPLIT4A_VANILLA
+        - 11 = 2SPLIT4B_VANILLA
+        - 12 = 2SPLIT5A_VANILLA
+        - 13 = 2SPLIT5B_VANILLA
+        - 14 = 2SPLIT6A_VANILLA
+        - 15 = 2SPLIT6B_VANILLA
+        - 16 = 2SPLIT7A_VANILLA
+        - 17 = 2SPLIT7B_VANILLA
+        - 18 = 2SPLIT8A_VANILLA
+        - 19 = 2SPLIT8B_VANILLA
+        - 20 = 4SPLIT4A_VANILLA
+        - 21 = 4SPLIT4B_VANILLA
+        - 22 = CF4_2_VANILLA
+        - 23 = CF4_3_VANILLA
+        - 24 = CF5_3_VANILLA
+        - 25 = CF6_4_VANILLA
+        - 26 = ES4_VANILLA
+        - 27 = TES4_VANILLA
+        - 28 = 2SPLIT2_MODAL
+        - 29 = BO
+        - 30 = 2SPLIT1A
+        - 31 = 2SPLIT1B
+        - 32 = 2SPLIT2A
+        - 33 = 2SPLIT2B
+        - 34 = 2SPLIT2S
+        - 35 = 2SPLIT3A
+        - 36 = 2SPLIT3B
+        - 37 = 2SPLIT3S
+        - 38 = 2SPLIT4A
+        - 39 = 2SPLIT4B
+        - 40 = 2SPLIT5A
+        - 41 = 2SPLIT5B
+        - 42 = 2SPLIT6A
+        - 43 = 2SPLIT6B
+        - 44 = 2SPLIT7A
+        - 45 = 2SPLIT7B
+        - 46 = 2SPLIT8A
+        - 47 = 2SPLIT8B
+        - 48 = 4SPLIT4A
+        - 49 = 4SPLIT4B
+        - 50 = CF4_2
+        - 51 = CF4_3
+        - 52 = CF5_3
+        - 53 = CF6_4
+        - 54 = ES4
+        - 55 = TES4
 
     * bsl : bound state localization, default=1
 
-        * NEWTON,
-        * GRIDSEARCH_AND_REFINE
+        - 0 = NEWTON
+        - 1 = GRIDSEARCH_AND_REFINE
 
     * niter : number of iterations for Newton bound state location, default = 10
 
     * dst : type of discrete spectrum, default = 0
 
-        * 0 = norming constants
-        * 1 = residues
-        * 2 = both
-        * 3 = skip computing discrete spectrum
+        - 0 = NORMING_CONSTANTS
+        - 1 = RESIDUES
+        - 2 = BOTH
+        - 3 = skip computing discrete spectrum
 
     * cst : type of continuous spectrum, default = 0
 
-        * 0 = reflection coefficient
-        * 1 = a and b
-        * 2 = both
-        * 3 = skip computing continuous spectrum
+        - 0 = REFLECTION_COEFFICIENT
+        - 1 = AB
+        - 2 = BOTH
+        - 3 = skip computing continuous spectrum
 
     * nf : normalization flag, default =  1
 
@@ -304,48 +304,47 @@ def get_nsep_options(loc=None, filt=None, bb=None, maxev=None, dis=None, nf=None
 
     * loc : localization method for the spectrum, default = 2
 
-        * 0 = subsample and refine
-        * 1 = gridsearch
-        * 2 = mixed
+        - SUBSAMPLE_AND_REFINE = 0
+        - GRIDSEARCH = 1
+        - MIXED = 2
 
     * filt : filtering of spectrum, default = 2
 
-        * 0 = none
-        * 1 = manual
-        * 2 = auto
+            - NONE = 0
+            - MANUAL = 1
+            - AUTO = 2
 
     * bb: bounding box used for manual filtering, default = [-inf, inf, -inf, inf]
     * maxev : maximum number of evaluations for root refinement, default = 20
     * dis : discretization, default = 4
 
-         * 0 = 2SPLIT2_MODAL
-         * 1 = BO
-         * 2 = 2SPLIT1A
-         * 3 = 2SPLIT1B
-         * 4 = 2SPLIT2A
-         * 5 = 2SPLIT2B
-         * 6 = 2SPLIT2S
-         * 7 = 2SPLIT3A
-         * 8 = 2SPLIT3B
-         * 9 = 2SPLIT3S
-         * 10 = 2SPLIT4A
-         * 11 = 2SPLIT4B
-         * 12 = 2SPLIT5A
-         * 13 = 2SPLIT5B
-         * 14 = 2SPLIT6A
-         * 15 = 2SPLIT6B
-         * 16 = 2SPLIT7A
-         * 17 = 2SPLIT7B
-         * 18 = 2SPLIT8A
-         * 19 = 2SPLIT8B
-         * 20 = 4SPLIT4A
-         * 21 = 4SPLIT4B
-         * 22 = CF4_2
-         * 23 = CF4_3
-         * 24 = CF5_3
-         * 25 = CF6_4
-         * 26 = ES4
-         * 27 = TES4
+        - 0 = 2SPLIT2_MODAL
+        - 1 = BO
+        - 2 = 2SPLIT1A
+        - 4 = 2SPLIT2A
+        - 5 = 2SPLIT2B
+        - 6 = 2SPLIT2S
+        - 7 = 2SPLIT3A
+        - 8 = 2SPLIT3B
+        - 9 = 2SPLIT3S
+        - 10 = 2SPLIT4A
+        - 11 = 2SPLIT4B
+        - 12 = 2SPLIT5A
+        - 13 = 2SPLIT5B
+        - 14 = 2SPLIT6A
+        - 15 = 2SPLIT6B
+        - 16 = 2SPLIT7A
+        - 17 = 2SPLIT7B
+        - 18 = 2SPLIT8A
+        - 19 = 2SPLIT8B
+        - 20 = 4SPLIT4A
+        - 21 = 4SPLIT4B
+        - 22 = CF4_2
+        - 23 = CF4_3
+        - 24 = CF5_3
+        - 25 = CF6_4
+        - 26 = ES4
+        - 27 = TES4
 
     * nf : normalization flag, default=1
 
@@ -441,72 +440,74 @@ def get_nsev_options(bsf=None, bsl=None, niter=None, Dsub=None, dst=None, cst=No
 
     * bsf : bound state filtering, default = 2
 
-        * 0 = none
-        * 1 = basic
-        * 2 = full
+        - 0 = NONE
+        - 1 = BASIC
+        - 2 = FULL
+
 
     * bsl : bound state localization, default = 2
 
-        * 0 = fast eigenvalue
-        * 1 = Newton
-        * 2 = subsample and refine
+        - 0 = FAST_EIGENVALUE
+        - 1 = NEWTON
+        - 2 = SUBSAMPLE_AND_REFINE
+
 
     * niter : number of iterations for Newton bound state location, default = 10
     * Dsub : number of samples used for 'subsampling and refine'-method, default = 0 (auto)
     * dst : type of discrete spectrum, default = 0
 
-        * 0 = norming constants
-        * 1 = residues
-        * 2 = both
-        * 3 = skip computing discrete spectrum
+        - 0 = NORMING_CONSTANTS
+        - 1 = RESIDUES
+        - 2 = BOTH
+        - 3 = skip computing discrete spectrum
 
     * cst : type of continuous spectrum, default = 0
 
-        * 0 = reflection coefficient
-        * 1 = a and b
-        * 2 = both
-        * 3 = skip computing continuous spectrum
+        - 0 = REFLECTION_COEFFICIENT
+        - 1 = AB
+        - 2 = BOTH
+        - 3 = skip computing continuous spectrum
 
     * dis : discretization, default = 11
 
-         * 0 = 2SPLIT2_MODAL
-         * 1 = BO
-         * 2 = 2SPLIT1A
-         * 3 = 2SPLIT1B
-         * 4 = 2SPLIT2A
-         * 5 = 2SPLIT2B
-         * 6 = 2SPLIT2S
-         * 7 = 2SPLIT3A
-         * 8 = 2SPLIT3B
-         * 9 = 2SPLIT3S
-         * 10 = 2SPLIT4A
-         * 11 = 2SPLIT4B
-         * 12 = 2SPLIT5A
-         * 13 = 2SPLIT5B
-         * 14 = 2SPLIT6A
-         * 15 = 2SPLIT6B
-         * 16 = 2SPLIT7A
-         * 17 = 2SPLIT7B
-         * 18 = 2SPLIT8A
-         * 19 = 2SPLIT8B
-         * 20 = 4SPLIT4A
-         * 21 = 4SPLIT4B
-         * 22 = CF4_2
-         * 23 = CF4_3
-         * 24 = CF5_3
-         * 25 = CF6_4
-         * 26 = ES4
-         * 27 = TES4
+        - 0 = 2SPLIT2_MODAL
+        - 1 = BO
+        - 2 = 2SPLIT1A
+        - 3 = 2SPLIT1B
+        - 4 = 2SPLIT2A
+        - 5 = 2SPLIT2B
+        - 6 = 2SPLIT2S
+        - 7 = 2SPLIT3A
+        - 8 = 2SPLIT3B
+        - 9 = 2SPLIT3S
+        - 10 = 2SPLIT4A
+        - 11 = 2SPLIT4B
+        - 12 = 2SPLIT5A
+        - 13 = 2SPLIT5B
+        - 14 = 2SPLIT6A
+        - 15 = 2SPLIT6B
+        - 16 = 2SPLIT7A
+        - 17 = 2SPLIT7B
+        - 18 = 2SPLIT8A
+        - 19 = 2SPLIT8B
+        - 20 = 4SPLIT4A
+        - 21 = 4SPLIT4B
+        - 22 = CF4_2
+        - 23 = CF4_3
+        - 24 = CF5_3
+        - 25 = CF6_4
+        - 26 = ES4
+        - 27 = TES4
 
     * nf : normalization flag, default =  1
 
-        * 0 = off
-        * 1 = on
+        - 0 = off
+        - 1 = on
 
     * ref : richardson extrapolation flag, default = 0
 
-        * 0 = off
-        * 1 = on
+        - 0 = off
+        - 1 = on
 
     Returns:
 
@@ -576,52 +577,52 @@ def get_nsev_inverse_options(dis=None, cst=None, csim=None, dst=None, max_iter=N
 
     * dis : discretization, default = 4
 
-         * 0 = 2SPLIT2_MODAL
-         * 1 = BO
-         * 2 = 2SPLIT1A
-         * 3 = 2SPLIT1B
-         * 4 = 2SPLIT2A
-         * 5 = 2SPLIT2B
-         * 6 = 2SPLIT2S
-         * 7 = 2SPLIT3A
-         * 8 = 2SPLIT3B
-         * 9 = 2SPLIT3S
-         * 10 = 2SPLIT4A
-         * 11 = 2SPLIT4B
-         * 12 = 2SPLIT5A
-         * 13 = 2SPLIT5B
-         * 14 = 2SPLIT6A
-         * 15 = 2SPLIT6B
-         * 16 = 2SPLIT7A
-         * 17 = 2SPLIT7B
-         * 18 = 2SPLIT8A
-         * 19 = 2SPLIT8B
-         * 20 = 4SPLIT4A
-         * 21 = 4SPLIT4B
-         * 22 = CF4_2
-         * 23 = CF4_3
-         * 24 = CF5_3
-         * 25 = CF6_4
-         * 26 = ES4
-         * 27 = TES4
+        - 0 = 2SPLIT2_MODAL
+        - 1 = BO
+        - 2 = 2SPLIT1A
+        - 3 = 2SPLIT1B
+        - 4 = 2SPLIT2A
+        - 5 = 2SPLIT2B
+        - 6 = 2SPLIT2S
+        - 7 = 2SPLIT3A
+        - 8 = 2SPLIT3B
+        - 9 = 2SPLIT3S
+        - 10 = 2SPLIT4A
+        - 11 = 2SPLIT4B
+        - 12 = 2SPLIT5A
+        - 13 = 2SPLIT5B
+        - 14 = 2SPLIT6A
+        - 15 = 2SPLIT6B
+        - 16 = 2SPLIT7A
+        - 17 = 2SPLIT7B
+        - 18 = 2SPLIT8A
+        - 19 = 2SPLIT8B
+        - 20 = 4SPLIT4A
+        - 21 = 4SPLIT4B
+        - 22 = CF4_2
+        - 23 = CF4_3
+        - 24 = CF5_3
+        - 25 = CF6_4
+        - 26 = ES4
+        - 27 = TES4
 
     * cst : type of continuous spectrum, default = 0
 
-        * 0 = Reflection coefficient
-        * 1 = b of xi
-        * 2 = b of tau
+        - 0 = REFLECTION_COEFFICIENT
+        - 1 = B_OF_XI
+        - 2 = B_OF_TAU
 
     * csim : inversion method for the continuous part, default = 0
 
-        * 0 = default
-        * 1 = Transfermatrix with reflection coefficients
-        * 2 = Transfermatrix with a,b from iteration
-        * 3 = seed potential
+        - 0 = DEFAULT
+        - 1 = TFMATRIX_CONTAINS_REFL_COEFF
+        - 2 = TFMATRIX_CONTAINS_AB_FROM_ITER
+        - 3 = USE_SEED_POTENTIAL_INSTEAD
 
     *  dst : type of discrete spectrum, default = 0
 
-        * 0 = norming constants
-        * 1 = residues
+        - 0 = NORMING_CONSTANTS
+        - 1 = RESIDUES
 
     * max_iter : maximum number of iterations for iterative methods, default = 100
     * osf : oversampling factor, default = 8
