@@ -23,7 +23,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 Contributors:
 
-Christoph Mahnke, 2018, 2019
+Christoph Mahnke, 2018-2021
 
 """
 from warnings import warn
@@ -46,7 +46,7 @@ def get_lib_path():
         * libstr = "/usr/local/lib/libfnft.so"  # example for linux
 
     """
-    libstr = "/home/ch/Downloads/FNFT/lib/libfnft.so.0.4.1"
+    libstr = "/home/ch/Downloads/manakov/FNFT/lib/libfnft.so.0.4.1"
     return libstr
 
 def get_winmode_param():

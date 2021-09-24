@@ -50,7 +50,7 @@ def manakovv(q1, q2, tvec, Xi1=-1.75, Xi2=2, M=128, K=128, kappa=1, bsf=None,
     Arguments:
 
     * q1 : numpy array holding the samples of the first input field (potential function)
-    * q2 : numpy array holding the samples of the first input field (potential function)
+    * q2 : numpy array holding the samples of the second input field (potential function)
     * tvec : time vector
 
     Optional Arguments:
@@ -146,6 +146,43 @@ def manakovv(q1, q2, tvec, Xi1=-1.75, Xi2=2, M=128, K=128, kappa=1, bsf=None,
 
 
 def manakovv_wrapper(D, q1, q2, T1, T2, Xi1, Xi2, M, K, kappa, options  ):
+    """
+    Calculate the Nonlinear Fourier Transform for the Manakov equation with vanishing boundary conditions.
+
+    This function's interface mimics the behavior of the function 'fnft_nsev' of FNFT.
+    It converts all Python input into the C equivalent and returns the result from FNFT.
+    If a more simplified version is desired, 'manakovv' can be used (see documentation there).
+
+    Arguments:
+
+    * D : number of sample points
+    * q1 : numpy array holding the samples of the first input field (potential function)
+    * q2 : numpy array holding the samples of the second input field (potential function)
+    * T1, T2 : time positions of the first and the last sample
+    * Xi1, Xi2 : min and max frequency for the continuous spectrum
+    * M : number of values for the continuous spectrum to calculate
+    * K : maximum number of bound states to calculate
+    * kappa : +/- 1 for focussing/defocussing nonlinearity
+    * options : options for manakovv as ManakovvOptionsStruct
+
+    Returns:
+
+    * rdict : dictionary holding the fields (depending on options)
+
+        * return_value : return value from FNFT
+        * bound_states_num : number of bound states found
+        * bound_states : array of bound states found
+        * disc_norm : discrete spectrum - norming constants
+        * disc_res : discrete spectrum - residues
+        * cont_ref1 : continuous spectrum - reflection coefficients 1
+        * cont_ref2: continuous spectrum - reflection coefficients 2
+        * cont_a : continuous spectrum - scattering coefficient a
+        * cont_b1 : continuous spectrum - scattering coefficient b 2
+        * cont_b2 : continuous spectrum - scattering coefficient b 1
+        * options : NsevOptionsStruct with the options used
+
+    """
+
     fnft_clib = ctypes.CDLL(get_lib_path(), winmode=get_winmode_param())
     clib_manakovv_func = fnft_clib.fnft_manakovv
     clib_manakovv_func.restype = ctypes_int
