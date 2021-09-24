@@ -116,7 +116,7 @@ class NsepOptionsStruct(GenericOptionsStruct):
     * floquet_range
     * points_per_spine
     * dsub
-    * tolerance
+    * tol
 
 
     """

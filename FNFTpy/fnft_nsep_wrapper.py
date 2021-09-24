@@ -55,53 +55,47 @@ def nsep(q, T1, T2, kappa=1, loc=None, filt=None, bb=None,
     * kappa : +/- 1 for focussing/defocussing nonlinearity, default = 1
     * loc : localization method for the spectrum, default = 2
 
-        * 0 = subsample and refine
-        * 1 = gridsearch
-        * 2 = mixed
+        - SUBSAMPLE_AND_REFINE = 0
+        - GRIDSEARCH = 1
+        - MIXED = 2
 
     * filt : filtering of spectrum, default = 2
 
-        * 0 = none
-        * 1 = manual
-        * 2 = auto
+            - NONE = 0
+            - MANUAL = 1
+            - AUTO = 2
 
     * bb: bounding box used for manual filtering, default = [-inf, inf, -inf, inf]
     * maxev : maximum number of evaluations for root refinement, default = 20
-    * nf : normalization flag default = 1
-
-        * 0 = off
-        * 1 = on
-
     * dis : discretization, default = 4
 
-         * 0 = 2SPLIT2_MODAL
-         * 1 = BO
-         * 2 = 2SPLIT1A
-         * 3 = 2SPLIT1B
-         * 4 = 2SPLIT2A
-         * 5 = 2SPLIT2B
-         * 6 = 2SPLIT2S
-         * 7 = 2SPLIT3A
-         * 8 = 2SPLIT3B
-         * 9 = 2SPLIT3S
-         * 10 = 2SPLIT4A
-         * 11 = 2SPLIT4B
-         * 12 = 2SPLIT5A
-         * 13 = 2SPLIT5B
-         * 14 = 2SPLIT6A
-         * 15 = 2SPLIT6B
-         * 16 = 2SPLIT7A
-         * 17 = 2SPLIT7B
-         * 18 = 2SPLIT8A
-         * 19 = 2SPLIT8B
-         * 20 = 4SPLIT4A
-         * 21 = 4SPLIT4B
-         * 22 = CF4_2
-         * 23 = CF4_3
-         * 24 = CF5_3
-         * 25 = CF6_4
-         * 26 = ES4
-         * 27 = TES4
+        - 0 = 2SPLIT2_MODAL
+        - 1 = BO
+        - 2 = 2SPLIT1A
+        - 4 = 2SPLIT2A
+        - 5 = 2SPLIT2B
+        - 6 = 2SPLIT2S
+        - 7 = 2SPLIT3A
+        - 8 = 2SPLIT3B
+        - 9 = 2SPLIT3S
+        - 10 = 2SPLIT4A
+        - 11 = 2SPLIT4B
+        - 12 = 2SPLIT5A
+        - 13 = 2SPLIT5B
+        - 14 = 2SPLIT6A
+        - 15 = 2SPLIT6B
+        - 16 = 2SPLIT7A
+        - 17 = 2SPLIT7B
+        - 18 = 2SPLIT8A
+        - 19 = 2SPLIT8B
+        - 20 = 4SPLIT4A
+        - 21 = 4SPLIT4B
+        - 22 = CF4_2
+        - 23 = CF4_3
+        - 24 = CF5_3
+        - 25 = CF6_4
+        - 26 = ES4
+        - 27 = TES4
 
     * nf : normalization flag, default=1
 
@@ -110,7 +104,7 @@ def nsep(q, T1, T2, kappa=1, loc=None, filt=None, bb=None,
 
     * floq_range : array of two reals defining Floquet range, default = [-1, 1]
 
-    * ppspin : points per spine: defining the grid between interval set by floq_range
+    * ppspine : points per spine: defining the grid between interval set by floq_range
 
     * dsub : approximate number of samples for 'subsample and refine' localization
 
