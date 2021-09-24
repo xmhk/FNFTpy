@@ -55,7 +55,7 @@ def nsev(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=None,
 
     * Xi1, Xi2 : min and max frequency for the continuous spectrum. default = -2,2
     * M : number of values for the continuous spectrum to calculate default = 128
-    * K : maximum number of bound states to calculatem default = 128
+    * K : maximum number of bound states to calculate default = 128
     * kappa : +/- 1 for focussing/defocussing nonlinearity, default = 1
 
     * bsf : bound state filtering, default = 2
