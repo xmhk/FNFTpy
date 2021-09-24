@@ -41,7 +41,6 @@ def nsev(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=None,
     automatically calculates some variables needed to call the
     C-library and uses some default options.
     Own options can be set by passing optional arguments (see below).
-    Options can be set by passing optional arguments (see below).
 
     It converts all Python input into the C equivalent and returns the result from FNFT.
     If a more C-like interface is desired, the function 'nsev_wrapper' can be used (see documentation there).

@@ -38,7 +38,7 @@ def nsev_inverse(xivec, tvec, contspec, bound_states, discspec,
 
     This function is intended to be 'clutter-free', which means it automatically calculates some variables
     needed to call the C-library.
-    Options can be set by passing optional arguments (see below).
+    Own options can be set by passing optional arguments (see below).
     It converts all Python input into the C equivalent and returns the result from FNFT.
     If a more C-like interface is desired, the function 'nsev_inverse_wrapper' can be used (see documentation there).
 
