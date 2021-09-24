@@ -37,26 +37,103 @@ def manakovv(q1, q2, tvec, Xi1=-1.75, Xi2=2, M=128, K=128, kappa=1, bsf=None,
          bsl=None, niter=None, Dsub=None, dst=None, cst=None, nf=None, dis=None, ref=None,
          ):
     """
-    TODO write Documentation
-    :param q1:
-    :param q2:
-    :param tvec:
-    :param Xi1:
-    :param Xi2:
-    :param M:
-    :param K:
-    :param kappa:
-    :param bsf:
-    :param bsl:
-    :param niter:
-    :param Dsub:
-    :param dst:
-    :param cst:
-    :param nf:
-    :param dis:
-    :param ref:
-    :return:
+    Calculate the Nonlinear Fourier Transform for the Manakov equation with vanishing boundary conditions.
+
+    This function is intended to be 'convenient', which means it
+    automatically calculates some variables needed to call the
+    C-library and uses some default options.
+    Own options can be set by passing optional arguments (see below).
+
+    It converts all Python input into the C equivalent and returns the result from FNFT.
+    If a more C-like interface is desired, the function 'mannakovv_wrapper' can be used (see documentation there).
+
+    Arguments:
+
+    * q1 : numpy array holding the samples of the first input field (potential function)
+    * q2 : numpy array holding the samples of the first input field (potential function)
+    * tvec : time vector
+
+    Optional Arguments:
+
+    * Xi1, Xi2 : min and max frequency for the continuous spectrum. default = -1.75,2
+    * M : number of values for the continuous spectrum to calculate default = 128
+    * K : maximum number of bound states to calculate default = 128
+    * kappa : +/- 1 for focussing/defocussing nonlinearity, default = 1
+
+    * bsf : bound state filtering, default = 2
+
+        - 0 = NONE
+        - 1 = BASIC
+        - 2 = FULL
+
+    * bsl : bound state localization, default = 2
+
+        - 0 = FAST_EIGENVALUE
+        - 1 = NEWTON
+        - 2 = SUBSAMPLE_AND_REFINE
+
+    * niter : number of iterations for Newton bound state location, default = 10
+
+    * Dsub : number of samples used for 'subsampling and refine'-method, default = 0 (auto)
+
+    * dst : type of discrete spectrum, default = 0
+
+        - 0 = NORMING_CONSTANTS
+        - 1 = RESIDUES
+        - 2 = BOTH
+        - 3 = skip computing discrete spectrum
+
+    * cst : type of continuous spectrum, default = 0
+
+        - 0 = REFLECTION_COEFFICIENT
+        - 1 = AB
+        - 2 = BOTH
+        - 3 = skip computing continuous spectrum
+
+    * dis : discretization, default = 3
+
+        - 0 = 2SPLIT3A
+        - 1 = 2SPLIT3B
+        - 2 = 2SPLIT4A
+        - 3 = 2SPLIT4B
+        - 4 = 2SPLIT6B
+        - 5 = 4SPLIT4A
+        - 6 = 4SPLIT4B
+        - 7 = 4SPLIT6B
+        - 8 = FTES4_4A
+        - 9 = FTES4_4B
+        - 10 = FTES4_suzuki
+        - 11 = CF4_2
+        - 12 = BO
+
+    * nf : normalization flag, default =  1
+
+        - 0 = off
+        - 1 = on
+
+    * ref : richardson extrapolation flag, default = 0
+
+        - 0 = off
+        - 1 = on
+
+    Returns:
+
+    * rdict : dictionary holding the fields (depending on options)
+
+        * return_value : return value from FNFT
+        * bound_states_num : number of bound states found
+        * bound_states : array of bound states found
+        * disc_norm : discrete spectrum - norming constants
+        * disc_res : discrete spectrum - residues
+        * cont_ref1 : continuous spectrum - reflection coefficients 1
+        * cont_ref2: continuous spectrum - reflection coefficients 2
+        * cont_a : continuous spectrum - scattering coefficient a
+        * cont_b1 : continuous spectrum - scattering coefficient b 2
+        * cont_b2 : continuous spectrum - scattering coefficient b 1
+        * options : NsevOptionsStruct with the options used
+
     """
+
 
     D = len(q1)
     if len(q1) != len(q2):
