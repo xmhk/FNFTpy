@@ -163,29 +163,29 @@ class NsevOptionsStruct(GenericOptionsStruct):
         ("richardson_extrapolation_flag", ctypes_int)]
 
 
-class NsevSlowOptionsStruct(GenericOptionsStruct):
-    """Ctypes options struct for interfacing fnft_nsev_slow.
-
-    Fields:
-
-    * bound_state_filtering
-    * bound_state_localization
-    * niter
-    * discspec_type
-    * contspec_type
-    * discretization
-    * richardson_extrapolation_flag
-
-
-        """
-    _fields_ = [
-        ("bound_state_filtering", ctypes_int),
-        ("bound_state_localization", ctypes_int),
-        ("niter", ctypes_uint),
-        ("discspec_type", ctypes_int),
-        ("contspec_type", ctypes_int),
-        ("discretization", ctypes_int),
-        ("richardson_extrapolation_flag", ctypes_uint)]
+#class NsevSlowOptionsStruct(GenericOptionsStruct):
+#    """Ctypes options struct for interfacing fnft_nsev_slow.
+#
+#    Fields:
+#
+#    * bound_state_filtering
+#    * bound_state_localization
+#    * niter
+#    * discspec_type
+#    * contspec_type
+#    * discretization
+#    * richardson_extrapolation_flag
+#
+#
+#       """
+#   _fields_ = [
+#        ("bound_state_filtering", ctypes_int),
+#        ("bound_state_localization", ctypes_int),
+#        ("niter", ctypes_uint),
+#        ("discspec_type", ctypes_int),
+#        ("contspec_type", ctypes_int),
+#        ("discretization", ctypes_int),
+#        ("richardson_extrapolation_flag", ctypes_uint)]
 
 
 class NsevInverseOptionsStruct(GenericOptionsStruct):
