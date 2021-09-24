@@ -27,7 +27,7 @@ Christoph Mahnke, 2018
 
 """
 
-from FNFTpy import KdvvOptionsStruct, NsepOptionsStruct, NsevInverseOptionsStruct, NsevOptionsStruct, NsevSlowOptionsStruct, \
+from FNFTpy import KdvvOptionsStruct, NsepOptionsStruct, NsevInverseOptionsStruct, NsevOptionsStruct, \
     get_kdvv_options, get_nsep_options, get_nsev_options, get_nsev_inverse_options
 
 import unittest
@@ -39,22 +39,21 @@ class FnftpyOptionsTest(unittest.TestCase):
     def setUp(self):
         # remark: third element of lists are one single string each (print(repr(opts))). They may look confusing
         self.expected = dict(
-                            kdvv = [KdvvOptionsStruct, get_kdvv_options,"'bound_state_localization' : 1, 'niter' : 10, 'discspec_type' : 0, 'contspec_type' : 0, 'normalization_flag' : 1, 'discretization' : 39, 'richardson_extrapolation_flag' : 0"],
-            #kdvv=[KdvvOptionsStruct, get_kdvv_options, "'discretization' : 17"],
-                             nsep=[NsepOptionsStruct, get_nsep_options, "'localization' : 2, 'filtering' : 2, 'bounding_box' : [-inf inf -inf inf ],"\
-                                     +" 'max_evals' : 20, 'discretization' : 4, 'normalization_flag' : 1, 'floquet_range' : [-1.0 1.0 ], "
-                                     + "'points_per_spine' : 2, 'Dsub' : 0, 'tol' : -1.0"
-                                    ],
-                             nsev=[NsevOptionsStruct, get_nsev_options,
-                                            "'bound_state_filtering' : 2, 'bound_state_localization' : 2, 'niter' : 10, 'Dsub' : 0, " \
-                                            + "'discspec_type' : 0, 'contspec_type' : 0, 'normalization_flag' : 1, 'discretization' : 11,"\
-                                            + " 'richardson_extrapolation_flag' : 0"],
-                             #nsev_slow=[NsevSlowOptionsStruct, get_nsev_slow_options,
-                             #           "'bound_state_filtering' : 2, 'bound_state_localization' : 1, 'niter' : 10, 'discspec_type' : 0, "\
-                             #           +"'contspec_type' : 0, 'discretization' : 1, 'richardson_extrapolation_flag' : 0"],
-                             nsev_inverse=[NsevInverseOptionsStruct, get_nsev_inverse_options,
-                                           "'discretization' : 4, 'contspec_type' : 0, 'contspec_inversion_method' : 0, " \
-                                           + "'discspec_type' : 0, 'max_iter' : 100, 'oversampling_factor' : 8"])
+            kdvv=[KdvvOptionsStruct, get_kdvv_options,
+                  "'bound_state_localization' : 1, 'niter' : 10, 'discspec_type' : 0, 'contspec_type' : 0, "\
+                  +"'normalization_flag' : 1, 'discretization' : 39, 'richardson_extrapolation_flag' : 0"],
+            nsep=[NsepOptionsStruct, get_nsep_options,
+                  "'localization' : 2, 'filtering' : 2, 'bounding_box' : [-inf inf -inf inf ]," \
+                  + " 'max_evals' : 20, 'discretization' : 4, 'normalization_flag' : 1, 'floquet_range' : [-1.0 1.0 ], "
+                  + "'points_per_spine' : 2, 'Dsub' : 0, 'tol' : -1.0"
+                  ],
+            nsev=[NsevOptionsStruct, get_nsev_options,
+                  "'bound_state_filtering' : 2, 'bound_state_localization' : 2, 'niter' : 10, 'Dsub' : 0, " \
+                  + "'discspec_type' : 0, 'contspec_type' : 0, 'normalization_flag' : 1, 'discretization' : 11," \
+                  + " 'richardson_extrapolation_flag' : 0"],
+            nsev_inverse=[NsevInverseOptionsStruct, get_nsev_inverse_options,
+                          "'discretization' : 4, 'contspec_type' : 0, 'contspec_inversion_method' : 0, " \
+                          + "'discspec_type' : 0, 'max_iter' : 100, 'oversampling_factor' : 8"])
 
     def test_get_options_type(self):
         for k in self.expected.keys():
