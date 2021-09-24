@@ -369,72 +369,74 @@ def get_nsev_options(bsf=None, bsl=None, niter=None, Dsub=None, dst=None, cst=No
 
     * bsf : bound state filtering, default = 2
 
-        * 0 = none
-        * 1 = basic
-        * 2 = full
+        - 0 = NONE
+        - 1 = BASIC
+        - 2 = FULL
+
 
     * bsl : bound state localization, default = 2
 
-        * 0 = fast eigenvalue
-        * 1 = Newton
-        * 2 = subsample and refine
+        - 0 = FAST_EIGENVALUE
+        - 1 = NEWTON
+        - 2 = SUBSAMPLE_AND_REFINE
+
 
     * niter : number of iterations for Newton bound state location, default = 10
     * Dsub : number of samples used for 'subsampling and refine'-method, default = 0 (auto)
     * dst : type of discrete spectrum, default = 0
 
-        * 0 = norming constants
-        * 1 = residues
-        * 2 = both
-        * 3 = skip computing discrete spectrum
+        - 0 = NORMING_CONSTANTS
+        - 1 = RESIDUES
+        - 2 = BOTH
+        - 3 = skip computing discrete spectrum
 
     * cst : type of continuous spectrum, default = 0
 
-        * 0 = reflection coefficient
-        * 1 = a and b
-        * 2 = both
-        * 3 = skip computing continuous spectrum
+        - 0 = REFLECTION_COEFFICIENT
+        - 1 = AB
+        - 2 = BOTH
+        - 3 = skip computing continuous spectrum
 
     * dis : discretization, default = 11
 
-         * 0 = 2SPLIT2_MODAL
-         * 1 = BO
-         * 2 = 2SPLIT1A
-         * 3 = 2SPLIT1B
-         * 4 = 2SPLIT2A
-         * 5 = 2SPLIT2B
-         * 6 = 2SPLIT2S
-         * 7 = 2SPLIT3A
-         * 8 = 2SPLIT3B
-         * 9 = 2SPLIT3S
-         * 10 = 2SPLIT4A
-         * 11 = 2SPLIT4B
-         * 12 = 2SPLIT5A
-         * 13 = 2SPLIT5B
-         * 14 = 2SPLIT6A
-         * 15 = 2SPLIT6B
-         * 16 = 2SPLIT7A
-         * 17 = 2SPLIT7B
-         * 18 = 2SPLIT8A
-         * 19 = 2SPLIT8B
-         * 20 = 4SPLIT4A
-         * 21 = 4SPLIT4B
-         * 22 = CF4_2
-         * 23 = CF4_3
-         * 24 = CF5_3
-         * 25 = CF6_4
-         * 26 = ES4
-         * 27 = TES4
+        - 0 = 2SPLIT2_MODAL
+        - 1 = BO
+        - 2 = 2SPLIT1A
+        - 3 = 2SPLIT1B
+        - 4 = 2SPLIT2A
+        - 5 = 2SPLIT2B
+        - 6 = 2SPLIT2S
+        - 7 = 2SPLIT3A
+        - 8 = 2SPLIT3B
+        - 9 = 2SPLIT3S
+        - 10 = 2SPLIT4A
+        - 11 = 2SPLIT4B
+        - 12 = 2SPLIT5A
+        - 13 = 2SPLIT5B
+        - 14 = 2SPLIT6A
+        - 15 = 2SPLIT6B
+        - 16 = 2SPLIT7A
+        - 17 = 2SPLIT7B
+        - 18 = 2SPLIT8A
+        - 19 = 2SPLIT8B
+        - 20 = 4SPLIT4A
+        - 21 = 4SPLIT4B
+        - 22 = CF4_2
+        - 23 = CF4_3
+        - 24 = CF5_3
+        - 25 = CF6_4
+        - 26 = ES4
+        - 27 = TES4
 
     * nf : normalization flag, default =  1
 
-        * 0 = off
-        * 1 = on
+        - 0 = off
+        - 1 = on
 
     * ref : richardson extrapolation flag, default = 0
 
-        * 0 = off
-        * 1 = on
+        - 0 = off
+        - 1 = on
 
     Returns:
 
