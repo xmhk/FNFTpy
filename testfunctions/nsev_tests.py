@@ -63,11 +63,12 @@ class NsevExampleTest(unittest.TestCase):
                             "cont_ref value not as expected")
 
 
-class NsevExampleTest_bound_state_guesses(unittest.TestCase):
+class NsevExampleTestBoundStateGuesses(unittest.TestCase):
     """Testcase for nsev_example, check whether works with provided bound_states."""
 
     def setUp(self):
-        self.res = nsev_example(verbose=False, dst=2, cst=4, bsl=1, bound_state_guesses=[0.01 + 0.1j, 1j],
+        self.res = nsev_example(verbose=False, dst=2, cst=4, bsl=1,
+                                bound_state_guesses=[0.01 + 0.1j, 1j],
                                 amplitude_scale=1.2)
         self.expected = {'bound_states': np.array([-1.97215226e-29 + 0.21057155j, 0.00000000e+00 + 2.02789446j]),
                          'disc_norm': np.array([1. + 7.8106363e-30j, -1. - 0.0000000e+00j]),

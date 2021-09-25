@@ -27,8 +27,8 @@ Christoph Mahnke, 2018-2021
 
 """
 
-from .kdvv_tests import KdvvExampleTest, KdvvExampleTest_mex4_bound_states, KdvvExampleTest_provide_bound_states
-from .nsev_tests import NsevExampleTest, NsevDstCstInputTest, NsevExampleTest_bound_state_guesses
+from .kdvv_tests import KdvvExampleTest, KdvvExampleTestMex4BoundStates, KdvvExampleTestProvideBoundStateGuesses
+from .nsev_tests import NsevExampleTest, NsevDstCstInputTest, NsevExampleTestBoundStateGuesses
 from .nsep_tests import NsepExampleTest
 from .nsev_inverse_tests import NsevInverseExample, NsevInverseExample2, NsevInverseInputVariation
 from .options_tests import FnftpyOptionsTest

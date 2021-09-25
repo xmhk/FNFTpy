@@ -77,7 +77,7 @@ class KdvvExampleTest(unittest.TestCase):
             self.assertTrue(check_array(self.res['cont_b'], expected['cont_b']), 'contspec (b) not as expected')
 
 
-class KdvvExampleTest_mex4_bound_states(unittest.TestCase):
+class KdvvExampleTestMex4BoundStates(unittest.TestCase):
     """Testcase for kdvv, check bound states for different discretizations."""
 
     def setUp(self):
@@ -125,7 +125,7 @@ class KdvvExampleTest_mex4_bound_states(unittest.TestCase):
                             'bound_states (mex 4 examples) not as expected')
 
 
-class KdvvExampleTest_provide_bound_states(unittest.TestCase):
+class KdvvExampleTestProvideBoundStateGuesses(unittest.TestCase):
     """Testcase for kdvv_example, NEWTON + bound states provided"""
 
     def setUp(self):
