@@ -90,6 +90,38 @@ class NsevInverseExample2(unittest.TestCase):
             self.assertTrue(check_array(self.res['q'][0:-1:40], self.expected['q']), "q values not as expected")
 
 
+class NsevInverseExampleMex2(unittest.TestCase):
+    """Testcase for example similar to mex_fnft_nsev_inverse_example_1."""
+
+    def setUp(self):
+        T = [-2, 2]
+        D = 2 ** 12
+        tvec = np.linspace(T[0], T[1], D)
+        M = 2 * D  # % Number of samples in the nonlinear frequency domain
+        rv, xi = nsev_inverse_xi_wrapper(D, T[0], T[1], M, dis=0);
+        xivec = np.linspace(xi[0], xi[1], M)
+        al = 2;
+        be = 0.55;
+        gam = np.sqrt(np.abs(al) ** 2 + be ** 2);
+        contspec_exact = al / (xivec - be * 1j)
+        bound_states = [1j * be];
+        normconsts = [-1j * al / (gam + be)];
+        # exact solution
+        self.q_exact = np.zeros(len(tvec)) + 0.0j
+        self.q_exact[tvec < 0] = -2.0j * gam * al / abs(al) / np.cosh(2 * gam * tvec[tvec < 0] + np.arctanh(be / gam))
+        # numerical
+        self.res = nsev_inverse(xivec, tvec, contspec_exact, bound_states, normconsts)
+
+
+    def test_return_value(self):
+        with self.subTest('check FNFT nsev_inverse return value'):
+            self.assertEqual(self.res['return_value'], 0, "FNFT nsev_inverse return value not 0")
+        with self.subTest('q value'):
+            #self.assertTrue(check_array(self.res['q'], self.q_exact), "q values not as expected")
+            self.assertTrue(np.linalg.norm(self.res['q']-self.q_exact)/np.linalg.norm(self.q_exact) < 6e-3, "q values not as expected")
+
+
+
 class NsevInverseInputVariation(unittest.TestCase):
     """Testcase for various input examples (discrete spec / contspec / None) for nsev_inverse"""
 
