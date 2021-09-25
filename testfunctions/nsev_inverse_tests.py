@@ -90,7 +90,7 @@ class NsevInverseExample2(unittest.TestCase):
             self.assertTrue(check_array(self.res['q'][0:-1:40], self.expected['q']), "q values not as expected")
 
 
-class NsevInverseExampleMex2(unittest.TestCase):
+class NsevInverseExampleMex1(unittest.TestCase):
     """Testcase for example similar to mex_fnft_nsev_inverse_example_1."""
 
     def setUp(self):
