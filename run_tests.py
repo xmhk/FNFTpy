@@ -31,7 +31,7 @@ import unittest
 from testfunctions import KdvvExampleTest, KdvvExampleTestProvideBoundStateGuesses, \
     KdvvExampleTestMex4BoundStates, \
     NsepExampleTest, NsevExampleTest, NsevExampleTestBoundStateGuesses, NsevExampleTestBoundStateGuessesMex4, NsevExampleTestRF,\
-    NsevDstCstInputTest, NsevInverseExample, NsevInverseExample2,NsevInverseExampleMex1, \
+    NsevDstCstInputTest, NsevInverseExample, NsevInverseExample2,NsevInverseExampleMex1, NsevInverseExampleMex3,\
     NsevInverseInputVariation, FnftpyOptionsTest
 from FNFTpy import print_fnft_version
 
@@ -54,7 +54,8 @@ nsev_suite5 = unittest.TestLoader().loadTestsFromTestCase(NsevExampleTestRF)
 nsev_inverse_suite1 = unittest.TestLoader().loadTestsFromTestCase(NsevInverseExample)
 nsev_inverse_suite2 = unittest.TestLoader().loadTestsFromTestCase(NsevInverseExample2)
 nsev_inverse_suite3 = unittest.TestLoader().loadTestsFromTestCase(NsevInverseExampleMex1)
-nsev_inverse_suite4 = unittest.TestLoader().loadTestsFromTestCase(NsevInverseInputVariation)
+nsev_inverse_suite4 = unittest.TestLoader().loadTestsFromTestCase(NsevInverseExampleMex3)
+nsev_inverse_suite5 = unittest.TestLoader().loadTestsFromTestCase(NsevInverseInputVariation)
 
 suite = unittest.TestSuite([options_suite,
                             kdvv_suite,
@@ -69,7 +70,8 @@ suite = unittest.TestSuite([options_suite,
                             nsev_inverse_suite1,
                             nsev_inverse_suite2,
                             nsev_inverse_suite3,
-                            nsev_inverse_suite4
+                            nsev_inverse_suite4,
+                            nsev_inverse_suite5
                             ])
 
 print_fnft_version()

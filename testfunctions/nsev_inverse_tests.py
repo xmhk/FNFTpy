@@ -91,7 +91,8 @@ class NsevInverseExample2(unittest.TestCase):
 
 
 class NsevInverseExampleMex1(unittest.TestCase):
-    """Testcase for example similar to mex_fnft_nsev_inverse_example_1."""
+    """Testcase for example similar to mex_fnft_nsev_inverse_example_1.m
+    (compute q from bound states, normconstants + continuous spectrum"""
 
     def setUp(self):
         T = [-2, 2]
@@ -112,14 +113,39 @@ class NsevInverseExampleMex1(unittest.TestCase):
         # numerical
         self.res = nsev_inverse(xivec, tvec, contspec_exact, bound_states, normconsts)
 
+    def test_return_value(self):
+        with self.subTest('check FNFT nsev_inverse return value'):
+            self.assertEqual(self.res['return_value'], 0, "FNFT nsev_inverse return value not 0")
+        with self.subTest('q value'):
+            # self.assertTrue(check_array(self.res['q'], self.q_exact), "q values not as expected")
+            self.assertTrue(np.linalg.norm(self.res['q'] - self.q_exact) / np.linalg.norm(self.q_exact) < 6e-3,
+                            "q values not as expected")
+
+
+class NsevInverseExampleMex3(unittest.TestCase):
+    """Testcase for example similar to mex_fnft_nsev_inverse_example_3.m
+    (compute q from continuous spectrum B(tau)"""
+
+    def setUp(self):
+        T = [-20, 20]
+        D = 2 ** 10
+        tvec = np.linspace(T[0], T[1], D)
+        XI = np.linspace(-1, 1, D)
+        A = 0.45
+        self.q_exact = 1.0j * A / np.cosh(tvec - 1)
+        # b_fun = lambda xivec: np.multiply(np.exp(-2.0j * xivec),
+        #                                  np.multiply(1.0j * np.sin(np.pi * A), 1. / np.cosh(np.pi * xivec)))
+        bigB_fun = lambda tau: 1.0j / (2 * np.pi) * np.sin(np.pi * A) / np.cosh((tau - 2) / 2)
+        tauvec = 2 * tvec
+        B_vals = bigB_fun(tauvec)
+        self.res = nsev_inverse(XI, tvec, B_vals, None, None, cst=2)
 
     def test_return_value(self):
         with self.subTest('check FNFT nsev_inverse return value'):
             self.assertEqual(self.res['return_value'], 0, "FNFT nsev_inverse return value not 0")
         with self.subTest('q value'):
-            #self.assertTrue(check_array(self.res['q'], self.q_exact), "q values not as expected")
-            self.assertTrue(np.linalg.norm(self.res['q']-self.q_exact)/np.linalg.norm(self.q_exact) < 6e-3, "q values not as expected")
-
+            self.assertTrue(np.linalg.norm(self.res['q'] - self.q_exact) / np.linalg.norm(self.q_exact) < 4e-5,
+                            "q values not as expected")
 
 
 class NsevInverseInputVariation(unittest.TestCase):
