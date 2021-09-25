@@ -27,7 +27,6 @@ Christoph Mahnke, 2018
 
 """
 
-
 from FNFTpy import nsev_inverse, nsev_inverse_xi_wrapper
 import numpy as np
 
@@ -44,7 +43,7 @@ def nsev_inverse_example():
     T2 = tvec[-1]
     alpha = 2.0
     beta = 0.55
-    gamma = np.sqrt( np.abs(alpha)**2 + np.abs(beta)**2)
+    gamma = np.sqrt(np.abs(alpha) ** 2 + np.abs(beta) ** 2)
     kappa = 1
 
     # get the frequency intervall suited for the given time vector
@@ -74,7 +73,7 @@ def nsev_inverse_example():
         print("  %d : q(t=%.5f) = %.5e + %.5e j " % (i, tvec[i],
                                                      np.real(res['q'][i]),
                                                      np.imag(res['q'][i])))
-    res['Xi'] = np.array([Xi1,Xi2])
+    res['Xi'] = np.array([Xi1, Xi2])
     return res
 
 

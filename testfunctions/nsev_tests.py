@@ -85,7 +85,6 @@ class NsevExampleTestBoundStateGuesses(unittest.TestCase):
                             "provide guesses: disc_norm value not as expected")
 
 
-
 class NsevExampleTestRF(unittest.TestCase):
     """Testcase for nsev_example, check whether RF flag works as expected.
 
@@ -118,7 +117,8 @@ class NsevExampleTestRF(unittest.TestCase):
             self.assertTrue(not check_array(self.res2['cont_b'], self.bexact),
                             "without RF flag: accuracy is sufficient. unexpected. (check error margin)")
         with self.subTest('check improvement'):
-            self.assertTrue( np.linalg.norm( self.res1['cont_b']-self.bexact)  < np.linalg.norm( self.res2['cont_b']-self.bexact) )
+            self.assertTrue(
+                np.linalg.norm(self.res1['cont_b'] - self.bexact) < np.linalg.norm(self.res2['cont_b'] - self.bexact))
 
 
 class NsevDstCstInputTest(unittest.TestCase):

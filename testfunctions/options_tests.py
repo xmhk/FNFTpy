@@ -40,8 +40,8 @@ class FnftpyOptionsTest(unittest.TestCase):
         # remark: third element of lists are one single string each (print(repr(opts))). They may look confusing
         self.expected = dict(
             kdvv=[KdvvOptionsStruct, get_kdvv_options,
-                  "'bound_state_localization' : 1, 'niter' : 10, 'discspec_type' : 0, 'contspec_type' : 0, "\
-                  +"'normalization_flag' : 1, 'discretization' : 39, 'richardson_extrapolation_flag' : 0"],
+                  "'bound_state_localization' : 1, 'niter' : 10, 'discspec_type' : 0, 'contspec_type' : 0, " \
+                  + "'normalization_flag' : 1, 'discretization' : 39, 'richardson_extrapolation_flag' : 0"],
             nsep=[NsepOptionsStruct, get_nsep_options,
                   "'localization' : 2, 'filtering' : 2, 'bounding_box' : [-inf inf -inf inf ]," \
                   + " 'max_evals' : 20, 'discretization' : 4, 'normalization_flag' : 1, 'floquet_range' : [-1.0 1.0 ], "

@@ -49,6 +49,7 @@ def get_lib_path():
     libstr = "/home/ch/Downloads/FNFT/lib/libfnft.so.0.4.1"
     return libstr
 
+
 def get_winmode_param():
     """
     This function is used to allow module-wide change of the winmode parameter used by
@@ -62,7 +63,7 @@ def get_winmode_param():
     Returns:
         winmode parameter : 0    (change manually to either None or some int if you experience problems)
     """
-    #return None
+    # return None
     return 0
 
 

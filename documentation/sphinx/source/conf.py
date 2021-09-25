@@ -14,9 +14,8 @@
 #
 import os
 import sys
+
 sys.path.insert(0, os.path.abspath('../../../'))
-
-
 
 # -- Project information -----------------------------------------------------
 
@@ -28,7 +27,6 @@ author = 'Christoph Mahnke'
 version = '0.4'
 # The full version, including alpha/beta/rc tags
 release = '0.4.1'
-
 
 # -- General configuration ---------------------------------------------------
 
@@ -70,13 +68,12 @@ exclude_patterns = []
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
 
-
 # -- Options for HTML output -------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-#html_theme = 'alabaster'
+# html_theme = 'alabaster'
 html_theme = 'classic'
 
 # Theme options are theme-specific and customize the look and feel of a theme
@@ -106,17 +103,16 @@ html_static_path = ['_static']
 # Output file base name for HTML help builder.
 htmlhelp_basename = 'FNFTpydoc'
 
-
 # -- Options for LaTeX output ------------------------------------------------
 
 latex_elements = {
     # The paper size ('letterpaper' or 'a4paper').
     #
-     'papersize': 'a4paper',
+    'papersize': 'a4paper',
 
     # The font size ('10pt', '11pt' or '12pt').
     #
-     'pointsize': '10pt',
+    'pointsize': '10pt',
 
     # Additional stuff for the LaTeX preamble.
     #
@@ -135,7 +131,6 @@ latex_documents = [
      'Christoph Mahnke', 'manual'),
 ]
 
-
 # -- Options for manual page output ------------------------------------------
 
 # One entry per manual page. List of tuples
@@ -144,7 +139,6 @@ man_pages = [
     (master_doc, 'fnftpy', 'FNFTpy Documentation',
      [author], 1)
 ]
-
 
 # -- Options for Texinfo output ----------------------------------------------
 
@@ -156,6 +150,5 @@ texinfo_documents = [
      author, 'FNFTpy', 'One line description of project.',
      'Miscellaneous'),
 ]
-
 
 # -- Extension configuration -------------------------------------------------

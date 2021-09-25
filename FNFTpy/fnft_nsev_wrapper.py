@@ -34,7 +34,7 @@ from .options_handling import get_nsev_options
 
 def nsev(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=None,
          bsl=None, niter=None, Dsub=None, dst=None, cst=None, nf=None, dis=None, ref=None,
-         bound_state_guesses = None):
+         bound_state_guesses=None):
     """Calculate the Nonlinear Fourier Transform for the Nonlinear Schroedinger equation with vanishing boundaries.
 
     This function is intended to be 'convenient', which means it
@@ -157,7 +157,7 @@ def nsev(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=None,
 
 
 def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
-                 M, K, kappa, options, bound_state_guesses = None):
+                 M, K, kappa, options, bound_state_guesses=None):
     """Calculate the Nonlinear Fourier Transform for the Nonlinear Schroedinger equation with vanishing boundaries.
 
     This function's interface mimics the behavior of the function 'fnft_nsev' of FNFT.
@@ -197,7 +197,7 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
 
     """
 
-    fnft_clib = ctypes.CDLL(get_lib_path(), winmode = get_winmode_param())
+    fnft_clib = ctypes.CDLL(get_lib_path(), winmode=get_winmode_param())
     clib_nsev_func = fnft_clib.fnft_nsev
     clib_nsev_func.restype = ctypes_int
     nsev_D = ctypes_uint(D)
@@ -217,7 +217,7 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
     #
     nsev_bound_states_type = numpy_complex_arr_ptr
     nsev_disc_spec_type = numpy_complex_arr_ptr
-    if (options.discspec_type == fnft_nsev_dstype.NORMING_CONSTANTS)\
+    if (options.discspec_type == fnft_nsev_dstype.NORMING_CONSTANTS) \
             or (options.discspec_type == fnft_nsev_dstype.RESIDUES):
         nsev_discspec = np.zeros(K, dtype=numpy_complex)
         nsev_boundstates = np.zeros(K, dtype=numpy_complex)
@@ -234,13 +234,13 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
     # for Newton refinement: use guesses, if provided.
     #
     if options.bound_state_localization == fnft_nsev_bsloc.NEWTON:
-        if bound_state_guesses is not None :
+        if bound_state_guesses is not None:
             bsg_copy = np.array(bound_state_guesses, dtype=np.complex128)
-            if len(bsg_copy)>0:
+            if len(bsg_copy) > 0:
                 ii = -1
                 # copy as many of the guesses to bound state array
-                while (ii< K-1) and (ii<len(bsg_copy)-1) and (ii<len(nsev_boundstates)-1):
-                    ii = ii+1
+                while (ii < K - 1) and (ii < len(bsg_copy) - 1) and (ii < len(nsev_boundstates) - 1):
+                    ii = ii + 1
                     nsev_boundstates[ii] = bsg_copy[ii]
     #
     # continuous spectrum -> reflection coefficient and / or a,b

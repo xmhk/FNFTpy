@@ -32,5 +32,4 @@ from .nsev_tests import NsevExampleTest, NsevDstCstInputTest, NsevExampleTestBou
 from .nsep_tests import NsepExampleTest
 from .nsev_inverse_tests import NsevInverseExample, NsevInverseExample2, NsevInverseInputVariation
 from .options_tests import FnftpyOptionsTest
-from .array_test import  check_array
-
+from .array_test import check_array

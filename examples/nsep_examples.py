@@ -30,14 +30,15 @@ Christoph Mahnke, 2018
 from FNFTpy import nsep
 import numpy as np
 
+
 def nsep_example():
     """Mimics the C example for calling fnft_nsep."""
     print("\n\nnsep example")
     # set values
     D = 256
-    #tvec = np.linspace(0, 2*np.pi, D)
+    # tvec = np.linspace(0, 2*np.pi, D)
     dt = 2 * np.pi / D
-    tvec = np.arange(0,D) * dt
+    tvec = np.arange(0, D) * dt
     q = np.exp(2.0j * tvec)
     # call function
     res = nsep(q, 0, 2 * np.pi, bb=[-2, 2, -2, 2], filt=1, kappa=1)
@@ -50,9 +51,9 @@ def nsep_example():
     print('main spectrum')
     for i in range(res['K']):
         print("%d :  %.6f  %.6fj" % (i, np.real(res['main'][i]),
-                                          np.imag(res['main'][i])))
+                                     np.imag(res['main'][i])))
     print('auxiliary spectrum')
     for i in range(res['M']):
         print("%d :  %.6f  %.6fj" % (i, np.real(res['aux'][i]),
-                                          np.imag(res['aux'][i])))
+                                     np.imag(res['aux'][i])))
     return res

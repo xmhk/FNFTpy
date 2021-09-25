@@ -33,7 +33,7 @@ from .options_handling import print_nsep_options, get_nsep_options
 
 
 def nsep(q, T1, T2, kappa=1, loc=None, filt=None, bb=None,
-         maxev=None, dis=None, nf=None, floq_range=None, ppspine=None, dsub=None, tol=None, phase_shift = 0.0):
+         maxev=None, dis=None, nf=None, floq_range=None, ppspine=None, dsub=None, tol=None, phase_shift=0.0):
     """Calculate the Nonlinear Fourier Transform for the Nonlinear Schroedinger equation with periodic boundaries.
 
     This function is intended to be 'convenient', which means it
@@ -160,7 +160,7 @@ def nsep_wrapper(D, q, T1, T2, phase_shift, kappa,
 
     """
 
-    fnft_clib = ctypes.CDLL(get_lib_path(), winmode = get_winmode_param())
+    fnft_clib = ctypes.CDLL(get_lib_path(), winmode=get_winmode_param())
     clib_nsep_func = fnft_clib.fnft_nsep
     clib_nsep_func.restype = ctypes_int
     nsep_D = ctypes_uint(D)
@@ -181,7 +181,7 @@ def nsep_wrapper(D, q, T1, T2, phase_shift, kappa,
         type(nsep_D),  # D
         numpy_complex_arr_ptr,  # q
         numpy_double_arr_ptr,  # t
-        type(nsep_phase_shift), # phase_shift
+        type(nsep_phase_shift),  # phase_shift
         ctypes.POINTER(ctypes_uint),  # K_ptr
         numpy_complex_arr_ptr,  # main_spec
         ctypes.POINTER(ctypes_uint),  # M_ptr
