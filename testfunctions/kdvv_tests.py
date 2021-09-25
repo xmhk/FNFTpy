@@ -30,7 +30,7 @@ Christoph Mahnke, 2018-2021
 import unittest
 
 from .array_test import *
-from examples import kdvv_example
+from examples import kdvv_example, kdvv_example_mex4
 
 
 class KdvvExampleTest(unittest.TestCase):
@@ -62,7 +62,8 @@ class KdvvExampleTest(unittest.TestCase):
         with self.subTest('check no of bound states'):
             self.assertEqual(self.res['bound_states_num'], 1, "number of bound states")
         with self.subTest('bound_states'):
-            self.assertTrue(check_array(self.res['bound_states'], expected['bound_states']), 'bound_states not as expected')
+            self.assertTrue(check_array(self.res['bound_states'], expected['bound_states']),
+                            'bound_states not as expected')
         with self.subTest('disc_norm'):
             self.assertTrue(check_array(self.res['disc_norm'], expected['disc_norm']), 'disc norm not as expected')
         with self.subTest('disc_res'):
@@ -74,6 +75,54 @@ class KdvvExampleTest(unittest.TestCase):
             self.assertTrue(check_array(self.res['cont_a'], expected['cont_a']), 'contspec (a) not as expected')
         with self.subTest('cont_b'):
             self.assertTrue(check_array(self.res['cont_b'], expected['cont_b']), 'contspec (b) not as expected')
+
+
+class KdvvExampleTest_mex4_bound_states(unittest.TestCase):
+    """Testcase for kdvv, check bound states for different discretizations."""
+
+    def setUp(self):
+        samplediscretizations = {
+            'n2SPLIT2_MODAL_VANILLA': 0,
+            'n2SPLIT8A_VANILLA': 18,
+            'CF4_3_VANILLA': 23,
+            'TES4_VANILLA': 27,
+            'BO': 29,
+            'n4SPLIT4A': 48,
+            'n4SPLIT4B': 49,
+            'CF6_4': 53,
+            'ES4': 54,
+            'TES4': 55}
+        M = []
+        for kk in samplediscretizations:
+            for log2D in [9]:
+                res = kdvv_example_mex4(log2D, dis=samplediscretizations[kk], diskey=kk, verbose=False)
+                M.append([res['return_value'], res['bound_states'][0], res['bound_states'][1]])
+        self.res = np.array(M)
+
+    def test_kdvv_mex4_bound_states(self):
+        expectedM = np.array([[0.00000000e+00 + 0.j, 0.00000000e+00 + 1.00030636j, 0.00000000e+00 + 2.99969377j,
+                               ],
+                              [0.00000000e+00 + 0.j, 0.00000000e+00 + 1.00030636j, 0.00000000e+00 + 2.99969377j,
+                               ],
+                              [0.00000000e+00 + 0.j, 0.00000000e+00 + 1.j, 0.00000000e+00 + 3.j, ],
+                              [0.00000000e+00 + 0.j, 0.00000000e+00 + 1.00000164j, 0.00000000e+00 + 2.99999924j,
+                               ],
+                              [0.00000000e+00 + 0.j, 0.00000000e+00 + 1.00030636j, 0.00000000e+00 + 2.99969377j,
+                               ],
+                              [0.00000000e+00 + 0.j, 0.00000000e+00 + 1.00000008j, 0.00000000e+00 + 2.99999998j,
+                               ],
+                              [0.00000000e+00 + 0.j, 0.00000000e+00 + 1.00000008j, 0.00000000e+00 + 2.99999998j,
+                               ],
+                              [0.00e+00 + 0.j, 0.00e+00 + 1.j, 0.00e+00 + 3.j, ],
+                              [0.00000000e+00 + 0.j, 0.00000000e+00 + 1.00000172j, 0.00000000e+00 + 2.99999858j,
+                               ],
+                              [0.00000000e+00 + 0.j, 0.00000000e+00 + 1.00000164j, 0.00000000e+00 + 2.99999924j,
+                               ]]
+                             )
+
+        with self.subTest('check bound states for different discretizations'):
+            self.assertTrue(check_array(self.res, expectedM, eps=1e-10),
+                            'bound_states (mex 4 examples) not as expected')
 
 
 class KdvvExampleTest_provide_bound_states(unittest.TestCase):
@@ -92,9 +141,11 @@ class KdvvExampleTest_provide_bound_states(unittest.TestCase):
         expected = {'bound_states': np.array([0. + 0.07454561j, 0. + 1.30818689j])
                     }
         with self.subTest('check bound state results with valid guesses'):
-            self.assertTrue(check_array(self.res['bound_states'], expected['bound_states']), 'bound_states not as expected')
+            self.assertTrue(check_array(self.res['bound_states'], expected['bound_states']),
+                            'bound_states not as expected')
         with self.subTest('check bound state results with valid guesses'):
-            self.assertTrue(check_array(self.res['bound_states'], expected['bound_states']), 'bound_states not as expected')
+            self.assertTrue(check_array(self.res['bound_states'], expected['bound_states']),
+                            'bound_states not as expected')
 
         self.assertEqual(self.res2['return_value'], 2,
                          "FNFT kdvv return value -- should be 2 if real part of guesses is not zero")

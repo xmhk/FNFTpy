@@ -27,7 +27,7 @@ Christoph Mahnke, 2018,2020
 
 """
 
-from .kdvv_examples import kdvv_example
+from .kdvv_examples import kdvv_example, kdvv_example_mex4
 
 from .nsep_examples import nsep_example
 

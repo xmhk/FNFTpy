@@ -67,3 +67,25 @@ def kdvv_example(dis=None, bsl=None, niter=None, dst=None, cst=None, nf=None,
             np.imag(res['disc_norm'][0]),
         ))
     return res
+
+
+def kdvv_example_mex4(log2D, dis = 0, diskey = "", verbose=True):
+    """calculation of bound states, similar to mex example 4
+
+    Exact values of the bound states
+
+    bound_states_exact = [1i,3i];
+    normconsts_exact = [-9e6, 729e18];
+    """
+    T1 = 0; T2 = 16
+    Xi1 = 0.5; Xi2 = 23
+    tvec = np.linspace(T1, T2, 2**log2D)
+    xivec = np.linspace(Xi1, Xi2, 2**log2D)
+    A = 15.0
+    d = 0.5
+    exp_t0 = 3000.
+    q = A * (1. / np.cosh((tvec - np.log(exp_t0)) / d)) ** 2
+    res = kdvv(q, tvec, M=2**log2D , Xi1=Xi1, Xi2=Xi2, cst=4, dis=dis, bsl=1, niter=20)
+    if verbose:
+        print("dis=%d (%s) ... bound states: "%(dis, diskey), res['bound_states'], "  norm const", res['disc_norm'])
+    return res
