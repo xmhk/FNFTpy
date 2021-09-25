@@ -27,7 +27,6 @@ Christoph Mahnke, 2019
 
 """
 
-
 from setuptools import setup, find_packages
 
 with open("README.md", "r") as fh:
@@ -43,7 +42,7 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/xmhk/FNFTpy",
-    packages=find_packages(exclude=('examples','testfunctions')),
+    packages=find_packages(exclude=('examples', 'testfunctions')),
     classifiers=[
         "Programming Language :: Python :: 3",
         "Operating System :: OS Independent",

@@ -85,6 +85,42 @@ class NsevExampleTestBoundStateGuesses(unittest.TestCase):
                             "provide guesses: disc_norm value not as expected")
 
 
+class NsevExampleTestBoundStateGuessesMex4(unittest.TestCase):
+    """Testcase for nsev_example, check whether works with provided bound_states.
+
+    based on mex_fnft_nsev_example_4.m"""
+
+    def setUp(self):
+        D = 2 ** 10
+        tvec = np.linspace(-32, 32, D)
+        qo = 5.4
+        lam0 = 3.0
+        q = np.multiply(qo / np.cosh(tvec), np.exp(-2.0j * tvec * lam0))
+        self.bs_exact = lam0 + 1.0j * (qo + 0.5 - np.floor(np.arange(qo + 0.5, 1, -1)))
+
+        # stochastic may not be good to have some reliable test function
+        # bsguesses = bs_exact+0.035*np.exp(1j*np.pi*np.random.rand(5))
+        bsguesses = self.bs_exact + np.array(
+            [0.00045826 + 0.034997j,
+             -0.01167859 + 0.0329941j,
+             0.01942237 + 0.02911651j,
+             0.03171094 + 0.0148127j,
+             -0.0339977 + 0.00831603j])
+        self.norm_exact = (-1) ** (np.arange(np.floor(qo + 0.5), 0, -1))
+        self.res = nsev(q, tvec, cst=3, dis=22, bsl=1, niter=20, bound_state_guesses=bsguesses)
+
+    def test_nsev_example_mex4(self):
+        with self.subTest('check FNFT nsev return value'):
+            self.assertEqual(self.res['return_value'], 0, "FNFT nsev return value not 0")
+        with self.subTest('bound states value'):
+            self.assertTrue(check_array(self.res['bound_states'], self.bs_exact, eps=1e-7),
+                            "provide guesses (mex4): bound_states value not as expected")
+
+        with self.subTest('disc_norm value'):
+            self.assertTrue(check_array(self.res['disc_norm'], self.norm_exact),
+                            "provide guesses: disc_norm value not as expected")
+
+
 class NsevExampleTestRF(unittest.TestCase):
     """Testcase for nsev_example, check whether RF flag works as expected.
 
