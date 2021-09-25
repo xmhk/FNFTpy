@@ -327,11 +327,15 @@ def kdvv_wrapper(D, u, T1, T2, K, M, Xi1, Xi2,
     #
     if options.contspec_type == fnft_kdvv_cstype.REFLECTION_COEFFICIENT:
         rdict['cont_ref'] = kdvv_cont[0:M]
+        # for backward compatibility reasons: include ref spectrum as 'cont'
+        rdict['cont'] = kdvv_cont[0:M]
     elif options.contspec_type == fnft_kdvv_cstype.AB:
         rdict['cont_a'] = kdvv_cont[0:M]
         rdict['cont_b'] = kdvv_cont[M:2 * M]
     elif options.contspec_type == fnft_kdvv_cstype.BOTH:
         rdict['cont_ref'] = kdvv_cont[0:M]
+        # for backward compatibility reasons: include ref spectrum as 'cont'
+        rdict['cont'] = kdvv_cont[0:M]
         rdict['cont_a'] = kdvv_cont[M:2 * M]
         rdict['cont_b'] = kdvv_cont[2 * M:3 * M]
     else:
