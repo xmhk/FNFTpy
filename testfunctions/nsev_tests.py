@@ -85,6 +85,42 @@ class NsevExampleTestBoundStateGuesses(unittest.TestCase):
                             "provide guesses: disc_norm value not as expected")
 
 
+
+class NsevExampleTestRF(unittest.TestCase):
+    """Testcase for nsev_example, check whether RF flag works as expected.
+
+    this based on the mex_fnft_nsev_example_2.m file of FNFT.
+
+    It should show that the Richardson Extrapolation improves accuracy"""
+
+    def setUp(self):
+        D = 2 ** 11
+        tvec = np.linspace(-32, 32, D)
+        Xi1 = -10;
+        Xi2 = 10
+        xivec = np.linspace(Xi1, Xi2, D)
+        qo = 5.4 + 0.0j
+        lam0 = 3.0
+        q = np.multiply(qo / np.cosh(tvec), np.exp(-2.0j * tvec * lam0))
+        self.bexact = -1.0 * np.sin(np.pi * qo) / np.cosh(np.pi * (xivec - lam0))
+        self.res1 = nsev(q, tvec, Xi1=Xi1, Xi2=Xi2, M=D, dst=4, cst=1, dis=21, ref=1)
+        self.res2 = nsev(q, tvec, Xi1=Xi1, Xi2=Xi2, M=D, dst=4, cst=1, dis=21, ref=0)
+
+    def test_nsev_rf_improvement(self):
+        with self.subTest('check FNFT nsev return value'):
+            self.assertEqual(self.res1['return_value'], 0, "FNFT nsev return value not 0")
+        with self.subTest('check FNFT nsev return value'):
+            self.assertEqual(self.res2['return_value'], 0, "FNFT nsev return value not 0")
+        with self.subTest('with RF flag accuracy is sufficient'):
+            self.assertTrue(check_array(self.res1['cont_b'], self.bexact),
+                            "with RF flag: accuracy is not sufficient")
+        with self.subTest('with RF flag accuracy is sufficient'):
+            self.assertTrue(not check_array(self.res2['cont_b'], self.bexact),
+                            "without RF flag: accuracy is sufficient. unexpected. (check error margin)")
+        with self.subTest('check improvement'):
+            self.assertTrue( np.linalg.norm( self.res1['cont_b']-self.bexact)  < np.linalg.norm( self.res2['cont_b']-self.bexact) )
+
+
 class NsevDstCstInputTest(unittest.TestCase):
     """Testcase for various input for nsev."""
 
