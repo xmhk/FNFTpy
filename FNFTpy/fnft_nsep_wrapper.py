@@ -46,7 +46,7 @@ def nsep(q, T1, T2, kappa=1, loc=None, filt=None, bb=None,
 
     Arguments:
 
-    * q : numpy array holding the samples of the input field
+    * q : numpy array holding the samples of the input field (lenght should be a power of two)
     * T1, T2  : time positions of the first and the (D+1) sample, where D is the number of samples
 
     Optional arguments:
@@ -140,7 +140,7 @@ def nsep_wrapper(D, q, T1, T2, phase_shift, kappa,
 
     Arguments:
 
-    * D : number of sample points
+    * D : number of sample points (should be power of 2)
     * q : numpy array holding the samples of the input field
     * T1, T2  : time positions of the first and the (D+1) sample
     * phase_shift : change of the phase over one quasi-period, arg(q(t+(T2-T1)/q(t))
