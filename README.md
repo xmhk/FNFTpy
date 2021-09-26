@@ -197,27 +197,27 @@ print("Difference analytic - numeric: sum((q_ana-q_num)**2) = %.2e  (should be a
    in auxiliary.py. 
    
    Example:
-    ```   
-    def get_lib_path():
-        """Return the path of the FNFT file.
-    
-        Here you can set the location of the compiled library for FNFT.
-        See example strings below.
-    
-        Returns:
-    
-        * libstring : string holding library path
-    
-        Example paths:
-    
-            * libstr = "C:/Libraries/local/libfnft.dll"  # example for windows            
-            * libstr = "/usr/local/lib/libfnft.so"  # example for linux
-    
-        """
-        libstr = "/usr/local/lib/libfnft.so"  # example for linux
-        return libstr        
-    ```
-    
+ 
+```python
+def get_lib_path():
+    """Return the path of the FNFT file.
+
+    Here you can set the location of the compiled library for FNFT.
+    See example strings below.
+
+    Returns:
+
+    * libstring : string holding library path
+
+    Example paths:
+
+        * libstr = "C:/Libraries/local/libfnft.dll"  # example for windows            
+        * libstr = "/usr/local/lib/libfnft.so"  # example for linux
+
+    """
+    libstr = "/usr/local/lib/libfnft.so"  # example for linux
+    return libstr
+```
     
  # License 
   
