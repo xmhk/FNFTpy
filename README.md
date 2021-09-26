@@ -18,34 +18,34 @@ for changes and latest updates see [Changelog](CHANGELOG.md)
   * Function **kdvv**: 
     * easy-to-use Python function, options can be passed as optional arguments 
     * minimal example:
-        ```
-        import numpy as np
-        from FNFTpy import kdvv
-        D = 256
-        tvec = np.linspace(-1, 1, D)
-        q = np.zeros(D, dtype=np.complex128)
-        q[:] = 2.0 + 0.0j
-        Xi1 = -2
-        Xi2 = 2
-        M = 8  # points for continuous spectrum
-        K = 8  # number of expected bound states
-        Xivec = np.linspace(Xi1, Xi2, M)
-        res = kdvv(q, tvec, K, M, Xi1=Xi1, Xi2=Xi2)
-        print("\n----- options used ----")
-        print(res['options'])
-        print("\n------ results --------")
-        print("FNFT return value: %d (should be 0)" % res['return_value'])
-        print("continuous spectrum: ")
-        for i in range(len(res['cont_ref'])):
-            print("%d : Xi=%.3f   %.3e + %.3ej"%(i,
-                    Xivec[i], np.real(res['cont_ref'][i]), 
-                    np.imag(res['cont_ref'][i])))
-        print("discrete spectrum")
-        for i in range(res['bound_states_num']):
-            print("%d : bound state  %.3e + %.3ej with norming const %.3e + %.3ej"% (i,
-                      np.real(res['bound_states'][i]),np.imag(res['bound_states'][i]),
-                      np.real(res['disc_norm'][i]),np.imag(res['disc_norm'][i])))
-          ```
+```python
+import numpy as np
+from FNFTpy import kdvv
+D = 256
+tvec = np.linspace(-1, 1, D)
+q = np.zeros(D, dtype=np.complex128)
+q[:] = 2.0 + 0.0j
+Xi1 = -2
+Xi2 = 2
+M = 8  # points for continuous spectrum
+K = 8  # number of expected bound states
+Xivec = np.linspace(Xi1, Xi2, M)
+res = kdvv(q, tvec, K, M, Xi1=Xi1, Xi2=Xi2)
+print("\n----- options used ----")
+print(res['options'])
+print("\n------ results --------")
+print("FNFT return value: %d (should be 0)" % res['return_value'])
+print("continuous spectrum: ")
+for i in range(len(res['cont_ref'])):
+    print("%d : Xi=%.3f   %.3e + %.3ej"%(i,
+            Xivec[i], np.real(res['cont_ref'][i]), 
+            np.imag(res['cont_ref'][i])))
+print("discrete spectrum")
+for i in range(res['bound_states_num']):
+    print("%d : bound state  %.3e + %.3ej with norming const %.3e + %.3ej"% (i,
+              np.real(res['bound_states'][i]),np.imag(res['bound_states'][i]),
+              np.real(res['disc_norm'][i]),np.imag(res['disc_norm'][i])))
+```
       * for full description call ```help(kdvv)```
       
       
@@ -59,34 +59,33 @@ for changes and latest updates see [Changelog](CHANGELOG.md)
   * The main and auxiliary spectra can be calculated.
   * Function **nsep**: 
     * easy-to-use Python function, options can be passed as optional arguments 
-    * minimal example:
-      ```
-      import numpy as np
-      from FNFTpy import nsep
-      print("\n\nnsep example")
-      # set values
-      D = 257
-      tvec = np.linspace(0, 2*np.pi, D)
-      q = np.exp(2.0j * tvec)
-      # call function
-      res = nsep(q, 0, 2 * np.pi, bb=[-2, 2, -2, 2], filt=1, kappa=1)
-      # print results
-      print("\n----- options used ----")
-      print(res['options'])
-      print("\n------ results --------")
-      print("FNFT return value: %d (should be 0)" % res['return_value'])
-      print("number of samples: %d" % D)
-      print('main spectrum')
-      for i in range(res['K']):
-          print("%d :  %.6f  %.6fj" % (i, np.real(res['main'][i]),
-                                            np.imag(res['main'][i])))
-      print('auxiliary spectrum')
-      for i in range(res['M']):
-          print("%d :  %.6f  %.6fj" % (i, np.real(res['aux'][i]),
-                                            np.imag(res['aux'][i])))
-
-       ```
-   * for full description call ```help(nsep)```
+  * minimal example:
+```python
+import numpy as np
+from FNFTpy import nsep
+print("\n\nnsep example")
+# set values
+D = 256
+tvec = np.linspace(0, 2*np.pi, D)
+q = np.exp(2.0j * tvec)
+# call function
+res = nsep(q, 0, 2 * np.pi, bb=[-2, 2, -2, 2], filt=1, kappa=1)
+# print results
+print("\n----- options used ----")
+print(res['options'])
+print("\n------ results --------")
+print("FNFT return value: %d (should be 0)" % res['return_value'])
+print("number of samples: %d" % D)
+print('main spectrum')
+for i in range(res['K']):
+  print("%d :  %.6f  %.6fj" % (i, np.real(res['main'][i]),
+                                   np.imag(res['main'][i])))
+print('auxiliary spectrum')
+for i in range(res['M']):
+  print("%d :  %.6f  %.6fj" % (i, np.real(res['aux'][i]),
+                                    np.imag(res['aux'][i])))
+```
+  * for full description call ```help(nsep)```
   * Function **nsep_wrapper**:
     * mimics the function fnft_nsep from FNFT.
     * for full description call ```help(nsep_wrapper)```
@@ -98,39 +97,40 @@ for changes and latest updates see [Changelog](CHANGELOG.md)
     * easy-to-use Python function, options can be passed as optional arguments 
     
     * minimal example:
-        ```
-        import numpy as np
-        from FNFTpy import nsev
-    
-        # set values
-        D = 256
-        tvec = np.linspace(-1, 1, D)
-        q = np.zeros(len(tvec), dtype=np.complex128)
-        q[:] = 2.0 + 0.0j
-        M = 8
-        Xi1 = -2
-        Xi2 = 2
-        Xivec = np.linspace(Xi1, Xi2, M)
-    
-        # call function
-        res = nsev(q, tvec, M=M, Xi1=Xi1, Xi2=Xi2)
-    
-        # print results
-        print("\n----- options used ----")
-        print(res['options'])
-        print("\n------ results --------")
-    
-        print("FNFT return value: %d (should be 0)" % res['return_value'])
-        print("continuous spectrum")
-        for i in range(len(res['cont_ref'])):
-            print("%d :  Xi = %.4f   %.6f  %.6fj" % (i, Xivec[i], np.real(res['cont_ref'][i]), np.imag(res['cont_ref'][i])))
-        print("discrete spectrum")
-        for i in range(len(res['bound_states'])):
-            print("%d : %.6f  %.6fj with norming const %.6f  %.6fj" % (i, np.real(res['bound_states'][i]),
-                                                                     np.imag(res['bound_states'][i]),
-                                                                     np.real(res['disc_norm'][i]),
-                                                                     np.imag(res['disc_norm'][i])))
-        ```
+  
+```python
+import numpy as np
+from FNFTpy import nsev
+
+# set values
+D = 256
+tvec = np.linspace(-1, 1, D)
+q = np.zeros(len(tvec), dtype=np.complex128)
+q[:] = 2.0 + 0.0j
+M = 8
+Xi1 = -2
+Xi2 = 2
+Xivec = np.linspace(Xi1, Xi2, M)
+
+# call function
+res = nsev(q, tvec, M=M, Xi1=Xi1, Xi2=Xi2)
+
+# print results
+print("\n----- options used ----")
+print(res['options'])
+print("\n------ results --------")
+
+print("FNFT return value: %d (should be 0)" % res['return_value'])
+print("continuous spectrum")
+for i in range(len(res['cont_ref'])):
+    print("%d :  Xi = %.4f   %.6f  %.6fj" % (i, Xivec[i], np.real(res['cont_ref'][i]), np.imag(res['cont_ref'][i])))
+print("discrete spectrum")
+for i in range(len(res['bound_states'])):
+    print("%d : %.6f  %.6fj with norming const %.6f  %.6fj" % (i, np.real(res['bound_states'][i]),
+                                                             np.imag(res['bound_states'][i]),
+                                                             np.real(res['disc_norm'][i]),
+                                                             np.imag(res['disc_norm'][i])))
+```        
     * for full description call ```help(nsev)```
         
   * Function **nsev_wrapper**:
@@ -144,34 +144,31 @@ for changes and latest updates see [Changelog](CHANGELOG.md)
  * function **nsev_inverse**
     * easy-to-use Python function, options can be passed as optional arguments 
     * minimal example:
-         ```
-         from FNFTpy import nsev_inverse, nsev_inverse_xi_wrapper
-        import numpy as np
-        
-        D = 1024
-        M = 2*D
-        Tmax = 15
-        tvec = np.linspace(-Tmax, Tmax, D)
-        # calculate suitable frequency bonds (xi)
-        rv, xi = nsev_inverse_xi_wrapper(D, tvec[0], tvec[-1], M)
-        xivec = xi[0] + np.arange(M) * (xi[1] - xi[0]) / (M - 1)
-        
-        # analytic field: chirp-free N=2.2 Satsuma-Yajima pulse
-        q = 2.2 / np.cosh(tvec)
-        
-        # semi-analytic nonlinear spectrum
-        bound_states = np.array([0.7j, 1.7j])
-        disc_norming_const_ana = [1.0, -1.0]
-        cont_b_ana = 0.587783 / np.cosh(xivec * np.pi) * np.exp(1.0j * np.pi)
-        
-        # call the function
-        res = nsev_inverse(xivec, tvec, cont_b_ana, bound_states, disc_norming_const_ana, cst=1, dst=0)
-        
-        # compare result to analytic function
-        print("\n\nnsev-inverse example: Satsuma-Yajima N=2.2")
-        print("Difference analytic - numeric: sum((q_ana-q_num)**2) = %.2e  (should be approx 0) "%np.sum(np.abs(q-res['q'])**2))        
-         ```
-         
+
+```python
+from FNFTpy import nsev_inverse, nsev_inverse_xi_wrapper
+import numpy as np
+D = 1024
+M = 2 * D
+Tmax = 15
+tvec = np.linspace(-Tmax, Tmax, D)
+# calculate suitable frequency bonds (xi)
+rv, xi = nsev_inverse_xi_wrapper(D, tvec[0], tvec[-1], M)
+xivec = xi[0] + np.arange(M) * (xi[1] - xi[0]) / (M - 1)
+# analytic field: chirp-free N=2.2 Satsuma-Yajima pulse
+q = 2.2 / np.cosh(tvec)
+# semi-analytic nonlinear spectrum
+bound_states = np.array([0.7j, 1.7j])
+disc_norming_const_ana = [1.0, -1.0]
+cont_b_ana = 0.587783 / np.cosh(xivec * np.pi) * np.exp(1.0j * np.pi)
+# call the function
+res = nsev_inverse(xivec, tvec, cont_b_ana, bound_states, disc_norming_const_ana, cst=1, dst=0)
+# compare result to analytic function
+print("\n\nnsev-inverse example: Satsuma-Yajima N=2.2")
+print("Difference analytic - numeric: sum((q_ana-q_num)**2) = %.2e  (should be approx 0) " % np.sum(
+    np.abs(q - res['q']) ** 2))
+``` 
+
   * Function **nsev_inverse_wrapper**:
     * mimics the function fnft_nsev_inverse from FNFT.
     * for full description call ```help(nsev_inverse_wrapper)```
@@ -223,7 +220,7 @@ for changes and latest updates see [Changelog](CHANGELOG.md)
   
 FNFTpy is provided under the terms of the [GNU General Public License, version 2.](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
 
-# Contact and contribution
+# Contact and contributors
 
 * for bug reports, please use the github issue tracker
 
