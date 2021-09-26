@@ -18,6 +18,7 @@ for changes and latest updates see [Changelog](CHANGELOG.md)
   * Function **kdvv**: 
     * easy-to-use Python function, options can be passed as optional arguments 
     * minimal example:
+
 ```python
 import numpy as np
 from FNFTpy import kdvv
@@ -45,9 +46,9 @@ for i in range(res['bound_states_num']):
     print("%d : bound state  %.3e + %.3ej with norming const %.3e + %.3ej"% (i,
               np.real(res['bound_states'][i]),np.imag(res['bound_states'][i]),
               np.real(res['disc_norm'][i]),np.imag(res['disc_norm'][i])))
+
 ```
-      * for full description call ```help(kdvv)```
-      
+  * for full description call `help(kdvv)`
       
   * function **kdvv_wrapper**:
     * mimics the function fnft_kdvv from FNFT.
@@ -60,6 +61,7 @@ for i in range(res['bound_states_num']):
   * Function **nsep**: 
     * easy-to-use Python function, options can be passed as optional arguments 
   * minimal example:
+
 ```python
 import numpy as np
 from FNFTpy import nsep
@@ -85,7 +87,7 @@ for i in range(res['M']):
   print("%d :  %.6f  %.6fj" % (i, np.real(res['aux'][i]),
                                     np.imag(res['aux'][i])))
 ```
-  * for full description call ```help(nsep)```
+  * for full description call `help(nsep)`
   * Function **nsep_wrapper**:
     * mimics the function fnft_nsep from FNFT.
     * for full description call ```help(nsep_wrapper)```
@@ -131,7 +133,8 @@ for i in range(len(res['bound_states'])):
                                                              np.real(res['disc_norm'][i]),
                                                              np.imag(res['disc_norm'][i])))
 ```        
-    * for full description call ```help(nsev)```
+
+  * for full description call `help(nsev)`
         
   * Function **nsev_wrapper**:
     * mimics the function fnft_nsev from FNFT.
@@ -186,7 +189,7 @@ print("Difference analytic - numeric: sum((q_ana-q_num)**2) = %.2e  (should be a
 
  * **alternatively**, you may add the FNFTpy folder to your Python path.
 
- * Of course, you need a compiled version of the FNFT C-library. See the
+ * Naturally, you need a compiled version of the FNFT C-library. See the
   [documentation for FNFT](https://github.com/FastNFT/FNFT) on how to build 
    the library on your device. 
  * FNFTpy needs to know where the C-library is located. 
