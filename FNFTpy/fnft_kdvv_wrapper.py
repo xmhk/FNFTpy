@@ -304,7 +304,6 @@ def kdvv_wrapper(D, u, T1, T2, K, M, Xi1, Xi2,
         ctypes.byref(options))
     check_return_code(rv)
     K_new = kdvv_K.value  # number of bound states found
-    # print(type(int(kdvv_k.value))) # TODO needs to be cleaned, cases?
     rdict = {'return_value': rv,
              'bound_states_num': K_new,
              'bound_states': kdvv_boundstates[0:K_new],

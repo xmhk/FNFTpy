@@ -2,15 +2,19 @@
 
 ## current
 
-### 17.09.2021
+### 17.09.2021 
+
+- general:
+  - updated some docstrings
+  - add more teststo
 
 - **kdvv**:
   - kdvv now has more options, bound states and discrete spectrum can be calculated
-  - PLEASE NOTE: instead of 'cont', the continuous spectrum in the result dict is now
-      returned as 'cont_ref' or ('cont_a' and 'cont_b') or depending on the cst parameter
-  - initial guesses for bound states can be provided, for newton bound state localization
+  - initial guesses for bound states can be provided, for newton bound state localization (note: this 
+    fails if the bound state guesses) are not purely imaginary
+
 - **nsev**:
-  - implemented that initial guesses can be provided, for newton bound state localization
+  - implemented that initial guesses can be provided for newton bound state localization
   
 ## 0.4.1
 
