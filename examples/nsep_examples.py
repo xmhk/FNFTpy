@@ -31,9 +31,10 @@ from FNFTpy import nsep
 import numpy as np
 
 
-def nsep_example():
+def nsep_example(verbose=True):
     """Mimics the C example for calling fnft_nsep."""
-    print("\n\nnsep example")
+    if verbose:
+        print("\n\nnsep example")
     # set values
     D = 256
     # tvec = np.linspace(0, 2*np.pi, D)
@@ -43,17 +44,18 @@ def nsep_example():
     # call function
     res = nsep(q, 0, 2 * np.pi, bb=[-2, 2, -2, 2], filt=1, kappa=1)
     # print results
-    print("\n----- options used ----")
-    print(res['options'])
-    print("\n------ results --------")
-    print("FNFT return value: %d (should be 0)" % res['return_value'])
-    print("number of samples: %d" % D)
-    print('main spectrum')
-    for i in range(res['K']):
-        print("%d :  %.6f  %.6fj" % (i, np.real(res['main'][i]),
-                                     np.imag(res['main'][i])))
-    print('auxiliary spectrum')
-    for i in range(res['M']):
-        print("%d :  %.6f  %.6fj" % (i, np.real(res['aux'][i]),
-                                     np.imag(res['aux'][i])))
+    if verbose:
+        print("\n----- options used ----")
+        print(res['options'])
+        print("\n------ results --------")
+        print("FNFT return value: %d (should be 0)" % res['return_value'])
+        print("number of samples: %d" % D)
+        print('main spectrum')
+        for i in range(res['K']):
+            print("%d :  %.6f  %.6fj" % (i, np.real(res['main'][i]),
+                                         np.imag(res['main'][i])))
+        print('auxiliary spectrum')
+        for i in range(res['M']):
+            print("%d :  %.6f  %.6fj" % (i, np.real(res['aux'][i]),
+                                         np.imag(res['aux'][i])))
     return res
