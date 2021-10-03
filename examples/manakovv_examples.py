@@ -30,8 +30,9 @@ Christoph Mahnke, 2018-2021
 from FNFTpy import manakovv, print_manakovv_options
 import numpy as np
 
+
 def manakovv_example(D=1024, M=8, K=None, T1=-2, T2=2, Xi1=-1.75, Xi2=2, kappa=1, bsf=None,
-         bsl=None, niter=None, Dsub=None, dst=None, cst=None,
+                     bsl=None, niter=None, Dsub=None, dst=None, cst=None,
                      nf=None, dis=None, ref=None, verbose=True):
     """
     todo : write docstring
@@ -55,9 +56,11 @@ def manakovv_example(D=1024, M=8, K=None, T1=-2, T2=2, Xi1=-1.75, Xi2=2, kappa=1
     :param verbose:
     :return:
     """
+
     def cplxprint(z):
         s = "%.4e\t%.4ej" % (np.real(z), np.imag(z))
         return s
+
     q1 = np.zeros(D, dtype=np.complex128)
     q2 = np.zeros(D, dtype=np.complex128)
     tvec = np.linspace(T1, T2, D)
@@ -68,26 +71,26 @@ def manakovv_example(D=1024, M=8, K=None, T1=-2, T2=2, Xi1=-1.75, Xi2=2, kappa=1
         K = D
     Xivec = np.linspace(Xi1, Xi2, M)
     res = manakovv(q1, q2, tvec, M=M, K=K, Xi1=Xi1, Xi2=Xi2,
-                dis=dis, bsf=bsf, bsl=bsl, niter=niter, Dsub=Dsub,
+                   dis=dis, bsf=bsf, bsl=bsl, niter=niter, Dsub=Dsub,
                    dst=dst, cst=cst,
-                     nf=nf,  ref=ref)
+                   nf=nf, ref=ref)
     if verbose:
         print("-- options used --")
         print_manakovv_options(res['options'])
         print("-- continuous spectrum ---\n")
         for i in range(M):
-            print("%d Xi = %.5f  \t%s \t%s"%(i+1,Xivec[i],
-                  cplxprint(res['cont_ref1'][i]),
-                  cplxprint(res['cont_ref2'][i])))
+            print("%d Xi = %.5f  \t%s \t%s" % (i + 1, Xivec[i],
+                                               cplxprint(res['cont_ref1'][i]),
+                                               cplxprint(res['cont_ref2'][i])))
     return res
 
 
 def mex_fnft_manakov_example(M=8):
     """resembles the calculation done in mex_fnft_manakovv_example"""
     D = 512
-    tvec = np.linspace(-5,5,D)
-    Xi1 = -7.0/4.
-    Xi2 = 8.0/4.
+    tvec = np.linspace(-5, 5, D)
+    Xi1 = -7.0 / 4.
+    Xi2 = 8.0 / 4.
     q1 = 0.8 / np.cosh(tvec)
     q2 = 5.2 / np.cosh(tvec)
     res = manakovv(q1, q2, tvec, Xi1, Xi2, M=M)

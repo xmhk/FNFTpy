@@ -27,15 +27,14 @@ Christoph Mahnke 2021
 
 """
 
-
 from .typesdef import *
 from .auxiliary import get_lib_path, check_return_code, get_winmode_param
 from .options_handling import get_manakovv_options
 
 
 def manakovv(q1, q2, tvec, Xi1=-1.75, Xi2=2, M=128, K=128, kappa=1, bsf=None,
-         bsl=None, niter=None, Dsub=None, dst=None, cst=None, nf=None, dis=None, ref=None,
-         ):
+             bsl=None, niter=None, Dsub=None, dst=None, cst=None, nf=None, dis=None, ref=None,
+             ):
     """
     Calculate the Nonlinear Fourier Transform for the Manakov equation with vanishing boundary conditions.
 
@@ -134,7 +133,6 @@ def manakovv(q1, q2, tvec, Xi1=-1.75, Xi2=2, M=128, K=128, kappa=1, bsf=None,
 
     """
 
-
     D = len(q1)
     if len(q1) != len(q2):
         print("Warning: q1 and q2 should be of same length.")
@@ -142,10 +140,10 @@ def manakovv(q1, q2, tvec, Xi1=-1.75, Xi2=2, M=128, K=128, kappa=1, bsf=None,
     T2 = np.max(tvec)
     options = get_manakovv_options(bsf=bsf, bsl=bsl, niter=niter, Dsub=Dsub, dst=dst, cst=cst, nf=nf, dis=dis, ref=ref)
     return manakovv_wrapper(D, q1, q2, T1, T2, Xi1, Xi2,
-                        M, K, kappa, options)
+                            M, K, kappa, options)
 
 
-def manakovv_wrapper(D, q1, q2, T1, T2, Xi1, Xi2, M, K, kappa, options  ):
+def manakovv_wrapper(D, q1, q2, T1, T2, Xi1, Xi2, M, K, kappa, options):
     """
     Calculate the Nonlinear Fourier Transform for the Manakov equation with vanishing boundary conditions.
 
@@ -205,9 +203,9 @@ def manakovv_wrapper(D, q1, q2, T1, T2, Xi1, Xi2, M, K, kappa, options  ):
     #
     manakovv_bound_states_type = numpy_complex_arr_ptr
     manakovv_disc_spec_type = numpy_complex_arr_ptr
-    if (options.discspec_type == fnft_manakovv_dstype.NORMING_CONSTANTS)\
+    if (options.discspec_type == fnft_manakovv_dstype.NORMING_CONSTANTS) \
             or (options.discspec_type == fnft_manakovv_dstype.RESIDUES):
-        manakovv_discspec = np.zeros(K, dtype=numpy_complex)    # todo check sizes
+        manakovv_discspec = np.zeros(K, dtype=numpy_complex)  # todo check sizes
         manakovv_boundstates = np.zeros(K, dtype=numpy_complex)
     elif options.discspec_type == fnft_manakovv_dstype.BOTH:
         manakovv_discspec = np.zeros(2 * K, dtype=numpy_complex)  # todo check sizes
@@ -229,7 +227,7 @@ def manakovv_wrapper(D, q1, q2, T1, T2, Xi1, Xi2, M, K, kappa, options  ):
     #
     manakovv_cont_spec_type = numpy_complex_arr_ptr
 
-    if options.contspec_type == fnft_manakovv_cstype.REFLECTION_COEFFICIENT:   # this is default
+    if options.contspec_type == fnft_manakovv_cstype.REFLECTION_COEFFICIENT:  # this is default
         manakovv_cont = np.zeros(2 * M, dtype=numpy_complex)
     elif options.contspec_type == fnft_manakovv_cstype.AB:
         manakovv_cont = np.zeros(3 * M, dtype=numpy_complex)
@@ -291,17 +289,17 @@ def manakovv_wrapper(D, q1, q2, T1, T2, Xi1, Xi2, M, K, kappa, options  ):
     #
     if options.contspec_type == fnft_manakovv_cstype.REFLECTION_COEFFICIENT:
         rdict['cont_ref1'] = manakovv_cont[0:M]
-        rdict['cont_ref2'] = manakovv_cont[M:2*M]
+        rdict['cont_ref2'] = manakovv_cont[M:2 * M]
     if options.contspec_type == fnft_manakovv_cstype.AB:
         # a and b
         rdict['cont_a'] = manakovv_cont[0:M]
-        rdict['cont_b1'] = manakovv_cont[M:2*M]
-        rdict['cont_b2'] = manakovv_cont[2*M::]
+        rdict['cont_b1'] = manakovv_cont[M:2 * M]
+        rdict['cont_b2'] = manakovv_cont[2 * M::]
     if options.contspec_type == fnft_manakovv_cstype.BOTH:
         rdict['cont_ref1'] = manakovv_cont[0:M]
         rdict['cont_ref2'] = manakovv_cont[M:2 * M]
-        rdict['cont_a'] = manakovv_cont[2*M:3*M]
-        rdict['cont_b1'] = manakovv_cont[3*M:4*M]
-        rdict['cont_b2'] = manakovv_cont[4*M::]
+        rdict['cont_a'] = manakovv_cont[2 * M:3 * M]
+        rdict['cont_b1'] = manakovv_cont[3 * M:4 * M]
+        rdict['cont_b2'] = manakovv_cont[4 * M::]
     rdict['options'] = repr(options)
     return rdict
