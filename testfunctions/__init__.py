@@ -28,7 +28,7 @@ Christoph Mahnke, 2018-2021
 """
 
 from .kdvv_tests import KdvvExampleTest, KdvvExampleTest_provide_bound_states
-from .manakovv_tests import ManakovvExampleTest
+from .manakovv_tests import ManakovvExampleTest, ManakovvMexExampleTest
 from .nsev_tests import NsevExampleTest, NsevDstCstInputTest, NsevExampleTest_bound_state_guesses
 from .nsep_tests import NsepExampleTest
 from .nsev_inverse_tests import NsevInverseExample, NsevInverseExample2, NsevInverseInputVariation

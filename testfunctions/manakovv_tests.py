@@ -30,7 +30,7 @@ Christoph Mahnke, 2021
 import unittest
 
 from .array_test import *
-from examples import manakovv_example
+from examples import manakovv_example, mex_fnft_manakov_example
 
 
 class ManakovvExampleTest(unittest.TestCase):
@@ -80,3 +80,44 @@ class ManakovvExampleTest(unittest.TestCase):
             self.assertTrue(check_array(self.res['cont_b1'], expected['cont_b1']), 'contspec (b1) not as expected')
         with self.subTest('cont_b2'):
             self.assertTrue(check_array(self.res['cont_b2'], expected['cont_b2']), 'contspec (b2) not as expected')
+
+
+class ManakovvMexExampleTest(unittest.TestCase):
+    """Testcase for manakovv_example, (mimic of mex example)."""
+
+    def setUp(self):
+        self.res = mex_fnft_manakov_example()
+
+    def test_manakovv_example(self):
+        with self.subTest('check FNFT kdvv return value'):
+            self.assertEqual(self.res['return_value'], 0, "FNFT kdvv return value")
+        expected = {
+            'bound_states_num': 14,
+            'bound_states': np.array([-3.56714658e-13 + 0.7695895j, -1.07580611e-12 + 1.76793298j,
+                                      5.90749671e-12 + 2.76586856j, -7.94020405e-12 + 3.76381877j,
+                                      1.62880820e-12 + 4.76185284j, 5.34070751e+01 + 0.2238525j,
+                                      5.34070751e+01 + 1.23470801j, 1.06814150e+02 + 0.7695895j,
+                                      -1.06814150e+02 + 1.76793298j, 1.06814150e+02 + 2.76586856j,
+                                      -1.06814150e+02 + 4.76185284j, -1.06814150e+02 + 3.76381877j,
+                                      -5.34070751e+01 + 1.23470801j, -5.34070751e+01 + 0.2238525j]),
+            'cont_ref1': np.array([0.00453788 + 0.00125072j, -0.00314803 + 0.00717911j, 0.02856637 + 0.00118833j,
+                                   -0.09057157 - 0.0755944j, 0.02569507 + 0.07997608j, 0.00098114 - 0.00165313j,
+                                   -0.0069678 - 0.00333635j, -0.00071609 + 0.00077024j]),
+            'cont_ref2': np.array([0.02949623 + 0.00812965j, -0.02046221 + 0.04666421j, 0.1856814 + 0.00772417j,
+                                   -0.58871521 - 0.49136358j, 0.16701798 + 0.51984451j, 0.00637742 - 0.01074532j,
+                                   -0.04529072 - 0.02168628j, -0.00465457 + 0.00500658j, ]),
+            'disc_norm': np.array(
+                [0. + 0.j, 0. + 0.j, 0. + 0.j, 0. + 0.j, 0. + 0.j, 0. + 0.j, 0. + 0.j, 0. + 0.j, 0. + 0.j, 0. + 0.j,
+                 0. + 0.j, 0. + 0.j, 0. + 0.j, 0. + 0.j])
+
+        }
+        with self.subTest('check no of bound states'):
+            self.assertEqual(self.res['bound_states_num'], 14, "number of bound states not as expected")
+        with self.subTest('check contspec 1'):
+            self.assertTrue(check_array(self.res['cont_ref1'], expected['cont_ref1']),
+                            'contspec (reflection 1) not as expected')
+        with self.subTest('check contspec 2'):
+            self.assertTrue(check_array(self.res['cont_ref2'], expected['cont_ref2']),
+                            'contspec (reflection 2) not as expected')
+        with self.subTest('disc norm'):
+            self.assertTrue(check_array(self.res['disc_norm'], expected['disc_norm']), 'disc_norm not as expected')

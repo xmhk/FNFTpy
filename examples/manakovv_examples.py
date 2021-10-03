@@ -80,3 +80,15 @@ def manakovv_example(D=1024, M=8, K=None, T1=-2, T2=2, Xi1=-1.75, Xi2=2, kappa=1
                   cplxprint(res['cont_ref1'][i]),
                   cplxprint(res['cont_ref2'][i])))
     return res
+
+
+def mex_fnft_manakov_example(M=8):
+    """resembles the calculation done in mex_fnft_manakovv_example"""
+    D = 512
+    tvec = np.linspace(-5,5,D)
+    Xi1 = -7.0/4.
+    Xi2 = 8.0/4.
+    q1 = 0.8 / np.cosh(tvec)
+    q2 = 5.2 / np.cosh(tvec)
+    res = manakovv(q1, q2, tvec, Xi1, Xi2, M=M)
+    return res
