@@ -29,7 +29,7 @@ Christoph Mahnke, 2018-2021
 
 import unittest
 from testfunctions import KdvvExampleTest, KdvvExampleTest_provide_bound_states, \
-    ManakovvExampleTest,\
+    ManakovvExampleTest, ManakovvMexExampleTest,\
     NsepExampleTest, NsevExampleTest, NsevExampleTest_bound_state_guesses,\
     NsevDstCstInputTest, NsevInverseExample, NsevInverseExample2, \
     NsevInverseInputVariation, FnftpyOptionsTest
@@ -39,7 +39,9 @@ options_suite = unittest.TestLoader().loadTestsFromTestCase(FnftpyOptionsTest)
 
 kdvv_suite = unittest.TestLoader().loadTestsFromTestCase(KdvvExampleTest)
 kdvv_newton_bound_suite = unittest.TestLoader().loadTestsFromTestCase(KdvvExampleTest_provide_bound_states)
-manakovv_suite = unittest.TestLoader().loadTestsFromTestCase(ManakovvExampleTest)
+
+manakovv_suite1 = unittest.TestLoader().loadTestsFromTestCase(ManakovvExampleTest)
+manakovv_suite2 = unittest.TestLoader().loadTestsFromTestCase(ManakovvMexExampleTest)
 
 nsep_suite = unittest.TestLoader().loadTestsFromTestCase(NsepExampleTest)
 
@@ -47,19 +49,18 @@ nsev_suite1 = unittest.TestLoader().loadTestsFromTestCase(NsevExampleTest)
 nsev_suite2 = unittest.TestLoader().loadTestsFromTestCase(NsevDstCstInputTest)
 nsev_suite3 = unittest.TestLoader().loadTestsFromTestCase(NsevExampleTest_bound_state_guesses)
 
-# nsev_slow_suite = unittest.TestLoader().loadTestsFromTestCase(NsevSlowExampleTest)
-
 nsev_inverse_suite1 = unittest.TestLoader().loadTestsFromTestCase(NsevInverseExample)
 nsev_inverse_suite2 = unittest.TestLoader().loadTestsFromTestCase(NsevInverseExample2)
 nsev_inverse_suite3 = unittest.TestLoader().loadTestsFromTestCase(NsevInverseInputVariation)
 
-suite = unittest.TestSuite([options_suite,
+suite = unittest.TestSuite([
+                            options_suite,
                             kdvv_suite,
                             kdvv_newton_bound_suite,
-                            manakovv_suite,
+                            manakovv_suite1,
+                            manakovv_suite2,
                             nsep_suite,
                             nsev_suite1, nsev_suite2, nsev_suite3,
-                            # nsev_slow_suite,
                             nsev_inverse_suite1,
                             nsev_inverse_suite2,
                             nsev_inverse_suite3
