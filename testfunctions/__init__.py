@@ -29,7 +29,7 @@ Christoph Mahnke, 2018-2021
 
 from .kdvv_tests import KdvvExampleTest, KdvvExampleTestMex4BoundStates, KdvvExampleTestProvideBoundStateGuesses
 from .nsev_tests import NsevExampleTest, NsevDstCstInputTest, NsevExampleTestBoundStateGuesses, NsevExampleTestBoundStateGuessesMex4, NsevExampleTestRF
-from .nsep_tests import NsepExampleTest
+from .nsep_tests import NsepExampleTest, NsepExampleTest_priorNewton
 from .nsev_inverse_tests import NsevInverseExample, NsevInverseExample2, NsevInverseExampleMex1,NsevInverseExampleMex3, NsevInverseInputVariation
 from .options_tests import FnftpyOptionsTest
 from .array_test import check_array

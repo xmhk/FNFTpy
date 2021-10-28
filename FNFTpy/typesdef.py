@@ -244,3 +244,9 @@ class fnft_kdvv_cstype(IntEnum):
     REFLECTION_COEFFICIENT = 0
     AB = 1
     BOTH = 2
+
+class fnft_nsep_loc(IntEnum):
+    SUBSAMPLE_AND_REFINE = 0
+    NEWTON = 1
+    GRIDSEARCH = 2
+    MIXED = 3

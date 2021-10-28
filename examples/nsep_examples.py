@@ -31,7 +31,7 @@ from FNFTpy import nsep
 import numpy as np
 
 
-def nsep_example(verbose=True):
+def nsep_example(verbose=True, loc=None, maxev=None):
     """Mimics the C example for calling fnft_nsep."""
     if verbose:
         print("\n\nnsep example")
@@ -42,7 +42,7 @@ def nsep_example(verbose=True):
     tvec = np.arange(0, D) * dt
     q = np.exp(2.0j * tvec)
     # call function
-    res = nsep(q, 0, 2 * np.pi, bb=[-2, 2, -2, 2], filt=1, kappa=1)
+    res = nsep(q, 0, 2 * np.pi, bb=[-2, 2, -2, 2], filt=1, kappa=1, loc=loc, maxev=maxev)
     # print results
     if verbose:
         print("\n----- options used ----")

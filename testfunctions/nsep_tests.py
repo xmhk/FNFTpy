@@ -31,6 +31,7 @@ import unittest
 
 from .array_test import *
 from examples import nsep_example
+from FNFTpy import fnft_nsep_loc
 
 
 class NsepExampleTest(unittest.TestCase):
@@ -38,6 +39,49 @@ class NsepExampleTest(unittest.TestCase):
 
     def setUp(self):
         self.res = nsep_example()
+        # self.res = nsep_example(loc=fnft_nsep_loc.MIXED, maxev=20)
+        self.expected = {'main': np.array([1.29133168 + 6.20755497e-09j, 1.29133165 - 2.43783858e-09j,
+                                           -0.99999999 - 8.65909596e-01j, -0.99999999 - 8.65909598e-01j,
+                                           0.11812379 + 1.39929078e-09j, 0.11812416 - 4.23632405e-07j,
+                                           -0.99999999 + 8.65909598e-01j, -0.99999999 + 8.65909598e-01j,
+                                           1.82846271 + 1.15271427e-08j, 1.82846267 + 4.17009152e-10j,
+                                           0.7321088 + 2.14041300e-09j, 0.73210888 - 1.21983992e-07j,
+                                           -0.99999999 - 9.99899604e-01j, -1.01392233 - 4.31204461e-05j,
+                                           -1.01441588 + 5.29052866e-05j, -0.98558342 - 5.27110635e-05j,
+                                           -0.98607588 + 4.08981616e-05j, -0.99999999 + 9.99899604e-01j]),
+                         'aux': np.array([1.82846264 - 2.03421871e-15j, 1.29133168 + 2.31746575e-15j,
+                                          0.73210878 - 1.62036153e-15j, 0.11812379 + 1.77918869e-15j,
+                                          -0.99999999 - 8.65909474e-01j, -0.99999999 + 8.65909474e-01j])
+                         }
+
+    def test_nsep_example(self):
+        with self.subTest('check FNFT nsep return value'):
+            self.assertEqual(self.res['return_value'], 0, "FNFT nsep return value")
+        with self.subTest('check M value'):
+            self.assertEqual(self.res['M'], 6, "M not 6")
+        with self.subTest('check aux spectrum value'):
+            self.assertTrue(check_array(
+                np.sort_complex(np.around(self.res['aux'], 8)),
+                np.sort_complex(self.expected['aux'])
+            ), "aux spectrum not as expected")
+        with self.subTest('check K value'):
+            self.assertEqual(self.res['K'], 18, "K not 18")
+        with self.subTest('check main spectrum value'):
+            self.assertTrue(check_array(
+                np.sort_complex(np.around(self.res['main'], 8)),
+                np.sort_complex(self.expected['main']), eps=1e-8
+            ), "main spectrum not as expected")
+
+
+class NsepExampleTest_priorNewton(unittest.TestCase):
+    """Testcase for nsep_example, (mimic of C example).
+
+    results are prior to introductions of Newton localization,
+    and can now be achieved with options:  loc= 2 (MIXED) and maxev=20"""
+
+    def setUp(self):
+        # self.res = nsep_example()
+        self.res = nsep_example(loc=fnft_nsep_loc.MIXED, maxev=20)
         self.expected = {'main': np.array([-1.0 + -0.865909j,
                                            -1.0 + -0.865909j,
                                            -1.0 + 0.865909j,
@@ -58,7 +102,7 @@ class NsepExampleTest(unittest.TestCase):
                              0.732225 + 1.1282e-08j,
                              1.29152 + 6.35545e-08j,
                              1.82871 + 8.88013e-08j,
-                             ])
+                         ])
                          }
 
     def test_nsep_example(self):
