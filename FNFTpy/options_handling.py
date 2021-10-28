@@ -234,8 +234,9 @@ def get_nsep_options(loc=None, filt=None, bb=None, maxev=None, dis=None, nf=None
     * loc : localization method for the spectrum, default = 2
 
         - SUBSAMPLE_AND_REFINE = 0
-        - GRIDSEARCH = 1
-        - MIXED = 2
+        - NEWTON = 1
+        - GRIDSEARCH = 2
+        - MIXED = 3
 
     * filt : filtering of spectrum, default = 2
 
