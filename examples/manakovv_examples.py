@@ -23,7 +23,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 Contributors:
 
-Christoph Mahnke, 2018-2021
+Christoph Mahnke, 2021
 
 """
 
@@ -34,29 +34,7 @@ import numpy as np
 def manakovv_example(D=1024, M=8, K=None, T1=-2, T2=2, Xi1=-1.75, Xi2=2, kappa=1, bsf=None,
                      bsl=None, niter=None, Dsub=None, dst=None, cst=None,
                      nf=None, dis=None, ref=None, verbose=True):
-    """
-    todo : write docstring
-    :param D:
-    :param M:
-    :param K:
-    :param T1:
-    :param T2:
-    :param Xi1:
-    :param Xi2:
-    :param kappa:
-    :param bsf:
-    :param bsl:
-    :param niter:
-    :param Dsub:
-    :param dst:
-    :param cst:
-    :param nf:
-    :param dis:
-    :param ref:
-    :param verbose:
-    :return:
-    """
-
+    """ mimics the manakovv C example from FNFT """
     def cplxprint(z):
         s = "%.4e\t%.4ej" % (np.real(z), np.imag(z))
         return s
@@ -78,6 +56,7 @@ def manakovv_example(D=1024, M=8, K=None, T1=-2, T2=2, Xi1=-1.75, Xi2=2, kappa=1
         print("-- options used --")
         print_manakovv_options(res['options'])
         print("-- continuous spectrum ---\n")
+        print("                  \t part 1\t\t\t\t\t\t part2")
         for i in range(M):
             print("%d Xi = %.5f  \t%s \t%s" % (i + 1, Xivec[i],
                                                cplxprint(res['cont_ref1'][i]),
