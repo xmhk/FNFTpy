@@ -31,8 +31,9 @@ import unittest
 from testfunctions import KdvvExampleTest, KdvvExampleTestProvideBoundStateGuesses, \
     KdvvExampleTestMex4BoundStates, \
     ManakovvExampleTest, ManakovvMexExampleTest, \
-NsepExampleTest, NsevExampleTest, NsevExampleTestBoundStateGuesses, NsevExampleTestBoundStateGuessesMex4, NsevExampleTestRF,\
-    NsevDstCstInputTest, NsevInverseExample, NsevInverseExample2,NsevInverseExampleMex1, NsevInverseExampleMex3,\
+    NsepExampleTest, NsevExampleTest, NsevExampleTestBoundStateGuesses, NsevExampleTestBoundStateGuessesMex4, \
+    NsevExampleTestRF, \
+    NsevDstCstInputTest, NsevInverseExample, NsevInverseExample2, NsevInverseExampleMex1, NsevInverseExampleMex3, \
     NsevInverseInputVariation, FnftpyOptionsTest
 from FNFTpy import print_fnft_version
 
