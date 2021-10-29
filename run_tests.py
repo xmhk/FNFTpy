@@ -30,7 +30,8 @@ Christoph Mahnke, 2018-2021
 import unittest
 from testfunctions import KdvvExampleTest, KdvvExampleTestProvideBoundStateGuesses, \
     KdvvExampleTestMex4BoundStates, \
-    NsepExampleTest, NsevExampleTest, NsevExampleTestBoundStateGuesses, NsevExampleTestBoundStateGuessesMex4, NsevExampleTestRF,\
+    ManakovvExampleTest, ManakovvMexExampleTest, \
+NsepExampleTest, NsevExampleTest, NsevExampleTestBoundStateGuesses, NsevExampleTestBoundStateGuessesMex4, NsevExampleTestRF,\
     NsevDstCstInputTest, NsevInverseExample, NsevInverseExample2,NsevInverseExampleMex1, NsevInverseExampleMex3,\
     NsevInverseInputVariation, FnftpyOptionsTest
 from FNFTpy import print_fnft_version
@@ -41,6 +42,9 @@ kdvv_suite = unittest.TestLoader().loadTestsFromTestCase(KdvvExampleTest)
 kdvv_bound_states_mex4 = unittest.TestLoader().loadTestsFromTestCase(KdvvExampleTestMex4BoundStates)
 kdvv_newton_bound_suite = unittest.TestLoader().loadTestsFromTestCase(KdvvExampleTestProvideBoundStateGuesses)
 
+manakovv_suite1 = unittest.TestLoader().loadTestsFromTestCase(ManakovvExampleTest)
+manakovv_suite2 = unittest.TestLoader().loadTestsFromTestCase(ManakovvMexExampleTest)
+
 nsep_suite = unittest.TestLoader().loadTestsFromTestCase(NsepExampleTest)
 
 nsev_suite1 = unittest.TestLoader().loadTestsFromTestCase(NsevExampleTest)
@@ -48,8 +52,6 @@ nsev_suite2 = unittest.TestLoader().loadTestsFromTestCase(NsevDstCstInputTest)
 nsev_suite3 = unittest.TestLoader().loadTestsFromTestCase(NsevExampleTestBoundStateGuesses)
 nsev_suite4 = unittest.TestLoader().loadTestsFromTestCase(NsevExampleTestBoundStateGuessesMex4)
 nsev_suite5 = unittest.TestLoader().loadTestsFromTestCase(NsevExampleTestRF)
-
-# nsev_slow_suite = unittest.TestLoader().loadTestsFromTestCase(NsevSlowExampleTest)
 
 nsev_inverse_suite1 = unittest.TestLoader().loadTestsFromTestCase(NsevInverseExample)
 nsev_inverse_suite2 = unittest.TestLoader().loadTestsFromTestCase(NsevInverseExample2)
@@ -61,6 +63,8 @@ suite = unittest.TestSuite([options_suite,
                             kdvv_suite,
                             kdvv_bound_states_mex4,
                             kdvv_newton_bound_suite,
+                            manakovv_suite1,
+                            manakovv_suite2,
                             nsep_suite,
                             nsev_suite1,
                             nsev_suite2,

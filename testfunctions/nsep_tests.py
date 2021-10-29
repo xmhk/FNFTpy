@@ -58,7 +58,7 @@ class NsepExampleTest(unittest.TestCase):
                              0.732225 + 1.1282e-08j,
                              1.29152 + 6.35545e-08j,
                              1.82871 + 8.88013e-08j,
-                             ])
+                         ])
                          }
 
     def test_nsep_example(self):
@@ -74,7 +74,6 @@ class NsepExampleTest(unittest.TestCase):
         with self.subTest('check K value'):
             self.assertEqual(self.res['K'], 11, "K not 11")
         with self.subTest('check main spectrum value'):
-            self.assertTrue(check_array(
-                np.sort_complex(np.around(self.res['main'], 8)),
-                np.sort_complex(self.expected['main']), eps=1e-8
-            ), "main spectrum not as expected")
+            self.assertTrue(
+                np.linalg.norm(self.res['main'] - self.expected['main']) / np.linalg.norm(self.expected['main']) < 7e-5
+                , "main spectrum not as expected")

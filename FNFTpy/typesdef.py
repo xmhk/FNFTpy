@@ -78,6 +78,36 @@ class GenericOptionsStruct(ctypes.Structure):
         return s
 
 
+class ManakovvOptionsStruct(GenericOptionsStruct):
+    """Ctypes options struct for interfacing fnft_manakovv.
+
+    Fields:
+
+        * bound_state_filtering
+        * bound_state_localization
+        * niter
+        * Dsub
+        * discspec_type
+        * contspec_type
+        * normalization_flag
+        * discretization
+        * richardson_extrapolation_flag
+
+    * discretization
+    """
+
+    _fields_ = [
+        ("bound_state_filtering", ctypes_int),
+        ("bound_state_localization", ctypes_int),
+        ("niter", ctypes_uint),  # check uint
+        ("Dsub", ctypes_uint),  # check uint
+        ("discspec_type", ctypes_int),
+        ("contspec_type", ctypes_int),
+        ("normalization_flag", ctypes_int),  # check int
+        ("discretization", ctypes_int),
+        ("richardson_extrapolation_flag", ctypes_uint)]  # check: uint
+
+
 class KdvvOptionsStruct(GenericOptionsStruct):
     """Ctypes options struct for interfacing fnft_kdvv.
 
@@ -244,3 +274,18 @@ class fnft_kdvv_cstype(IntEnum):
     REFLECTION_COEFFICIENT = 0
     AB = 1
     BOTH = 2
+
+class fnft_manakovv_dstype(IntEnum):
+    NORMING_CONSTANTS = 0
+    RESIDUES = 1
+    BOTH = 2
+
+class fnft_manakovv_cstype(IntEnum):
+    REFLECTION_COEFFICIENT = 0
+    AB = 1
+    BOTH = 2
+
+
+
+
+

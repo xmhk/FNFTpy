@@ -19,6 +19,8 @@ Welcome to FNFTpy's documentation!
    faux.rst
 
    kdvv.rst
+
+   manakovv.rst
    
    nsep.rst
    
