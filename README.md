@@ -14,7 +14,7 @@ for changes and latest updates see [Changelog](CHANGELOG.md)
 
 
 ### Korteweg-de-Vries equation with vanishing boundary conditions:
-  * Currently, the continuous spectrum can be calculated.
+  * Currently, the continuous and discrete spectra can be calculated.
   * Function **kdvv**: 
     * easy-to-use Python function, options can be passed as optional arguments 
     * minimal example:
@@ -54,7 +54,39 @@ for i in range(res['bound_states_num']):
     * mimics the function fnft_kdvv from FNFT.
     * for full description call ```help(kdvv_wrapper)```
       
+### Manakov equation with vanishing boundary conditions
+  * Currently, the continuous spectrum can be calculated.
+  * Function **manakovv**: 
+    * easy-to-use Python function, options can be passed as optional arguments 
+  * minimal example:
+```python
+import numpy as np
+from FNFTpy import manakovv
+D= 1024
+M = 8
+Xi1 = -1.75
+Xi2 = 2
+kappa = 1
+q1 = np.zeros(D, dtype=np.complex128)
+q2 = np.zeros(D, dtype=np.complex128)
+tvec = np.linspace(-2, 2, D)
+# standard
+q1[:] = 2.0 + 0.0j
+q2[:] = .650 + 0.0j
+Xivec = np.linspace(Xi1, Xi2, M)
+res = manakovv(q1, q2, tvec, M=M,  Xi1=Xi1, Xi2=Xi2)
+print("-- continuous spectrum ---\n")
+print("                  \t part 1\t\t\t\t\t\t part2")
+for i in range(M):
+    print("%d Xi = %.5f  \t%.4e + %.4ei \t%.4e + %.4ei" % (i + 1, Xivec[i],
+                                       np.real(res['cont_ref1'][i]), np.imag(res['cont_ref1'][i]),
+                                       np.real(res['cont_ref2'][i]), np.imag(res['cont_ref2'][i])))
+```
+  * for full description call `help(manakovv)`
         
+  * Function **manakovv_wrapper**:
+    * mimics the function fnft_manakovv from FNFT.
+    * for full description call ```help(manakovv_wrapper)```
   
 ### Nonlinear Schroedinger Equation with periodic boundary conditions
   * The main and auxiliary spectra can be calculated.
@@ -96,8 +128,7 @@ for i in range(res['M']):
 ### Nonlinear Schroedinger Equation with vanishing boundary conditions:
   * The discrete and continuous spectra can be calculated.
   * Function **nsev**:
-    * easy-to-use Python function, options can be passed as optional arguments 
-    
+    * easy-to-use Python function, options can be passed as optional arguments     
     * minimal example:
   
 ```python
@@ -176,7 +207,7 @@ print("Difference analytic - numeric: sum((q_ana-q_num)**2) = %.2e  (should be a
     * mimics the function fnft_nsev_inverse from FNFT.
     * for full description call ```help(nsev_inverse_wrapper)```
 # Requirements
- * Python 3
+ * Python 3.8 and above
  * additional Python module: NumPy (python-numpy)  
  
 # Setup
