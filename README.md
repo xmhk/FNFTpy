@@ -165,7 +165,8 @@ for i in range(res['M']):
 
 
 * calculates the Nonlinear Fourier Transform of the Nonlinear Schroedinger equation 
-$$iq_x + q_{tt} \pm 2q|q|^2=0, \quad  q=q(x,t) $$
+<img src="https://render.githubusercontent.com/render/math?math=iq_x %2B q_{tt} \pm 2q|q|^2=0">
+<!--$$iq_x + q_{tt} \pm 2q|q|^2=0$$-->
 with vanishing boundary conditions
 
 * calculation of the continuous spectrum:
