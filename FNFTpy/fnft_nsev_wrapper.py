@@ -63,14 +63,13 @@ def nsev(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=None,
         - 1 = BASIC
         - 2 = FULL
 
-
     * bsl : bound state localization, default = 2
 
         - 0 = FAST_EIGENVALUE
         - 1 = NEWTON
         - 2 = SUBSAMPLE_AND_REFINE
 
-    * bsg: list or array of bound state guesses, only effective if bsl==1 (Newton
+    * bsg : list or array of bound state guesses, only effective if bsl==1 (Newton
                          bound state location is activated). Default = None
 
     * niter : number of iterations for Newton bound state location, default = 10
