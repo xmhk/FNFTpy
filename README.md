@@ -14,10 +14,23 @@ for changes and latest updates see [Changelog](CHANGELOG.md)
 
 
 ### Korteweg-de-Vries equation with vanishing boundary conditions:
-  * Currently, the continuous and discrete spectra can be calculated.
-  * Function **kdvv**: 
-    * easy-to-use Python function, options can be passed as optional arguments 
-    * minimal example:
+
+* calculates the Nonlinear Fourier Transform of the Korteweg-de-Vries equation
+$$q_x + 6qq_{t} + q_{ttt}=0$$
+with vanishing boundary conditions
+
+* calculation of the continuous spectrum:
+	- reflection coefficient and/or the NFT coefficients a and b
+* calculation of the discrete spectrum:
+	- bound states 
+	- norming constants and/or residues 
+	- initial guesses for bound states may be provided
+
+ 
+Function **kdvv**: 
+
+* easy-to-use Python function, options can be passed as optional arguments 
+* minimal example:
 
 ```python
 import numpy as np
@@ -48,16 +61,30 @@ for i in range(res['bound_states_num']):
               np.real(res['disc_norm'][i]),np.imag(res['disc_norm'][i])))
 
 ```
-  * for full description call `help(kdvv)`
-      
-  * function **kdvv_wrapper**:
-    * mimics the function fnft_kdvv from FNFT.
-    * for full description call ```help(kdvv_wrapper)```
-      
+
+* for full description call `help(kdvv)`
+  
+* function **kdvv_wrapper**:
+	* mimics the function fnft_kdvv from FNFT.
+	* for full description call ```help(kdvv_wrapper)```
+  
 ### Manakov equation with vanishing boundary conditions
-  * Currently, the continuous spectrum can be calculated.
-  * Function **manakovv**: 
-    * easy-to-use Python function, options can be passed as optional arguments 
+
+
+* calculates the Nonlinear Fourier Transform of the Manakov equation 
+$$ iq_x + q_{tt} \pm 2q|q|^2=0, \quad  q=[q1; q2]$$
+with vanishing boundary conditions
+
+* calculation of the continuous spectrum:
+	- reflection coefficient and/or the NFT coefficients a, b1 and b2
+* calculation of the discrete spectrum:
+	- bound states 
+	- norming constants and/or residues 
+	- initial guesses for bound states may be provided
+	
+
+* Function **manakovv**: 
+	* easy-to-use Python function, options can be passed as optional arguments 
   * minimal example:
 ```python
 import numpy as np
@@ -82,13 +109,19 @@ for i in range(M):
                                        np.real(res['cont_ref1'][i]), np.imag(res['cont_ref1'][i]),
                                        np.real(res['cont_ref2'][i]), np.imag(res['cont_ref2'][i])))
 ```
-  * for full description call `help(manakovv)`
+	* for full description call `help(manakovv)`
         
-  * Function **manakovv_wrapper**:
+* Function **manakovv_wrapper**:
     * mimics the function fnft_manakovv from FNFT.
     * for full description call ```help(manakovv_wrapper)```
   
 ### Nonlinear Schroedinger Equation with periodic boundary conditions
+
+* calculation of the  Nonlinear Fourier Transform of the Nonlinear Schroedinger equation
+ $$ iq_x + q_{tt} \pm 2q|q|^2=0$$ 
+with (quasi-)periodic boundary conditions
+
+
   * The main and auxiliary spectra can be calculated.
   * Function **nsep**: 
     * easy-to-use Python function, options can be passed as optional arguments 
@@ -126,9 +159,22 @@ for i in range(res['M']):
      
   
 ### Nonlinear Schroedinger Equation with vanishing boundary conditions:
-  * The discrete and continuous spectra can be calculated.
-  * Function **nsev**:
-    * easy-to-use Python function, options can be passed as optional arguments     
+
+
+* calculates the Nonlinear Fourier Transform of the Nonlinear Schroedinger equation 
+$$iq_x + q_{tt} \pm 2q|q|^2=0, \quad  q=q(x,t) $$
+with vanishing boundary conditions
+
+* calculation of the continuous spectrum:
+	- reflection coefficient and/or the NFT coefficients a and b
+* calculation of the discrete spectrum:
+	- bound states 
+	- norming constants and/or residues 
+	- initial guesses for bound states may be provided
+
+
+* Function **nsev**:
+	* easy-to-use Python function, options can be passed as optional arguments     
     * minimal example:
   
 ```python
@@ -167,8 +213,8 @@ for i in range(len(res['bound_states'])):
 
   * for full description call `help(nsev)`
         
-  * Function **nsev_wrapper**:
-    * mimics the function fnft_nsev from FNFT.
+* Function **nsev_wrapper**:
+	* mimics the function fnft_nsev from FNFT.
     * for full description call ```help(nsev_wrapper)```
      
 ### Nonlinear Schroedinger Equation with vanishing boundary conditions (Inverse Transformation): 
