@@ -2,16 +2,19 @@
 
 ## current
 
-### 17.09.2021 
+### Sept 2021 - November 2021   0.4.1-dev
 
 - general:
   - updated some docstrings
-  - add more teststo
+  - add more tests
+  
+- **manakovv**: 
+  - added interface to the FNFTs manakovv functions
 
 - **kdvv**:
-  - kdvv now has more options, bound states and discrete spectrum can be calculated
-  - initial guesses for bound states can be provided, for newton bound state localization (note: this 
-    fails if the bound state guesses) are not purely imaginary
+  - following the update if FNFTs kdvv,
+    - kdvv now has more options, bound states and discrete spectrum can be calculated
+    - initial guesses for bound states can be provided, for newton bound state localization
 
 - **nsev**:
   - implemented that initial guesses can be provided for newton bound state localization

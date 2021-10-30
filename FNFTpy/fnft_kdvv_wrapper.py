@@ -32,8 +32,8 @@ from .options_handling import get_kdvv_options
 from .auxiliary import get_lib_path, check_return_code, get_winmode_param
 
 
-def kdvv(u, tvec, K=128, M=128, Xi1=-2, Xi2=2, dis=None, bsl=None, niter=None, dst=None, cst=None, nf=None,
-         ref=None, bound_state_guesses=None):
+def kdvv(u, tvec, K=128, M=128, Xi1=-2, Xi2=2, dis=None, bsl=None, bsg=None, niter=None, dst=None, cst=None, nf=None,
+         ref=None):
     """Calculate the Nonlinear Fourier Transform for the Korteweg-de Vries equation with vanishing boundaries.
 
     This function is intended to be 'convenient', which means it
@@ -121,6 +121,8 @@ def kdvv(u, tvec, K=128, M=128, Xi1=-2, Xi2=2, dis=None, bsl=None, niter=None, d
         - 0 = NEWTON
         - 1 = GRIDSEARCH_AND_REFINE
 
+    * bsg : initial guesses for bound states, only effective if bsl=0, default=None
+
     * niter : number of iterations for Newton bound state location, default = 10
 
     * dst : type of discrete spectrum, default = 0
@@ -147,10 +149,6 @@ def kdvv(u, tvec, K=128, M=128, Xi1=-2, Xi2=2, dis=None, bsl=None, niter=None, d
         * 0 = off
         * 1 = on
 
-    * bound_state_guesses : initial guesses for bound states, only effective if bsl=0, default=None
-
-                            Please note: up to now, the guesses have to be purely imaginary
-
     Returns:
 
    * rdict : dictionary holding the fields:
@@ -174,11 +172,11 @@ def kdvv(u, tvec, K=128, M=128, Xi1=-2, Xi2=2, dis=None, bsl=None, niter=None, d
     options = get_kdvv_options(dis=dis, bsl=bsl, niter=niter, dst=dst, cst=cst, nf=nf,
                                ref=ref)
     return kdvv_wrapper(D, u, T1, T2, K, M, Xi1, Xi2,
-                        options, bound_state_guesses=bound_state_guesses)
+                        options, bsg=bsg)
 
 
 def kdvv_wrapper(D, u, T1, T2, K, M, Xi1, Xi2,
-                 options, bound_state_guesses=None):
+                 options, bsg=None):
     """Calculate the Nonlinear Fourier Transform for the Korteweg-de Vries equation with vanishing boundaries.
 
     This function's interface mimics the behavior of the function 'fnft_kdvv' of FNFT.
@@ -197,10 +195,8 @@ def kdvv_wrapper(D, u, T1, T2, K, M, Xi1, Xi2,
 
     Optional Arguments:
 
-    * bound_state_guesses : lost or array of bound state guesses, only effective if bsl==1 (Newton
+    * bsg : lost or array of bound state guesses, only effective if bsl==1 (Newton
                          bound state localization) is activated. Default = None
-
-                         Please note: up to now, the guesses have to be purely imaginary
 
     Returns:
 
@@ -256,8 +252,8 @@ def kdvv_wrapper(D, u, T1, T2, K, M, Xi1, Xi2,
     # for Newton refinement: use guesses, if provided.
     #
     if options.bound_state_localization == fnft_kdvv_bsloc.NEWTON:
-        if bound_state_guesses is not None:
-            bsg_copy = np.array(bound_state_guesses, dtype=np.complex128)
+        if bsg is not None:
+            bsg_copy = np.array(bsg, dtype=np.complex128)
             if len(bsg_copy) > 0:
                 ii = -1
                 # copy as many of the guesses to bound state array

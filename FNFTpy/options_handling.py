@@ -189,6 +189,77 @@ def get_kdvv_options(dis=None, bsl=None, niter=None, dst=None, cst=None, nf=None
 
 
 #
+#  Get and view options for manakovv (Manakov equation)
+#
+
+
+def fnft_manakovv_default_options_wrapper():
+    """
+    WRITE DOCSTRING
+
+    :return:
+    """
+    fnft_clib = ctypes.CDLL(get_lib_path(), winmode=get_winmode_param())
+    clib_func = fnft_clib.fnft_manakovv_default_opts
+    clib_func.restype = ManakovvOptionsStruct
+    clib_func.argtpes = []
+    return clib_func()
+
+
+def print_manakovv_options(options=None):
+    """Print options of a Manakovv.
+
+    When called without additional argument, the default options from FNFT are printed.
+
+    Optional arguments:
+
+    * options : ManakovvOptionsStruct, e.g. created by get_manakovv_options()
+
+    """
+    if options is None:
+        options = fnft_manakovv_default_options_wrapper()
+    print("manakovv options:")
+    print(options)
+
+
+def get_manakovv_options(dis=None, bsf=None, bsl=None, Dsub=None, niter=None, dst=None,
+                         cst=None, nf=None, ref=None):
+    """
+    TODO write docstring
+    :param dis:
+    :param bsf:
+    :param bsl:
+    :param Dsub:
+    :param niter:
+    :param dst:
+    :param cst:
+    :param nf:
+    :param ref:
+    :return:
+    """
+    options = fnft_manakovv_default_options_wrapper()
+    if dis is not None:
+        options.discretization = dis
+    if bsf is not None:
+        options.bound_state_filtering = bsf
+    if bsl is not None:
+        options.bound_state_localization = bsl
+    if Dsub is not None:
+        options.Dsub = Dsub
+    if niter is not None:
+        options.niter = niter
+    if dst is not None:
+        options.discspec_type = dst
+    if cst is not None:
+        options.contspec_type = cst
+    if nf is not None:
+        options.normalization_flag = nf
+    if ref is not None:
+        options.richardson_extrapolation_flag = ref
+    return options
+
+
+#
 #  Get and view options for nsep (Nonlinear Schroedinger equation, periodic boundaries)
 #
 

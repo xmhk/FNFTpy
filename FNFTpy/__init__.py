@@ -23,7 +23,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 Contributors:
 
-Christoph Mahnke, 2018 - 2020
+Christoph Mahnke, 2018 - 2021
 
 """
 
@@ -31,10 +31,10 @@ from .auxiliary import get_lib_path, get_fnft_version, print_fnft_version
 
 # import wrapper functions
 from .fnft_kdvv_wrapper import kdvv_wrapper, kdvv
+from .fnft_manakovv_wrapper import manakovv_wrapper, manakovv
 from .fnft_nsep_wrapper import nsep_wrapper, nsep
 from .fnft_nsev_wrapper import nsev_wrapper, nsev
 from .fnft_nsev_inverse_wrapper import nsev_inverse_xi_wrapper, nsev_inverse_wrapper, nsev_inverse
-
 from .typesdef import *
 from .options_handling import *
 

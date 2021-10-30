@@ -130,9 +130,9 @@ class KdvvExampleTestProvideBoundStateGuesses(unittest.TestCase):
 
     def setUp(self):
         self.res = kdvv_example(dst=1, cst=3, bsl=0, verbose=False, amplitude_scale=1.3,
-                                bound_state_guesses=[0.1j, 1.j], K=2)
+                                bsg=[0.1j, 1.j], K=2)
         self.res2 = kdvv_example(dst=1, cst=3, bsl=0, verbose=False, amplitude_scale=1.3,
-                                 bound_state_guesses=[0.1j, 0.01 + 1.j],
+                                 bsg=[0.1j, 0.01 + 1.j],
                                  K=2)  # should fail, no real part for guesses (yet)
 
     def test_kdvv_example_bound_states_provided(self):

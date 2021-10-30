@@ -23,7 +23,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 Contributors:
 
-Christoph Mahnke, 2018
+Christoph Mahnke, 2018-2021
 
 """
 
@@ -32,6 +32,7 @@ import numpy as np
 
 
 def nsep_example(verbose=True, loc=None, maxev=None):
+#def nsep_example(D=256, verbose=True, dis=None):
     """Mimics the C example for calling fnft_nsep."""
     if verbose:
         print("\n\nnsep example")
@@ -42,7 +43,8 @@ def nsep_example(verbose=True, loc=None, maxev=None):
     tvec = np.arange(0, D) * dt
     q = np.exp(2.0j * tvec)
     # call function
-    res = nsep(q, 0, 2 * np.pi, bb=[-2, 2, -2, 2], filt=1, kappa=1, loc=loc, maxev=maxev)
+    #res = nsep(q, 0, 2 * np.pi, bb=[-2, 2, -2, 2], filt=1, kappa=1, loc=loc, maxev=maxev)
+    res = nsep(q, 0, 2 * np.pi, bb=[-2, 2, -2, 2], filt=1, kappa=1, dis=dis)
     # print results
     if verbose:
         print("\n----- options used ----")

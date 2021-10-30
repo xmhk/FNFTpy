@@ -23,12 +23,13 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 Contributors:
 
-Christoph Mahnke, 2018
+Christoph Mahnke, 2018-2021
 
 """
 
-from FNFTpy import KdvvOptionsStruct, NsepOptionsStruct, NsevInverseOptionsStruct, NsevOptionsStruct, \
-    get_kdvv_options, get_nsep_options, get_nsev_options, get_nsev_inverse_options
+from FNFTpy import KdvvOptionsStruct, ManakovvOptionsStruct, NsepOptionsStruct, NsevInverseOptionsStruct, \
+    NsevOptionsStruct, \
+    get_kdvv_options, get_manakovv_options, get_nsep_options, get_nsev_options, get_nsev_inverse_options
 
 import unittest
 
@@ -39,6 +40,10 @@ class FnftpyOptionsTest(unittest.TestCase):
     def setUp(self):
         # remark: third element of lists are one single string each (print(repr(opts))). They may look confusing
         self.expected = dict(
+            manakovv=[ManakovvOptionsStruct, get_manakovv_options,
+                      "'bound_state_filtering' : 2, 'bound_state_localization' : 2, 'niter' : 10, " \
+                      + "'Dsub' : 0, 'discspec_type' : 0, 'contspec_type' : 0, 'normalization_flag' : 1, " \
+                      + "'discretization' : 3, 'richardson_extrapolation_flag' : 0"],
             kdvv=[KdvvOptionsStruct, get_kdvv_options,
                   "'bound_state_localization' : 1, 'niter' : 10, 'discspec_type' : 0, 'contspec_type' : 0, " \
                   + "'normalization_flag' : 1, 'discretization' : 39, 'richardson_extrapolation_flag' : 0"],
