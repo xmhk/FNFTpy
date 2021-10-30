@@ -31,8 +31,8 @@ from FNFTpy import kdvv
 import numpy as np
 
 
-def kdvv_example(dis=None, bsl=None, niter=None, dst=None, cst=None, nf=None,
-                 ref=None, bound_state_guesses=None, K=None, amplitude_scale=1.0, verbose=True):
+def kdvv_example(dis=None, bsl=None, bsg=None, niter=None, dst=None, cst=None, nf=None,
+                 ref=None, K=None, amplitude_scale=1.0, verbose=True):
     """Mimics the C example for calling fnft_kdvv, can be modified with options"""
     if verbose:
         print("\n\nkdvv example")
@@ -50,7 +50,7 @@ def kdvv_example(dis=None, bsl=None, niter=None, dst=None, cst=None, nf=None,
     # call function
     res = kdvv(q, tvec, K, M, Xi1=Xi1, Xi2=Xi2,
                dis=dis, bsl=bsl, niter=niter, dst=dst, cst=cst, nf=nf,
-               ref=ref, bound_state_guesses=bound_state_guesses)
+               ref=ref, bsg=bsg)
     # print results
     if verbose:
         print("\n----- options used ----")

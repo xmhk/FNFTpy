@@ -33,8 +33,7 @@ from .options_handling import get_nsev_options
 
 
 def nsev(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=None,
-         bsl=None, niter=None, Dsub=None, dst=None, cst=None, nf=None, dis=None, ref=None,
-         bound_state_guesses=None):
+         bsl=None, bsg=None, niter=None, Dsub=None, dst=None, cst=None, nf=None, dis=None, ref=None):
     """Calculate the Nonlinear Fourier Transform for the Nonlinear Schroedinger equation with vanishing boundaries.
 
     This function is intended to be 'convenient', which means it
@@ -71,6 +70,8 @@ def nsev(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=None,
         - 1 = NEWTON
         - 2 = SUBSAMPLE_AND_REFINE
 
+    * bsg: list or array of bound state guesses, only effective if bsl==1 (Newton
+                         bound state location is activated). Default = None
 
     * niter : number of iterations for Newton bound state location, default = 10
     * Dsub : number of samples used for 'subsampling and refine'-method, default = 0 (auto)
@@ -128,11 +129,6 @@ def nsev(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=None,
 
         - 0 = off
         - 1 = on
-
-
-    * bound_state_guesses: list or array of bound state guesses, only effective if bsl==1 (Newton
-                         bound state location is activated). Default = None
-
     Returns:
 
     * rdict : dictionary holding the fields (depending on options)
@@ -153,11 +149,11 @@ def nsev(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=None,
     T2 = np.max(tvec)
     options = get_nsev_options(bsf=bsf, bsl=bsl, niter=niter, Dsub=Dsub, dst=dst, cst=cst, nf=nf, dis=dis, ref=ref)
     return nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
-                        M, K, kappa, options, bound_state_guesses=bound_state_guesses)
+                        M, K, kappa, options, bsg=bsg)
 
 
 def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
-                 M, K, kappa, options, bound_state_guesses=None):
+                 M, K, kappa, options, bsg=None):
     """Calculate the Nonlinear Fourier Transform for the Nonlinear Schroedinger equation with vanishing boundaries.
 
     This function's interface mimics the behavior of the function 'fnft_nsev' of FNFT.
@@ -177,9 +173,9 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
 
     Optional Arguments:
 
-    * bound_state_guesses: list or array of bound state guesses, only effective if
-                         options.bound_state_localization == 1  (Newton
-                         bound state location is activated). Default = None
+    * bsg: list or array of bound state guesses, only effective if
+           options.bound_state_localization == 1  (Newton bound state
+           location is activated). Default = None
 
     Returns:
 
@@ -234,8 +230,8 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
     # for Newton refinement: use guesses, if provided.
     #
     if options.bound_state_localization == fnft_nsev_bsloc.NEWTON:
-        if bound_state_guesses is not None:
-            bsg_copy = np.array(bound_state_guesses, dtype=np.complex128)
+        if bsg is not None:
+            bsg_copy = np.array(bsg, dtype=np.complex128)
             if len(bsg_copy) > 0:
                 ii = -1
                 # copy as many of the guesses to bound state array

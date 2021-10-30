@@ -33,7 +33,7 @@ from .options_handling import get_manakovv_options
 
 
 def manakovv(q1, q2, tvec, Xi1=-1.75, Xi2=2, M=128, K=128, kappa=1, bsf=None,
-             bsl=None, bound_state_guesses=None, niter=None, Dsub=None, dst=None, cst=None, nf=None, dis=None, ref=None,
+             bsl=None, bsg=None, niter=None, Dsub=None, dst=None, cst=None, nf=None, dis=None, ref=None,
              ):
     """
     Calculate the Nonlinear Fourier Transform for the Manakov equation with vanishing boundary conditions.
@@ -71,9 +71,9 @@ def manakovv(q1, q2, tvec, Xi1=-1.75, Xi2=2, M=128, K=128, kappa=1, bsf=None,
         - 1 = NEWTON
         - 2 = SUBSAMPLE_AND_REFINE
 
-    * bound_state_guesses: list or array of bound state guesses, only effective if
-                         options.bound_state_localization == 1  (Newton
-                         bound state location is activated). Default = None
+    * bsg: list or array of bound state guesses, only effective if
+           options.bound_state_localization == 1  (Newton bound state
+           location is activated). Default = None
 
     * niter : number of iterations for Newton bound state location, default = 10
 
@@ -144,10 +144,10 @@ def manakovv(q1, q2, tvec, Xi1=-1.75, Xi2=2, M=128, K=128, kappa=1, bsf=None,
     T2 = np.max(tvec)
     options = get_manakovv_options(bsf=bsf, bsl=bsl, niter=niter, Dsub=Dsub, dst=dst, cst=cst, nf=nf, dis=dis, ref=ref)
     return manakovv_wrapper(D, q1, q2, T1, T2, Xi1, Xi2,
-                            M, K, kappa, options,bound_state_guesses=bound_state_guesses,)
+                            M, K, kappa, options,bsg=bsg,)
 
 
-def manakovv_wrapper(D, q1, q2, T1, T2, Xi1, Xi2, M, K, kappa, options, bound_state_guesses=None):
+def manakovv_wrapper(D, q1, q2, T1, T2, Xi1, Xi2, M, K, kappa, options, bsg=None):
     """
     Calculate the Nonlinear Fourier Transform for the Manakov equation with vanishing boundary conditions.
 
@@ -169,7 +169,7 @@ def manakovv_wrapper(D, q1, q2, T1, T2, Xi1, Xi2, M, K, kappa, options, bound_st
 
     Optional Arguments:
 
-    * bound_state_guesses : list or array of bound state guesses, only effective if
+    * bsg : list or array of bound state guesses, only effective if
                          options.bound_state_localization == 1  (Newton
                          bound state location is activated). Default = None
 
@@ -232,8 +232,8 @@ def manakovv_wrapper(D, q1, q2, T1, T2, Xi1, Xi2, M, K, kappa, options, bound_st
     # for Newton refinement: use guesses, if provided.
     #
     if options.bound_state_localization == fnft_manakovv_bsloc.NEWTON:
-        if bound_state_guesses is not None:
-            bsg_copy = np.array(bound_state_guesses, dtype=np.complex128)
+        if bsg is not None:
+            bsg_copy = np.array(bsg, dtype=np.complex128)
             if len(bsg_copy) > 0:
                 ii = -1
                 # copy as many of the guesses to bound state array

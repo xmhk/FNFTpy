@@ -141,9 +141,9 @@ class ManakovvProvideBoundStateGuessesTest(unittest.TestCase):
                                      3.56976630e-02 + 0.63059218j, -2.32319542e-03 + 1.57776145j,
                                      2.40767718e-02 + 2.03361678j, -9.97948799e+01 + 0.46293924j, ])
         # self.res = manakovv_example(D=256, dis=0, cst=2, bsl=fnfttypes.fnft_manakovv_bsloc.NEWTON, verbose=False,
-        #                            bound_state_guesses=self.bsg)
+        #                            bsg=self.bsg)
         self.res = manakovv_example(D=256, bsl=fnfttypes.fnft_manakovv_bsloc.NEWTON, verbose=False,
-                                    bound_state_guesses=self.bsg)
+                                    bsg=self.bsg)
 
     def test_manakovv_provide_bs(self):
         with self.subTest('check FNFT manakovv return value'):

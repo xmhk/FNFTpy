@@ -68,7 +68,7 @@ class NsevExampleTestBoundStateGuesses(unittest.TestCase):
 
     def setUp(self):
         self.res = nsev_example(verbose=False, dst=2, cst=4, bsl=1,
-                                bound_state_guesses=[0.01 + 0.1j, 1j],
+                                bsg=[0.01 + 0.1j, 1j],
                                 amplitude_scale=1.2)
         self.expected = {'bound_states': np.array([-1.97215226e-29 + 0.21057155j, 0.00000000e+00 + 2.02789446j]),
                          'disc_norm': np.array([1. + 7.8106363e-30j, -1. - 0.0000000e+00j]),
@@ -107,7 +107,7 @@ class NsevExampleTestBoundStateGuessesMex4(unittest.TestCase):
              0.03171094 + 0.0148127j,
              -0.0339977 + 0.00831603j])
         self.norm_exact = (-1) ** (np.arange(np.floor(qo + 0.5), 0, -1))
-        self.res = nsev(q, tvec, cst=3, dis=22, bsl=1, niter=20, bound_state_guesses=bsguesses)
+        self.res = nsev(q, tvec, cst=3, dis=22, bsl=1, niter=20, bsg=bsguesses)
 
     def test_nsev_example_mex4(self):
         with self.subTest('check FNFT nsev return value'):

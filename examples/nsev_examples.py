@@ -31,8 +31,8 @@ from FNFTpy import nsev
 import numpy as np
 
 
-def nsev_example(bsf=None, bsl=None, niter=None, Dsub=None, dst=None, cst=None, nf=None, dis=None, ref=None,
-                 bound_state_guesses=None, amplitude_scale=1.0, verbose=True):
+def nsev_example(bsf=None, bsl=None, bsg=None, niter=None, Dsub=None, dst=None, cst=None, nf=None, dis=None, ref=None,
+                 amplitude_scale=1.0, verbose=True):
     """Mimics the C example for calling fnft_nsev."""
     if verbose:
         print("\n\nnsev example")
@@ -48,7 +48,7 @@ def nsev_example(bsf=None, bsl=None, niter=None, Dsub=None, dst=None, cst=None, 
     # call function
     res = nsev(q, tvec, M=M, Xi1=Xi1, Xi2=Xi2,
                bsf=bsf, bsl=bsl, niter=niter, Dsub=Dsub, dst=dst, cst=cst, nf=nf, dis=dis, ref=ref,
-               bound_state_guesses=bound_state_guesses,
+               bsg=bsg,
                )
 
     if verbose:
