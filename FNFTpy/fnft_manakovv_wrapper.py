@@ -33,7 +33,7 @@ from .options_handling import get_manakovv_options
 
 
 def manakovv(q1, q2, tvec, Xi1=-1.75, Xi2=2, M=128, K=128, kappa=1, bsf=None,
-             bsl=None, niter=None, Dsub=None, dst=None, cst=None, nf=None, dis=None, ref=None,
+             bsl=None, bound_state_guesses=None, niter=None, Dsub=None, dst=None, cst=None, nf=None, dis=None, ref=None,
              ):
     """
     Calculate the Nonlinear Fourier Transform for the Manakov equation with vanishing boundary conditions.
@@ -70,6 +70,10 @@ def manakovv(q1, q2, tvec, Xi1=-1.75, Xi2=2, M=128, K=128, kappa=1, bsf=None,
         - 0 = FAST_EIGENVALUE
         - 1 = NEWTON
         - 2 = SUBSAMPLE_AND_REFINE
+
+    * bound_state_guesses: list or array of bound state guesses, only effective if
+                         options.bound_state_localization == 1  (Newton
+                         bound state location is activated). Default = None
 
     * niter : number of iterations for Newton bound state location, default = 10
 
@@ -140,10 +144,10 @@ def manakovv(q1, q2, tvec, Xi1=-1.75, Xi2=2, M=128, K=128, kappa=1, bsf=None,
     T2 = np.max(tvec)
     options = get_manakovv_options(bsf=bsf, bsl=bsl, niter=niter, Dsub=Dsub, dst=dst, cst=cst, nf=nf, dis=dis, ref=ref)
     return manakovv_wrapper(D, q1, q2, T1, T2, Xi1, Xi2,
-                            M, K, kappa, options)
+                            M, K, kappa, options,bound_state_guesses=bound_state_guesses,)
 
 
-def manakovv_wrapper(D, q1, q2, T1, T2, Xi1, Xi2, M, K, kappa, options):
+def manakovv_wrapper(D, q1, q2, T1, T2, Xi1, Xi2, M, K, kappa, options, bound_state_guesses=None):
     """
     Calculate the Nonlinear Fourier Transform for the Manakov equation with vanishing boundary conditions.
 
@@ -162,6 +166,13 @@ def manakovv_wrapper(D, q1, q2, T1, T2, Xi1, Xi2, M, K, kappa, options):
     * K : maximum number of bound states to calculate
     * kappa : +/- 1 for focussing/defocussing nonlinearity
     * options : options for manakovv as ManakovvOptionsStruct
+
+    Optional Arguments:
+
+    * bound_state_guesses : list or array of bound state guesses, only effective if
+                         options.bound_state_localization == 1  (Newton
+                         bound state location is activated). Default = None
+
 
     Returns:
 
@@ -216,12 +227,19 @@ def manakovv_wrapper(D, q1, q2, T1, T2, Xi1, Xi2, M, K, kappa, options):
         manakovv_boundstates = ctypes_nullptr
         manakovv_bound_states_type = type(ctypes_nullptr)
         manakovv_disc_spec_type = type(ctypes_nullptr)
+
     #
     # for Newton refinement: use guesses, if provided.
     #
-    if options.bound_state_localization == 1:
-        pass
-        # todo : implement
+    if options.bound_state_localization == fnft_manakovv_bsloc.NEWTON:
+        if bound_state_guesses is not None:
+            bsg_copy = np.array(bound_state_guesses, dtype=np.complex128)
+            if len(bsg_copy) > 0:
+                ii = -1
+                # copy as many of the guesses to bound state array
+                while (ii < K - 1) and (ii < len(bsg_copy) - 1) and (ii < len(manakovv_boundstates) - 1):
+                    ii = ii + 1
+                    manakovv_boundstates[ii] = bsg_copy[ii]
     #
     # continuous spectrum -> reflection coefficient and / or a,b
     #
