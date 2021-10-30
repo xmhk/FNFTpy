@@ -286,3 +286,8 @@ class fnft_manakovv_cstype(IntEnum):
     REFLECTION_COEFFICIENT = 0
     AB = 1
     BOTH = 2
+
+class fnft_manakovv_bsloc(IntEnum):
+    FAST_EIGENVALUE = 0
+    NEWTON = 1
+    SUBSAMPLE_AND_REFINE = 2
