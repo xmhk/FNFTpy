@@ -73,7 +73,9 @@ for i in range(res['bound_states_num']):
 
 
 * calculates the Nonlinear Fourier Transform of the Manakov equation 
-$$ iq_x + q_{tt} \pm 2q|q|^2=0, \quad  q=[q1; q2]$$
+<img src="https://render.githubusercontent.com/render/math?math=iq_x %2B q_{tt} \pm 2q|q|^2=0, \quad  q=[q1; q2]">
+
+<!--$$ iq_x + q_{tt} \pm 2q|q|^2=0, \quad  q=[q1; q2]$$-->
 with vanishing boundary conditions
 
 * calculation of the continuous spectrum:
