@@ -74,7 +74,6 @@ for i in range(res['bound_states_num']):
 
 * calculates the Nonlinear Fourier Transform of the Manakov equation 
 <img src="https://render.githubusercontent.com/render/math?math=iq_x %2B q_{tt} \pm 2q|q|^2=0, \quad  q=[q1,q2]">
-
 <!--$$ iq_x + q_{tt} \pm 2q|q|^2=0, \quad  q=[q1; q2]$$-->
 with vanishing boundary conditions
 
@@ -121,7 +120,8 @@ for i in range(M):
 ### Nonlinear Schroedinger Equation with periodic boundary conditions
 
 * calculation of the  Nonlinear Fourier Transform of the Nonlinear Schroedinger equation
- $$ iq_x + q_{tt} \pm 2q|q|^2=0$$ 
+<img src="https://render.githubusercontent.com/render/math?math=iq_x %2B q_{tt} \pm 2q|q|^2=0">
+<!--$$ iq_x + q_{tt} \pm 2q|q|^2=0$$--> 
 with (quasi-)periodic boundary conditions
 
 
