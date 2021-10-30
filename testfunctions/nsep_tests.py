@@ -81,7 +81,7 @@ class NsepExampleTest_priorNewton(unittest.TestCase):
 
     def setUp(self):
         # self.res = nsep_example()
-        self.res = nsep_example(loc=fnft_nsep_loc.MIXED, maxev=20)
+        self.res = nsep_example(loc=fnft_nsep_loc.MIXED, maxev=20, verbose=False)
         self.expected = {'main': np.array([-1.0 + -0.865909j,
                                            -1.0 + -0.865909j,
                                            -1.0 + 0.865909j,
