@@ -30,7 +30,7 @@ Christoph Mahnke, 2018-2021
 import unittest
 from testfunctions import KdvvExampleTest, KdvvExampleTestProvideBoundStateGuesses, \
     KdvvExampleTestMex4BoundStates, \
-    ManakovvExampleTest, ManakovvMexExampleTest, \
+    ManakovvExampleTest, ManakovvMexExampleTest, ManakovvProvideBoundStateGuessesTest, \
     NsepExampleTest, NsevExampleTest, NsevExampleTestBoundStateGuesses, NsevExampleTestBoundStateGuessesMex4, \
     NsevExampleTestRF, \
     NsevDstCstInputTest, NsevInverseExample, NsevInverseExample2, NsevInverseExampleMex1, NsevInverseExampleMex3, \
@@ -45,7 +45,7 @@ kdvv_newton_bound_suite = unittest.TestLoader().loadTestsFromTestCase(KdvvExampl
 
 manakovv_suite1 = unittest.TestLoader().loadTestsFromTestCase(ManakovvExampleTest)
 manakovv_suite2 = unittest.TestLoader().loadTestsFromTestCase(ManakovvMexExampleTest)
-
+manakovv_suite3 = unittest.TestLoader().loadTestsFromTestCase(ManakovvProvideBoundStateGuessesTest)
 nsep_suite = unittest.TestLoader().loadTestsFromTestCase(NsepExampleTest)
 
 nsev_suite1 = unittest.TestLoader().loadTestsFromTestCase(NsevExampleTest)
@@ -66,6 +66,7 @@ suite = unittest.TestSuite([options_suite,
                             kdvv_newton_bound_suite,
                             manakovv_suite1,
                             manakovv_suite2,
+                            manakovv_suite3,
                             nsep_suite,
                             nsev_suite1,
                             nsev_suite2,

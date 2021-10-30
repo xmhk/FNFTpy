@@ -31,6 +31,7 @@ import unittest
 
 from .array_test import *
 from examples import manakovv_example, mex_fnft_manakov_example
+import FNFTpy.typesdef as fnfttypes
 
 
 class ManakovvExampleTest(unittest.TestCase):
@@ -40,8 +41,8 @@ class ManakovvExampleTest(unittest.TestCase):
         self.res = manakovv_example(D=256, dis=0, cst=2, verbose=False)
 
     def test_manakovv_example(self):
-        with self.subTest('check FNFT kdvv return value'):
-            self.assertEqual(self.res['return_value'], 0, "FNFT kdvv return value")
+        with self.subTest('check FNFT manakovv return value'):
+            self.assertEqual(self.res['return_value'], 0, "FNFT manakovv return value")
         expected = {
             'bound_states_num': 14,
             'cont_ref1': np.array([-0.78609698 + 0.82940082j, 0.00112661 + 0.27523454j,
@@ -89,8 +90,8 @@ class ManakovvMexExampleTest(unittest.TestCase):
         self.res = mex_fnft_manakov_example()
 
     def test_manakovv_example(self):
-        with self.subTest('check FNFT kdvv return value'):
-            self.assertEqual(self.res['return_value'], 0, "FNFT kdvv return value")
+        with self.subTest('check FNFT manakovv return value'):
+            self.assertEqual(self.res['return_value'], 0, "FNFT manakovv return value")
         expected = {
             'bound_states_num': 14,
             'bound_states': np.array([-3.56714658e-13 + 0.7695895j, -1.07580611e-12 + 1.76793298j,
@@ -121,3 +122,34 @@ class ManakovvMexExampleTest(unittest.TestCase):
                             'contspec (reflection 2) not as expected')
         with self.subTest('disc norm'):
             self.assertTrue(check_array(self.res['disc_norm'], expected['disc_norm']), 'disc_norm not as expected')
+
+
+class ManakovvProvideBoundStateGuessesTest(unittest.TestCase):
+    """Testcase: provide bound state guesses works"""
+
+    def setUp(self):
+        self.bsg = np.array([-1.994e+02 + 0.622j + 10 + 0.1j,
+                             1.994e+02 + 1.570j - 11 + 0.4j,
+                             -1.995e+02 + 2.029j + 22,
+                             9.97e+01 + 0.389j - 0.2j,
+                             3.569e-02 + 0.630j + 0.01 - 0.2j,
+                             -2.323e-03 + 1.577j + 0.3j,
+                             2.407e-02 + 2.03j + 0.1j,
+                             -9.979e+01 + 0.462j + 3])
+        self.expected_bs = np.array([-1.99446899e+02 + 0.62246359j, 1.99445730e+02 + 1.57025773j,
+                                     -1.99519409e+02 + 2.02981315j, 9.97600247e+01 + 0.38927333j,
+                                     3.56976630e-02 + 0.63059218j, -2.32319542e-03 + 1.57776145j,
+                                     2.40767718e-02 + 2.03361678j, -9.97948799e+01 + 0.46293924j, ])
+        # self.res = manakovv_example(D=256, dis=0, cst=2, bsl=fnfttypes.fnft_manakovv_bsloc.NEWTON, verbose=False,
+        #                            bound_state_guesses=self.bsg)
+        self.res = manakovv_example(D=256, bsl=fnfttypes.fnft_manakovv_bsloc.NEWTON, verbose=False,
+                                    bound_state_guesses=self.bsg)
+
+    def test_manakovv_provide_bs(self):
+        with self.subTest('check FNFT manakovv return value'):
+            self.assertEqual(self.res['return_value'], 0, "FNFT manakovv return value")
+
+        with self.subTest('bsguesses works'):
+            self.assertTrue(
+                np.linalg.norm(self.res['bound_states'] - self.expected_bs) / np.linalg.norm(self.expected_bs) < 4e-4,
+                'provided bound state guesses do not give expected result')
