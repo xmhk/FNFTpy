@@ -287,6 +287,7 @@ class fnft_manakovv_cstype(IntEnum):
     AB = 1
     BOTH = 2
 
+
 class fnft_manakovv_bsloc(IntEnum):
     FAST_EIGENVALUE = 0
     NEWTON = 1

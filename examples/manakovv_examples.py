@@ -33,7 +33,7 @@ import numpy as np
 
 def manakovv_example(D=1024, M=8, K=None, T1=-2, T2=2, Xi1=-1.75, Xi2=2, kappa=1, bsf=None,
                      bsl=None, niter=None, Dsub=None, dst=None, cst=None,
-                     nf=None, dis=None, ref=None, verbose=True):
+                     nf=None, dis=None, ref=None, verbose=True, bound_state_guesses=None):
     """ mimics the manakovv C example from FNFT """
     def cplxprint(z):
         s = "%.4e\t%.4ej" % (np.real(z), np.imag(z))
@@ -51,7 +51,7 @@ def manakovv_example(D=1024, M=8, K=None, T1=-2, T2=2, Xi1=-1.75, Xi2=2, kappa=1
     res = manakovv(q1, q2, tvec, M=M, K=K, Xi1=Xi1, Xi2=Xi2,
                    dis=dis, bsf=bsf, bsl=bsl, niter=niter, Dsub=Dsub,
                    dst=dst, cst=cst,
-                   nf=nf, ref=ref)
+                   nf=nf, ref=ref, bound_state_guesses=bound_state_guesses)
     if verbose:
         print("-- options used --")
         print_manakovv_options(res['options'])
