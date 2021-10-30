@@ -16,7 +16,8 @@ for changes and latest updates see [Changelog](CHANGELOG.md)
 ### Korteweg-de-Vries equation with vanishing boundary conditions:
 
 * calculates the Nonlinear Fourier Transform of the Korteweg-de-Vries equation
-$$q_x + 6qq_{t} + q_{ttt}=0$$
+<img src="https://render.githubusercontent.com/render/math?math=q_x%2B 6qq_t %2B q_{ttt} =0">
+<!--$$q_x + 6qq_{t} + q_{ttt}=0$$-->
 with vanishing boundary conditions
 
 * calculation of the continuous spectrum:
