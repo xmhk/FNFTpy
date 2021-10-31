@@ -30,7 +30,7 @@ Christoph Mahnke, 2018-2021
 import unittest
 from testfunctions import KdvvExampleTest, KdvvExampleTestProvideBoundStateGuesses, \
     KdvvExampleTestMex4BoundStates, \
-    NsepExampleTest, NsepExampleTest_priorNewton,\
+    NsepExampleTest, NsepExampleTest_priorNewton,NsepExampleTestNewtonProvideGuesses,\
     NsevExampleTest, NsevExampleTestBoundStateGuesses, NsevExampleTestBoundStateGuessesMex4, NsevExampleTestRF,\
     NsevDstCstInputTest, NsevInverseExample, NsevInverseExample2,NsevInverseExampleMex1, NsevInverseExampleMex3,\
     ManakovvExampleTest, ManakovvMexExampleTest, ManakovvProvideBoundStateGuessesTest, \
@@ -48,10 +48,11 @@ kdvv_newton_bound_suite = unittest.TestLoader().loadTestsFromTestCase(KdvvExampl
 
 nsep_suite1 = unittest.TestLoader().loadTestsFromTestCase(NsepExampleTest)
 nsep_suite2 = unittest.TestLoader().loadTestsFromTestCase(NsepExampleTest_priorNewton)
+nsep_suite3 = unittest.TestLoader().loadTestsFromTestCase(NsepExampleTestNewtonProvideGuesses)
+
 manakovv_suite1 = unittest.TestLoader().loadTestsFromTestCase(ManakovvExampleTest)
 manakovv_suite2 = unittest.TestLoader().loadTestsFromTestCase(ManakovvMexExampleTest)
 manakovv_suite3 = unittest.TestLoader().loadTestsFromTestCase(ManakovvProvideBoundStateGuessesTest)
-nsep_suite = unittest.TestLoader().loadTestsFromTestCase(NsepExampleTest)
 
 nsev_suite1 = unittest.TestLoader().loadTestsFromTestCase(NsevExampleTest)
 nsev_suite2 = unittest.TestLoader().loadTestsFromTestCase(NsevDstCstInputTest)
@@ -65,12 +66,13 @@ nsev_inverse_suite3 = unittest.TestLoader().loadTestsFromTestCase(NsevInverseExa
 nsev_inverse_suite4 = unittest.TestLoader().loadTestsFromTestCase(NsevInverseExampleMex3)
 nsev_inverse_suite5 = unittest.TestLoader().loadTestsFromTestCase(NsevInverseInputVariation)
 
-suite = unittest.TestSuite([options_suite,
+suite = unittest.TestSuite([#options_suite,
                             #kdvv_suite,
                             #kdvv_bound_states_mex4,
                             #kdvv_newton_bound_suite,
                             nsep_suite1,
                             nsep_suite2,
+                            nsep_suite3,
                             #manakovv_suite1,
                             #manakovv_suite2,
                             #manakovv_suite3,
