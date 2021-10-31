@@ -203,7 +203,6 @@ def nsep_wrapper(D, q, T1, T2, K, M, phase_shift, kappa,
             while (ii < K - 1) and (ii < len(msg_copy) - 1) and (ii < len(nsep_main_spec) - 1):
                 ii = ii + 1
                 nsep_main_spec[ii] = msg_copy[ii]
-
     nsep_aux_spec = np.zeros(nsep_M.value, dtype=numpy_complex)
     nsep_sheet_indices = ctypes_nullptr
     nsep_kappa = ctypes_int(kappa)
