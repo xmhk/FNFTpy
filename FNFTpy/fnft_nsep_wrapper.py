@@ -32,7 +32,7 @@ from .auxiliary import get_lib_path, check_return_code, get_winmode_param
 from .options_handling import print_nsep_options, get_nsep_options
 
 
-def nsep(q, T1, T2, kappa=1, loc=None, filt=None, bb=None,
+def nsep(q, T1, T2, K=None, M=None, kappa=1, loc=None, filt=None, bb=None,
          maxev=None, dis=None, nf=None, floq_range=None, ppspine=None, dsub=None, tol=None, phase_shift=0.0):
     """Calculate the Nonlinear Fourier Transform for the Nonlinear Schroedinger equation with periodic boundaries.
 
@@ -51,6 +51,10 @@ def nsep(q, T1, T2, kappa=1, loc=None, filt=None, bb=None,
 
     Optional arguments:
 
+    * K : guess for the numbers of points for the main spectrum.
+          If omitted K=D * options.points_per_spine will be used
+    * M : guess for the numbers of points for the auxiliary specrum.
+          If omitted M=D
     * kappa : +/- 1 for focussing/defocussing nonlinearity, default = 1
     * loc : localization method for the spectrum, default = 2
 
@@ -125,13 +129,18 @@ def nsep(q, T1, T2, kappa=1, loc=None, filt=None, bb=None,
 
         """
     D = len(q)
+
     options = get_nsep_options(loc=loc, filt=filt, bb=bb, maxev=maxev, dis=dis, nf=nf,
                                floq_range=floq_range, ppspine=ppspine, dsub=dsub, tol=tol)
-    return nsep_wrapper(D, q, T1, T2, phase_shift,
+    if K is None:
+        K = options.points_per_spine * D
+    if M is None:
+        M = D
+    return nsep_wrapper(D, q, T1, T2, K, M, phase_shift,
                         kappa, options)
 
 
-def nsep_wrapper(D, q, T1, T2, phase_shift, kappa,
+def nsep_wrapper(D, q, T1, T2, K, M, phase_shift, kappa,
                  options):
     """Calculate the Nonlinear Fourier Transform for the Nonlinear Schroedinger equation with periodic boundaries.
 
@@ -144,6 +153,8 @@ def nsep_wrapper(D, q, T1, T2, phase_shift, kappa,
     * D : number of sample points (should be power of 2)
     * q : numpy array holding the samples of the input field
     * T1, T2  : time positions of the first and the (D+1) sample
+    * K : expected length of the main spectrum. A good guess is options.points_per_spine * D
+    * M : expected length of the auxiliary specrum. A good guess is D
     * phase_shift : change of the phase over one quasi-period, arg(q(t+(T2-T1)/q(t))
     * kappa   : +/- 1 for focussing/defocussing nonlinearity
     * options : options for nsep as NsepOptionsStruct. Can be generated e.g. with 'get_nsep_options()'
@@ -165,15 +176,18 @@ def nsep_wrapper(D, q, T1, T2, phase_shift, kappa,
     clib_nsep_func = fnft_clib.fnft_nsep
     clib_nsep_func.restype = ctypes_int
     nsep_D = ctypes_uint(D)
+    nsep_K = ctypes_uint(K)
+    nsep_M = ctypes_uint(M)
     nsep_q = np.zeros(nsep_D.value, dtype=numpy_complex)
     nsep_q[:] = q[:] + 0.0j
     nsep_T = np.zeros(2, dtype=numpy_double)
     nsep_T[0] = T1
     nsep_T[1] = T2
     nsep_phase_shift = ctypes_double(phase_shift)
-    nsep_K = ctypes_uint(4 * nsep_D.value)
+    #nsep_K = ctypes_uint(4 * nsep_D.value)
+    #nsep_K = ctypes_uint(options.points_per_spine * nsep_D.value)
     nsep_main_spec = np.zeros(nsep_K.value, dtype=numpy_complex)
-    nsep_M = ctypes_uint(2 * nsep_D.value)
+    #nsep_M = ctypes_uint(1 * nsep_D.value)
     nsep_aux_spec = np.zeros(nsep_M.value, dtype=numpy_complex)
     nsep_sheet_indices = ctypes_nullptr
     nsep_kappa = ctypes_int(kappa)
