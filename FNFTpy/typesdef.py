@@ -240,7 +240,37 @@ class NsevInverseOptionsStruct(GenericOptionsStruct):
         ("oversampling_factor", ctypes_uint)]
 
 
-### python enums
+# python enums
+class fnft_nse_discretization(IntEnum):
+    n2SPLIT2_MODAL = 0
+    BO = 1
+    n2SPLIT1A = 2
+    n2SPLIT1B = 3
+    n2SPLIT2A = 4
+    n2SPLIT2B = 5
+    n2SPLIT2S = 6
+    n2SPLIT3A = 7
+    n2SPLIT3B = 8
+    n2SPLIT3S = 9
+    n2SPLIT4A = 10
+    n2SPLIT4B = 11
+    n2SPLIT5A = 12
+    n2SPLIT5B = 13
+    n2SPLIT6A = 14
+    n2SPLIT6B = 15
+    n2SPLIT7A = 16
+    n2SPLIT7B = 17
+    n2SPLIT8A = 18
+    n2SPLIT8B = 19
+    n4SPLIT4A = 20
+    n4SPLIT4B = 21
+    CF4_2 = 22
+    CF4_3 = 23
+    CF5_3 = 24
+    CF6_4 = 25
+    ES4 = 26
+
+
 class fnft_nsev_bsloc(IntEnum):
     FAST_EIGENVALUE = 0
     NEWTON = 1
@@ -280,6 +310,12 @@ class fnft_nsep_loc(IntEnum):
     NEWTON = 1
     GRIDSEARCH = 2
     MIXED = 3
+
+class fnft_nsep_filt(IntEnum):
+    NONE = 0
+    MANUAL = 1
+    AUTO = 2
+
 
 class fnft_manakovv_dstype(IntEnum):
     NORMING_CONSTANTS = 0
