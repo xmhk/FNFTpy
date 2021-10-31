@@ -33,7 +33,8 @@ from .options_handling import print_nsep_options, get_nsep_options
 
 
 def nsep(q, T1, T2, K=None, M=None, kappa=1, loc=None, filt=None, bb=None,
-         maxev=None, dis=None, nf=None, floq_range=None, ppspine=None, dsub=None, tol=None, phase_shift=0.0):
+         maxev=None, dis=None, nf=None, floq_range=None, ppspine=None, dsub=None, tol=None, phase_shift=0.0,
+         msg = None):
     """Calculate the Nonlinear Fourier Transform for the Nonlinear Schroedinger equation with periodic boundaries.
 
     This function is intended to be 'convenient', which means it
@@ -53,6 +54,9 @@ def nsep(q, T1, T2, K=None, M=None, kappa=1, loc=None, filt=None, bb=None,
 
     * K : guess for the numbers of points for the main spectrum.
           If omitted K=D * options.points_per_spine will be used
+    * msg : main spectrum guesses (on has effect if options.localization == Newton).
+          structure of msg should be: [g1_1, ..., gK_1, g1_2, ..., gK_2, ..., g1_P, ..., gK_P]
+          where gk_n is the k-th initial guess for the n-th spine point with P = options.points_per_spline
     * M : guess for the numbers of points for the auxiliary specrum.
           If omitted M=D
     * kappa : +/- 1 for focussing/defocussing nonlinearity, default = 1
@@ -137,11 +141,11 @@ def nsep(q, T1, T2, K=None, M=None, kappa=1, loc=None, filt=None, bb=None,
     if M is None:
         M = D
     return nsep_wrapper(D, q, T1, T2, K, M, phase_shift,
-                        kappa, options)
+                        kappa, options, msg=msg)
 
 
 def nsep_wrapper(D, q, T1, T2, K, M, phase_shift, kappa,
-                 options):
+                 options,  msg=None):
     """Calculate the Nonlinear Fourier Transform for the Nonlinear Schroedinger equation with periodic boundaries.
 
     This function's interface mimics the behavior of the function 'fnft_nsep' of FNFT.
@@ -159,6 +163,11 @@ def nsep_wrapper(D, q, T1, T2, K, M, phase_shift, kappa,
     * kappa   : +/- 1 for focussing/defocussing nonlinearity
     * options : options for nsep as NsepOptionsStruct. Can be generated e.g. with 'get_nsep_options()'
 
+    Optional Arguments:
+
+    * msg : main spectrum guesses (on has effect if options.localization == Newton).
+            structure of msg should be: [g1_1, ..., gK_1, g1_2, ..., gK_2, ..., g1_P, ..., gK_P]
+            where gk_n is the k-th initial guess for the n-th spine point with P = options.points_per_spline
     Returns:
 
     * rdict : dictionary holding the fields (depending on options)
@@ -184,10 +193,17 @@ def nsep_wrapper(D, q, T1, T2, K, M, phase_shift, kappa,
     nsep_T[0] = T1
     nsep_T[1] = T2
     nsep_phase_shift = ctypes_double(phase_shift)
-    #nsep_K = ctypes_uint(4 * nsep_D.value)
-    #nsep_K = ctypes_uint(options.points_per_spine * nsep_D.value)
     nsep_main_spec = np.zeros(nsep_K.value, dtype=numpy_complex)
-    #nsep_M = ctypes_uint(1 * nsep_D.value)
+    # if main spec guesses are provided
+    if options.localization == fnft_nsep_loc.NEWTON:
+        msg_copy = np.array(msg, dtype=np.complex128)
+        if len(msg_copy) > 0:
+            ii = -1
+            # copy as many of the guesses to main spec array
+            while (ii < K - 1) and (ii < len(msg_copy) - 1) and (ii < len(nsep_main_spec) - 1):
+                ii = ii + 1
+                nsep_main_spec[ii] = msg_copy[ii]
+
     nsep_aux_spec = np.zeros(nsep_M.value, dtype=numpy_complex)
     nsep_sheet_indices = ctypes_nullptr
     nsep_kappa = ctypes_int(kappa)
