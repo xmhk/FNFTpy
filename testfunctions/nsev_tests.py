@@ -28,8 +28,8 @@ Christoph Mahnke, 2018-2021
 """
 
 import unittest
-
-from .array_test import *
+import numpy as np
+from .array_test import relnorm, check_boolarray
 from examples import nsev_example
 from FNFTpy import nsev
 
@@ -53,13 +53,13 @@ class NsevExampleTest(unittest.TestCase):
         with self.subTest('bound states number'):
             self.assertEqual(self.res['bound_states_num'], 1, "bound_states_num not 1")
         with self.subTest('bound states value'):
-            self.assertTrue(check_array(self.res['bound_states'], self.expected['bound_states']),
+            self.assertTrue(relnorm(self.expected['bound_states'], self.res['bound_states']) < 1e-8,
                             "bound_states value not as expected")
         with self.subTest('disc_norm value'):
-            self.assertTrue(check_array(self.res['disc_norm'], self.expected['disc_norm']),
+            self.assertTrue(relnorm(self.expected['disc_norm'], self.res['disc_norm']) < 1e-13,
                             "disc_norm value not as expected")
         with self.subTest('cont_ref value'):
-            self.assertTrue(check_array(self.res['cont_ref'], self.expected['cont_ref']),
+            self.assertTrue(relnorm(self.expected['cont_ref'], self.res['cont_ref']) < 1e-8,
                             "cont_ref value not as expected")
 
 
@@ -78,10 +78,10 @@ class NsevExampleTestBoundStateGuesses(unittest.TestCase):
         with self.subTest('check FNFT nsev return value'):
             self.assertEqual(self.res['return_value'], 0, "FNFT nsev return value not 0")
         with self.subTest('bound states value'):
-            self.assertTrue(check_array(self.res['bound_states'], self.expected['bound_states']),
+            self.assertTrue(relnorm(self.expected['bound_states'], self.res['bound_states']) < 1e-8,
                             "provide guesses: bound_states value not as expected")
         with self.subTest('disc_norm value'):
-            self.assertTrue(check_array(self.res['disc_norm'], self.expected['disc_norm']),
+            self.assertTrue(relnorm(self.expected['disc_norm'], self.res['disc_norm']) < 1e-14,
                             "provide guesses: disc_norm value not as expected")
 
 
@@ -113,11 +113,11 @@ class NsevExampleTestBoundStateGuessesMex4(unittest.TestCase):
         with self.subTest('check FNFT nsev return value'):
             self.assertEqual(self.res['return_value'], 0, "FNFT nsev return value not 0")
         with self.subTest('bound states value'):
-            self.assertTrue(check_array(self.res['bound_states'], self.bs_exact, eps=1e-7),
+            self.assertTrue(relnorm(self.bs_exact, self.res['bound_states']) < 5e-5,
                             "provide guesses (mex4): bound_states value not as expected")
 
         with self.subTest('disc_norm value'):
-            self.assertTrue(check_array(self.res['disc_norm'], self.norm_exact),
+            self.assertTrue(relnorm(self.norm_exact, self.res['disc_norm']) < 1e-14,
                             "provide guesses: disc_norm value not as expected")
 
 
@@ -147,14 +147,15 @@ class NsevExampleTestRF(unittest.TestCase):
         with self.subTest('check FNFT nsev return value'):
             self.assertEqual(self.res2['return_value'], 0, "FNFT nsev return value not 0")
         with self.subTest('with RF flag accuracy is sufficient'):
-            self.assertTrue(check_array(self.res1['cont_b'], self.bexact),
+            self.assertTrue(relnorm(self.bexact, self.res1['cont_b']) < 2e-7,
                             "with RF flag: accuracy is not sufficient")
         with self.subTest('with RF flag accuracy is sufficient'):
-            self.assertTrue(not check_array(self.res2['cont_b'], self.bexact),
+            self.assertTrue(not relnorm(self.bexact, self.res2['cont_b']) < 2e-7,
                             "without RF flag: accuracy is sufficient. unexpected. (check error margin)")
         with self.subTest('check improvement'):
             self.assertTrue(
-                np.linalg.norm(self.res1['cont_b'] - self.bexact) < np.linalg.norm(self.res2['cont_b'] - self.bexact))
+                relnorm(self.bexact, self.res1['cont_b']) < relnorm(self.bexact, self.res2['cont_b']),
+                "RF flag does not improve as expected")
 
 
 class NsevDstCstInputTest(unittest.TestCase):

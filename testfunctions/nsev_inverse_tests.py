@@ -23,13 +23,13 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 Contributors:
 
-Christoph Mahnke, 2018-2020
+Christoph Mahnke, 2018-2021
 
 """
 
 import unittest
-
-from .array_test import *
+import numpy as np
+from .array_test import relnorm
 from examples import nsev_inverse_example, nsev_inverse_example2
 from FNFTpy import nsev_inverse_xi_wrapper, nsev_inverse
 
@@ -58,10 +58,9 @@ class NsevInverseExample(unittest.TestCase):
         with self.subTest('check FNFT nsev_inverse return value'):
             self.assertEqual(self.res['return_value'], 0, "FNFT nsev_inverse return value not 0")
         with self.subTest('q value'):
-            self.assertTrue(check_array(self.res['q'][0:-1:40],
-                                        self.expected['q']), "q values not as expected")
+            self.assertTrue(relnorm(self.expected['q'], self.res['q'][0:-1:40], ) < 2e-9, "q values not as expected")
         with self.subTest('Xi value'):
-            self.assertTrue(check_array(self.res['Xi'], self.expected['Xi']), "xi values not as expected")
+            self.assertTrue(relnorm(self.expected['Xi'], self.res['Xi']), "xi values not as expected")
 
 
 class NsevInverseExample2(unittest.TestCase):
@@ -87,7 +86,7 @@ class NsevInverseExample2(unittest.TestCase):
         with self.subTest('check FNFT nsev_inverse return value'):
             self.assertEqual(self.res['return_value'], 0, "FNFT nsev_inverse return value not 0")
         with self.subTest('q value'):
-            self.assertTrue(check_array(self.res['q'][0:-1:40], self.expected['q']), "q values not as expected")
+            self.assertTrue(relnorm(self.expected['q'], self.res['q'][0:-1:40]) < 2e-9, "q values not as expected")
 
 
 class NsevInverseExampleMex1(unittest.TestCase):
@@ -117,8 +116,7 @@ class NsevInverseExampleMex1(unittest.TestCase):
         with self.subTest('check FNFT nsev_inverse return value'):
             self.assertEqual(self.res['return_value'], 0, "FNFT nsev_inverse return value not 0")
         with self.subTest('q value'):
-            # self.assertTrue(check_array(self.res['q'], self.q_exact), "q values not as expected")
-            self.assertTrue(np.linalg.norm(self.res['q'] - self.q_exact) / np.linalg.norm(self.q_exact) < 6e-3,
+            self.assertTrue(relnorm(self.q_exact, self.res['q']) < 6e-3,
                             "q values not as expected")
 
 
@@ -144,7 +142,7 @@ class NsevInverseExampleMex3(unittest.TestCase):
         with self.subTest('check FNFT nsev_inverse return value'):
             self.assertEqual(self.res['return_value'], 0, "FNFT nsev_inverse return value not 0")
         with self.subTest('q value'):
-            self.assertTrue(np.linalg.norm(self.res['q'] - self.q_exact) / np.linalg.norm(self.q_exact) < 4e-5,
+            self.assertTrue(relnorm(self.q_exact, self.res['q']) < 4e-5,
                             "q values not as expected")
 
 
@@ -201,7 +199,8 @@ class NsevInverseInputVariation(unittest.TestCase):
         with self.subTest('FNFT nsev_inverse return value'):
             self.assertEqual(res['return_value'], 0, "nsev_inverse input variation both return value not 0")
         with self.subTest('both : q value'):
-            self.assertTrue(check_array(res['q'][0:-1:40], self.expected['q_both']), "both: q values not as expected")
+            self.assertTrue(relnorm(self.expected['q_both'], res['q'][0:-1:40]) < 1e-8,
+                            "both: q values not as expected")
 
     def test_input_disc(self):
         res = nsev_inverse(self.xivec, self.tvec, None, self.bound_states, self.disc_norming_const_ana,
@@ -210,7 +209,8 @@ class NsevInverseInputVariation(unittest.TestCase):
             self.assertEqual(res['return_value'], 0,
                              "nsev_inverse input variation disc return value not 0")
         with self.subTest('disc : q value'):
-            self.assertTrue(check_array(res['q'][0:-1:40], self.expected['q_disc']), "disc: q values not as expected")
+            self.assertTrue(relnorm(self.expected['q_disc'], res['q'][0:-1:40]) < 1e-8,
+                            "disc: q values not as expected")
 
     def test_input_cont1(self):
         res = nsev_inverse(self.xivec, self.tvec, self.cont_b_ana, None, None,
@@ -219,7 +219,7 @@ class NsevInverseInputVariation(unittest.TestCase):
             self.assertEqual(res['return_value'], 0,
                              "nsev_inverse input variation cont1 return value not 0")
         with self.subTest('cont1 : q value'):
-            self.assertTrue(check_array(res['q'][0:-1:40], self.expected['q_cont']),
+            self.assertTrue(relnorm(self.expected['q_cont'], res['q'][0:-1:40]) < 1e-8,
                             "cont1: q values not as expected")
 
     def test_input_cont2(self):
@@ -229,7 +229,7 @@ class NsevInverseInputVariation(unittest.TestCase):
             self.assertEqual(res['return_value'], 0,
                              "nsev_inverse input variation cont2 return value not 0")
         with self.subTest('cont2 : q value'):
-            self.assertTrue(check_array(res['q'][0:-1:40], self.expected['q_cont']),
+            self.assertTrue(relnorm(self.expected['q_cont'], res['q'][0:-1:40]) < 1e-8,
                             "cont2: q values not as expected")
 
     def test_input_cont3(self):
@@ -239,7 +239,7 @@ class NsevInverseInputVariation(unittest.TestCase):
             self.assertEqual(res['return_value'], 0,
                              "nsev_inverse input variation cont3 return value not 0")
         with self.subTest('cont3 : q value'):
-            self.assertTrue(check_array(res['q'][0:-1:40], self.expected['q_cont']),
+            self.assertTrue(relnorm(self.expected['q_cont'], res['q'][0:-1:40]) < 1e-8,
                             "cont3: q values not as expected")
 
     def test_return_value_none(self):
@@ -249,25 +249,28 @@ class NsevInverseInputVariation(unittest.TestCase):
             self.assertEqual(res['return_value'], 7,
                              "nsev_inverse input variation none return value not 7")
         with self.subTest('none : q value'):
-            self.assertTrue(check_array(res['q'][0:-1:40], self.expected['q_none']),
-                            "none: q values not as expected")
+            # 2021-11-02: shoud return just zeros
+            # self.assertTrue(relnorm(self.expected['q_none'],res['q'][0:-1:40])<1e-7,
+            #                "none: q values not as expected")
+            self.assertTrue(np.linalg.norm(res['q']) < 1e-9)
 
     def test_q_value_cont1(self):
         res = nsev_inverse(self.xivec, self.tvec, self.cont_b_ana, None, None,
                            cst=1, dst=0)
-        self.assertTrue(check_array(res['q'][0:-1:40], self.expected['q_cont']), "cont1: q values not as expected")
+        self.assertTrue(relnorm(self.expected['q_cont'], res['q'][0:-1:40]) < 1e-1, "cont1: q values not as expected")
 
     def test_q_value_cont2(self):
         res = nsev_inverse(self.xivec, self.tvec, self.cont_b_ana, None, self.disc_norming_const_ana,
                            cst=1, dst=0)
-        self.assertTrue(check_array(res['q'][0:-1:40], self.expected['q_cont']), "cont2: q values not as expected")
+        self.assertTrue(relnorm(self.expected['q_cont'], res['q'][0:-1:40]) < 1e-1, "cont2: q values not as expected")
 
     def test_q_value_cont3(self):
         res = nsev_inverse(self.xivec, self.tvec, self.cont_b_ana, self.bound_states, None,
                            cst=1, dst=0)
-        self.assertTrue(check_array(res['q'][0:-1:40], self.expected['q_cont']), "cont3: q values not as expected")
+        self.assertTrue(relnorm(self.expected['q_cont'], res['q'][0:-1:40]) < 1e-1, "cont3: q values not as expected")
 
     def test_q_value_none(self):
         res = nsev_inverse(self.xivec, self.tvec, None, None, None,
                            cst=1, dst=0)
-        self.assertTrue(check_array(res['q'][0:-1:40], self.expected['q_none']), "none: q values not as expected")
+        # self.assertTrue(relnorm(self.expected['q_cont'], res['q'][0:-1:40]) < 1e-1, "none: q values not as expected")
+        self.assertTrue(np.linalg.norm(res['q'][0:-1:40]) < 1e-10, "none: q values not as expected")

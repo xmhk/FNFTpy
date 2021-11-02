@@ -29,6 +29,9 @@ Christoph Mahnke, 2018
 
 import numpy as np
 
+def relnorm(a1, a2):
+    """returns norm (a1-a2) / norm(a1)"""
+    return np.linalg.norm(a1-a2) / np.linalg.norm(a1)
 
 def check_array(value, expectedval, eps=1e-10):
     """Test array == expectedarray  (norm < eps)"""

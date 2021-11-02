@@ -28,8 +28,9 @@ Christoph Mahnke, 2021
 """
 
 import unittest
+import numpy as np
 
-from .array_test import *
+from .array_test import relnorm
 from examples import manakovv_example, mex_fnft_manakov_example
 import FNFTpy.typesdef as fnfttypes
 
@@ -39,11 +40,7 @@ class ManakovvExampleTest(unittest.TestCase):
 
     def setUp(self):
         self.res = manakovv_example(D=256, dis=0, cst=2, verbose=False)
-
-    def test_manakovv_example(self):
-        with self.subTest('check FNFT manakovv return value'):
-            self.assertEqual(self.res['return_value'], 0, "FNFT manakovv return value")
-        expected = {
+        self.expected = {
             'bound_states_num': 14,
             'cont_ref1': np.array([-0.78609698 + 0.82940082j, 0.00112661 + 0.27523454j,
                                    -0.53227908 + 0.12468494j, 1.05810621 + 0.83874311j,
@@ -67,20 +64,27 @@ class ManakovvExampleTest(unittest.TestCase):
                                  0.19315448 - 2.65532931e-07j, 0.1771351 - 4.26608723e-07j])
 
         }
+
+    def test_manakovv_example(self):
+        with self.subTest('check FNFT manakovv return value'):
+            self.assertEqual(self.res['return_value'], 0, "FNFT manakovv return value")
         with self.subTest('check no of bound states'):
             self.assertEqual(self.res['bound_states_num'], 14, "number of bound states not as expected")
         with self.subTest('check contspec 1'):
-            self.assertTrue(check_array(self.res['cont_ref1'], expected['cont_ref1']),
+            self.assertTrue(relnorm(self.expected['cont_ref1'], self.res['cont_ref1']) < 4.1e-9,
                             'contspec (reflection 1) not as expected')
         with self.subTest('check contspec 2'):
-            self.assertTrue(check_array(self.res['cont_ref2'], expected['cont_ref2']),
+            self.assertTrue(relnorm(self.expected['cont_ref2'], self.res['cont_ref2']) < 1.6e-8,
                             'contspec (reflection 2) not as expected')
         with self.subTest('cont_a'):
-            self.assertTrue(check_array(self.res['cont_a'], expected['cont_a']), 'contspec (a) not as expected')
+            self.assertTrue(relnorm(self.expected['cont_a'], self.res['cont_a']) < 4.8e-9,
+                            'contspec (a) not as expected')
         with self.subTest('cont_b1'):
-            self.assertTrue(check_array(self.res['cont_b1'], expected['cont_b1']), 'contspec (b1) not as expected')
+            self.assertTrue(relnorm(self.expected['cont_b1'], self.res['cont_b1']) < 5.2e-9,
+                            'contspec (b1) not as expected')
         with self.subTest('cont_b2'):
-            self.assertTrue(check_array(self.res['cont_b2'], expected['cont_b2']), 'contspec (b2) not as expected')
+            self.assertTrue(relnorm(self.expected['cont_b2'], self.res['cont_b2']) < 1.3e-8,
+                            'contspec (b2) not as expected')
 
 
 class ManakovvMexExampleTest(unittest.TestCase):
@@ -88,11 +92,7 @@ class ManakovvMexExampleTest(unittest.TestCase):
 
     def setUp(self):
         self.res = mex_fnft_manakov_example()
-
-    def test_manakovv_example(self):
-        with self.subTest('check FNFT manakovv return value'):
-            self.assertEqual(self.res['return_value'], 0, "FNFT manakovv return value")
-        expected = {
+        self.expected = {
             'bound_states_num': 14,
             'bound_states': np.array([-3.56714658e-13 + 0.7695895j, -1.07580611e-12 + 1.76793298j,
                                       5.90749671e-12 + 2.76586856j, -7.94020405e-12 + 3.76381877j,
@@ -112,16 +112,23 @@ class ManakovvMexExampleTest(unittest.TestCase):
                  0. + 0.j, 0. + 0.j, 0. + 0.j, 0. + 0.j])
 
         }
+
+    def test_manakovv_example(self):
+        with self.subTest('check FNFT manakovv return value'):
+            self.assertEqual(self.res['return_value'], 0, "FNFT manakovv return value")
+
         with self.subTest('check no of bound states'):
             self.assertEqual(self.res['bound_states_num'], 14, "number of bound states not as expected")
         with self.subTest('check contspec 1'):
-            self.assertTrue(check_array(self.res['cont_ref1'], expected['cont_ref1']),
+            self.assertTrue(relnorm(self.expected['cont_ref1'], self.res['cont_ref1']) < 6.9e-8,
                             'contspec (reflection 1) not as expected')
         with self.subTest('check contspec 2'):
-            self.assertTrue(check_array(self.res['cont_ref2'], expected['cont_ref2']),
+            self.assertTrue(relnorm(self.expected['cont_ref2'], self.res['cont_ref2']) < 1.4e-8,
                             'contspec (reflection 2) not as expected')
         with self.subTest('disc norm'):
-            self.assertTrue(check_array(self.res['disc_norm'], expected['disc_norm']), 'disc_norm not as expected')
+            # 2021-11-02: disc norm is returned as array of zeros
+            # self.assertTrue(check_array(self.res['disc_norm'], expected['disc_norm']), 'disc_norm not as expected')
+            self.assertTrue(np.sum(np.abs(self.res['disc_norm'])) < 1e-10, 'disc_norm not as expected')
 
 
 class ManakovvProvideBoundStateGuessesTest(unittest.TestCase):
@@ -151,5 +158,5 @@ class ManakovvProvideBoundStateGuessesTest(unittest.TestCase):
 
         with self.subTest('bsguesses works'):
             self.assertTrue(
-                np.linalg.norm(self.res['bound_states'] - self.expected_bs) / np.linalg.norm(self.expected_bs) < 4e-4,
+                relnorm(self.expected_bs, self.res['bound_states']) < 4e-4,
                 'provided bound state guesses do not give expected result')
