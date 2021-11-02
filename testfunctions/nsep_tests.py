@@ -62,14 +62,14 @@ class NsepExampleTest(unittest.TestCase):
         with self.subTest('check aux spectrum value'):
             self.assertTrue(relnorm(
                 np.sort_complex(self.expected['aux']),
-                np.sort_complex(np.around(self.res['aux'], 8))) <2e-9
-            , "aux spectrum not as expected")
+                np.sort_complex(np.around(self.res['aux'], 8))) < 2e-9
+                            , "aux spectrum not as expected")
         with self.subTest('check K value'):
             self.assertEqual(self.res['K'], 18, "K not 18")
         with self.subTest('check main spectrum value'):
             self.assertTrue(relnorm(
                 np.sort_complex(self.expected['main']),
-                np.sort_complex(np.around(self.res['main'], 8)))<3e-9, "main spectrum not as expected")
+                np.sort_complex(np.around(self.res['main'], 8))) < 3e-9, "main spectrum not as expected")
 
 
 class NsepExampleTest_priorNewton(unittest.TestCase):
@@ -112,13 +112,13 @@ class NsepExampleTest_priorNewton(unittest.TestCase):
         with self.subTest('check aux spectrum value'):
             self.assertTrue(relnorm(
                 np.sort_complex(self.expected['aux']),
-                np.sort_complex(np.around(self.res['aux'], 8)))<8e-7,
-             "aux spectrum not as expected")
+                np.sort_complex(np.around(self.res['aux'], 8))) < 8e-7,
+                            "aux spectrum not as expected")
         with self.subTest('check K value'):
             self.assertEqual(self.res['K'], 11, "K not 11")
         with self.subTest('check main spectrum value'):
             self.assertTrue(
-                relnorm(self.expected['main'], self.res['main'])<  8e-7, "main spectrum not as expected")
+                relnorm(self.expected['main'], self.res['main']) < 8e-7, "main spectrum not as expected")
 
 
 class NsepExampleTestNewtonProvideGuesses(unittest.TestCase):
@@ -166,9 +166,9 @@ class NsepExampleTestNewtonProvideGuesses(unittest.TestCase):
             self.assertEqual(self.res['return_value'], 0, "FNFT nsep return value")
         with self.subTest('check aux spectrum value'):
             self.assertTrue(
-                relnorm(self.expected['aux'], self.res['aux'])<3e-9, "aux spectrum not as expected")
+                relnorm(self.expected['aux'], self.res['aux']) < 3e-9, "aux spectrum not as expected")
 
         with self.subTest('check main spectrum value'):
             self.assertTrue(
-                relnorm( self.expected['main'], self.res['main'])<2e-9
+                relnorm(self.expected['main'], self.res['main']) < 2e-9
                 , "main spectrum not as expected")
