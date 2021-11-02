@@ -28,8 +28,8 @@ Christoph Mahnke, 2018-2021
 """
 
 import unittest
-
-from .array_test import *
+import numpy as np
+from .array_test import relnorm
 from examples import nsep_example
 from FNFTpy import nsep, fnft_nsep_loc, fnft_nse_discretization, fnft_nsep_filt
 
@@ -60,17 +60,16 @@ class NsepExampleTest(unittest.TestCase):
         with self.subTest('check M value'):
             self.assertEqual(self.res['M'], 6, "M not 6")
         with self.subTest('check aux spectrum value'):
-            self.assertTrue(check_array(
-                np.sort_complex(np.around(self.res['aux'], 8)),
-                np.sort_complex(self.expected['aux'])
-            ), "aux spectrum not as expected")
+            self.assertTrue(relnorm(
+                np.sort_complex(self.expected['aux']),
+                np.sort_complex(np.around(self.res['aux'], 8))) <2e-9
+            , "aux spectrum not as expected")
         with self.subTest('check K value'):
             self.assertEqual(self.res['K'], 18, "K not 18")
         with self.subTest('check main spectrum value'):
-            self.assertTrue(check_array(
-                np.sort_complex(np.around(self.res['main'], 8)),
-                np.sort_complex(self.expected['main']), eps=1e-8
-            ), "main spectrum not as expected")
+            self.assertTrue(relnorm(
+                np.sort_complex(self.expected['main']),
+                np.sort_complex(np.around(self.res['main'], 8)))<3e-9, "main spectrum not as expected")
 
 
 class NsepExampleTest_priorNewton(unittest.TestCase):
@@ -111,16 +110,15 @@ class NsepExampleTest_priorNewton(unittest.TestCase):
         with self.subTest('check M value'):
             self.assertEqual(self.res['M'], 7, "M not 7")
         with self.subTest('check aux spectrum value'):
-            self.assertTrue(check_array(
-                np.sort_complex(np.around(self.res['aux'], 8)),
-                np.sort_complex(self.expected['aux'])
-            ), "aux spectrum not as expected")
+            self.assertTrue(relnorm(
+                np.sort_complex(self.expected['aux']),
+                np.sort_complex(np.around(self.res['aux'], 8)))<8e-7,
+             "aux spectrum not as expected")
         with self.subTest('check K value'):
             self.assertEqual(self.res['K'], 11, "K not 11")
         with self.subTest('check main spectrum value'):
             self.assertTrue(
-                np.linalg.norm(self.res['main'] - self.expected['main']) / np.linalg.norm(self.expected['main']) < 7e-5
-                , "main spectrum not as expected")
+                relnorm(self.expected['main'], self.res['main'])<  8e-7, "main spectrum not as expected")
 
 
 class NsepExampleTestNewtonProvideGuesses(unittest.TestCase):
@@ -168,10 +166,9 @@ class NsepExampleTestNewtonProvideGuesses(unittest.TestCase):
             self.assertEqual(self.res['return_value'], 0, "FNFT nsep return value")
         with self.subTest('check aux spectrum value'):
             self.assertTrue(
-                np.linalg.norm(self.res['aux'] - self.expected['aux']) / np.linalg.norm(self.expected['aux']) < 1e-8
-                , "aux spectrum not as expected")
+                relnorm(self.expected['aux'], self.res['aux'])<3e-9, "aux spectrum not as expected")
 
         with self.subTest('check main spectrum value'):
             self.assertTrue(
-                np.linalg.norm(self.res['main'] - self.expected['main']) / np.linalg.norm(self.expected['main']) < 1e-8
+                relnorm( self.expected['main'], self.res['main'])<2e-9
                 , "main spectrum not as expected")
