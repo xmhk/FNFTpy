@@ -33,4 +33,4 @@ from .manakovv_tests import ManakovvExampleTest, ManakovvMexExampleTest, Manakov
 from .nsep_tests import NsepExampleTest
 from .nsev_inverse_tests import NsevInverseExample, NsevInverseExample2, NsevInverseExampleMex1,NsevInverseExampleMex3, NsevInverseInputVariation
 from .options_tests import FnftpyOptionsTest
-#from .array_test import check_array
+from .array_test import relnorm
