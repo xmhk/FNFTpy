@@ -156,3 +156,18 @@ def check_return_code(rv):
     else:
         wstring = "An error occured when calling FNFT: error code %d" % rv
         warn(wstring)
+
+
+def cmplxrpr(z, dig=3,fmtter='%d', formatter = "e", accuracy=8):
+    """get string representation of a complex numbers
+
+    Arguments:
+    - z : complex numbers
+
+    Optional Arguments:
+    - formatter: string formatter (e.g. 'e', 'f'), (default = 'e')
+    - accurary: number of digits after the decimal point (default=8)
+    """
+    s1 = "{0.real:.%d%s} {0.imag:.%d%s}i"%(accuracy,formatter,
+                                           accuracy, formatter)
+    return s1.format(z)

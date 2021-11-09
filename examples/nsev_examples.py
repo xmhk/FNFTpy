@@ -27,7 +27,7 @@ Christoph Mahnke, 2018-2021
 
 """
 
-from FNFTpy import nsev
+from FNFTpy import nsev, cmplxrpr
 import numpy as np
 
 
@@ -59,12 +59,9 @@ def nsev_example(bsf=None, bsl=None, bsg=None, niter=None, Dsub=None, dst=None, 
         print("FNFT return value: %d (should be 0)" % res['return_value'])
         print("continuous spectrum")
         for i in range(len(res['cont_ref'])):
-            print("%d :  Xi = %.4f   %.6f  %.6fj" % (
-                i, Xivec[i], np.real(res['cont_ref'][i]), np.imag(res['cont_ref'][i])))
+            print("%d Xi=%.4f  %s" % (i, Xivec[i], cmplxrpr(res['cont_ref'][i], formatter='f')))
         print("discrete spectrum")
         for i in range(len(res['bound_states'])):
-            print("%d : %.6f  %.6fj with norming const %.6f  %.6fj" % (i, np.real(res['bound_states'][i]),
-                                                                       np.imag(res['bound_states'][i]),
-                                                                       np.real(res['disc_norm'][i]),
-                                                                       np.imag(res['disc_norm'][i])))
+            print("%d : %s with norming const %s" % (i, cmplxrpr(res['bound_states'][i]),
+                                                     cmplxrpr(res['disc_norm'][i])))
     return res

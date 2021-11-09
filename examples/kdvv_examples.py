@@ -27,7 +27,7 @@ Christoph Mahnke, 2018-2021
 
 """
 
-from FNFTpy import kdvv
+from FNFTpy import kdvv, cmplxrpr
 import numpy as np
 
 
@@ -59,13 +59,12 @@ def kdvv_example(dis=None, bsl=None, bsg=None, niter=None, dst=None, cst=None, n
         print("FNFT return value: %d (should be 0)" % res['return_value'])
         print("continuous spectrum: ")
         for i in range(len(res['cont_ref'])):
-            print("%d : Xi=%.4f   %.6f  %.6fj" % (i, Xivec[i],
-                                                  np.real(res['cont_ref'][i]), np.imag(res['cont_ref'][i])))
+            print("%d : Xi=%.4f   %s" % (i, Xivec[i],
+                                         cmplxrpr(res['cont_ref'][i], formatter='f')))
         print("discrete spectrum:")
-        print("bound state at %.4f   %.4fi  with norming constant %.4f  %.4f" % (
-            np.real(res['bound_states'][0]), np.imag(res['bound_states'][0]), np.real(res['disc_norm'][0]),
-            np.imag(res['disc_norm'][0]),
-        ))
+        print("bound state at %s  with norming constant %s" % (
+            cmplxrpr(res['bound_states'][0], formatter='f'),
+            cmplxrpr(res['disc_norm'][0], formatter='f')))
     return res
 
 

@@ -23,7 +23,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 Contributors:
 
-Christoph Mahnke, 2018
+Christoph Mahnke, 2018-2021
 
 """
 
@@ -31,6 +31,11 @@ Christoph Mahnke, 2018
 from examples import *
 
 res = kdvv_example()
+
+input("Press enter for next example")
+
+
+manakovv_example()
 
 input("Press enter for next example")
 
@@ -44,6 +49,6 @@ input("Press enter for next example")
 
 nsev_inverse_example()
 
-input("Press enter for next example")
+#input("Press enter for next example")
 
-nsev_inverse_example2()
+#nsev_inverse_example2()

@@ -27,7 +27,7 @@ Christoph Mahnke, 2018-2021
 
 """
 
-from FNFTpy import nsep
+from FNFTpy import nsep, cmplxrpr
 import numpy as np
 
 
@@ -50,10 +50,8 @@ def nsep_example(D=256, loc=None, dis=None, maxev=None, verbose=True):
         print("number of samples: %d" % D)
         print('main spectrum')
         for i in range(res['K']):
-            print("%d :  %.6f  %.6fj" % (i, np.real(res['main'][i]),
-                                         np.imag(res['main'][i])))
+            print("%d :   %s" % (i, cmplxrpr(res['main'][i])))
         print('auxiliary spectrum')
         for i in range(res['M']):
-            print("%d :  %.6f  %.6fj" % (i, np.real(res['aux'][i]),
-                                         np.imag(res['aux'][i])))
+            print("%d : %s" % (i, cmplxrpr(res['aux'][i])))
     return res
