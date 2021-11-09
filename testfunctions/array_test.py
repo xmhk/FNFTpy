@@ -23,20 +23,16 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 Contributors:
 
-Christoph Mahnke, 2018
+Christoph Mahnke, 2018-2021
 
 """
 
 import numpy as np
 
+
 def relnorm(a1, a2):
     """returns norm (a1-a2) / norm(a1)"""
-    return np.linalg.norm(a1-a2) / np.linalg.norm(a1)
-
-def check_array(value, expectedval, eps=1e-10):
-    """Test array == expectedarray  (norm < eps)"""
-    return np.sum(np.abs(value - expectedval) ** 2) < eps
-
+    return np.linalg.norm(a1 - a2) / np.linalg.norm(a1)
 
 def check_boolarray(value, expectedval):
     """Test boolean array == expected"""
