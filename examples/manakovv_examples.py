@@ -27,7 +27,7 @@ Christoph Mahnke, 2021
 
 """
 
-from FNFTpy import manakovv, print_manakovv_options
+from FNFTpy import manakovv, print_manakovv_options, cmplxrpr
 import numpy as np
 
 
@@ -35,9 +35,8 @@ def manakovv_example(D=1024, M=8, K=None, T1=-2, T2=2, Xi1=-1.75, Xi2=2, kappa=1
                      bsl=None, niter=None, Dsub=None, dst=None, cst=None,
                      nf=None, dis=None, ref=None, verbose=True, bsg=None):
     """ mimics the manakovv C example from FNFT """
-    def cplxprint(z):
-        s = "%.4e\t%.4ej" % (np.real(z), np.imag(z))
-        return s
+    if verbose:
+        print("\nmanakovv example")
 
     q1 = np.zeros(D, dtype=np.complex128)
     q2 = np.zeros(D, dtype=np.complex128)
@@ -59,8 +58,8 @@ def manakovv_example(D=1024, M=8, K=None, T1=-2, T2=2, Xi1=-1.75, Xi2=2, kappa=1
         print("                  \t part 1\t\t\t\t\t\t part2")
         for i in range(M):
             print("%d Xi = %.5f  \t%s \t%s" % (i + 1, Xivec[i],
-                                               cplxprint(res['cont_ref1'][i]),
-                                               cplxprint(res['cont_ref2'][i])))
+                                               cmplxrpr(res['cont_ref1'][i], formatter='f'),
+                                               cmplxrpr(res['cont_ref2'][i], formatter='f')))
     return res
 
 

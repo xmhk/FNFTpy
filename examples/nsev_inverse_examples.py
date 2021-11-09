@@ -23,17 +23,18 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 Contributors:
 
-Christoph Mahnke, 2018
+Christoph Mahnke, 2018-2021
 
 """
 
-from FNFTpy import nsev_inverse, nsev_inverse_xi_wrapper
+from FNFTpy import nsev_inverse, nsev_inverse_xi_wrapper, cmplxrpr
 import numpy as np
 
 
-def nsev_inverse_example():
+def nsev_inverse_example(verbose=True):
     """Mimics the C example for calling fnft_nsev_inverse."""
-    print("\nnsev inverse example")
+    if verbose:
+        print("\nnsev inverse example")
 
     # set values
     M = 2048
@@ -63,16 +64,15 @@ def nsev_inverse_example():
     res = nsev_inverse(xivec, tvec, contspec, bound_states, normconst_or_residues)
 
     # print results
-    print("\n----- options used ----")
-    print(res['options'])
-    print("\n------ results --------")
-    print("FNFT return value: %d (should be 0)" % res['return_value'])
-    print("Total number of samples calculated: %d" % D)
-    print("some samples:")
-    for i in range(0, D, 64):
-        print("  %d : q(t=%.5f) = %.5e + %.5e j " % (i, tvec[i],
-                                                     np.real(res['q'][i]),
-                                                     np.imag(res['q'][i])))
+    if verbose:
+        print("\n----- options used ----")
+        print(res['options'])
+        print("\n------ results --------")
+        print("FNFT return value: %d (should be 0)" % res['return_value'])
+        print("Total number of samples calculated: %d" % D)
+        print("some samples:")
+        for i in range(0, D, 64):
+            print("  %d : q(t=%.5f) = %s " % (i, tvec[i], cmplxrpr((res['q'][i]))))
     res['Xi'] = np.array([Xi1, Xi2])
     return res
 
