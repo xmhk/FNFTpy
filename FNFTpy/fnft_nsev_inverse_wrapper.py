@@ -151,6 +151,7 @@ def nsev_inverse_wrapper(M, contspec, Xi1, Xi2, K, bound_states,
     * options : options for nsev_inverse as NsevInverseOptionsStruct
 
     Optional Arguments:
+
     * display_c_msg : whether or not to show messages raised by the C-library, default = True
 
     Returns:
