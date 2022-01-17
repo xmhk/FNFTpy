@@ -137,7 +137,7 @@ class KdvvExampleTestProvideBoundStateGuesses(unittest.TestCase):
                                 bsg=[0.1j, 1.j], K=2)
         self.res2 = kdvv_example(dst=1, cst=3, bsl=0, verbose=False, amplitude_scale=1.3,
                                  bsg=[0.1j, 0.01 + 1.j],
-                                 K=2)  # should fail, no real part for guesses (yet)
+                                 K=2, display_c_msg=False)  # should fail, no real part for guesses (yet)
         self.expected = {'bound_states': np.array([0. + 0.07454561j, 0. + 1.30818689j])
                          }
 

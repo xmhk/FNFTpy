@@ -176,7 +176,7 @@ def kdvv(u, tvec, K=128, M=128, Xi1=-2, Xi2=2, dis=None, bsl=None, bsg=None, nit
     options = get_kdvv_options(dis=dis, bsl=bsl, niter=niter, dst=dst, cst=cst, nf=nf,
                                ref=ref)
     return kdvv_wrapper(D, u, T1, T2, K, M, Xi1, Xi2,
-                        options, bsg=bsg, display_c_msg=True)
+                        options, bsg=bsg, display_c_msg=display_c_msg)
 
 
 def kdvv_wrapper(D, u, T1, T2, K, M, Xi1, Xi2,

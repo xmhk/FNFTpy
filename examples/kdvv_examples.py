@@ -32,7 +32,7 @@ import numpy as np
 
 
 def kdvv_example(dis=None, bsl=None, bsg=None, niter=None, dst=None, cst=None, nf=None,
-                 ref=None, K=None, amplitude_scale=1.0, verbose=True):
+                 ref=None, K=None, amplitude_scale=1.0, verbose=True, display_c_msg=True):
     """Mimics the C example for calling fnft_kdvv, can be modified with options"""
     if verbose:
         print("\n\nkdvv example")
@@ -50,7 +50,7 @@ def kdvv_example(dis=None, bsl=None, bsg=None, niter=None, dst=None, cst=None, n
     # call function
     res = kdvv(q, tvec, K, M, Xi1=Xi1, Xi2=Xi2,
                dis=dis, bsl=bsl, niter=niter, dst=dst, cst=cst, nf=nf,
-               ref=ref, bsg=bsg)
+               ref=ref, bsg=bsg, display_c_msg=display_c_msg)
     # print results
     if verbose:
         print("\n----- options used ----")
