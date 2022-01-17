@@ -148,10 +148,7 @@ def nsep(q, T1, T2, K=None, msg=None, M=None, asg=None, kappa=1, loc=None, filt=
         M = D
     print(D, T1, T2, K, M, phase_shift)
     return nsep_wrapper(D, q, T1, T2, K, M, phase_shift,
-                        kappa, options, msg=msg, asg=asg)
-    return nsep_wrapper(D, q, T1, T2, phase_shift,
-                        kappa, options, display_c_msg=display_c_msg)
-
+                        kappa, options, msg=msg, asg=asg, display_c_msg=display_c_msg)
 
 def nsep_wrapper(D, q, T1, T2, K, M, phase_shift, kappa,
                  options,  msg=None, asg=None, display_c_msg=True):
