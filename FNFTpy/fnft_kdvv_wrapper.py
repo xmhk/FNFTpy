@@ -33,13 +33,15 @@ from .auxiliary import get_lib_path, check_return_code, get_winmode_param
 
 
 def kdvv(u, tvec, K=128, M=128, Xi1=-2, Xi2=2, dis=None, bsl=None, bsg=None, niter=None, dst=None, cst=None, nf=None,
-         ref=None):
+         ref=None, display_c_msg=True):
     """Calculate the Nonlinear Fourier Transform for the Korteweg-de Vries equation with vanishing boundaries.
 
     This function is intended to be 'convenient', which means it
     automatically calculates some variables needed to call the
     C-library and uses some default options.
     Own options can be set by passing optional arguments (see below).
+
+    Currently, only the continuous spectrum is calculated.
 
     It converts all Python input into the C equivalent and returns the result from FNFT.
     If a more C-like interface is desired, the function 'kdvv_wrapper' can be used (see documentation there).
@@ -149,6 +151,8 @@ def kdvv(u, tvec, K=128, M=128, Xi1=-2, Xi2=2, dis=None, bsl=None, bsg=None, nit
         * 0 = off
         * 1 = on
 
+    * display_c_msg : whether or not to show messages raised by the C-library, default = True
+
     Returns:
 
    * rdict : dictionary holding the fields:
@@ -172,11 +176,11 @@ def kdvv(u, tvec, K=128, M=128, Xi1=-2, Xi2=2, dis=None, bsl=None, bsg=None, nit
     options = get_kdvv_options(dis=dis, bsl=bsl, niter=niter, dst=dst, cst=cst, nf=nf,
                                ref=ref)
     return kdvv_wrapper(D, u, T1, T2, K, M, Xi1, Xi2,
-                        options, bsg=bsg)
+                        options, bsg=bsg, display_c_msg=display_c_msg)
 
 
 def kdvv_wrapper(D, u, T1, T2, K, M, Xi1, Xi2,
-                 options, bsg=None):
+                 options, bsg=None, display_c_msg=True):
     """Calculate the Nonlinear Fourier Transform for the Korteweg-de Vries equation with vanishing boundaries.
 
     This function's interface mimics the behavior of the function 'fnft_kdvv' of FNFT.
@@ -195,6 +199,7 @@ def kdvv_wrapper(D, u, T1, T2, K, M, Xi1, Xi2,
 
     Optional Arguments:
 
+    * display_c_msg : whether or not to show messages raised by the C-library, default = True
     * bsg : lost or array of bound state guesses, only effective if bsl==1 (Newton
                          bound state localization) is activated. Default = None
 
@@ -216,6 +221,9 @@ def kdvv_wrapper(D, u, T1, T2, K, M, Xi1, Xi2,
     fnft_clib = ctypes.CDLL(get_lib_path(), winmode=get_winmode_param())
     clib_kdvv_func = fnft_clib.fnft_kdvv
     clib_kdvv_func.restype = ctypes_int
+    if not display_c_msg:  # suppress output from C-library
+        clib_errwarn_setprintf = fnft_clib.fnft_errwarn_setprintf
+        clib_errwarn_setprintf(ctypes_nullptr)
     kdvv_D = ctypes_uint(D)
     kdvv_u = np.zeros(kdvv_D.value, dtype=numpy_complex)
     kdvv_u[:] = u[:] + 0.0j

@@ -244,7 +244,7 @@ class NsevInverseInputVariation(unittest.TestCase):
 
     def test_return_value_none(self):
         res = nsev_inverse(self.xivec, self.tvec, None, None, None,
-                           cst=1, dst=0)
+                           cst=1, dst=0, display_c_msg=False)
         with self.subTest('FNFT nsev_inverse return value'):
             self.assertEqual(res['return_value'], 7,
                              "nsev_inverse input variation none return value not 7")
@@ -271,6 +271,9 @@ class NsevInverseInputVariation(unittest.TestCase):
 
     def test_q_value_none(self):
         res = nsev_inverse(self.xivec, self.tvec, None, None, None,
-                           cst=1, dst=0)
+                           cst=1, dst=0, display_c_msg=False)
         # self.assertTrue(relnorm(self.expected['q_cont'], res['q'][0:-1:40]) < 1e-1, "none: q values not as expected")
         self.assertTrue(np.linalg.norm(res['q'][0:-1:40]) < 1e-10, "none: q values not as expected")
+#                           cst=1, dst=0, display_c_msg=False)
+        #self.assertTrue(check_array(res['q'][0:-1:40], self.expected['q_none']), "none: q values not as expected")
+        #

@@ -33,7 +33,9 @@ from .options_handling import get_nsev_inverse_options
 
 
 def nsev_inverse(xivec, tvec, contspec, bound_states, discspec,
-                 dis=None, cst=None, csim=None, dst=None, max_iter=None, osf=None, kappa=1):
+                 dis=None, cst=None, csim=None, dst=None, max_iter=None, osf=None, kappa=1,
+                 display_c_msg=True
+                 ):
     """Calculate the  Inverse Nonlinear Fourier Transform for the Nonlinear Schroedinger equation with vanishing boundaries.
 
     This function is intended to be 'clutter-free', which means it automatically calculates some variables
@@ -108,6 +110,7 @@ def nsev_inverse(xivec, tvec, contspec, bound_states, discspec,
     * max_iter : maximum number of iterations for iterative methods, default = 100
     * osf : oversampling factor, default = 8
 
+    * display_c_msg : whether or not to show messages raised by the C-library, default = True
     """
     M = len(xivec)
     D = len(tvec)
@@ -120,13 +123,13 @@ def nsev_inverse(xivec, tvec, contspec, bound_states, discspec,
         M = 0
     options = get_nsev_inverse_options(dis, cst, csim, dst, max_iter, osf)
     rdict = nsev_inverse_wrapper(M, contspec, xivec[0], xivec[-1], K, bound_states, discspec, D, tvec[0], tvec[-1],
-                                 kappa, options)
+                                 kappa, options, display_c_msg=display_c_msg)
     return rdict
 
 
 def nsev_inverse_wrapper(M, contspec, Xi1, Xi2, K, bound_states,
                          normconst_or_residues, D, T1, T2, kappa,
-                         options):
+                         options, display_c_msg=True):
     """Calculate the  Inverse Nonlinear Fourier Transform for the Nonlinear Schroedinger equation with vanishing boundaries.
 
     This function's interface mimics the behavior of the function 'fnft_nsev_inverse' of FNFT.
@@ -147,6 +150,10 @@ def nsev_inverse_wrapper(M, contspec, Xi1, Xi2, K, bound_states,
     * kappa : +1/-1 for focussing / defocussing NSE
     * options : options for nsev_inverse as NsevInverseOptionsStruct
 
+    Optional Arguments:
+
+    * display_c_msg : whether or not to show messages raised by the C-library, default = True
+
     Returns:
 
     * rdict : dictionary holding the fields (depending on options)
@@ -158,6 +165,9 @@ def nsev_inverse_wrapper(M, contspec, Xi1, Xi2, K, bound_states,
     fnft_clib = ctypes.CDLL(get_lib_path(), winmode=get_winmode_param())
     clib_nsev_inverse_func = fnft_clib.fnft_nsev_inverse
     clib_nsev_inverse_func.restype = ctypes_int
+    if not display_c_msg:  # suppress output from C-library
+        clib_errwarn_setprintf = fnft_clib.fnft_errwarn_setprintf
+        clib_errwarn_setprintf(ctypes_nullptr)
     nsev_M = ctypes_uint(M)
     nsev_Xi = np.zeros(2, dtype=numpy_double)
     nsev_Xi[0] = Xi1
@@ -224,7 +234,7 @@ def nsev_inverse_wrapper(M, contspec, Xi1, Xi2, K, bound_states,
     return rdict
 
 
-def nsev_inverse_xi_wrapper(D, T1, T2, M, dis=None):
+def nsev_inverse_xi_wrapper(D, T1, T2, M, dis=None, display_c_msg=True):
     """Helper function for nsev_inverse to calculate the spectral borders for a given time window.
 
     Return value is an array holding the position of the first and the last spectral
@@ -269,6 +279,8 @@ def nsev_inverse_xi_wrapper(D, T1, T2, M, dis=None):
         - 26 = ES4
         - 27 = TES4
 
+    * display_c_msg : whether or not to show messages raised by the C-library, default = True
+
     Returns:
 
     * rv : return value of the C-function
@@ -278,6 +290,9 @@ def nsev_inverse_xi_wrapper(D, T1, T2, M, dis=None):
     fnft_clib = ctypes.CDLL(get_lib_path(), winmode=get_winmode_param())
     clib_nsev_inverse_xi_func = fnft_clib.fnft_nsev_inverse_XI
     clib_nsev_inverse_xi_func.restype = ctypes_int
+    if not display_c_msg:  # suppress output from C-library
+        clib_errwarn_setprintf = fnft_clib.fnft_errwarn_setprintf
+        clib_errwarn_setprintf(ctypes_nullptr)
     nsev_D = ctypes_uint(D)
     nsev_T = np.zeros(2, dtype=numpy_double)
     nsev_T[0] = T1

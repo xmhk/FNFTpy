@@ -89,6 +89,5 @@ suite = unittest.TestSuite([#options_suite,
                             ])
 
 print_fnft_version()
-print(
-    "\n Note: some output for 'FNFT errors' are intended. This is to check whether errors are catched\n\n")
-t1 = unittest.TextTestRunner(buffer=True, verbosity=5).run(suite)
+#print("\n\nthe FNFT error ('FNFT Error: Sanity check failed (Neither contspec nor discspec provided.)') is intended: just to check that it is catched without crashing ...\n\n")
+t1 = unittest.TextTestRunner(buffer=True, verbosity=1).run(suite)
