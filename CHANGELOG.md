@@ -2,6 +2,12 @@
 
 ## 0.4.1
 
+### 17.01.2022
+
+- introduced an optional argument `display_c_msg` for the main functions `kdvv`, `kdvv_wrapper`, `nsep`, `nsep_wrapper`,
+  `nsev`, `nsev_wrapper`, `nsev_inverse`, `nsev_inverse_wrapper` and `nsev_inverse_xi_wrapper`. 
+  Default it is set to `true`. If set to `false`, messages from the c-library to stdout are suppressed.
+
 ### 28.06.2021
 - changed the way how ctypes.CDLL is called.
 - Some users (WIN) had problems to load the libfnft.dll file although the proper path was given in _get_lib_path.
