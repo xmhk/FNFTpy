@@ -67,10 +67,13 @@ class NsepExampleTest(unittest.TestCase):
         with self.subTest('check M value'):
             self.assertEqual(self.res['M'], 7, "M not 7")
         with self.subTest('check aux spectrum value'):
-            self.assertTrue(check_array(
-                np.sort_complex(np.around(self.res['aux'], 8)),
-                np.sort_complex(self.expected['aux'])
-            ), "aux spectrum not as expected")
+            #self.assertTrue(check_array(
+            #    np.sort_complex(np.around(self.res['aux'], 8)),
+            #    np.sort_complex(self.expected['aux'])
+            #), "aux spectrum not as expected")
+            self.assertTrue(relnorm(np.sort_complex(np.around(self.res['aux'], 8)),
+                                np.sort_complex(np.around(self.expected['aux'], 8))),
+                        'aux spec not as expected')
         with self.subTest('check K value'):
             self.assertEqual(self.res['K'], 11, "K not 11")
         with self.subTest('check main spectrum value'):

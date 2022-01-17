@@ -274,6 +274,6 @@ class NsevInverseInputVariation(unittest.TestCase):
                            cst=1, dst=0)
         # self.assertTrue(relnorm(self.expected['q_cont'], res['q'][0:-1:40]) < 1e-1, "none: q values not as expected")
         self.assertTrue(np.linalg.norm(res['q'][0:-1:40]) < 1e-10, "none: q values not as expected")
-                           cst=1, dst=0, display_c_msg=False)
+#                           cst=1, dst=0, display_c_msg=False)
         #self.assertTrue(check_array(res['q'][0:-1:40], self.expected['q_none']), "none: q values not as expected")
         #
