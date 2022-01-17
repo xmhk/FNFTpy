@@ -32,7 +32,7 @@ from .options_handling import get_kdvv_options
 from .auxiliary import get_lib_path, check_return_code, get_winmode_param
 
 
-def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None):
+def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None, display_c_msg=True):
     """Calculate the Nonlinear Fourier Transform for the Korteweg-de Vries equation with vanishing boundaries.
 
     This function is intended to be 'convenient', which means it
@@ -81,6 +81,9 @@ def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None):
          * 22 = CF4_3
          * 23 = CF5_3
          * 24 = CF6_4
+
+    * display_c_msg : whether or not to show messages raised by the C-library, default = True
+
     Returns:
 
     * rdict : dictionary holding the fields:
@@ -97,11 +100,11 @@ def kdvv(u, tvec, M=128, Xi1=-2, Xi2=2, dis=None):
     T2 = np.max(tvec)
     options = get_kdvv_options(dis=dis)
     return kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
-                        K, options)
+                        K, options, display_c_msg=display_c_msg)
 
 
 def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
-                 K, options):
+                 K, options, display_c_msg=True):
     """Calculate the Nonlinear Fourier Transform for the Korteweg-de Vries equation with vanishing boundaries.
 
     This function's interface mimics the behavior of the function 'fnft_kdvv' of FNFT.
@@ -120,6 +123,10 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
     * K : maximum number of bound states to calculate (no effect yet)
     * options : options for kdvv as KdvvOptionsStruct. Can be generated e.g. with 'get_kdvv_options()'
 
+    Optional Arguments:
+
+    * display_c_msg : whether or not to show messages raised by the C-library, default = True
+
     Returns:
 
     * rdict : dictionary holding the fields:
@@ -129,9 +136,12 @@ def kdvv_wrapper(D, u, T1, T2, M, Xi1, Xi2,
         * options : KdvvOptionsStruct with options used
     """
 
-    fnft_clib = ctypes.CDLL(get_lib_path(), winmode = get_winmode_param())
+    fnft_clib = ctypes.CDLL(get_lib_path(), winmode=get_winmode_param())
     clib_kdvv_func = fnft_clib.fnft_kdvv
     clib_kdvv_func.restype = ctypes_int
+    if not display_c_msg:  # suppress output from C-library
+        clib_errwarn_setprintf = fnft_clib.fnft_errwarn_setprintf
+        clib_errwarn_setprintf(ctypes_nullptr)
     kdvv_D = ctypes_uint(D)
     kdvv_u = np.zeros(kdvv_D.value, dtype=numpy_complex)
     kdvv_u[:] = u[:] + 0.0j

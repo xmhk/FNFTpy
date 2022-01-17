@@ -33,7 +33,8 @@ from .options_handling import get_nsev_options
 
 
 def nsev(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=None,
-         bsl=None, niter=None, Dsub=None, dst=None, cst=None, nf=None, dis=None, ref=None):
+         bsl=None, niter=None, Dsub=None, dst=None, cst=None, nf=None, dis=None, ref=None,
+         display_c_msg=True):
     """Calculate the Nonlinear Fourier Transform for the Nonlinear Schroedinger equation with vanishing boundaries.
 
     This function is intended to be 'convenient', which means it
@@ -126,6 +127,8 @@ def nsev(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=None,
         * 0 = off
         * 1 = on
 
+    * display_c_msg : whether or not to show messages raised by the C-library, default = True
+
     Returns:
 
     * rdict : dictionary holding the fields (depending on options)
@@ -146,11 +149,11 @@ def nsev(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=None,
     T2 = np.max(tvec)
     options = get_nsev_options(bsf=bsf, bsl=bsl, niter=niter, Dsub=Dsub, dst=dst, cst=cst, nf=nf, dis=dis, ref=ref)
     return nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
-                        M, K, kappa, options)
+                        M, K, kappa, options, display_c_msg=display_c_msg)
 
 
 def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
-                 M, K, kappa, options):
+                 M, K, kappa, options, display_c_msg=True):
     """Calculate the Nonlinear Fourier Transform for the Nonlinear Schroedinger equation with vanishing boundaries.
 
     This function's interface mimics the behavior of the function 'fnft_nsev' of FNFT.
@@ -168,6 +171,9 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
     * kappa : +/- 1 for focussing/defocussing nonlinearity
     * options : options for nsev as NsevOptionsStruct
 
+    Optional Arguments:
+
+    * display_c_msg : whether or not to show messages raised by the C-library, default = True
 
     Returns:
 
@@ -185,9 +191,12 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
 
     """
 
-    fnft_clib = ctypes.CDLL(get_lib_path(), winmode = get_winmode_param())
+    fnft_clib = ctypes.CDLL(get_lib_path(), winmode=get_winmode_param())
     clib_nsev_func = fnft_clib.fnft_nsev
     clib_nsev_func.restype = ctypes_int
+    if not display_c_msg:  # suppress output from C-library
+        clib_errwarn_setprintf = fnft_clib.fnft_errwarn_setprintf
+        clib_errwarn_setprintf(ctypes_nullptr)
     nsev_D = ctypes_uint(D)
     nsev_M = ctypes_uint(M)
     nsev_K = ctypes_uint(K)

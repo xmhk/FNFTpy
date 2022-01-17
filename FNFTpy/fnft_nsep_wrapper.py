@@ -33,7 +33,8 @@ from .options_handling import print_nsep_options, get_nsep_options
 
 
 def nsep(q, T1, T2, kappa=1, loc=None, filt=None, bb=None,
-         maxev=None, dis=None, nf=None, floq_range=None, ppspine=None, dsub=None, tol=None, phase_shift = 0.0):
+         maxev=None, dis=None, nf=None, floq_range=None, ppspine=None, dsub=None, tol=None, phase_shift=0.0,
+         display_c_msg=True):
     """Calculate the Nonlinear Fourier Transform for the Nonlinear Schroedinger equation with periodic boundaries.
 
     This function is intended to be 'convenient', which means it
@@ -118,6 +119,9 @@ def nsep(q, T1, T2, kappa=1, loc=None, filt=None, bb=None,
 
     * phase_shift :  change of the phase over one quasi-period, arg(q(t+(T2-T1)/q(t)) (default=0)
 
+    * display_c_msg : whether or not to show messages raised by the C-library, default = True
+
+
     Returns:
 
     * rdict : dictionary holding the fields (depending on options)
@@ -134,11 +138,11 @@ def nsep(q, T1, T2, kappa=1, loc=None, filt=None, bb=None,
     options = get_nsep_options(loc=loc, filt=filt, bb=bb, maxev=maxev, dis=dis, nf=nf,
                                floq_range=floq_range, ppspine=ppspine, dsub=dsub, tol=tol)
     return nsep_wrapper(D, q, T1, T2, phase_shift,
-                        kappa, options)
+                        kappa, options, display_c_msg=display_c_msg)
 
 
 def nsep_wrapper(D, q, T1, T2, phase_shift, kappa,
-                 options):
+                 options, display_c_msg=True):
     """Calculate the Nonlinear Fourier Transform for the Nonlinear Schroedinger equation with periodic boundaries.
 
     This function's interface mimics the behavior of the function 'fnft_nsep' of FNFT.
@@ -154,6 +158,10 @@ def nsep_wrapper(D, q, T1, T2, phase_shift, kappa,
     * kappa   : +/- 1 for focussing/defocussing nonlinearity
     * options : options for nsep as NsepOptionsStruct. Can be generated e.g. with 'get_nsep_options()'
 
+    Optional Arguments:
+
+    * display_c_msg : whether or not to show messages raised by the C-library, default = True
+
     Returns:
 
     * rdict : dictionary holding the fields (depending on options)
@@ -167,9 +175,12 @@ def nsep_wrapper(D, q, T1, T2, phase_shift, kappa,
 
     """
 
-    fnft_clib = ctypes.CDLL(get_lib_path(), winmode = get_winmode_param())
+    fnft_clib = ctypes.CDLL(get_lib_path(), winmode=get_winmode_param())
     clib_nsep_func = fnft_clib.fnft_nsep
     clib_nsep_func.restype = ctypes_int
+    if not display_c_msg:  # suppress output from C-library
+        clib_errwarn_setprintf = fnft_clib.fnft_errwarn_setprintf
+        clib_errwarn_setprintf(ctypes_nullptr)
     nsep_D = ctypes_uint(D)
     nsep_q = np.zeros(nsep_D.value, dtype=numpy_complex)
     nsep_q[:] = q[:] + 0.0j
@@ -188,7 +199,7 @@ def nsep_wrapper(D, q, T1, T2, phase_shift, kappa,
         type(nsep_D),  # D
         numpy_complex_arr_ptr,  # q
         numpy_double_arr_ptr,  # t
-        type(nsep_phase_shift), # phase_shift
+        type(nsep_phase_shift),  # phase_shift
         ctypes.POINTER(ctypes_uint),  # K_ptr
         numpy_complex_arr_ptr,  # main_spec
         ctypes.POINTER(ctypes_uint),  # M_ptr
