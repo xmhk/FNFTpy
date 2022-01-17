@@ -34,7 +34,7 @@ from .options_handling import get_manakovv_options
 
 def manakovv(q1, q2, tvec, Xi1=-1.75, Xi2=2, M=128, K=128, kappa=1, bsf=None,
              bsl=None, bsg=None, niter=None, Dsub=None, dst=None, cst=None, nf=None, dis=None, ref=None,
-             ):
+             display_c_msg=True):
     """
     Calculate the Nonlinear Fourier Transform for the Manakov equation with vanishing boundary conditions.
 
@@ -119,6 +119,9 @@ def manakovv(q1, q2, tvec, Xi1=-1.75, Xi2=2, M=128, K=128, kappa=1, bsf=None,
         - 0 = off
         - 1 = on
 
+    * display_c_msg : whether or not to show messages raised by the C-library, default = True
+
+
     Returns:
 
     * rdict : dictionary holding the fields (depending on options)
@@ -144,10 +147,10 @@ def manakovv(q1, q2, tvec, Xi1=-1.75, Xi2=2, M=128, K=128, kappa=1, bsf=None,
     T2 = np.max(tvec)
     options = get_manakovv_options(bsf=bsf, bsl=bsl, niter=niter, Dsub=Dsub, dst=dst, cst=cst, nf=nf, dis=dis, ref=ref)
     return manakovv_wrapper(D, q1, q2, T1, T2, Xi1, Xi2,
-                            M, K, kappa, options,bsg=bsg,)
+                            M, K, kappa, options,bsg=bsg,display_c_msg=display_c_msg)
 
 
-def manakovv_wrapper(D, q1, q2, T1, T2, Xi1, Xi2, M, K, kappa, options, bsg=None):
+def manakovv_wrapper(D, q1, q2, T1, T2, Xi1, Xi2, M, K, kappa, options, bsg=None, display_c_msg=True):
     """
     Calculate the Nonlinear Fourier Transform for the Manakov equation with vanishing boundary conditions.
 
@@ -173,6 +176,7 @@ def manakovv_wrapper(D, q1, q2, T1, T2, Xi1, Xi2, M, K, kappa, options, bsg=None
                          options.bound_state_localization == 1  (Newton
                          bound state location is activated). Default = None
 
+    * display_c_msg : whether or not to show messages raised by the C-library, default = True
 
     Returns:
 
@@ -195,6 +199,9 @@ def manakovv_wrapper(D, q1, q2, T1, T2, Xi1, Xi2, M, K, kappa, options, bsg=None
     fnft_clib = ctypes.CDLL(get_lib_path(), winmode=get_winmode_param())
     clib_manakovv_func = fnft_clib.fnft_manakovv
     clib_manakovv_func.restype = ctypes_int
+    if not display_c_msg:  # suppress output from C-library
+        clib_errwarn_setprintf = fnft_clib.fnft_errwarn_setprintf
+        clib_errwarn_setprintf(ctypes_nullptr)
     manakovv_D = ctypes_uint(D)
     manakovv_M = ctypes_uint(M)
     manakovv_K = ctypes_uint(K)
