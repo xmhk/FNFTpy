@@ -23,7 +23,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 Contributors:
 
-Christoph Mahnke, 2018-2021
+Christoph Mahnke, 2018-2022
 
 """
 from warnings import warn
@@ -47,7 +47,8 @@ def get_lib_path():
 
     """
     #libstr = "/home/ch/Downloads/FNFT/lib/libfnft.so.0.4.1"
-    libstr = "/home/ch/Downloads/nsep-improvements/FNFT/lib/libfnft.so.0.4.1"
+    libstr = "/home/ch/Downloads/FNFT/lib/libfnft.so.0.5.0"
+
     return libstr
 
 

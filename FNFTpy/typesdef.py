@@ -185,12 +185,14 @@ class NsevOptionsStruct(GenericOptionsStruct):
         ("bound_state_filtering", ctypes_int),
         ("bound_state_localization", ctypes_int),
         ("niter", ctypes_uint),
+        ("tol", ctypes_double),
         ("Dsub", ctypes_uint),
         ("discspec_type", ctypes_int),
         ("contspec_type", ctypes_int),
         ("normalization_flag", ctypes_int32),
         ("discretization", ctypes_int),
-        ("richardson_extrapolation_flag", ctypes_int)]
+        ("richardson_extrapolation_flag", ctypes_int),
+        ("bounding_box", ctypes_double * 4)]
 
 
 class NsevInverseOptionsStruct(GenericOptionsStruct):
