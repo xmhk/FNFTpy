@@ -66,26 +66,27 @@ nsev_inverse_suite3 = unittest.TestLoader().loadTestsFromTestCase(NsevInverseExa
 nsev_inverse_suite4 = unittest.TestLoader().loadTestsFromTestCase(NsevInverseExampleMex3)
 nsev_inverse_suite5 = unittest.TestLoader().loadTestsFromTestCase(NsevInverseInputVariation)
 
-suite = unittest.TestSuite([#options_suite,
-                            #kdvv_suite,
-                            #kdvv_bound_states_mex4,
-                            #kdvv_newton_bound_suite,
+suite = unittest.TestSuite([
+                            options_suite,
+                            kdvv_suite,
+                            kdvv_bound_states_mex4,
+                            kdvv_newton_bound_suite,
                             nsep_suite1,
                             nsep_suite2,
                             nsep_suite3,
-                            #manakovv_suite1,
-                            #manakovv_suite2,
-                            #manakovv_suite3,
-                            #nsev_suite1,
-                            #nsev_suite2,
-                            #nsev_suite3,
-                            #nsev_suite4,
-                            #nsev_suite5,
-                            #nsev_inverse_suite1,
-                            #nsev_inverse_suite2,
-                            #nsev_inverse_suite3,
-                            #nsev_inverse_suite4,
-                            #nsev_inverse_suite5
+                            manakovv_suite1,
+                            manakovv_suite2,
+                            manakovv_suite3,
+                            nsev_suite1,
+                            nsev_suite2,
+                            nsev_suite3,
+                            nsev_suite4,
+                            nsev_suite5,
+                            nsev_inverse_suite1,
+                            nsev_inverse_suite2,
+                            nsev_inverse_suite3,
+                            nsev_inverse_suite4,
+                            nsev_inverse_suite5
                             ])
 
 print_fnft_version()
