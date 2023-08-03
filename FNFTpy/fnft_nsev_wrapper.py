@@ -33,7 +33,8 @@ from .options_handling import get_nsev_options
 
 
 def nsev(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=None,
-         bsl=None, bsg=None, niter=None, Dsub=None, dst=None, cst=None, nf=None, dis=None, ref=None, display_c_msg=True):
+         bsl=None, bsg=None, niter=None, tol=None, Dsub=None, dst=None, cst=None, nf=None, dis=None, ref=None, display_c_msg=True,
+         bb=None):
     """Calculate the Nonlinear Fourier Transform for the Nonlinear Schroedinger equation with vanishing boundaries.
 
     This function is intended to be 'convenient', which means it
@@ -72,7 +73,8 @@ def nsev(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=None,
     * bsg : list or array of bound state guesses, only effective if bsl==1 (Newton
                          bound state location is activated). Default = None
 
-    * niter : number of iterations for Newton bound state location, default = 10
+    * niter : number of iterations for Newton bound state location, default = 100
+    * tol : tolerance for bound state location methods (e.g. Newton), default = -1 (auto)
     * Dsub : number of samples used for 'subsampling and refine'-method, default = 0 (auto)
     * dst : type of discrete spectrum, default = 0
 
@@ -129,6 +131,8 @@ def nsev(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=None,
         - 0 = off
         - 1 = on
 
+    * bb: bounding box used for manual filtering, default = [-inf, inf, -inf, inf]
+
     * display_c_msg : whether or not to show messages raised by the C-library, default = True
 
     Returns:
@@ -149,7 +153,7 @@ def nsev(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=None,
     D = len(q)
     T1 = np.min(tvec)
     T2 = np.max(tvec)
-    options = get_nsev_options(bsf=bsf, bsl=bsl, niter=niter, Dsub=Dsub, dst=dst, cst=cst, nf=nf, dis=dis, ref=ref)
+    options = get_nsev_options(bsf=bsf, bsl=bsl, niter=niter, tol=tol, Dsub=Dsub, dst=dst, cst=cst, nf=nf, dis=dis, ref=ref, bb=bb)
     return nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
                         M, K, kappa, options, bsg=bsg, display_c_msg=display_c_msg)
 
@@ -179,7 +183,7 @@ def nsev_wrapper(D, q, T1, T2, Xi1, Xi2,
            options.bound_state_localization == 1  (Newton bound state
            location is activated). Default = None
 
-    * display_c_msg : whether or not to show messages raised by the C-library, default = True
+    * display_c_msg : whether to show messages raised by the C-library, default = True
 
     Returns:
 

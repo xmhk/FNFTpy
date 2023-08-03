@@ -432,7 +432,7 @@ def print_nsev_options(options=None):
     print(options)
 
 
-def get_nsev_options(bsf=None, bsl=None, niter=None, Dsub=None, dst=None, cst=None, nf=None, dis=None, ref=None):
+def get_nsev_options(bsf=None, bsl=None, niter=None, tol=None, Dsub=None, dst=None, cst=None, nf=None, dis=None, ref=None, bb=None):
     """Get a NsevOptionsStruct for use with nsev_wrapper.
 
     When called without additional optional arguments, the default values from FNFT are used.
@@ -453,7 +453,8 @@ def get_nsev_options(bsf=None, bsl=None, niter=None, Dsub=None, dst=None, cst=No
         - 2 = SUBSAMPLE_AND_REFINE
 
 
-    * niter : number of iterations for Newton bound state location, default = 10
+    * niter : number of iterations for Newton bound state location, default = 100
+    * tol : tolerance for bound state location methods (e.g. Newton), default = -1 (auto)
     * Dsub : number of samples used for 'subsampling and refine'-method, default = 0 (auto)
     * dst : type of discrete spectrum, default = 0
 
@@ -510,6 +511,8 @@ def get_nsev_options(bsf=None, bsl=None, niter=None, Dsub=None, dst=None, cst=No
         - 0 = off
         - 1 = on
 
+    * bb: bounding box used for manual filtering, default = [-inf, inf, -inf, inf]
+
     Returns:
 
     * options : NsevOptionsStruct
@@ -522,6 +525,8 @@ def get_nsev_options(bsf=None, bsl=None, niter=None, Dsub=None, dst=None, cst=No
         options.bound_state_localization = bsl
     if niter is not None:
         options.niter = niter
+    if tol is not None:
+        options.tol = tol
     if Dsub is not None:
         options.Dsub = Dsub
     if dst is not None:
@@ -534,6 +539,11 @@ def get_nsev_options(bsf=None, bsl=None, niter=None, Dsub=None, dst=None, cst=No
         options.discretization = dis
     if ref is not None:
         options.richardson_extrapolation_flag = ref
+    if bb is not None:
+        options.bounding_box[0] = bb[0]
+        options.bounding_box[1] = bb[1]
+        options.bounding_box[2] = bb[2]
+        options.bounding_box[3] = bb[3]
     return options
 
 

@@ -107,7 +107,10 @@ class NsevExampleTestBoundStateGuessesMex4(unittest.TestCase):
              0.03171094 + 0.0148127j,
              -0.0339977 + 0.00831603j])
         self.norm_exact = (-1) ** (np.arange(np.floor(qo + 0.5), 0, -1))
-        self.res = nsev(q, tvec, cst=3, dis=22, bsl=1, niter=20, bsg=bsguesses)
+        self.res = nsev(q, tvec, cst=3, dis=22, bsl=1,
+                        niter=50,  # note: added 2023
+                        tol=1-5,   # note: added 2023
+                        bsg=bsguesses)
 
     def test_nsev_example_mex4(self):
         with self.subTest('check FNFT nsev return value'):

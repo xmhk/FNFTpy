@@ -173,11 +173,13 @@ class NsevOptionsStruct(GenericOptionsStruct):
     * bound_state_localization
     * Dsub
     * niter
+    * tol
     * discspec_type
     * contspec_type
     * normalization_flag
     * discretization
     * richardson_extrapolation_flag
+    * bounding box
 
 
         """
