@@ -63,6 +63,7 @@ def nsev(q, tvec, Xi1=-2, Xi2=2, M=128, K=128, kappa=1, bsf=None,
         - 0 = NONE
         - 1 = BASIC
         - 2 = FULL
+        - 3 = MANUAL
 
     * bsl : bound state localization, default = 2
 

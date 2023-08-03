@@ -509,6 +509,7 @@ def get_nsev_options(bsf=None, bsl=None, niter=None, tol=None, Dsub=None, dst=No
         - 0 = NONE
         - 1 = BASIC
         - 2 = FULL
+        - 3 = MANUAL
 
 
     * bsl : bound state localization, default = 2
