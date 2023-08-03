@@ -23,7 +23,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 Contributors:
 
-Christoph Mahnke, 2018-2021
+Christoph Mahnke, 2018-2023
 
 """
 
@@ -77,6 +77,32 @@ class GenericOptionsStruct(ctypes.Structure):
         s = self.__repr__().replace(',', '\n')
         return s
 
+class KdvvOptionsStruct(GenericOptionsStruct):
+    """Ctypes options struct for interfacing fnft_kdvv.
+
+    Fields:
+
+        * bound_state_localization
+        * niter
+        * discspec_type
+        * contspec_type
+        * normalization_flag
+        * discretization
+        * richardson_extrapolation_flag
+        * grid_spacing
+    """
+    # note: order of fields here needs to be exactly as in .h file
+    _fields_ = [
+        ("bound_state_localization", ctypes_int),
+        ("niter", ctypes_uint),  # check uint
+        ("discspec_type", ctypes_int),
+        ("contspec_type", ctypes_int),
+        ("normalization_flag", ctypes_int),  # check int
+        ("discretization", ctypes_int),
+        ("richardson_extrapolation_flag", ctypes_uint),
+        ("grid_spacing", ctypes_double)  # check: uint
+        ]
+
 
 class ManakovvOptionsStruct(GenericOptionsStruct):
     """Ctypes options struct for interfacing fnft_manakovv.
@@ -106,35 +132,6 @@ class ManakovvOptionsStruct(GenericOptionsStruct):
         ("normalization_flag", ctypes_int),  # check int
         ("discretization", ctypes_int),
         ("richardson_extrapolation_flag", ctypes_uint)]  # check: uint
-
-
-class KdvvOptionsStruct(GenericOptionsStruct):
-    """Ctypes options struct for interfacing fnft_kdvv.
-
-    Fields:
-
-        * bound_state_localization
-        * niter
-        * discspec_type
-        * contspec_type
-        * normalization_flag
-        * discretization
-        * richardson_extrapolation_flag
-        * grid_spacing
-    """
-    # note: order of fields here needs to be exactly as in .h file
-    _fields_ = [
-        ("bound_state_localization", ctypes_int),
-        ("niter", ctypes_uint),  # check uint
-        ("discspec_type", ctypes_int),
-        ("contspec_type", ctypes_int),
-        ("normalization_flag", ctypes_int),  # check int
-        ("discretization", ctypes_int),
-        ("richardson_extrapolation_flag", ctypes_uint),
-        ("grid_spacing", ctypes_double)  # check: uint
-        ]
-
-
 
 class NsepOptionsStruct(GenericOptionsStruct):
     """Ctypes options struct for interfacing fnft_nsep.

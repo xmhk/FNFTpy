@@ -23,7 +23,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 Contributors:
 
-Christoph Mahnke 2021
+Christoph Mahnke 2021-2023
 
 """
 
@@ -119,7 +119,7 @@ def manakovv(q1, q2, tvec, Xi1=-1.75, Xi2=2, M=128, K=128, kappa=1, bsf=None,
         - 0 = off
         - 1 = on
 
-    * display_c_msg : whether or not to show messages raised by the C-library, default = True
+    * display_c_msg : whether to show messages raised by the C-library, default = True
 
 
     Returns:
@@ -176,7 +176,7 @@ def manakovv_wrapper(D, q1, q2, T1, T2, Xi1, Xi2, M, K, kappa, options, bsg=None
                          options.bound_state_localization == 1  (Newton
                          bound state location is activated). Default = None
 
-    * display_c_msg : whether or not to show messages raised by the C-library, default = True
+    * display_c_msg : whether to show messages raised by the C-library, default = True
 
     Returns:
 
