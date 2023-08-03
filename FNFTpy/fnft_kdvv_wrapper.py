@@ -33,7 +33,7 @@ from .auxiliary import get_lib_path, check_return_code, get_winmode_param
 
 
 def kdvv(u, tvec, K=128, M=128, Xi1=-2, Xi2=2, dis=None, bsl=None, bsg=None, niter=None, dst=None, cst=None, nf=None,
-         ref=None, display_c_msg=True):
+         ref=None, gs=None, display_c_msg=True):
     """Calculate the Nonlinear Fourier Transform for the Korteweg-de Vries equation with vanishing boundaries.
 
     This function is intended to be 'convenient', which means it
@@ -151,6 +151,8 @@ def kdvv(u, tvec, K=128, M=128, Xi1=-2, Xi2=2, dis=None, bsl=None, bsg=None, nit
         * 0 = off
         * 1 = on
 
+    * gs : grid spacing parameter for GRIDSEARCH_AND_REFINE bound state location method, default = 0
+
     * display_c_msg : whether or not to show messages raised by the C-library, default = True
 
     Returns:
@@ -174,7 +176,7 @@ def kdvv(u, tvec, K=128, M=128, Xi1=-2, Xi2=2, dis=None, bsl=None, bsg=None, nit
     T1 = np.min(tvec)
     T2 = np.max(tvec)
     options = get_kdvv_options(dis=dis, bsl=bsl, niter=niter, dst=dst, cst=cst, nf=nf,
-                               ref=ref)
+                               gs=gs, ref=ref)
     return kdvv_wrapper(D, u, T1, T2, K, M, Xi1, Xi2,
                         options, bsg=bsg, display_c_msg=display_c_msg)
 

@@ -67,7 +67,7 @@ def print_kdvv_options(options=None):
 
 
 def get_kdvv_options(dis=None, bsl=None, niter=None, dst=None, cst=None, nf=None,
-                     ref=None):
+                     gs=None, ref=None):
 
     """Get an KdvvOptionsStruct struct for use with kdvv_wrapper.
 
@@ -165,6 +165,8 @@ def get_kdvv_options(dis=None, bsl=None, niter=None, dst=None, cst=None, nf=None
         * 0 = off
         * 1 = on
 
+    * gs : grid spacing parameter for GRIDSEARCH_AND_REFINE bound state location method, default = 0
+
     Returns:
 
     * options : KdvvOptionsStruct
@@ -185,6 +187,8 @@ def get_kdvv_options(dis=None, bsl=None, niter=None, dst=None, cst=None, nf=None
         options.normalization_flag = nf
     if ref is not None:
         options.richardson_extrapolation_flag = ref
+    if gs is not None:
+        options.grid_spacing = gs
     return options
 
 

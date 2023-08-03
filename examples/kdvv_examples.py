@@ -31,7 +31,7 @@ from FNFTpy import kdvv, cmplxrpr
 import numpy as np
 
 
-def kdvv_example(dis=None, bsl=None, bsg=None, niter=None, dst=None, cst=None, nf=None,
+def kdvv_example(dis=None, bsl=None, bsg=None, niter=None, dst=None, cst=None, nf=None, gs=None,
                  ref=None, K=None, amplitude_scale=1.0, verbose=True, display_c_msg=True):
     """Mimics the C example for calling fnft_kdvv, can be modified with options"""
     if verbose:
@@ -41,6 +41,8 @@ def kdvv_example(dis=None, bsl=None, bsg=None, niter=None, dst=None, cst=None, n
     tvec = np.linspace(-1, 1, D)
     q = np.zeros(D, dtype=np.complex128)
     q[:] = amplitude_scale * 2.0 + 0.0j
+    if gs is None:
+        gs = np.sqrt( np.max( np.abs(q) ) ) / 1000.  # grid spacing
     Xi1 = -2
     Xi2 = 2
     M = 8
@@ -50,7 +52,7 @@ def kdvv_example(dis=None, bsl=None, bsg=None, niter=None, dst=None, cst=None, n
     # call function
     res = kdvv(q, tvec, K, M, Xi1=Xi1, Xi2=Xi2,
                dis=dis, bsl=bsl, niter=niter, dst=dst, cst=cst, nf=nf,
-               ref=ref, bsg=bsg, display_c_msg=display_c_msg)
+               ref=ref, bsg=bsg, gs = gs, display_c_msg=display_c_msg)
     # print results
     if verbose:
         print("\n----- options used ----")
@@ -66,6 +68,7 @@ def kdvv_example(dis=None, bsl=None, bsg=None, niter=None, dst=None, cst=None, n
             cmplxrpr(res['bound_states'][0], formatter='f'),
             cmplxrpr(res['disc_norm'][0], formatter='f')))
     return res
+
 
 
 def kdvv_example_mex4(log2D, dis=0, diskey="", verbose=True):
@@ -86,7 +89,8 @@ def kdvv_example_mex4(log2D, dis=0, diskey="", verbose=True):
     d = 0.5
     exp_t0 = 3000.
     q = A * (1. / np.cosh((tvec - np.log(exp_t0)) / d)) ** 2
-    res = kdvv(q, tvec, M=2 ** log2D, Xi1=Xi1, Xi2=Xi2, cst=4, dis=dis, bsl=1, niter=20)
+    dxi = np.sqrt( np.max( np.abs(q) ) ) / 1000.
+    res = kdvv(q, tvec, M=2 ** log2D, Xi1=Xi1, Xi2=Xi2, cst=4, dis=dis, bsl=1, niter=20, gs=dxi)
     if verbose:
         print("dis=%d (%s) ... bound states: " % (dis, diskey), res['bound_states'], "  norm const", res['disc_norm'])
     return res

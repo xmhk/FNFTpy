@@ -95,7 +95,7 @@ class ManakovvOptionsStruct(GenericOptionsStruct):
 
     * discretization
     """
-
+    # note: order of fields here needs to be exactly as in .h file
     _fields_ = [
         ("bound_state_filtering", ctypes_int),
         ("bound_state_localization", ctypes_int),
@@ -120,8 +120,9 @@ class KdvvOptionsStruct(GenericOptionsStruct):
         * normalization_flag
         * discretization
         * richardson_extrapolation_flag
+        * grid_spacing
     """
-
+    # note: order of fields here needs to be exactly as in .h file
     _fields_ = [
         ("bound_state_localization", ctypes_int),
         ("niter", ctypes_uint),  # check uint
@@ -129,7 +130,10 @@ class KdvvOptionsStruct(GenericOptionsStruct):
         ("contspec_type", ctypes_int),
         ("normalization_flag", ctypes_int),  # check int
         ("discretization", ctypes_int),
-        ("richardson_extrapolation_flag", ctypes_uint)]  # check: uint
+        ("richardson_extrapolation_flag", ctypes_uint),
+        ("grid_spacing", ctypes_double)  # check: uint
+        ]
+
 
 
 class NsepOptionsStruct(GenericOptionsStruct):
@@ -147,9 +151,8 @@ class NsepOptionsStruct(GenericOptionsStruct):
     * points_per_spine
     * dsub
     * tol
-
-
     """
+    # note: order of fields here needs to be exactly as in .h file
     _fields_ = [
         ("localization", ctypes_int),
         ("filtering", ctypes_int),
@@ -180,9 +183,8 @@ class NsevOptionsStruct(GenericOptionsStruct):
     * discretization
     * richardson_extrapolation_flag
     * bounding box
-
-
-        """
+    """
+    # note: order of fields here needs to be exactly as in .h file
     _fields_ = [
         ("bound_state_filtering", ctypes_int),
         ("bound_state_localization", ctypes_int),
@@ -208,8 +210,8 @@ class NsevInverseOptionsStruct(GenericOptionsStruct):
     * discspec_type
     * max_iter
     * oversampling_factor
-
     """
+    # note: order of fields here needs to be exactly as in .h file
     _fields_ = [
         ("discretization", ctypes_int),
         ("contspec_type", ctypes_int),
