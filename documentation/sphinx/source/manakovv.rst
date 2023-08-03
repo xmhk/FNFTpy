@@ -5,14 +5,14 @@ Manakov equation with vanishing boundaries
 =========================================================
 
 manakovv - calculate the Nonlinear Fourier Transform
---------------------------------------------------------
+----------------------------------------------------
 
 .. autofunction:: FNFTpy.fnft_manakovv_wrapper.manakovv
 
 
 
 manakovv_wrapper - interact with FNFT library
------------------------------------------
+---------------------------------------------
 
 .. autofunction:: FNFTpy.fnft_manakovv_wrapper.manakovv_wrapper
 
@@ -20,7 +20,7 @@ manakovv_wrapper - interact with FNFT library
 
 
 get, set and print options for manakovv wrapper
--------------------------------------------
+-----------------------------------------------
 
 .. autofunction:: FNFTpy.options_handling.fnft_manakovv_default_options_wrapper
 
@@ -31,7 +31,7 @@ get, set and print options for manakovv wrapper
 
 
 options ManakovvOptionsStruct
--------------------------
+-----------------------------
 
 .. autoclass::    FNFTpy.typesdef.ManakovvOptionsStruct
 

@@ -2,6 +2,15 @@
 
 ## current
 
+### August 2023
+- implement  'tol' argument for nsev functions
+- implement optional 'bb' (bounding box) argument for nsev functions
+- implement optional 'gs' (grid_spacing) argument for kdvv
+
+### June 2022
+
+- added tests and additions from FNFT branch nsep-improvements, merged into development
+
 ### Sept 2021 - November 2021   0.4.1-dev
 
 - general:
